@@ -13,6 +13,10 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
     var tasks: [Task] = []
     
     var sections = FoodData.foodCategories
+    
+    var twoDArray = [
+        [Task(name: "No items yet")], [Task(name: "No items yet")], [Task(name: "No items yet")], [Task(name: "No items yet")], [Task(name: "No items yet")], [Task(name: "No items yet")], [Task(name: "No items yet")], [Task(name: "No items yet")], [Task(name: "No items yet")], [Task(name: "No items yet")], [Task(name: "No items yet")], [Task(name: "No items yet")], [Task(name: "No items yet")], [Task(name: "No items yet")], [Task(name: "No items yet")], [Task(name: "No items yet")], [Task(name: "No items yet")], [Task(name: "No items yet")]
+    ]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,7 +34,7 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
         if section == 0 {
             return 1
         }
-        return tasks.count
+        return twoDArray[0].count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -40,7 +44,9 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "taskCell", for: indexPath) as! TaskCell
-            let current = tasks[indexPath.row]
+//            let current = tasks[indexPath.row]
+            print(indexPath.section)
+            let current = twoDArray[indexPath.section][indexPath.row]
             cell.taskNameLabel.text = current.name
             
             if current.checked {
@@ -70,6 +76,9 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
         
         print("Item \(newTask.name) has category of \(newTask.category) with number \(newTask.number)")
         tasks.append(Task(name: name))
+        print(twoDArray)
+        twoDArray[newTask.number].append(Task(name: name))
+        print(twoDArray)
         tableView.reloadData()
     }
     
