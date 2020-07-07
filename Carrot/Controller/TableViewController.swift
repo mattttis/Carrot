@@ -15,25 +15,27 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
     var sections = FoodData.foodCategories
     
     var twoDArray = [
-        [Task(name: "No items yet")], [Task(name: "Apples"), Task(name: "Bananas"), Task(name: "Fruits")], [Task(name: "Beef")], [Task(name: "No items yet")], [Task(name: "No items yet")], [Task(name: "No items yet")], [Task(name: "No items yet")], [Task(name: "No items yet")], [Task(name: "No items yet")], [Task(name: "No items yet")], [Task(name: "No items yet")], [Task(name: "No items yet")], [Task(name: "No items yet")], [Task(name: "No items yet")], [Task(name: "No items yet")], [Task(name: "No items yet")], [Task(name: "No items yet")], [Task(name: "No items yet")]
+        [Task(name: "No items yet")], [Task(name: "Apples"), Task(name: "Bananas"), Task(name: "Fruits")], [Task(name: "Beef"), Task(name: "Chicken")], [Task(name: "No items yet")], [Task(name: "No items yet")], [Task(name: "No items yet")], [Task(name: "No items yet")], [Task(name: "No items yet")], [Task(name: "No items yet")], [Task(name: "No items yet")], [Task(name: "No items yet")], [Task(name: "No items yet")], [Task(name: "No items yet")], [Task(name: "No items yet")], [Task(name: "No items yet")], [Task(name: "No items yet")], [Task(name: "No items yet")], [Task(name: "No items yet")]
     ]
 
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.prefersLargeTitles = true
         title = "Groceries"
-        tasks.append(Task(name: "Apples"))
-        tasks.append(Task(name: "Bananas"))
-        tasks.append(Task(name: "Pears"))
-        tasks.append(Task(name: "Bread"))
+//        tasks.append(Task(name: "Apples"))
+//        tasks.append(Task(name: "Bananas"))
+//        tasks.append(Task(name: "Pears"))
+//        tasks.append(Task(name: "Bread"))
     }
 
     // MARK: - TableView data source
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
         if section == 0 {
             return 1
         }
+        
         return twoDArray[section].count
     }
     
@@ -45,7 +47,6 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "taskCell", for: indexPath) as! TaskCell
 //            let current = tasks[indexPath.row]
-            print(indexPath.section)
             let current = twoDArray[indexPath.section][indexPath.row]
             cell.taskNameLabel.text = current.name
             
@@ -56,8 +57,9 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
             }
             
             cell.delegate = self
-            cell.tasks = tasks
-            cell.indexP = indexPath.row
+            cell.tasks = twoDArray
+            cell.indexSection = indexPath.section
+            cell.indexRow = indexPath.row
             
             return cell
         }
@@ -65,8 +67,8 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
     //MARK: - Add task protocol
     
     func addTask(name: String) {
-        var newTask = Task(name: name)
-        var thisCategory = newTask.category
+        let newTask = Task(name: name)
+        let thisCategory = newTask.category
         
         if thisCategory != "" {
             newTask.number = FoodData.foodCategories.firstIndex(of: thisCategory) ?? 17
@@ -75,17 +77,20 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
         }
         
         print("Item \(newTask.name) has category of \(newTask.category) with number \(newTask.number)")
-        tasks.append(Task(name: name))
-        print(twoDArray)
+        print(twoDArray[newTask.number])
         twoDArray[newTask.number].append(Task(name: name))
-        print(twoDArray)
+        print(twoDArray[newTask.number])
         tableView.reloadData()
+        
+        // tasks.append(Task(name: name))
+        // print(twoDArray)
+        // print(twoDArray)
     }
     
     //MARK: - Change button protocol
     
-    func changeButton(state: Bool, index: Int?) {
-        tasks[index!].checked = state
+    func changeButton(state: Bool, indexSection: Int?, indexRow: Int?) {
+        twoDArray[indexSection!][indexRow!].checked = state
         tableView.reloadData()
     }
     
@@ -98,7 +103,6 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
         let label = UILabel()
-//        label.text = "   Meat 🥩🥓"
         label.text = "    \(sections[section])"
         label.font = UIFont .boldSystemFont(ofSize: 24)
         

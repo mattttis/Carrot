@@ -11,7 +11,7 @@ import Foundation
 //🥩🥓", "Fish 🐟🍣", "Bread 🍞🥯", "Canned goods 🥫", "Dairy 🥛🧀", "Snacks 🍿🥨", "Frozen foods 🧊", "Produce 🍅🍒"
 
 struct FoodData {
-    static let foodCategories = ["New item", "Produce", "Meat 🥩🥓", "Breakfast 🍞🥯", "Seafood", "Dairy 🥛🧀", "Frozen 🧊❄️", "Drinks", "Snacks 🍿🥨", "Grains", "Cans & Jars 🥫", "Spices", "Sauces & Oils", "Paper", "Cleaning", "Personal", "Baking", "Other"]
+    static let foodCategories = ["New item", "Produce 🍅", "Meat 🥩", "Breakfast 🍞", "Seafood 🐟", "Dairy 🥛", "Frozen 🧊", "Drinks 🥤", "Snacks 🍿", "Grains", "Cans & Jars 🥫", "Spices", "Sauces & Oils", "Paper", "Cleaning", "Personal", "Baking 🥧", "Other"]
     
     static let fruits: [String] = ["apples", "apricots", "avocados", "bananas", "berries", "cherries", "grapefruit", "grapes", "kiwi", "lemons", "limes", "melons", "nectarines", "oranges", "papaya", "peaches", "pears", "plums", "pomegranate", "watermelon", "banana", "bananas", "apple", "pear"]
     static let meat: [String] = ["bacon", "chicken", "deli meat", "ground beef", "ground turkey", "ham", "hot dogs", "pork", "sausage", "steak", "turkey"]

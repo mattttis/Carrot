@@ -9,24 +9,24 @@
 import UIKit
 
 protocol ChangeButton {
-    func changeButton(state: Bool, index: Int?)
+    func changeButton(state: Bool, indexSection: Int?, indexRow: Int?)
 }
 
 class TaskCell: UITableViewCell {
     
     @IBAction func checkBoxAction(_ sender: Any) {
-       if tasks![indexP!].checked {
-            delegate?.changeButton(state: false, index: indexP!)
+       if tasks![indexSection!][indexRow!].checked {
+            delegate?.changeButton(state: false, indexSection: indexSection!, indexRow: indexRow!)
         } else {
-            delegate?.changeButton(state: true, index: indexP!)
+            delegate?.changeButton(state: true, indexSection: indexSection!, indexRow: indexRow!)
         }
     }
-    
     
     @IBOutlet weak var taskNameLabel: UILabel!
     @IBOutlet weak var checkBoxOutlet: UIButton!
     
     var delegate: ChangeButton?
-    var indexP: Int?
-    var tasks: [Task]?
+    var indexSection: Int?
+    var indexRow: Int?
+    var tasks: [[Task]]?
 }

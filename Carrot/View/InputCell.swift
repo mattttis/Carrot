@@ -19,10 +19,16 @@ class InputCell: UITableViewCell {
             delegate?.addTask(name: newTaskField.text!)
             // print("New item added: \(newTaskField.text!)")
             newTaskField.text = ""
+            newTaskField.resignFirstResponder()
         }
     }
     @IBOutlet weak var saveNewTaskOutlet: UIButton!
     @IBOutlet weak var newTaskField: UITextField!
     
     var delegate: AddTask?
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        newTaskField.addTarget(self, action: #selector(saveNewTaskAction), for: .editingDidEndOnExit)
+    }
 }
