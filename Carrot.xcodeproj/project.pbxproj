@@ -70,7 +70,6 @@
 				7B59B00724AA7811005FBC70 /* AppDelegate.swift */,
 				7B59B00924AA7811005FBC70 /* SceneDelegate.swift */,
 				7B59B01024AA7816005FBC70 /* Assets.xcassets */,
-				7B59B01224AA7816005FBC70 /* LaunchScreen.storyboard */,
 				7B59B01524AA7816005FBC70 /* Info.plist */,
 			);
 			path = Carrot;
@@ -89,6 +88,7 @@
 			isa = PBXGroup;
 			children = (
 				7B59B00D24AA7811005FBC70 /* Main.storyboard */,
+				7B59B01224AA7816005FBC70 /* LaunchScreen.storyboard */,
 				7B59B01B24AA7A33005FBC70 /* TaskCell.swift */,
 				7B35934A24AB521F00A8CC4F /* InputCell.swift */,
 			);

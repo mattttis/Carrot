@@ -100,11 +100,21 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
-      let headerView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: tableView.frame.width, height: 50))
-
+        let headerView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: tableView.frame.width, height: 50))
+        
+        // Button configuration
+        let button = UIButton(type: .system)
+        let configuration = UIImage.SymbolConfiguration(pointSize: 16, weight: .semibold, scale: .small)
+        let image = UIImage(systemName: "chevron.down", withConfiguration: configuration)
+        button.setImage(image, for: .normal)
+        button.tintColor = UIColor.black
+        button.addTarget(self, action: #selector(handleExpandClose), for: .touchUpInside)
+        button.tag = section
+        
+        // Label configuration
         let label = UILabel()
         label.frame = CGRect.init(x: 5, y: 5, width: headerView.frame.width-10, height: headerView.frame.height-5)
-        
+        button.frame = CGRect.init(x: 100, y: 5, width: headerView.frame.width+120, height: headerView.frame.height-5)
         label.text = "   \(sections[section])"
         label.font = UIFont .boldSystemFont(ofSize: 24)
 
@@ -112,6 +122,8 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
         
         if section == 0 {
             label.text = ""
+        } else {
+            headerView.addSubview(button)
         }
 
         return headerView
@@ -125,6 +137,25 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
         
 //        return tableView.sectionHeaderHeight
         return 40
+    }
+    
+    //MARK: - Closing a section
+    
+    @objc func handleExpandClose(button: UIButton) {
+        print("Trying to expand/close section...")
+    
+        // Deleting the rows
+        var indexPaths = [IndexPath]()
+        let section = button.tag
+        
+        for row in twoDArray[section].indices {
+            let indexPath = IndexPath(row: row, section: section)
+            indexPaths.append(indexPath)
+            print(section, row)
+        }
+        
+        twoDArray[section].removeAll()
+        tableView.deleteRows(at: indexPaths, with: .fade)
     }
     
 }
