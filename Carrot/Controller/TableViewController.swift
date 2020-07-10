@@ -17,7 +17,7 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
     var twoDArray = [
         [Task(name: "No items yet")], [Task(name: "Apples"), Task(name: "Bananas"), Task(name: "Fruits")], [Task(name: "Beef"), Task(name: "Chicken")], [Task(name: "No items yet")], [Task(name: "No items yet")], [Task(name: "No items yet")], [Task(name: "No items yet")], [Task(name: "No items yet")], [Task(name: "No items yet")], [Task(name: "No items yet")], [Task(name: "No items yet")], [Task(name: "No items yet")], [Task(name: "No items yet")], [Task(name: "No items yet")], [Task(name: "No items yet")], [Task(name: "No items yet")], [Task(name: "No items yet")], [Task(name: "No items yet")]
     ]
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.prefersLargeTitles = true
@@ -77,9 +77,7 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
         }
         
         print("Item \(newTask.name) has category of \(newTask.category) with number \(newTask.number)")
-        print(twoDArray[newTask.number])
         twoDArray[newTask.number].append(Task(name: name))
-        print(twoDArray[newTask.number])
         tableView.reloadData()
         
         // tasks.append(Task(name: name))
@@ -102,22 +100,31 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
+      let headerView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: tableView.frame.width, height: 50))
+
         let label = UILabel()
-        label.text = "    \(sections[section])"
+        label.frame = CGRect.init(x: 5, y: 5, width: headerView.frame.width-10, height: headerView.frame.height-5)
+        
+        label.text = "   \(sections[section])"
         label.font = UIFont .boldSystemFont(ofSize: 24)
+
+        headerView.addSubview(label)
         
         if section == 0 {
             label.text = ""
         }
+
+        return headerView
         
-        return label
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if section == 0 {
             return CGFloat.leastNormalMagnitude
         }
-
-        return tableView.sectionHeaderHeight
+        
+//        return tableView.sectionHeaderHeight
+        return 40
     }
+    
 }
