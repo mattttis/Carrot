@@ -10,18 +10,28 @@ import UIKit
 
 class TableViewController: UITableViewController, AddTask, ChangeButton {
 
-    var tasks: [Task] = []
+//    var tasks: [Task] = []
     
     var sections = FoodData.foodCategories
     
     var twoDArray = [
-        [Task(name: "No items yet")], [Task(name: "Apples"), Task(name: "Bananas"), Task(name: "Fruits")], [Task(name: "Beef"), Task(name: "Chicken")], [Task(name: "No items yet")], [Task(name: "No items yet")], [Task(name: "No items yet")], [Task(name: "No items yet")], [Task(name: "No items yet")], [Task(name: "No items yet")], [Task(name: "No items yet")], [Task(name: "No items yet")], [Task(name: "No items yet")], [Task(name: "No items yet")], [Task(name: "No items yet")], [Task(name: "No items yet")], [Task(name: "No items yet")], [Task(name: "No items yet")], [Task(name: "No items yet")]
-    ]
+        Section(isExpanded: true, items: [Task(name: "No items yet")]), Section(isExpanded: true, items: [Task(name: "No items yet")]), Section(isExpanded: true, items: [Task(name: "No items yet")]), Section(isExpanded: true, items: [Task(name: "No items yet")]), Section(isExpanded: true, items: [Task(name: "No items yet")]), Section(isExpanded: true, items: [Task(name: "No items yet")]), Section(isExpanded: true, items: [Task(name: "No items yet")]), Section(isExpanded: true, items: [Task(name: "No items yet")]), Section(isExpanded: true, items: [Task(name: "No items yet")]),
+            Section(isExpanded: true, items: [Task(name: "No items yet")]),
+            Section(isExpanded: true, items: [Task(name: "No items yet")]),
+            Section(isExpanded: true, items: [Task(name: "No items yet")]),
+            Section(isExpanded: true, items: [Task(name: "No items yet")]),
+            Section(isExpanded: true, items: [Task(name: "No items yet")]),
+            Section(isExpanded: true, items: [Task(name: "No items yet")]),
+            Section(isExpanded: true, items: [Task(name: "No items yet")]),
+            Section(isExpanded: true, items: [Task(name: "No items yet")]),
+            Section(isExpanded: true, items: [Task(name: "No items yet")])
+        ]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.prefersLargeTitles = true
         title = "Groceries"
+        
 //        tasks.append(Task(name: "Apples"))
 //        tasks.append(Task(name: "Bananas"))
 //        tasks.append(Task(name: "Pears"))
@@ -36,7 +46,11 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
             return 1
         }
         
-        return twoDArray[section].count
+        if !twoDArray[section].isExpanded {
+            return 0
+        }
+        
+        return twoDArray[section].items.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -47,7 +61,7 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "taskCell", for: indexPath) as! TaskCell
 //            let current = tasks[indexPath.row]
-            let current = twoDArray[indexPath.section][indexPath.row]
+            let current = twoDArray[indexPath.section].items[indexPath.row]
             cell.taskNameLabel.text = current.name
             
             if current.checked {
@@ -57,7 +71,8 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
             }
             
             cell.delegate = self
-            cell.tasks = twoDArray
+//            cell.tasks = twoDArray
+            cell.items = twoDArray[indexPath.section].items
             cell.indexSection = indexPath.section
             cell.indexRow = indexPath.row
             
@@ -77,7 +92,7 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
         }
         
         print("Item \(newTask.name) has category of \(newTask.category) with number \(newTask.number)")
-        twoDArray[newTask.number].append(Task(name: name))
+        twoDArray[newTask.number].items.append(Task(name: name))
         tableView.reloadData()
         
         // tasks.append(Task(name: name))
@@ -88,7 +103,7 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
     //MARK: - Change button protocol
     
     func changeButton(state: Bool, indexSection: Int?, indexRow: Int?) {
-        twoDArray[indexSection!][indexRow!].checked = state
+        twoDArray[indexSection!].items[indexRow!].checked = state
         tableView.reloadData()
     }
     
@@ -142,20 +157,30 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
     //MARK: - Closing a section
     
     @objc func handleExpandClose(button: UIButton) {
-        print("Trying to expand/close section...")
     
         // Deleting the rows
         var indexPaths = [IndexPath]()
         let section = button.tag
         
-        for row in twoDArray[section].indices {
+        for row in twoDArray[section].items.indices {
             let indexPath = IndexPath(row: row, section: section)
             indexPaths.append(indexPath)
-            print(section, row)
         }
         
-        twoDArray[section].removeAll()
-        tableView.deleteRows(at: indexPaths, with: .fade)
+        let isExpanded = twoDArray[section].isExpanded
+        twoDArray[section].isExpanded = !isExpanded
+        
+        if isExpanded {
+            tableView.deleteRows(at: indexPaths, with: .fade)
+            let configuration = UIImage.SymbolConfiguration(pointSize: 16, weight: .semibold, scale: .small)
+            let image = UIImage(systemName: "chevron.up", withConfiguration: configuration)
+            button.setImage(image, for: .normal)
+        } else {
+            tableView.insertRows(at: indexPaths, with: .fade)
+            let configuration = UIImage.SymbolConfiguration(pointSize: 16, weight: .semibold, scale: .small)
+            let image = UIImage(systemName: "chevron.down", withConfiguration: configuration)
+            button.setImage(image, for: .normal)
+        }
     }
     
 }

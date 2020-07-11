@@ -15,7 +15,7 @@ protocol ChangeButton {
 class TaskCell: UITableViewCell {
     
     @IBAction func checkBoxAction(_ sender: Any) {
-       if tasks![indexSection!][indexRow!].checked {
+        if items![indexRow!].checked {
             delegate?.changeButton(state: false, indexSection: indexSection!, indexRow: indexRow!)
         } else {
             delegate?.changeButton(state: true, indexSection: indexSection!, indexRow: indexRow!)
@@ -29,4 +29,5 @@ class TaskCell: UITableViewCell {
     var indexSection: Int?
     var indexRow: Int?
     var tasks: [[Task]]?
+    var items: [Task]?
 }

@@ -16,6 +16,7 @@
 		7B59B01424AA7816005FBC70 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7B59B01224AA7816005FBC70 /* LaunchScreen.storyboard */; };
 		7B59B01C24AA7A33005FBC70 /* TaskCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B59B01B24AA7A33005FBC70 /* TaskCell.swift */; };
 		7B59B01E24AA7A59005FBC70 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B59B01D24AA7A59005FBC70 /* TableViewController.swift */; };
+		A0AE90C124B8F2DA00E31B68 /* ExpandableItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0AE90C024B8F2DA00E31B68 /* ExpandableItems.swift */; };
 		A0C466B124B12FF400DDDAAA /* FoodData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C466B024B12FF400DDDAAA /* FoodData.swift */; };
 /* End PBXBuildFile section */
 
@@ -31,6 +32,7 @@
 		7B59B01524AA7816005FBC70 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7B59B01B24AA7A33005FBC70 /* TaskCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCell.swift; sourceTree = "<group>"; };
 		7B59B01D24AA7A59005FBC70 /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
+		A0AE90C024B8F2DA00E31B68 /* ExpandableItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ExpandableItems.swift; path = Carrot/Controller/ExpandableItems.swift; sourceTree = SOURCE_ROOT; };
 		A0C466B024B12FF400DDDAAA /* FoodData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -78,6 +80,7 @@
 		A03C5D7924B11A0000C2BB4D /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				A0AE90C024B8F2DA00E31B68 /* ExpandableItems.swift */,
 				7B194FDA24AA7D190099AE9F /* Task.swift */,
 				A0C466B024B12FF400DDDAAA /* FoodData.swift */,
 			);
@@ -180,6 +183,7 @@
 				7B59B01E24AA7A59005FBC70 /* TableViewController.swift in Sources */,
 				7B194FDB24AA7D190099AE9F /* Task.swift in Sources */,
 				7B59B00A24AA7811005FBC70 /* SceneDelegate.swift in Sources */,
+				A0AE90C124B8F2DA00E31B68 /* ExpandableItems.swift in Sources */,
 				7B35934B24AB521F00A8CC4F /* InputCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
