@@ -38,21 +38,25 @@
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="New item" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eCz-MS-0xe">
-                                            <rect key="frame" x="20" y="4" width="387" height="34"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <textField opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="New item" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eCz-MS-0xe">
+                                            <rect key="frame" x="20" y="4" width="328" height="34"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <textInputTraits key="textInputTraits"/>
                                         </textField>
-                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OKw-36-mv6">
+                                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OKw-36-mv6">
                                             <rect key="frame" x="356" y="6" width="30" height="30"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <state key="normal" title="Add"/>
                                             <connections>
                                                 <action selector="saveNewTaskAction:" destination="FLb-zj-NIe" eventType="touchUpInside" id="asg-8v-v1P"/>
                                             </connections>
                                         </button>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="eCz-MS-0xe" secondAttribute="trailing" constant="66" id="0fd-2G-n5F"/>
+                                        <constraint firstItem="eCz-MS-0xe" firstAttribute="leading" secondItem="oTw-PM-sMz" secondAttribute="leading" constant="20" id="1lU-lO-o0y"/>
+                                        <constraint firstAttribute="trailing" secondItem="OKw-36-mv6" secondAttribute="trailing" constant="28" id="AyU-xX-Wyt"/>
+                                        <constraint firstAttribute="trailing" secondItem="eCz-MS-0xe" secondAttribute="trailing" constant="66" id="BxP-eD-ORs"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="newTaskField" destination="eCz-MS-0xe" id="M8s-Bk-nD2"/>

@@ -19,7 +19,7 @@ class Task {
         self.name = name
         self.checked = false
         self.date = Date()
-        self.number = 0
+        self.number = 17
         self.category = ""
         self.category = findCategory(itemName: name.lowercased())
     }

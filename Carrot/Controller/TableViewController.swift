@@ -24,7 +24,7 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
             Section(isExpanded: true, items: [Task(name: "No items yet")]),
             Section(isExpanded: true, items: [Task(name: "No items yet")]),
             Section(isExpanded: true, items: [Task(name: "No items yet")]),
-            Section(isExpanded: true, items: [Task(name: "No items yet")])
+            Section(isExpanded: true, items: [Task(name: "Other - No items yet"), Task(name: "Other - test 2")])
         ]
     
     override func viewDidLoad() {
@@ -93,6 +93,7 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
         
         print("Item \(newTask.name) has category of \(newTask.category) with number \(newTask.number)")
         twoDArray[newTask.number].items.append(Task(name: name))
+        twoDArray[newTask.number].isExpanded = true
         tableView.reloadData()
         
         // tasks.append(Task(name: name))
@@ -122,14 +123,14 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
         let configuration = UIImage.SymbolConfiguration(pointSize: 16, weight: .semibold, scale: .small)
         let image = UIImage(systemName: "chevron.down", withConfiguration: configuration)
         button.setImage(image, for: .normal)
-        button.tintColor = UIColor.black
+         button.tintColor = UIColor.label
         button.addTarget(self, action: #selector(handleExpandClose), for: .touchUpInside)
         button.tag = section
+        button.frame = CGRect.init(x: 100, y: 5, width: headerView.frame.width+120, height: headerView.frame.height-5)
         
         // Label configuration
         let label = UILabel()
         label.frame = CGRect.init(x: 5, y: 5, width: headerView.frame.width-10, height: headerView.frame.height-5)
-        button.frame = CGRect.init(x: 100, y: 5, width: headerView.frame.width+120, height: headerView.frame.height-5)
         label.text = "   \(sections[section])"
         label.font = UIFont .boldSystemFont(ofSize: 24)
 
