@@ -7,12 +7,13 @@
 //
 
 import UIKit
+import Firebase
 
 class TableViewController: UITableViewController, AddTask, ChangeButton {
-
-//    var tasks: [Task] = []
     
     var sections = FoodData.foodCategories
+    let db = Firestore.firestore()
+    var currentListID: String?
     
     var twoDArray = [
         Section(isExpanded: true, items: [Task(name: "No items yet")]), Section(isExpanded: true, items: [Task(name: "No items yet")]), Section(isExpanded: true, items: [Task(name: "No items yet")]), Section(isExpanded: true, items: [Task(name: "No items yet")]), Section(isExpanded: true, items: [Task(name: "No items yet")]), Section(isExpanded: true, items: [Task(name: "No items yet")]), Section(isExpanded: true, items: [Task(name: "No items yet")]), Section(isExpanded: true, items: [Task(name: "No items yet")]), Section(isExpanded: true, items: [Task(name: "No items yet")]),
@@ -24,7 +25,7 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
             Section(isExpanded: true, items: [Task(name: "No items yet")]),
             Section(isExpanded: true, items: [Task(name: "No items yet")]),
             Section(isExpanded: true, items: [Task(name: "No items yet")]),
-            Section(isExpanded: true, items: [Task(name: "Other - No items yet"), Task(name: "Other - test 2")])
+            Section(isExpanded: true, items: [Task(name: "No items yet")])
         ]
     
     override func viewDidLoad() {
@@ -32,10 +33,18 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
         navigationController?.navigationBar.prefersLargeTitles = true
         title = "Groceries"
         
-//        tasks.append(Task(name: "Apples"))
-//        tasks.append(Task(name: "Bananas"))
-//        tasks.append(Task(name: "Pears"))
-//        tasks.append(Task(name: "Bread"))
+        //MARK: - Database setup
+        
+        let listRef = self.db.collection(K.lists)
+        let someData = [
+            "date": Date(),
+            "name": "List 1",
+            "sections": FoodData.foodCategories
+            ] as [String : Any]
+        
+        let aDoc = listRef.document()
+        currentListID = aDoc.documentID
+        aDoc.setData(someData)
     }
 
     // MARK: - TableView data source
@@ -96,9 +105,14 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
         twoDArray[newTask.number].isExpanded = true
         tableView.reloadData()
         
-        // tasks.append(Task(name: name))
-        // print(twoDArray)
-        // print(twoDArray)
+        //MARK: - Database setup
+        var ref: DocumentReference? = nil
+        ref = db.collection(K.lists).document(currentListID!).collection("items").addDocument(data: [
+            "name": newTask.name,
+            "isChecked": newTask.checked,
+            "categoryNumber": newTask.number,
+            "date": Date()
+        ])
     }
     
     //MARK: - Change button protocol

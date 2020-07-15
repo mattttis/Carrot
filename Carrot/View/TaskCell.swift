@@ -17,6 +17,7 @@ class TaskCell: UITableViewCell {
     @IBAction func checkBoxAction(_ sender: Any) {
         if items![indexRow!].checked {
             delegate?.changeButton(state: false, indexSection: indexSection!, indexRow: indexRow!)
+            
         } else {
             delegate?.changeButton(state: true, indexSection: indexSection!, indexRow: indexRow!)
         }

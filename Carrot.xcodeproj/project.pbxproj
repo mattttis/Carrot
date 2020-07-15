@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -18,6 +18,7 @@
 		7B59B01C24AA7A33005FBC70 /* TaskCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B59B01B24AA7A33005FBC70 /* TaskCell.swift */; };
 		7B59B01E24AA7A59005FBC70 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B59B01D24AA7A59005FBC70 /* TableViewController.swift */; };
 		A044EF6724BB1FEC009C93B2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A044EF6624BB1FEC009C93B2 /* GoogleService-Info.plist */; };
+		A0ACFEAD24BBA320008943E4 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0ACFEAC24BBA320008943E4 /* Constants.swift */; };
 		A0AE90C124B8F2DA00E31B68 /* ExpandableItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0AE90C024B8F2DA00E31B68 /* ExpandableItems.swift */; };
 		A0C466B124B12FF400DDDAAA /* FoodData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C466B024B12FF400DDDAAA /* FoodData.swift */; };
 /* End PBXBuildFile section */
@@ -36,6 +37,7 @@
 		7B59B01D24AA7A59005FBC70 /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		96D38123B0D97AA341E9A3B5 /* Pods-Carrot.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Carrot.debug.xcconfig"; path = "Target Support Files/Pods-Carrot/Pods-Carrot.debug.xcconfig"; sourceTree = "<group>"; };
 		A044EF6624BB1FEC009C93B2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		A0ACFEAC24BBA320008943E4 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		A0AE90C024B8F2DA00E31B68 /* ExpandableItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ExpandableItems.swift; path = Carrot/Controller/ExpandableItems.swift; sourceTree = SOURCE_ROOT; };
 		A0C466B024B12FF400DDDAAA /* FoodData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodData.swift; sourceTree = "<group>"; };
 		DD9E70B64D89EFFCE59BE41C /* Pods-Carrot.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Carrot.release.xcconfig"; path = "Target Support Files/Pods-Carrot/Pods-Carrot.release.xcconfig"; sourceTree = "<group>"; };
@@ -93,6 +95,7 @@
 				A0AE90C024B8F2DA00E31B68 /* ExpandableItems.swift */,
 				7B194FDA24AA7D190099AE9F /* Task.swift */,
 				A0C466B024B12FF400DDDAAA /* FoodData.swift */,
+				A0ACFEAC24BBA320008943E4 /* Constants.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -130,7 +133,6 @@
 				96D38123B0D97AA341E9A3B5 /* Pods-Carrot.debug.xcconfig */,
 				DD9E70B64D89EFFCE59BE41C /* Pods-Carrot.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -258,6 +260,7 @@
 				7B59B00A24AA7811005FBC70 /* SceneDelegate.swift in Sources */,
 				A0AE90C124B8F2DA00E31B68 /* ExpandableItems.swift in Sources */,
 				7B35934B24AB521F00A8CC4F /* InputCell.swift in Sources */,
+				A0ACFEAD24BBA320008943E4 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
