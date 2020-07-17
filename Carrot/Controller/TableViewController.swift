@@ -147,7 +147,7 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
         
         //MARK: - Database setup
         var ref: DocumentReference? = nil
-        ref = db.collection(K.lists).document(currentListID!).collection(K.FStore.sections).document("\(thisCategory)").collection(K.FStore.items).addDocument(data: [
+        ref = db.collection(K.lists).document(currentListID!).collection(K.FStore.sections).document("\(newTask.number)").collection(K.FStore.items).addDocument(data: [
                 "name": newTask.name,
                 "isChecked": newTask.checked,
                 "categoryNumber": newTask.number,
