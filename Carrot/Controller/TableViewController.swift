@@ -13,9 +13,12 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
     
     var sections = FoodData.foodCategories
     
-    // Database variables
+    // Database references
     let db = Firestore.firestore()
+    var userRef: DocumentReference?
+    var listsRef: DocumentReference?
 
+    // Useful variables
     var currentListID: String?
     var currentLists: [String]?
     var currentUserID: String?
@@ -51,34 +54,18 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
         
         title = "Groceries"
         
-//        let userRef = db.collection(K.FStore.users)
-//        let user = Auth.auth().currentUser
-//
-//        if let user = user {
-//            currentUserID = user.uid
-//            let currentUserRef = userRef.document(currentUserID!)
-//            currentUserRef.getDocument { (document, error) in
-//                if let document = document, document.exists {
-//                    let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
-//                    print("Document data: \(dataDescription)")
-//                } else {
-//                    print("Document does not exist")
-//                }
-//            }
-//        }
-        
         let user = Auth.auth().currentUser
         
         if let user = user {
             currentUserID = user.uid
-            print(currentUserID!)
-            let ref = db.collection(K.FStore.users).document(currentUserID!)
-            ref.getDocument { (snapshot, error) in
+            userRef = db.collection(K.FStore.users).document(currentUserID!)
+            userRef!.getDocument { (snapshot, error) in
                 if let data = snapshot?.data() {
                     self.userFirstName = data["firstname"] as! String
                     self.userEmail = data["email"] as! String
                     self.currentLists = data["lists"] as! [String]
                     self.currentListID = self.currentLists![0]
+                    self.listsRef = self.db.collection(K.FStore.lists).document(self.currentListID!)
                 } else {
                     print("Could not find document")
                 }
@@ -146,19 +133,29 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
         tableView.reloadData()
         
         //MARK: - Database setup
+        
         var ref: DocumentReference? = nil
         ref = db.collection(K.lists).document(currentListID!).collection(K.FStore.sections).document("\(newTask.number)").collection(K.FStore.items).addDocument(data: [
-                "name": newTask.name,
-                "isChecked": newTask.checked,
-                "categoryNumber": newTask.number,
-                "date": Date()
-        ])
+            "name": newTask.name,
+            "isChecked": newTask.checked,
+            "categoryNumber": newTask.number,
+            "date": Date()
+        ]) { err in
+            if let err = err {
+                print("Error adding document: \(err)")
+            } else {
+                print("Document added with ID: \(ref!.documentID)")
+                newTask.itemID = ref!.documentID
+            }
+        }
     }
     
     //MARK: - Change button protocol
     
-    func changeButton(state: Bool, indexSection: Int?, indexRow: Int?) {
+    func changeButton(state: Bool, indexSection: Int?, indexRow: Int?, itemID: String?) {
+        print("The item ID is \(itemID)")
         twoDArray[indexSection!].items[indexRow!].checked = state
+        
         tableView.reloadData()
     }
     
@@ -239,6 +236,21 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
             let configuration = UIImage.SymbolConfiguration(pointSize: 16, weight: .semibold, scale: .small)
             let image = UIImage(systemName: "chevron.down", withConfiguration: configuration)
             button.setImage(image, for: .normal)
+        }
+    }
+    
+    //MARK: - Load items
+    func loadItems(section: Int) {
+        db.collection(K.FStore.lists).document("\(section)").collection(K.FStore.items).getDocuments { (snapshot, error) in
+            if let error = error {
+                print("Error getting documents: \(error)")
+            } else {
+                for document in snapshot!.documents {
+                    let name = document.get("name") as! String
+                    print("Name: ",name)
+                    let section1 = Section(isExpanded: true, items: [])
+                }
+            }
         }
     }
     

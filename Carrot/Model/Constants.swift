@@ -21,5 +21,6 @@ struct K {
         static let sections = "sections"
         static let items = "items"
         static let firstName = "firstname"
+        static let isChecked = "isChecked"
     }
 }

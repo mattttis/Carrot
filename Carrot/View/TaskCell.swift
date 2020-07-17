@@ -7,21 +7,23 @@
 //
 
 import UIKit
+import Firebase
 
 protocol ChangeButton {
-    func changeButton(state: Bool, indexSection: Int?, indexRow: Int?)
+    func changeButton(state: Bool, indexSection: Int?, indexRow: Int?, itemID: String?)
 }
 
 class TaskCell: UITableViewCell {
     
     @IBAction func checkBoxAction(_ sender: Any) {
+        
         if items![indexRow!].checked {
-            delegate?.changeButton(state: false, indexSection: indexSection!, indexRow: indexRow!)
-            
+            delegate?.changeButton(state: false, indexSection: indexSection!, indexRow: indexRow!, itemID: itemID)
         } else {
-            delegate?.changeButton(state: true, indexSection: indexSection!, indexRow: indexRow!)
+            delegate?.changeButton(state: true, indexSection: indexSection!, indexRow: indexRow!, itemID: itemID)
         }
     }
+
     
     @IBOutlet weak var taskNameLabel: UILabel!
     @IBOutlet weak var checkBoxOutlet: UIButton!
@@ -31,4 +33,5 @@ class TaskCell: UITableViewCell {
     var indexRow: Int?
     var tasks: [[Task]]?
     var items: [Task]?
+    var itemID: String?
 }

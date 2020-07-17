@@ -14,6 +14,7 @@ class Task {
     var date = Date()
     var category: String
     var number: Int
+    var itemID: String?
     
     init(name: String) {
         self.name = name

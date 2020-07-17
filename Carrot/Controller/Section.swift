@@ -9,8 +9,6 @@
 import Foundation
 
 struct Section {
-    
     var isExpanded: Bool
     var items: [Task]
-    
 }
