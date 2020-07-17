@@ -17,9 +17,12 @@
 		7B59B01424AA7816005FBC70 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7B59B01224AA7816005FBC70 /* LaunchScreen.storyboard */; };
 		7B59B01C24AA7A33005FBC70 /* TaskCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B59B01B24AA7A33005FBC70 /* TaskCell.swift */; };
 		7B59B01E24AA7A59005FBC70 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B59B01D24AA7A59005FBC70 /* TableViewController.swift */; };
+		A02C91BB24BFB38300BE0489 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02C91BA24BFB38300BE0489 /* LoginViewController.swift */; };
+		A03F5A2724C1EF4F008054A7 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03F5A2624C1EF4F008054A7 /* RegisterViewController.swift */; };
+		A03F5A2924C1F564008054A7 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03F5A2824C1F564008054A7 /* WelcomeViewController.swift */; };
 		A044EF6724BB1FEC009C93B2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A044EF6624BB1FEC009C93B2 /* GoogleService-Info.plist */; };
 		A0ACFEAD24BBA320008943E4 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0ACFEAC24BBA320008943E4 /* Constants.swift */; };
-		A0AE90C124B8F2DA00E31B68 /* ExpandableItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0AE90C024B8F2DA00E31B68 /* ExpandableItems.swift */; };
+		A0AE90C124B8F2DA00E31B68 /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0AE90C024B8F2DA00E31B68 /* Section.swift */; };
 		A0C466B124B12FF400DDDAAA /* FoodData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C466B024B12FF400DDDAAA /* FoodData.swift */; };
 /* End PBXBuildFile section */
 
@@ -36,9 +39,12 @@
 		7B59B01B24AA7A33005FBC70 /* TaskCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCell.swift; sourceTree = "<group>"; };
 		7B59B01D24AA7A59005FBC70 /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		96D38123B0D97AA341E9A3B5 /* Pods-Carrot.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Carrot.debug.xcconfig"; path = "Target Support Files/Pods-Carrot/Pods-Carrot.debug.xcconfig"; sourceTree = "<group>"; };
+		A02C91BA24BFB38300BE0489 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		A03F5A2624C1EF4F008054A7 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
+		A03F5A2824C1F564008054A7 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		A044EF6624BB1FEC009C93B2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A0ACFEAC24BBA320008943E4 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		A0AE90C024B8F2DA00E31B68 /* ExpandableItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ExpandableItems.swift; path = Carrot/Controller/ExpandableItems.swift; sourceTree = SOURCE_ROOT; };
+		A0AE90C024B8F2DA00E31B68 /* Section.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Section.swift; path = Carrot/Controller/Section.swift; sourceTree = SOURCE_ROOT; };
 		A0C466B024B12FF400DDDAAA /* FoodData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodData.swift; sourceTree = "<group>"; };
 		DD9E70B64D89EFFCE59BE41C /* Pods-Carrot.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Carrot.release.xcconfig"; path = "Target Support Files/Pods-Carrot/Pods-Carrot.release.xcconfig"; sourceTree = "<group>"; };
 		E04A748A672CA8543E3991F9 /* Pods_Carrot.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Carrot.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -92,7 +98,7 @@
 		A03C5D7924B11A0000C2BB4D /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				A0AE90C024B8F2DA00E31B68 /* ExpandableItems.swift */,
+				A0AE90C024B8F2DA00E31B68 /* Section.swift */,
 				7B194FDA24AA7D190099AE9F /* Task.swift */,
 				A0C466B024B12FF400DDDAAA /* FoodData.swift */,
 				A0ACFEAC24BBA320008943E4 /* Constants.swift */,
@@ -114,7 +120,10 @@
 		A03C5D7B24B11A0E00C2BB4D /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				A02C91BA24BFB38300BE0489 /* LoginViewController.swift */,
 				7B59B01D24AA7A59005FBC70 /* TableViewController.swift */,
+				A03F5A2624C1EF4F008054A7 /* RegisterViewController.swift */,
+				A03F5A2824C1F564008054A7 /* WelcomeViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -253,13 +262,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				A0C466B124B12FF400DDDAAA /* FoodData.swift in Sources */,
+				A03F5A2724C1EF4F008054A7 /* RegisterViewController.swift in Sources */,
 				7B59B01C24AA7A33005FBC70 /* TaskCell.swift in Sources */,
 				7B59B00824AA7811005FBC70 /* AppDelegate.swift in Sources */,
 				7B59B01E24AA7A59005FBC70 /* TableViewController.swift in Sources */,
 				7B194FDB24AA7D190099AE9F /* Task.swift in Sources */,
 				7B59B00A24AA7811005FBC70 /* SceneDelegate.swift in Sources */,
-				A0AE90C124B8F2DA00E31B68 /* ExpandableItems.swift in Sources */,
+				A0AE90C124B8F2DA00E31B68 /* Section.swift in Sources */,
 				7B35934B24AB521F00A8CC4F /* InputCell.swift in Sources */,
+				A03F5A2924C1F564008054A7 /* WelcomeViewController.swift in Sources */,
+				A02C91BB24BFB38300BE0489 /* LoginViewController.swift in Sources */,
 				A0ACFEAD24BBA320008943E4 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

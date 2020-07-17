@@ -12,40 +12,81 @@ import Firebase
 class TableViewController: UITableViewController, AddTask, ChangeButton {
     
     var sections = FoodData.foodCategories
+    
+    // Database variables
     let db = Firestore.firestore()
+
     var currentListID: String?
+    var currentLists: [String]?
+    var currentUserID: String?
+    var userFirstName: String?
+    var userEmail: String?
     
     var twoDArray = [
-        Section(isExpanded: true, items: [Task(name: "No items yet")]), Section(isExpanded: true, items: [Task(name: "No items yet")]), Section(isExpanded: true, items: [Task(name: "No items yet")]), Section(isExpanded: true, items: [Task(name: "No items yet")]), Section(isExpanded: true, items: [Task(name: "No items yet")]), Section(isExpanded: true, items: [Task(name: "No items yet")]), Section(isExpanded: true, items: [Task(name: "No items yet")]), Section(isExpanded: true, items: [Task(name: "No items yet")]), Section(isExpanded: true, items: [Task(name: "No items yet")]),
-            Section(isExpanded: true, items: [Task(name: "No items yet")]),
-            Section(isExpanded: true, items: [Task(name: "No items yet")]),
-            Section(isExpanded: true, items: [Task(name: "No items yet")]),
-            Section(isExpanded: true, items: [Task(name: "No items yet")]),
-            Section(isExpanded: true, items: [Task(name: "No items yet")]),
-            Section(isExpanded: true, items: [Task(name: "No items yet")]),
-            Section(isExpanded: true, items: [Task(name: "No items yet")]),
-            Section(isExpanded: true, items: [Task(name: "No items yet")]),
-            Section(isExpanded: true, items: [Task(name: "No items yet")])
-        ]
+        Section(isExpanded: true, items: [Task(name: "Add new task")]),
+        Section(isExpanded: true, items: []),
+        Section(isExpanded: true, items: []),
+        Section(isExpanded: true, items: []),
+        Section(isExpanded: true, items: []),
+        Section(isExpanded: true, items: []),
+        Section(isExpanded: true, items: []),
+        Section(isExpanded: true, items: []),
+        Section(isExpanded: true, items: []),
+        Section(isExpanded: true, items: []),
+        Section(isExpanded: true, items: []),
+        Section(isExpanded: true, items: []),
+        Section(isExpanded: true, items: []),
+        Section(isExpanded: true, items: []),
+        Section(isExpanded: true, items: []),
+        Section(isExpanded: true, items: []),
+        Section(isExpanded: true, items: []),
+        Section(isExpanded: true, items: [])
+    ]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.prefersLargeTitles = true
+        navigationItem.hidesBackButton = true
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
+        
         title = "Groceries"
         
-        //MARK: - Database setup
+//        let userRef = db.collection(K.FStore.users)
+//        let user = Auth.auth().currentUser
+//
+//        if let user = user {
+//            currentUserID = user.uid
+//            let currentUserRef = userRef.document(currentUserID!)
+//            currentUserRef.getDocument { (document, error) in
+//                if let document = document, document.exists {
+//                    let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
+//                    print("Document data: \(dataDescription)")
+//                } else {
+//                    print("Document does not exist")
+//                }
+//            }
+//        }
         
-        let listRef = self.db.collection(K.lists)
-        let someData = [
-            "date": Date(),
-            "name": "List 1",
-            "sections": FoodData.foodCategories
-            ] as [String : Any]
+        let user = Auth.auth().currentUser
         
-        let aDoc = listRef.document()
-        currentListID = aDoc.documentID
-        aDoc.setData(someData)
+        if let user = user {
+            currentUserID = user.uid
+            print(currentUserID!)
+            let ref = db.collection(K.FStore.users).document(currentUserID!)
+            ref.getDocument { (snapshot, error) in
+                if let data = snapshot?.data() {
+                    self.userFirstName = data["firstname"] as! String
+                    self.userEmail = data["email"] as! String
+                    self.currentLists = data["lists"] as! [String]
+                    self.currentListID = self.currentLists![0]
+                } else {
+                    print("Could not find document")
+                }
+            }
+        }
+        
     }
+    
 
     // MARK: - TableView data source
 
@@ -93,7 +134,6 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
     func addTask(name: String) {
         let newTask = Task(name: name)
         let thisCategory = newTask.category
-        
         if thisCategory != "" {
             newTask.number = FoodData.foodCategories.firstIndex(of: thisCategory) ?? 17
         } else {
@@ -107,11 +147,11 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
         
         //MARK: - Database setup
         var ref: DocumentReference? = nil
-        ref = db.collection(K.lists).document(currentListID!).collection("items").addDocument(data: [
-            "name": newTask.name,
-            "isChecked": newTask.checked,
-            "categoryNumber": newTask.number,
-            "date": Date()
+        ref = db.collection(K.lists).document(currentListID!).collection(K.FStore.sections).document("\(thisCategory)").collection(K.FStore.items).addDocument(data: [
+                "name": newTask.name,
+                "isChecked": newTask.checked,
+                "categoryNumber": newTask.number,
+                "date": Date()
         ])
     }
     
@@ -163,6 +203,10 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if section == 0 {
             return CGFloat.leastNormalMagnitude
+        }
+        
+        if twoDArray[section].items.count == 0 {
+            return 0
         }
         
 //        return tableView.sectionHeaderHeight
