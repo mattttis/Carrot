@@ -11,7 +11,7 @@ import Firebase
 
 class TableViewController: UITableViewController, AddTask, ChangeButton {
     
-    // var sections = FoodData.foodCategories
+    var refreshControlMT = UIRefreshControl()
     var sections: [Section] = []
     
     // Database references
@@ -27,58 +27,33 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
     var userEmail: String?
     var items: [Task]?
     
-    var twoDArray = [
-        Section(name: FoodData.foodCategories[0], isExpanded: true, items: [Task(name: "Add new task")]),
-        Section(name: FoodData.foodCategories[1], isExpanded: true, items: []),
-        Section(name: FoodData.foodCategories[2], isExpanded: true, items: []),
-        Section(name: FoodData.foodCategories[3], isExpanded: true, items: []),
-        Section(name: FoodData.foodCategories[4], isExpanded: true, items: []),
-        Section(name: FoodData.foodCategories[5], isExpanded: true, items: []),
-        Section(name: FoodData.foodCategories[6], isExpanded: true, items: []),
-        Section(name: FoodData.foodCategories[7], isExpanded: true, items: []),
-        Section(name: FoodData.foodCategories[8], isExpanded: true, items: []),
-        Section(name: FoodData.foodCategories[9], isExpanded: true, items: []),
-        Section(name: FoodData.foodCategories[10], isExpanded: true, items: []),
-        Section(name: FoodData.foodCategories[11], isExpanded: true, items: []),
-        Section(name: FoodData.foodCategories[12], isExpanded: true, items: []),
-        Section(name: FoodData.foodCategories[13], isExpanded: true, items: []),
-        Section(name: FoodData.foodCategories[14], isExpanded: true, items: []),
-        Section(name: FoodData.foodCategories[15], isExpanded: true, items: []),
-        Section(name: FoodData.foodCategories[16], isExpanded: true, items: []),
-        Section(name: FoodData.foodCategories[17], isExpanded: true, items: [])
-    ]
-    
 //    var twoDArray = [
-//        Section(isExpanded: true, items: [Task(name: "Add new task")]),
-//        Section(isExpanded: true, items: []),
-//        Section(isExpanded: true, items: []),
-//        Section(isExpanded: true, items: []),
-//        Section(isExpanded: true, items: []),
-//        Section(isExpanded: true, items: []),
-//        Section(isExpanded: true, items: []),
-//        Section(isExpanded: true, items: []),
-//        Section(isExpanded: true, items: []),
-//        Section(isExpanded: true, items: []),
-//        Section(isExpanded: true, items: []),
-//        Section(isExpanded: true, items: []),
-//        Section(isExpanded: true, items: []),
-//        Section(isExpanded: true, items: []),
-//        Section(isExpanded: true, items: []),
-//        Section(isExpanded: true, items: []),
-//        Section(isExpanded: true, items: []),
-//        Section(isExpanded: true, items: [])
+//        Section(name: FoodData.foodCategories[0], isExpanded: true, items: [Task(name: "Add new task")]),
+//        Section(name: FoodData.foodCategories[1], isExpanded: true, items: []),
+//        Section(name: FoodData.foodCategories[2], isExpanded: true, items: []),
+//        Section(name: FoodData.foodCategories[3], isExpanded: true, items: []),
+//        Section(name: FoodData.foodCategories[4], isExpanded: true, items: []),
+//        Section(name: FoodData.foodCategories[5], isExpanded: true, items: []),
+//        Section(name: FoodData.foodCategories[6], isExpanded: true, items: []),
+//        Section(name: FoodData.foodCategories[7], isExpanded: true, items: []),
+//        Section(name: FoodData.foodCategories[8], isExpanded: true, items: []),
+//        Section(name: FoodData.foodCategories[9], isExpanded: true, items: []),
+//        Section(name: FoodData.foodCategories[10], isExpanded: true, items: []),
+//        Section(name: FoodData.foodCategories[11], isExpanded: true, items: []),
+//        Section(name: FoodData.foodCategories[12], isExpanded: true, items: []),
+//        Section(name: FoodData.foodCategories[13], isExpanded: true, items: []),
+//        Section(name: FoodData.foodCategories[14], isExpanded: true, items: []),
+//        Section(name: FoodData.foodCategories[15], isExpanded: true, items: []),
+//        Section(name: FoodData.foodCategories[16], isExpanded: true, items: []),
+//        Section(name: FoodData.foodCategories[17], isExpanded: true, items: [])
 //    ]
-//    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.hidesBackButton = true
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
         
         title = "Groceries"
-        
-        
         
         let user = Auth.auth().currentUser
         
@@ -101,6 +76,10 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
                 }
             }
         }
+        
+        refreshControlMT.attributedTitle = NSAttributedString(string: "Refreshing...")
+        refreshControlMT.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
+        tableView.addSubview(refreshControlMT) // not required when using UITableViewController
     }
     
 
@@ -112,11 +91,16 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
             return 1
         }
         
-        if !twoDArray[section].isExpanded {
+        if !sections[section].isExpanded {
             return 0
         }
         
-        return twoDArray[section].items.count
+//        if !twoDArray[section].isExpanded {
+//            return 0
+//        }
+        
+        return sections[section].items.count
+        // return twoDArray[section].items.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -126,7 +110,7 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "taskCell", for: indexPath) as! TaskCell
-            let current = twoDArray[indexPath.section].items[indexPath.row]
+            let current = sections[indexPath.section].items[indexPath.row]
             cell.taskNameLabel.text = current.name
             
             if current.checked {
@@ -136,10 +120,10 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
             }
             
             cell.delegate = self
-            cell.items = twoDArray[indexPath.section].items
+            cell.items = sections[indexPath.section].items
             cell.indexSection = indexPath.section
             cell.indexRow = indexPath.row
-            cell.itemID = twoDArray[indexPath.section].items[indexPath.row].itemID
+            cell.itemID = sections[indexPath.section].items[indexPath.row].itemID
             
             return cell
         }
@@ -172,11 +156,11 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
         
         // Adding the task to array
         print("Item \(newTask.name) has category of \(newTask.category) with number \(newTask.number) & id")
-        twoDArray[newTask.number].items.append(Task(name: name))
-        twoDArray[newTask.number].isExpanded = true
+        sections[newTask.number].items.append(Task(name: name))
+        sections[newTask.number].isExpanded = true
         
-        let count = twoDArray[newTask.number].items.count - 1
-        twoDArray[newTask.number].items[count].itemID = ref!.documentID
+        let count = sections[newTask.number].items.count - 1
+        sections[newTask.number].items[count].itemID = ref!.documentID
         tableView.reloadData()
     
     }
@@ -185,12 +169,12 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
     
     func changeButton(state: Bool, indexSection: Int?, indexRow: Int?, itemID: String?) {
         // print("The item ID is \(itemID)")
-        twoDArray[indexSection!].items[indexRow!].checked = state
+        sections[indexSection!].items[indexRow!].checked = state
         
         if let itemID = itemID {
             let itemRef = db.collection(K.FStore.lists).document(currentListID!).collection(K.FStore.sections).document("\(indexSection!)").collection(K.FStore.items).document(itemID)
             
-            if twoDArray[indexSection!].items[indexRow!].checked {
+            if sections[indexSection!].items[indexRow!].checked {
                 itemRef.updateData([
                     K.FStore.isChecked : true
                 ]) { err in
@@ -262,7 +246,7 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
             return CGFloat.leastNormalMagnitude
         }
         
-        if twoDArray[section].items.count == 0 {
+        if sections[section].items.count == 0 {
             return 0
         }
         
@@ -277,13 +261,13 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
         var indexPaths = [IndexPath]()
         let section = button.tag
         
-        for row in twoDArray[section].items.indices {
+        for row in sections[section].items.indices {
             let indexPath = IndexPath(row: row, section: section)
             indexPaths.append(indexPath)
         }
         
-        let isExpanded = twoDArray[section].isExpanded
-        twoDArray[section].isExpanded = !isExpanded
+        let isExpanded = sections[section].isExpanded
+        sections[section].isExpanded = !isExpanded
         
         if isExpanded {
             tableView.deleteRows(at: indexPaths, with: .fade)
@@ -316,7 +300,7 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
                 }
             }
             print(itemArray)
-            self.twoDArray[section].items = itemArray
+            self.sections[section].items = itemArray
             self.tableView.reloadData()
         }
         
@@ -349,6 +333,13 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
             }
         }
     
+    }
+    
+    @objc func refresh(_ sender: AnyObject) {
+       // Code to refresh table view
+        // loadSections(listID: currentListID ?? "hellor")
+        tableView.reloadData()
+        refreshControlMT.endRefreshing()
     }
     
 }
