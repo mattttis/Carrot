@@ -30,5 +30,6 @@ class InputCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         newTaskField.addTarget(self, action: #selector(saveNewTaskAction), for: .editingDidEndOnExit)
+
     }
 }

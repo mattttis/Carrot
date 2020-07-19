@@ -25,6 +25,15 @@ class Task {
         self.category = findCategory(itemName: name.lowercased())
     }
     
+    init(name: String, isChecked: Bool) {
+        self.name = name
+        self.checked = isChecked
+        self.date = Date()
+        self.number = 17
+        self.category = ""
+        self.category = findCategory(itemName: name.lowercased())
+    }
+    
     private func findCategory (itemName: String) -> String {
         var category: String
         if FoodData.fruits.contains(itemName) || FoodData.vegetables.contains(itemName) {

@@ -96,11 +96,6 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
                     // Load the section names
                     self.loadSections(listID: self.currentListID!)
                     
-                    for (index, element) in self.sections.enumerated() {
-                        self.loadItems(listID: self.currentListID!, section: index)
-                        print("Wow")
-                    }
-                    
                 } else {
                     print("Could not find document")
                 }
@@ -306,16 +301,26 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
     //MARK: - Load items
     func loadItems(listID: String, section: Int) {
         let itemRef = db.collection(K.FStore.lists).document(listID).collection(K.FStore.sections).document("\(section)").collection(K.FStore.items)
+        var itemArray = [Task]()
         
         itemRef.getDocuments() { (querySnapshot, error) in
             if let error = error {
                 print("Error getting documents: \(error)")
             } else {
                 for document in querySnapshot!.documents {
-                    print("\(document.documentID) => \(document.data())")
+                    let name = document.data()["name"] as? String
+                    let isChecked : Bool = (document.data()["isChecked"] != nil)
+                    let newItem = Task(name: name ?? "FIREBASE ERROR", isChecked: isChecked)
+                    itemArray.append(newItem)
+                    print(newItem.checked)
                 }
             }
+            print(itemArray)
+            self.twoDArray[section].items = itemArray
+            self.tableView.reloadData()
         }
+        
+        
         
     }
     
@@ -330,9 +335,10 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
                 let sectionNames = document.data()!["sections"] as? [String]
                 
                 if let sectionNames = sectionNames {
-                    for item in sectionNames {
+                    for (index, item) in sectionNames.enumerated() {
                         let newSection = Section(name: item, isExpanded: true, items: [])
                         self.sections.append(newSection)
+                        self.loadItems(listID: listID, section: index)
                     }
                 }
                 
