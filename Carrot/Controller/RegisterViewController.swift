@@ -74,7 +74,9 @@ class RegisterViewController: UIViewController {
                             // Set up sections
                             for (index, section) in FoodData.foodCategories.enumerated() {
                                 db.collection(K.FStore.lists).document(currentListID!).collection(K.FStore.sections).document("\(index)").setData([
-                                    "name": "\(section)"
+                                    "name": "\(section)",
+                                    "index": "\(index)",
+                                    "date": Date()
                                 ])
                             }
                         }

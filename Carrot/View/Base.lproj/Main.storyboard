@@ -163,7 +163,7 @@
         <!--Groceries-->
         <scene sceneID="hKQ-pw-zhy">
             <objects>
-                <tableViewController title="Groceries" providesPresentationContextTransitionStyle="YES" modalPresentationStyle="fullScreen" id="JKY-RQ-H6R" customClass="TableViewController" customModule="Carrot" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="TableViewController" title="Groceries" providesPresentationContextTransitionStyle="YES" modalPresentationStyle="fullScreen" id="JKY-RQ-H6R" customClass="TableViewController" customModule="Carrot" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="lUu-ok-zsl">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -394,10 +394,10 @@
             </objects>
             <point key="canvasLocation" x="-299" y="136"/>
         </scene>
-        <!--View Controller-->
+        <!--Welcome View Controller-->
         <scene sceneID="2Ab-4D-4Bg">
             <objects>
-                <viewController id="2Xs-gN-d9L" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WelcomeViewController" id="2Xs-gN-d9L" customClass="WelcomeViewController" customModule="Carrot" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="vwb-pk-uiU">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

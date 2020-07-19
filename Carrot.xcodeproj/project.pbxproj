@@ -83,11 +83,11 @@
 		7B59B00624AA7811005FBC70 /* Carrot */ = {
 			isa = PBXGroup;
 			children = (
+				7B59B00724AA7811005FBC70 /* AppDelegate.swift */,
+				7B59B00924AA7811005FBC70 /* SceneDelegate.swift */,
 				A03C5D7B24B11A0E00C2BB4D /* Controller */,
 				A03C5D7A24B11A0800C2BB4D /* View */,
 				A03C5D7924B11A0000C2BB4D /* Model */,
-				7B59B00724AA7811005FBC70 /* AppDelegate.swift */,
-				7B59B00924AA7811005FBC70 /* SceneDelegate.swift */,
 				7B59B01024AA7816005FBC70 /* Assets.xcassets */,
 				7B59B01524AA7816005FBC70 /* Info.plist */,
 				A044EF6624BB1FEC009C93B2 /* GoogleService-Info.plist */,
@@ -120,8 +120,8 @@
 		A03C5D7B24B11A0E00C2BB4D /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				A02C91BA24BFB38300BE0489 /* LoginViewController.swift */,
 				7B59B01D24AA7A59005FBC70 /* TableViewController.swift */,
+				A02C91BA24BFB38300BE0489 /* LoginViewController.swift */,
 				A03F5A2624C1EF4F008054A7 /* RegisterViewController.swift */,
 				A03F5A2824C1F564008054A7 /* WelcomeViewController.swift */,
 			);
