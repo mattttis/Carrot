@@ -70,10 +70,12 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
+        // Let the first section (add item) only have 1 cell
         if section == 0 {
             return 1
         }
         
+        // If the section is hidden, hide the rows in the section
         if !sections[section].isExpanded {
             return 0
         }
@@ -82,6 +84,8 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        // First section (1 cell) should use the inputCell
         if indexPath.row == 0 && indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "inputCell", for: indexPath) as! InputCell
             cell.delegate = self
@@ -113,6 +117,8 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
     func addTask(name: String) {
         let newTask = Task(name: name)
         let thisCategory = newTask.category
+        
+        // Check what the position of the category name is, return 17 (other) if nothing found
         if thisCategory != "" {
             newTask.number = FoodData.foodCategories.firstIndex(of: thisCategory) ?? 17
         } else {
@@ -227,10 +233,12 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        // Hide the section title for the 'Add task' section
         if section == 0 {
             return CGFloat.leastNormalMagnitude
         }
         
+        // Hide the section title if it is empty
         if sections[section].items.count == 0 {
             return 0
         }
@@ -272,7 +280,7 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
     
     //MARK: - Load sections
     func loadSections(listID: String) {
-        print("Loading sections...")
+        // print("Loading sections...")
         let listRef = db.collection(K.FStore.lists).document(listID)
         
         listRef.getDocument { (document, error) in
@@ -287,6 +295,7 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
                         self.loadItems(listID: listID, section: index)
                     }
                 }
+                
                 
                 self.tableView.reloadData()
                 
@@ -303,21 +312,61 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
     func loadItems(listID: String, section: Int) {
         let itemRef = db.collection(K.FStore.lists).document(listID).collection(K.FStore.sections).document("\(section)").collection(K.FStore.items)
         var itemArray = [Task]()
+        self.sections[section].items = []
         
-        itemRef.getDocuments() { (querySnapshot, error) in
-            if let error = error {
-                print("Error getting documents: \(error)")
-            } else {
-                for document in querySnapshot!.documents {
-                    let name = document.data()[K.Item.name] as? String
-                    let checked: Bool = (document.data()[K.Item.isChecked]) as! Bool
-                    let idDocument = document.documentID
-                    
-                    let newItem = Task(name: name ?? "FIREBASE ERROR", isChecked: checked, itemID: idDocument)
-                    itemArray.append(newItem)
-                }
+//        itemRef.getDocuments() { (querySnapshot, error) in
+//            if let error = error {
+//                print("Error getting documents: \(error)")
+//            } else {
+//                for document in querySnapshot!.documents {
+//                    let name = document.data()[K.Item.name] as? String
+//                    let checked: Bool = (document.data()[K.Item.isChecked]) as! Bool
+//                    let idDocument = document.documentID
+//
+//                    let newItem = Task(name: name ?? "FIREBASE ERROR", isChecked: checked, itemID: idDocument)
+//                    itemArray.append(newItem)
+//                }
+//            }
+//            self.sections[section].items = itemArray
+//            self.tableView.reloadData()
+//        }
+        
+        itemRef.addSnapshotListener { (querySnapshot, error) in
+            guard let documents = querySnapshot?.documents else {
+                print("Error fetching documents: \(error!)")
+                return
             }
+            for document in querySnapshot!.documents {
+                let name = document.data()[K.Item.name] as? String
+                let checked: Bool = (document.data()[K.Item.isChecked]) as! Bool
+                let idDocument = document.documentID
+                
+                let newItem = Task(name: name ?? "FIREBASE ERROR", isChecked: checked, itemID: idDocument)
+                
+                itemArray.append(newItem)
+                // self.sections[section].items = itemArray
+            }
+            
             self.sections[section].items = itemArray
+            // print(itemArray)
+            
+            func removeMyDuplicates() {
+                var newListOfItems:[Task] = []
+
+                for item in self.sections[section].items {
+                    var added = false
+                    for newItem in itemArray {
+                        if(item.itemID == newItem.itemID){
+                            added = true
+                        }
+                    }
+                    if !added{
+                        newListOfItems.append(item)
+                    }
+                }
+                self.sections[section].items = newListOfItems
+            }
+            
             self.tableView.reloadData()
         }
     }
