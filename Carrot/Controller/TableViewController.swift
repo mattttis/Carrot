@@ -27,27 +27,6 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
     var userEmail: String?
     var items: [Task]?
     
-//    var twoDArray = [
-//        Section(name: FoodData.foodCategories[0], isExpanded: true, items: [Task(name: "Add new task")]),
-//        Section(name: FoodData.foodCategories[1], isExpanded: true, items: []),
-//        Section(name: FoodData.foodCategories[2], isExpanded: true, items: []),
-//        Section(name: FoodData.foodCategories[3], isExpanded: true, items: []),
-//        Section(name: FoodData.foodCategories[4], isExpanded: true, items: []),
-//        Section(name: FoodData.foodCategories[5], isExpanded: true, items: []),
-//        Section(name: FoodData.foodCategories[6], isExpanded: true, items: []),
-//        Section(name: FoodData.foodCategories[7], isExpanded: true, items: []),
-//        Section(name: FoodData.foodCategories[8], isExpanded: true, items: []),
-//        Section(name: FoodData.foodCategories[9], isExpanded: true, items: []),
-//        Section(name: FoodData.foodCategories[10], isExpanded: true, items: []),
-//        Section(name: FoodData.foodCategories[11], isExpanded: true, items: []),
-//        Section(name: FoodData.foodCategories[12], isExpanded: true, items: []),
-//        Section(name: FoodData.foodCategories[13], isExpanded: true, items: []),
-//        Section(name: FoodData.foodCategories[14], isExpanded: true, items: []),
-//        Section(name: FoodData.foodCategories[15], isExpanded: true, items: []),
-//        Section(name: FoodData.foodCategories[16], isExpanded: true, items: []),
-//        Section(name: FoodData.foodCategories[17], isExpanded: true, items: [])
-//    ]
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.prefersLargeTitles = true
@@ -95,12 +74,7 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
             return 0
         }
         
-//        if !twoDArray[section].isExpanded {
-//            return 0
-//        }
-        
         return sections[section].items.count
-        // return twoDArray[section].items.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -145,38 +119,40 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
             "name": newTask.name,
             "isChecked": newTask.checked,
             "categoryNumber": newTask.number,
-            "date": Date()
+            "date": Date(),
+            "uid": currentUserID!
         ]) { err in
             if let err = err {
                 print("Error adding document: \(err)")
             } else {
-                newTask.itemID = ref!.documentID
+                if let newItemID = ref?.documentID {
+                    newTask.itemID = newItemID
+                    
+                    // Adding the task to array
+                    print("Item \(newTask.name) has category of \(newTask.category) with number \(newTask.number) & id \(newTask.itemID!)")
+                    let count = self.sections[newTask.number].items.count - 1
+                    self.sections[newTask.number].items[count].itemID = ref!.documentID
+                    self.sections[newTask.number].items.append(Task(name: name))
+                    self.sections[newTask.number].isExpanded = true
+                }
             }
+            
+            print("Item III id: \(newTask.itemID!)")
         }
-        
-        // Adding the task to array
-        print("Item \(newTask.name) has category of \(newTask.category) with number \(newTask.number) & id")
-        sections[newTask.number].items.append(Task(name: name))
-        sections[newTask.number].isExpanded = true
-        
-        let count = sections[newTask.number].items.count - 1
-        sections[newTask.number].items[count].itemID = ref!.documentID
         tableView.reloadData()
-    
     }
     
     //MARK: - Change isChecked state & button
     
     func changeButton(state: Bool, indexSection: Int?, indexRow: Int?, itemID: String?) {
-        // print("The item ID is \(itemID)")
         sections[indexSection!].items[indexRow!].checked = state
-        
         if let itemID = itemID {
             let itemRef = db.collection(K.FStore.lists).document(currentListID!).collection(K.FStore.sections).document("\(indexSection!)").collection(K.FStore.items).document(itemID)
             
             if sections[indexSection!].items[indexRow!].checked {
                 itemRef.updateData([
-                    K.FStore.isChecked : true
+                    K.FStore.isChecked : true,
+                    K.FStore.checkedBy: currentUserID!
                 ]) { err in
                     if let err = err {
                         print("Error writing document: \(err)")
@@ -225,7 +201,6 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
         // Label configuration
         let label = UILabel()
         label.frame = CGRect.init(x: 5, y: 5, width: headerView.frame.width-10, height: headerView.frame.height-5)
-        // label.text = "   \(sections[section])"
         label.text = "   \(sections[section].name!)"
         label.font = UIFont .boldSystemFont(ofSize: 24)
 
@@ -293,24 +268,21 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
             } else {
                 for document in querySnapshot!.documents {
                     let name = document.data()["name"] as? String
-                    let isChecked : Bool = (document.data()["isChecked"] != nil)
-                    let newItem = Task(name: name ?? "FIREBASE ERROR", isChecked: isChecked)
+                    let checked: Bool = (document.data()["isChecked"]) as! Bool
+                    let idDocument = document.documentID
+                    
+                    let newItem = Task(name: name ?? "FIREBASE ERROR", isChecked: checked, itemID: idDocument)
                     itemArray.append(newItem)
-                    print(newItem.checked)
                 }
             }
-            print(itemArray)
             self.sections[section].items = itemArray
             self.tableView.reloadData()
         }
-        
-        
-        
     }
     
     //MARK: - Load sections
     func loadSections(listID: String) {
-        
+        print("Loading sections...")
         let listRef = db.collection(K.FStore.lists).document(listID)
         
         listRef.getDocument { (document, error) in
@@ -332,15 +304,17 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
                 print("Document does not exist")
             }
         }
-    
     }
     
+    
+    //MARK: - Refresh TableView
     @objc func refresh(_ sender: AnyObject) {
-       // Code to refresh table view
-        // loadSections(listID: currentListID ?? "hellor")
+        // Recollect data from Firestore
+        loadSections(listID: currentListID ?? "hellor")
         tableView.reloadData()
+        
+        // Stop refreshing animation
         refreshControlMT.endRefreshing()
     }
-    
 }
 

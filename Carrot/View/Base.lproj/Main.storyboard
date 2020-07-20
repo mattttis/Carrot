@@ -408,11 +408,13 @@
                                 <color key="backgroundColor" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="lessThanOrEqual" constant="63" id="00V-0w-gfx"/>
+                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="266" id="UEb-nf-yoP"/>
                                     <constraint firstAttribute="width" relation="lessThanOrEqual" constant="266" id="Ytc-oS-cKV"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="266" id="gm6-7j-zQ0"/>
                                     <constraint firstAttribute="width" constant="266" id="mTF-4R-5Ho"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="63" id="mUB-rR-uPp"/>
                                     <constraint firstAttribute="height" constant="63" id="o8H-6l-YUX"/>
+                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="63" id="oiK-PP-GFI"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="29"/>
                                 <state key="normal" title="Log In">
@@ -431,7 +433,9 @@
                                 <constraints>
                                     <constraint firstAttribute="width" constant="266" id="2DK-k6-Qau"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="266" id="Ewg-NP-rcV"/>
+                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="266" id="K5g-Jl-HLz"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="63" id="RmG-R0-w7R"/>
+                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="63" id="fEQ-9M-eio"/>
                                     <constraint firstAttribute="height" constant="63" id="rfN-LE-tRB"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="29"/>
@@ -483,7 +487,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="3vQ-JR-Z8p"/>
+        <segue reference="ELv-9J-ITG"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="checkBoxOUTLINE " width="22" height="22"/>
