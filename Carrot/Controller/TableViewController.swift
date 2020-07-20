@@ -44,9 +44,9 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
             userRef = db.collection(K.FStore.users).document(currentUserID!)
             userRef!.getDocument { (snapshot, error) in
                 if let data = snapshot?.data() {
-                    self.userFirstName = data[K.User.firstName] as! String
-                    self.userEmail = data[K.User.email] as! String
-                    self.currentLists = data[K.User.lists] as! [String]
+                    self.userFirstName = (data[K.User.firstName] as! String)
+                    self.userEmail = (data[K.User.email] as! String)
+                    self.currentLists = (data[K.User.lists] as! [String])
                     self.currentListID = self.currentLists![0]
                     self.listsRef = self.db.collection(K.FStore.lists).document(self.currentListID!)
                     
@@ -206,9 +206,13 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
         
         // Label configuration
         let label = UILabel()
+        let tap = UITapGestureRecognizer(target: self, action: #selector(handleExpandClose))
         label.frame = CGRect.init(x: 5, y: 5, width: headerView.frame.width-10, height: headerView.frame.height-5)
         label.text = "   \(sections[section].name!)"
         label.font = UIFont .boldSystemFont(ofSize: 24)
+        label.isUserInteractionEnabled = true
+        label.addGestureRecognizer(tap)
+        label.tag = section
 
         headerView.addSubview(label)
         
