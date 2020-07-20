@@ -34,11 +34,12 @@ class RegisterViewController: UIViewController {
                 if let authData = authResult {
                     // Save profile picture
                     var dict: Dictionary<String, Any> = [
-                        "firstname" : firstName,
-                        "email" : authData.user.email,
-                        "dateCreated" : Date(),
-                        "lists": []
+                        K.User.firstName: firstName,
+                        K.User.email: authData.user.email,
+                        K.User.dateCreated: Date(),
+                        K.User.lists: []
                     ]
+                    
                     let db = Firestore.firestore()
                     let userRef = db.collection(K.FStore.users).document(authData.user.uid)
                     
@@ -52,12 +53,12 @@ class RegisterViewController: UIViewController {
                             
                             let listRef = db.collection(K.FStore.lists)
                             let someData = [
-                                "date": Date(),
-                                "name": "Groceries",
-                                "sections": FoodData.foodCategories,
-                                "createdBy": authData.user.uid,
-                                "members": [authData.user.uid],
-                                "members-email": [authData.user.email]
+                                K.List.dateCreated: Date(),
+                                K.List.name: "Groceries",
+                                K.List.sections: FoodData.foodCategories,
+                                K.List.createdBy: authData.user.uid,
+                                K.List.members: [authData.user.uid],
+                                K.List.membersEmail: [authData.user.email]
                                 ] as [String : Any]
                             
                             let aDoc = listRef.document()
@@ -66,7 +67,7 @@ class RegisterViewController: UIViewController {
                             
                             // Append previously created list ID to user's "lists" array
                             userRef.updateData([
-                                "lists" : FieldValue.arrayUnion([currentListID])
+                                K.User.lists: FieldValue.arrayUnion([currentListID])
                             ])
                             
                             // Redirect user to groceries
@@ -77,9 +78,9 @@ class RegisterViewController: UIViewController {
                             // Set up sections
                             for (index, section) in FoodData.foodCategories.enumerated() {
                                 db.collection(K.FStore.lists).document(currentListID!).collection(K.FStore.sections).document("\(index)").setData([
-                                    "name": "\(section)",
-                                    "index": "\(index)",
-                                    "date": Date()
+                                    K.Section.name: "\(section)",
+                                    K.Section.index: "\(index)",
+                                    K.Section.dateCreated: Date()
                                 ])
                             }
                         }
@@ -87,11 +88,5 @@ class RegisterViewController: UIViewController {
                 }
             }
         }
-        
-        
-        
-        
     }
-    
-    
 }

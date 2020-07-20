@@ -44,9 +44,9 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
             userRef = db.collection(K.FStore.users).document(currentUserID!)
             userRef!.getDocument { (snapshot, error) in
                 if let data = snapshot?.data() {
-                    self.userFirstName = data["firstname"] as! String
-                    self.userEmail = data["email"] as! String
-                    self.currentLists = data["lists"] as! [String]
+                    self.userFirstName = data[K.User.firstName] as! String
+                    self.userEmail = data[K.User.email] as! String
+                    self.currentLists = data[K.User.lists] as! [String]
                     self.currentListID = self.currentLists![0]
                     self.listsRef = self.db.collection(K.FStore.lists).document(self.currentListID!)
                     
@@ -122,11 +122,11 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
         // Adding to Firestore
         var ref: DocumentReference? = nil
         ref = db.collection(K.lists).document(currentListID!).collection(K.FStore.sections).document("\(newTask.number)").collection(K.FStore.items).addDocument(data: [
-            "name": newTask.name,
-            "isChecked": newTask.checked,
-            "categoryNumber": newTask.number,
-            "date": Date(),
-            "uid": currentUserID!
+                K.Item.name: newTask.name,
+                K.Item.isChecked: newTask.checked,
+                K.Item.categoryNumber: newTask.number,
+                K.Item.date: Date(),
+                K.Item.uid: currentUserID!
         ]) { err in
             if let err = err {
                 print("Error adding document: \(err)")
@@ -156,8 +156,8 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
             
             if sections[indexSection!].items[indexRow!].checked {
                 itemRef.updateData([
-                    K.FStore.isChecked : true,
-                    K.FStore.checkedBy: currentUserID!
+                    K.Item.isChecked : true,
+                    K.Item.checkedBy: currentUserID!
                 ]) { err in
                     if let err = err {
                         print("Error writing document: \(err)")
@@ -167,7 +167,7 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
                 }
             } else {
                 itemRef.updateData([
-                    K.FStore.isChecked : false
+                    K.Item.isChecked : false
                 ]) { err in
                     if let err = err {
                         print("Error writing document: \(err)")
@@ -274,7 +274,7 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
         listRef.getDocument { (document, error) in
             if let document = document, document.exists {
                 let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
-                let sectionNames = document.data()!["sections"] as? [String]
+                let sectionNames = document.data()![K.List.sections] as? [String]
                 
                 if let sectionNames = sectionNames {
                     for (index, item) in sectionNames.enumerated() {
@@ -305,8 +305,8 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
                 print("Error getting documents: \(error)")
             } else {
                 for document in querySnapshot!.documents {
-                    let name = document.data()["name"] as? String
-                    let checked: Bool = (document.data()["isChecked"]) as! Bool
+                    let name = document.data()[K.Item.name] as? String
+                    let checked: Bool = (document.data()[K.Item.isChecked]) as! Bool
                     let idDocument = document.documentID
                     
                     let newItem = Task(name: name ?? "FIREBASE ERROR", isChecked: checked, itemID: idDocument)
