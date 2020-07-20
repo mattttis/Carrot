@@ -9,5 +9,7 @@ target 'Carrot' do
 
 pod 'Firebase/Auth'
 pod 'Firebase/Firestore'
+pod 'Firebase/Analytics'
+pod 'Firebase/DynamicLinks'
 
 end

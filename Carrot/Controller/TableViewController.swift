@@ -27,15 +27,18 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
     var userEmail: String?
     var items: [Task]?
     
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Setting up title of ViewController
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.hidesBackButton = true
-        
         title = "Groceries"
         
+        // Storing user variables locally
         let user = Auth.auth().currentUser
-        
         if let user = user {
             currentUserID = user.uid
             userRef = db.collection(K.FStore.users).document(currentUserID!)
@@ -56,9 +59,10 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
             }
         }
         
+        // Adding pull to refresh functionality
         refreshControlMT.attributedTitle = NSAttributedString(string: "Refreshing...")
         refreshControlMT.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
-        tableView.addSubview(refreshControlMT) // not required when using UITableViewController
+        tableView.addSubview(refreshControlMT)
     }
     
 
@@ -102,7 +106,9 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
             return cell
         }
     }
-    //MARK: - Add task protocol
+    
+    
+    //MARK: - Adding task (protocol)
     
     func addTask(name: String) {
         let newTask = Task(name: name)
@@ -136,11 +142,10 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
                     self.sections[newTask.number].isExpanded = true
                 }
             }
-            
-            print("Item III id: \(newTask.itemID!)")
         }
-        tableView.reloadData()
+        refreshTable()
     }
+    
     
     //MARK: - Change isChecked state & button
     
@@ -175,8 +180,9 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
             print("No item ID")
         }
         
-        tableView.reloadData()
+        refreshTable()
     }
+    
     
     //MARK: - Section title
     
@@ -228,7 +234,9 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
         return 40
     }
     
-    //MARK: - Closing a section
+    
+    
+    //MARK: - Closing/Expanding a section
     
     @objc func handleExpandClose(button: UIButton) {
     
@@ -257,28 +265,6 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
         }
     }
     
-    //MARK: - Load items
-    func loadItems(listID: String, section: Int) {
-        let itemRef = db.collection(K.FStore.lists).document(listID).collection(K.FStore.sections).document("\(section)").collection(K.FStore.items)
-        var itemArray = [Task]()
-        
-        itemRef.getDocuments() { (querySnapshot, error) in
-            if let error = error {
-                print("Error getting documents: \(error)")
-            } else {
-                for document in querySnapshot!.documents {
-                    let name = document.data()["name"] as? String
-                    let checked: Bool = (document.data()["isChecked"]) as! Bool
-                    let idDocument = document.documentID
-                    
-                    let newItem = Task(name: name ?? "FIREBASE ERROR", isChecked: checked, itemID: idDocument)
-                    itemArray.append(newItem)
-                }
-            }
-            self.sections[section].items = itemArray
-            self.tableView.reloadData()
-        }
-    }
     
     //MARK: - Load sections
     func loadSections(listID: String) {
@@ -307,14 +293,49 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
     }
     
     
-    //MARK: - Refresh TableView
+    
+    //MARK: - Load items
+    
+    func loadItems(listID: String, section: Int) {
+        let itemRef = db.collection(K.FStore.lists).document(listID).collection(K.FStore.sections).document("\(section)").collection(K.FStore.items)
+        var itemArray = [Task]()
+        
+        itemRef.getDocuments() { (querySnapshot, error) in
+            if let error = error {
+                print("Error getting documents: \(error)")
+            } else {
+                for document in querySnapshot!.documents {
+                    let name = document.data()["name"] as? String
+                    let checked: Bool = (document.data()["isChecked"]) as! Bool
+                    let idDocument = document.documentID
+                    
+                    let newItem = Task(name: name ?? "FIREBASE ERROR", isChecked: checked, itemID: idDocument)
+                    itemArray.append(newItem)
+                }
+            }
+            self.sections[section].items = itemArray
+            self.tableView.reloadData()
+        }
+    }
+
+    
+    
+    //MARK: - Refresh function (obj-c) used in pull to refresh
+    
     @objc func refresh(_ sender: AnyObject) {
         // Recollect data from Firestore
-        loadSections(listID: currentListID ?? "hellor")
-        tableView.reloadData()
+        refreshTable()
         
         // Stop refreshing animation
         refreshControlMT.endRefreshing()
+    }
+    
+    
+    //MARK: - Refresh function that can be used globally
+    
+    func refreshTable() {
+        loadSections(listID: currentListID!)
+        tableView.reloadData()
     }
 }
 

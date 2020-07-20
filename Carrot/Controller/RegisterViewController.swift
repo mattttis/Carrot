@@ -47,21 +47,24 @@ class RegisterViewController: UIViewController {
                             self.errorMessage.text = error?.localizedDescription
                         } else {
                             
-                            // Create a new list and save it to FB
+                            // Create a new list and save it to FireStore
                             var currentListID: String?
                             
                             let listRef = db.collection(K.FStore.lists)
                             let someData = [
                                 "date": Date(),
                                 "name": "Groceries",
-                                "sections": FoodData.foodCategories
+                                "sections": FoodData.foodCategories,
+                                "createdBy": authData.user.uid,
+                                "members": [authData.user.uid],
+                                "members-email": [authData.user.email]
                                 ] as [String : Any]
                             
                             let aDoc = listRef.document()
                             currentListID = aDoc.documentID
                             aDoc.setData(someData)
                             
-                            // Add previously created list to user
+                            // Append previously created list ID to user's "lists" array
                             userRef.updateData([
                                 "lists" : FieldValue.arrayUnion([currentListID])
                             ])
