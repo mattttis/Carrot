@@ -123,7 +123,7 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
     func deleteAction(at indexPath: IndexPath) -> UIContextualAction {
         let item = sections[indexPath.section].items[indexPath.row]
         let action = UIContextualAction(style: .destructive, title: "Delete") { (action, view, completion) in
-
+            
             // Item's properties variables
             let itemID: String
             let name: String
@@ -132,6 +132,9 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
             let checkedBy: String
             let dateCreated: Date
             let dateChecked: Date
+            
+            // self.tableView.deleteRows(at: [indexPath], with: .automatic)
+            // self.sections[indexPath.section].items.remove(at: indexPath.row)
             
             let itemRef = self.db.collection(K.FStore.lists).document(self.currentListID!).collection(K.FStore.sections).document("\(indexPath.section)").collection(K.FStore.items).document(item.itemID!)
             
@@ -149,6 +152,7 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
                     let checkedBy = document.data()?[K.Item.checkedBy] as? String
                     
                     var ref: DocumentReference? = nil
+                    // self.tableView.deleteRows(at: [indexPath], with: .fade)
                     
                     // Save the properties of the item in sectionsDeleted
                     ref = self.db.collection(K.lists).document(self.currentListID!).collection(K.FStore.sectionsDeleted).document("\(category!)").collection(K.FStore.items).addDocument(data: [
@@ -164,7 +168,7 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
                         if let err = err {
                             print("Error adding document: \(err)")
                         } else {
-                            
+
                             // If successfull, delete the item in the normal collection
                             itemRef.delete() { err in
                                 if let err = err {
@@ -175,14 +179,12 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
                             }
                         }
                     }
-                    
-                   // self.refreshTable()
-                    
                 } else {
                     print("Document does not exist")
                 }
             }
-            self.refreshTable()
+            self.tableView.reloadData()
+            // self.refreshTable()
             completion(true)
         }
         
@@ -220,8 +222,6 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
             print("Category is nil")
         }
         
-        print("Items before: \(sections[newTask.number].items.count)")
-        
         // Adding to Firestore
         var ref: DocumentReference? = nil
         ref = db.collection(K.lists).document(currentListID!).collection(K.FStore.sections).document("\(newTask.number)").collection(K.FStore.items).addDocument(data: [
@@ -245,7 +245,6 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
                     self.sections[newTask.number].items.append(Task(name: name))
                     self.sections[newTask.number].isExpanded = true
                 }
-                print("Items after: \(self.sections[newTask.number].items.count)")
             }
         }
         
@@ -402,8 +401,6 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
                         self.loadItems(listID: listID, section: index)
                     }
                 }
-                
-                
                 self.tableView.reloadData()
                 
             } else {
@@ -431,7 +428,6 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
             self.sections[section].items.removeAll()
             newItems.removeAll()
             for document in documents {
-                print("Name: \(document.data()[K.Item.name])")
                 let name = document.data()[K.Item.name] as! String
                 let isChecked = document.data()[K.Item.isChecked] as! Bool
                 let documentID = document.documentID as! String
@@ -440,9 +436,6 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
                 newItems.append(newTask)
             }
             self.sections[section].items.removeAll()
-            if section == 2 {
-                print(newItems.count)
-            }
             self.sections[section].items = newItems
             self.tableView.reloadData()
         }
@@ -455,7 +448,6 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
     
     @objc func refresh(_ sender: AnyObject) {
         // Recollect data from Firestore
-        
         refreshTable()
         
         // Stop refreshing animation
@@ -466,7 +458,6 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
     //MARK: - Refresh function that can be used globally
     
     func refreshTable() {
-        
         loadSections(listID: currentListID!)
         tableView.reloadData()
     }
