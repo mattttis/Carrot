@@ -27,8 +27,6 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
     var userEmail: String?
     var items: [Task]?
     
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -458,7 +456,7 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
     //MARK: - Refresh function that can be used globally
     
     func refreshTable() {
-        loadSections(listID: currentListID!)
+        // loadSections(listID: currentListID!)
         tableView.reloadData()
     }
 }
