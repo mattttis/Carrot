@@ -52,6 +52,7 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
                     
                     // Load the section names
                     self.loadSections(listID: self.currentListID!)
+                    // self.loadItems(listID: self.currentListID!, section: 2)
                     
                 } else {
                     print("Could not find document")
@@ -111,6 +112,100 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
         }
     }
     
+    //MARK: - Swipeable cells
+    
+    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
+        let delete = deleteAction(at: indexPath)
+        return UISwipeActionsConfiguration(actions: [delete])
+    }
+    
+    func deleteAction(at indexPath: IndexPath) -> UIContextualAction {
+        let item = sections[indexPath.section].items[indexPath.row]
+        let action = UIContextualAction(style: .destructive, title: "Delete") { (action, view, completion) in
+
+            // Item's properties variables
+            let itemID: String
+            let name: String
+            let uid: String
+            let isChecked: Bool
+            let checkedBy: String
+            let dateCreated: Date
+            let dateChecked: Date
+            
+            let itemRef = self.db.collection(K.FStore.lists).document(self.currentListID!).collection(K.FStore.sections).document("\(indexPath.section)").collection(K.FStore.items).document(item.itemID!)
+            
+            itemRef.getDocument { (document, error) in
+                if let document = document, document.exists {
+                    let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
+                    
+                    // Get the properties of the item
+                    let name = document.data()?[K.Item.name] as? String
+                    let uid = document.data()?[K.Item.uid] as? String
+                    let category = document.data()?[K.Item.categoryNumber] as? Int
+                    let isChecked = document.data()?[K.Item.isChecked] as? Bool
+                    let dateCreated = document.data()?[K.Item.date] as? Date
+                    let dateChecked = document.data()?[K.Item.dateChecked] as? Date
+                    let checkedBy = document.data()?[K.Item.checkedBy] as? String
+                    
+                    var ref: DocumentReference? = nil
+                    
+                    // Save the properties of the item in sectionsDeleted
+                    ref = self.db.collection(K.lists).document(self.currentListID!).collection(K.FStore.sectionsDeleted).document("\(category!)").collection(K.FStore.items).addDocument(data: [
+                            K.Item.name: name,
+                            K.Item.isChecked: isChecked,
+                            K.Item.categoryNumber: category,
+                            K.Item.date: dateCreated,
+                            K.Item.dateChecked: dateChecked,
+                            K.Item.checkedBy: checkedBy,
+                            K.Item.uid: uid,
+                            K.Item.dateDeleted: Date()
+                    ]) { err in
+                        if let err = err {
+                            print("Error adding document: \(err)")
+                        } else {
+                            
+                            // If successfull, delete the item in the normal collection
+                            itemRef.delete() { err in
+                                if let err = err {
+                                    print("Error removing document: \(err)")
+                                } else {
+                                    print("Document successfully removed!")
+                                }
+                            }
+                        }
+                    }
+                    
+                   // self.refreshTable()
+                    
+                } else {
+                    print("Document does not exist")
+                }
+            }
+            self.refreshTable()
+            completion(true)
+        }
+        
+        func resizeImage(image: UIImage, newWidth: CGFloat) -> UIImage? {
+
+            let scale = newWidth / image.size.width
+            let newHeight = image.size.height * scale
+            UIGraphicsBeginImageContext(CGSize(width: newWidth, height: newHeight))
+            image.draw(in: CGRect(x: 0, y: 0, width: newWidth, height: newHeight))
+
+            let newImage = UIGraphicsGetImageFromCurrentImageContext()
+            UIGraphicsEndImageContext()
+
+            return newImage
+        }
+        
+        let image = #imageLiteral(resourceName: "delete")
+        
+        action.image = resizeImage(image: image, newWidth: 20)
+        
+        return action
+    }
+    
     
     //MARK: - Adding task (protocol)
     
@@ -124,6 +219,8 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
         } else {
             print("Category is nil")
         }
+        
+        print("Items before: \(sections[newTask.number].items.count)")
         
         // Adding to Firestore
         var ref: DocumentReference? = nil
@@ -143,12 +240,15 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
                     // Adding the task to array
                     print("Item \(newTask.name) has category of \(newTask.category) with number \(newTask.number) & id \(newTask.itemID!)")
                     let count = self.sections[newTask.number].items.count - 1
-                    self.sections[newTask.number].items[count].itemID = ref!.documentID
+                    self.sections[newTask.number].items[count].itemID = ref?.documentID
+                    self.sections[newTask.number].items = []
                     self.sections[newTask.number].items.append(Task(name: name))
                     self.sections[newTask.number].isExpanded = true
                 }
+                print("Items after: \(self.sections[newTask.number].items.count)")
             }
         }
+        
         refreshTable()
     }
     
@@ -157,18 +257,22 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
     
     func changeButton(state: Bool, indexSection: Int?, indexRow: Int?, itemID: String?) {
         sections[indexSection!].items[indexRow!].checked = state
+        print("Before: \(sections[indexSection!].items.count)")
+        
         if let itemID = itemID {
             let itemRef = db.collection(K.FStore.lists).document(currentListID!).collection(K.FStore.sections).document("\(indexSection!)").collection(K.FStore.items).document(itemID)
             
             if sections[indexSection!].items[indexRow!].checked {
                 itemRef.updateData([
                     K.Item.isChecked : true,
-                    K.Item.checkedBy: currentUserID!
+                    K.Item.checkedBy: currentUserID!,
+                    K.Item.dateChecked: Date()
                 ]) { err in
                     if let err = err {
                         print("Error writing document: \(err)")
                     } else {
                         print("Document successfully written!")
+                        print("After: \(self.sections[indexSection!].items.count)")
                     }
                 }
             } else {
@@ -179,6 +283,7 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
                         print("Error writing document: \(err)")
                     } else {
                         print("Document successfully written!")
+                        print("After: \(self.sections[indexSection!].items.count)")
                     }
                 }
             }
@@ -187,6 +292,7 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
         }
         
         refreshTable()
+        
     }
     
     
@@ -216,7 +322,7 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
         label.frame = CGRect.init(x: 5, y: 5, width: headerView.frame.width-10, height: headerView.frame.height-5)
         label.text = "   \(sections[section].name!)"
         label.font = UIFont .boldSystemFont(ofSize: 24)
-        label.isUserInteractionEnabled = true
+        // label.isUserInteractionEnabled = true
         label.addGestureRecognizer(tap)
         label.tag = section
 
@@ -288,6 +394,7 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
                 let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
                 let sectionNames = document.data()![K.List.sections] as? [String]
                 
+                self.sections.removeAll()
                 if let sectionNames = sectionNames {
                     for (index, item) in sectionNames.enumerated() {
                         let newSection = Section(name: item, isExpanded: true, items: [])
@@ -310,65 +417,36 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
     //MARK: - Load items
     
     func loadItems(listID: String, section: Int) {
+        
+        var newItems = [Task]()
+        // self.sections[section].items.removeAll()
         let itemRef = db.collection(K.FStore.lists).document(listID).collection(K.FStore.sections).document("\(section)").collection(K.FStore.items)
-        var itemArray = [Task]()
-        self.sections[section].items = []
         
-//        itemRef.getDocuments() { (querySnapshot, error) in
-//            if let error = error {
-//                print("Error getting documents: \(error)")
-//            } else {
-//                for document in querySnapshot!.documents {
-//                    let name = document.data()[K.Item.name] as? String
-//                    let checked: Bool = (document.data()[K.Item.isChecked]) as! Bool
-//                    let idDocument = document.documentID
-//
-//                    let newItem = Task(name: name ?? "FIREBASE ERROR", isChecked: checked, itemID: idDocument)
-//                    itemArray.append(newItem)
-//                }
-//            }
-//            self.sections[section].items = itemArray
-//            self.tableView.reloadData()
-//        }
-        
-        itemRef.addSnapshotListener { (querySnapshot, error) in
+        itemRef.addSnapshotListener { querySnapshot, error in
             guard let documents = querySnapshot?.documents else {
-                print("Error fetching documents: \(error!)")
-                return
+                   print("Error fetching documents: \(error!)")
+                   return
+               }
+            self.items?.removeAll()
+            self.sections[section].items.removeAll()
+            newItems.removeAll()
+            for document in documents {
+                print("Name: \(document.data()[K.Item.name])")
+                let name = document.data()[K.Item.name] as! String
+                let isChecked = document.data()[K.Item.isChecked] as! Bool
+                let documentID = document.documentID as! String
+    
+                let newTask = Task(name: name, isChecked: isChecked, itemID: documentID)
+                newItems.append(newTask)
             }
-            for document in querySnapshot!.documents {
-                let name = document.data()[K.Item.name] as? String
-                let checked: Bool = (document.data()[K.Item.isChecked]) as! Bool
-                let idDocument = document.documentID
-                
-                let newItem = Task(name: name ?? "FIREBASE ERROR", isChecked: checked, itemID: idDocument)
-                
-                itemArray.append(newItem)
-                // self.sections[section].items = itemArray
+            self.sections[section].items.removeAll()
+            if section == 2 {
+                print(newItems.count)
             }
-            
-            self.sections[section].items = itemArray
-            // print(itemArray)
-            
-            func removeMyDuplicates() {
-                var newListOfItems:[Task] = []
-
-                for item in self.sections[section].items {
-                    var added = false
-                    for newItem in itemArray {
-                        if(item.itemID == newItem.itemID){
-                            added = true
-                        }
-                    }
-                    if !added{
-                        newListOfItems.append(item)
-                    }
-                }
-                self.sections[section].items = newListOfItems
-            }
-            
+            self.sections[section].items = newItems
             self.tableView.reloadData()
         }
+        
     }
 
     
@@ -377,6 +455,7 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
     
     @objc func refresh(_ sender: AnyObject) {
         // Recollect data from Firestore
+        
         refreshTable()
         
         // Stop refreshing animation
@@ -387,8 +466,10 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
     //MARK: - Refresh function that can be used globally
     
     func refreshTable() {
+        
         loadSections(listID: currentListID!)
         tableView.reloadData()
     }
 }
+
 

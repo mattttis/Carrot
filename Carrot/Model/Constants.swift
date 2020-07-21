@@ -20,6 +20,8 @@ struct K {
         static let lists = "lists"
         static let sections = "sections"
         static let items = "items"
+        static let sectionsDeleted = "sectionsDeleted"
+        static let sectionsChecked = "sectionsChecked"
         // static let firstName = "firstname"
         // static let email = "email"
         // static let isChecked = "isChecked"
@@ -52,9 +54,11 @@ struct K {
         static let name = "name"
         static let isChecked = "isChecked"
         static let checkedBy = "checkedBy"
-        static let uid = "uid"
+        static let uid = "createdBy"
         static let categoryNumber = "categoryNumber"
-        static let date = "date"
+        static let date = "dateCreated"
+        static let dateChecked = "dateChecked"
+        static let dateDeleted = "dateDeleted"
     }
     
 }
