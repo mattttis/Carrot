@@ -282,11 +282,11 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.crop.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="ol4-tW-f4s">
-                                            <rect key="frame" x="359" y="8.5" width="28" height="27"/>
+                                            <rect key="frame" x="365" y="11.5" width="22" height="21"/>
                                             <color key="tintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="28" id="1ig-3I-qgu"/>
-                                                <constraint firstAttribute="width" constant="28" id="Ca7-5O-gaM"/>
+                                                <constraint firstAttribute="height" constant="22" id="1ig-3I-qgu"/>
+                                                <constraint firstAttribute="width" constant="22" id="Ca7-5O-gaM"/>
                                             </constraints>
                                         </imageView>
                                     </subviews>
@@ -479,17 +479,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mJJ-Sa-SzC">
-                                <rect key="frame" x="74" y="797" width="266" height="11"/>
+                                <rect key="frame" x="74" y="745" width="266" height="63"/>
                                 <color key="backgroundColor" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="63" id="00V-0w-gfx"/>
-                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="266" id="UEb-nf-yoP"/>
-                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="266" id="Ytc-oS-cKV"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="266" id="gm6-7j-zQ0"/>
-                                    <constraint firstAttribute="width" constant="266" id="mTF-4R-5Ho"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="63" id="mUB-rR-uPp"/>
-                                    <constraint firstAttribute="height" constant="63" id="o8H-6l-YUX"/>
-                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="63" id="oiK-PP-GFI"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="29"/>
                                 <state key="normal" title="Log In">
@@ -503,15 +497,11 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xzx-fx-jXE">
-                                <rect key="frame" x="74" y="725" width="266" height="63"/>
+                                <rect key="frame" x="74" y="673" width="266" height="63"/>
                                 <color key="backgroundColor" name="BrandLightBlue"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="266" id="2DK-k6-Qau"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="266" id="Ewg-NP-rcV"/>
-                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="266" id="K5g-Jl-HLz"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="63" id="RmG-R0-w7R"/>
-                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="63" id="fEQ-9M-eio"/>
-                                    <constraint firstAttribute="height" constant="63" id="rfN-LE-tRB"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="29"/>
                                 <state key="normal" title="Register">
@@ -540,7 +530,6 @@
                             <constraint firstItem="mJJ-Sa-SzC" firstAttribute="top" secondItem="xzx-fx-jXE" secondAttribute="bottom" constant="9" id="Ap8-dY-0RA"/>
                             <constraint firstItem="mJJ-Sa-SzC" firstAttribute="top" secondItem="xzx-fx-jXE" secondAttribute="bottom" constant="9" id="Giq-8e-Gzw"/>
                             <constraint firstItem="ZUA-Ge-EyS" firstAttribute="bottom" secondItem="mJJ-Sa-SzC" secondAttribute="bottom" constant="54" id="IAL-GI-09s"/>
-                            <constraint firstItem="xzx-fx-jXE" firstAttribute="top" secondItem="gof-hC-D5h" secondAttribute="bottom" constant="195" id="Lbk-Cx-pYq"/>
                             <constraint firstItem="ZUA-Ge-EyS" firstAttribute="trailing" secondItem="xzx-fx-jXE" secondAttribute="trailing" constant="74" id="S4a-gr-q33"/>
                             <constraint firstItem="ZUA-Ge-EyS" firstAttribute="trailing" secondItem="gof-hC-D5h" secondAttribute="trailing" constant="92.510000000000005" id="Tx9-fI-5Db"/>
                             <constraint firstItem="xzx-fx-jXE" firstAttribute="leading" secondItem="ZUA-Ge-EyS" secondAttribute="leading" constant="74" id="XVd-aN-lLj"/>
@@ -674,7 +663,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="3vQ-JR-Z8p"/>
+        <segue reference="ELv-9J-ITG"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="checkBoxOUTLINE " width="22" height="22"/>

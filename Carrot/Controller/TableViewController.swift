@@ -454,7 +454,10 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
                     for (index, item) in sectionNames.enumerated() {
                         let newSection = Section(name: item, isExpanded: true, items: [])
                         self.sections.append(newSection)
-                        self.loadItems(listID: listID, section: index)
+                        
+                        DispatchQueue.main.async {
+                            self.loadItems(listID: listID, section: index)
+                        }
                     }
                 }
                 self.tableView.reloadData()

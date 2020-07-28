@@ -63,11 +63,6 @@ class AccountViewController: UIViewController {
                                 self.emailAddress.text = self.userEmail!
                                 self.firstName.text = self.userFirstName!
                                 
-                                if let url = self.imageURL {
-                                    let image = URL(string: url)!
-                                    self.downloadImage(from: image)
-                                }
-            
                                 self.listRef?.getDocument(completion: { (snapshot, error) in
                                     if let data = snapshot?.data() {
                                         self.listCodeString = (data[K.List.code] as! String)
@@ -75,7 +70,12 @@ class AccountViewController: UIViewController {
                                         self.listCode.text = self.listCodeString
                                     }
                                 })
-            
+                                
+                                if let url = self.imageURL {
+                                    let image = URL(string: url)!
+                                    self.downloadImage(from: image)
+                                }
+                                
                             } else {
                                 print("Could not find document")
                             }
@@ -194,11 +194,9 @@ extension AccountViewController: UIImagePickerControllerDelegate, UINavigationCo
     }
     
     func downloadImage(from url: URL) {
-        print("Download Started")
         getData(from: url) { data, response, error in
             guard let data = data, error == nil else { return }
             print(response?.suggestedFilename ?? url.lastPathComponent)
-            print("Download Finished")
             DispatchQueue.main.async() { [weak self] in
                 self?.profilePicture.image = UIImage(data: data)
             }
