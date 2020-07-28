@@ -20,14 +20,14 @@ class TaskCell: UITableViewCell {
     var indexRow: Int?
     var items: [Task]?
     var itemID: String?
+    var uid: String?
+    var currentUid = Auth.auth().currentUser!.uid
     
     @IBAction func checkBoxAction(_ sender: Any) {
         if items![indexRow!].checked {
-            // print("Line 22 \(itemID)")
             delegate?.changeButton(state: false, indexSection: indexSection!, indexRow: indexRow!, itemID: itemID)
         } else {
             delegate?.changeButton(state: true, indexSection: indexSection!, indexRow: indexRow!, itemID: itemID)
-            // print("Line 25 \(itemID)")
         }
     }
     
@@ -40,6 +40,16 @@ class TaskCell: UITableViewCell {
     }
     
     @objc func tapFunction(sender:UITapGestureRecognizer) {
+        
+        print("TaskCell I: \(uid!)")
+        print("TaskCell II: \(currentUid)")
+        
+        if uid == currentUid {
+            profilePicture.isHidden = true
+        } else {
+            profilePicture.isHidden = false
+        }
+        
         if items![indexRow!].checked {
             delegate?.changeButton(state: false, indexSection: indexSection!, indexRow: indexRow!, itemID: itemID)
         } else {
@@ -47,11 +57,7 @@ class TaskCell: UITableViewCell {
         }
     }
     
+    @IBOutlet weak var profilePicture: UIImageView!
     @IBOutlet weak var taskNameLabel: UILabel!
     @IBOutlet weak var checkBoxOutlet: UIButton!
-    
-    
-    // var tasks: [[Task]]?
-    
-    
 }

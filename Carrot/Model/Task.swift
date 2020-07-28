@@ -15,6 +15,7 @@ class Task {
     var category: String
     var number: Int
     var itemID: String?
+    var uid: String?
     
     init(name: String) {
         self.name = name
@@ -43,6 +44,28 @@ class Task {
         self.category = ""
         self.category = findCategory(itemName: name.lowercased())
     }
+    
+    init(name: String, isChecked: Bool, itemID: String, uid: String) {
+        self.name = name
+        self.checked = isChecked
+        self.date = Date()
+        self.number = 17
+        self.itemID = itemID
+        self.category = ""
+        self.category = findCategory(itemName: name.lowercased())
+        self.uid = uid
+    }
+    
+    init(name: String, uid: String) {
+        self.name = name
+        self.checked = false
+        self.date = Date()
+        self.number = 17
+        self.category = ""
+        self.category = findCategory(itemName: name.lowercased())
+        self.uid = uid
+    }
+    
     
     private func findCategory (itemName: String) -> String {
         var category: String

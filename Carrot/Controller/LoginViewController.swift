@@ -42,8 +42,9 @@ class LoginViewController: UIViewController {
             if let e = error {
                 self.errorMessage.text = e.localizedDescription
             } else {
-                self.performSegue(withIdentifier: K.loginSegue, sender: self)
+                self.performSegue(withIdentifier: K.Segues.loginToTable, sender: self)
                 UserDefaults.standard.set(true, forKey: "isLoggedIn")
+                UserDefaults.standard.set(authResult?.user.uid, forKey: "uid")
                 UserDefaults.standard.synchronize()
             }
         }

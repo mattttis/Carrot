@@ -15,6 +15,14 @@ struct K {
     static let loginSegue = "loginToTable"
     static let welcomeSegue = "welcomeToTable"
     
+    struct Segues {
+        static let registerToTable = "registerToTable"
+        static let registerToAddList = "registerToAddList"
+        static let addListToTable = "addListToTable"
+        static let loginToTable = "loginToTable"
+        static let welcomeToTable = "welcomeToTable"
+    }
+    
     struct FStore {
         static let users = "users"
         static let lists = "lists"
@@ -42,6 +50,7 @@ struct K {
         static let createdBy = "createdBy"
         static let members = "members"
         static let membersEmail = "membersEmail"
+        static let code = "code"
     }
     
     struct Section {

@@ -27,13 +27,37 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
     var userEmail: String?
     var items: [Task]?
     
+    @IBOutlet weak var tabBar: UITabBarItem!
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // Setting up title of ViewController
+        self.navigationController?.isNavigationBarHidden = false
+        self.navigationController?.navigationBar.topItem?.title = "Groceries"
+        self.navigationController?.navigationBar.prefersLargeTitles = true
+        self.navigationItem.hidesBackButton = true
+        
+        // let image = UIImage(systemName: "list.bullet")
+        // tabBar.image = image
+        // tabBarItem.image = image
+    }
+    
+    @objc func addTapped() {
+        print("Share list")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Setting up title of ViewController
-        navigationController?.navigationBar.prefersLargeTitles = true
-        navigationItem.hidesBackButton = true
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Add", style: .plain, target: self, action: #selector(addTapped))
+        
+        
+        
         title = "Groceries"
+        self.navigationItem.setHidesBackButton(true, animated: true)
+        // navigationItem.hidesBackButton = true
+        print(self.navigationItem.hidesBackButton)
         
         // Storing user variables locally
         let user = Auth.auth().currentUser
@@ -45,12 +69,13 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
                     self.userFirstName = (data[K.User.firstName] as! String)
                     self.userEmail = (data[K.User.email] as! String)
                     self.currentLists = (data[K.User.lists] as! [String])
+                    // print("Current lists: \(self.currentLists)")
                     self.currentListID = self.currentLists![0]
+                    // self.currentListID = "1ywo6EfVPhsHVrSxWpVg"
                     self.listsRef = self.db.collection(K.FStore.lists).document(self.currentListID!)
                     
                     // Load the section names
                     self.loadSections(listID: self.currentListID!)
-                    // self.loadItems(listID: self.currentListID!, section: 2)
                     
                 } else {
                     print("Could not find document")
@@ -62,6 +87,8 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
         refreshControlMT.attributedTitle = NSAttributedString(string: "Refreshing...")
         refreshControlMT.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
         tableView.addSubview(refreshControlMT)
+        
+        // print("UD ID: \(UserDefaults.standard.string(forKey: "uid"))")
     }
     
 
@@ -105,6 +132,12 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
             cell.indexSection = indexPath.section
             cell.indexRow = indexPath.row
             cell.itemID = sections[indexPath.section].items[indexPath.row].itemID
+            cell.currentUid = currentUserID!
+            cell.uid = sections[indexPath.section].items[indexPath.row].uid
+            
+            if cell.uid == cell.currentUid {
+                cell.profilePicture.isHidden = true
+            }
             
             return cell
         }
@@ -131,9 +164,6 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
             let dateCreated: Date
             let dateChecked: Date
             
-            // self.tableView.deleteRows(at: [indexPath], with: .automatic)
-            // self.sections[indexPath.section].items.remove(at: indexPath.row)
-            
             let itemRef = self.db.collection(K.FStore.lists).document(self.currentListID!).collection(K.FStore.sections).document("\(indexPath.section)").collection(K.FStore.items).document(item.itemID!)
             
             itemRef.getDocument { (document, error) in
@@ -150,7 +180,6 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
                     let checkedBy = document.data()?[K.Item.checkedBy] as? String
                     
                     var ref: DocumentReference? = nil
-                    // self.tableView.deleteRows(at: [indexPath], with: .fade)
                     
                     // Save the properties of the item in sectionsDeleted
                     ref = self.db.collection(K.lists).document(self.currentListID!).collection(K.FStore.sectionsDeleted).document("\(category!)").collection(K.FStore.items).addDocument(data: [
@@ -209,8 +238,8 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
     
     //MARK: - Adding task (protocol)
     
-    func addTask(name: String) {
-        let newTask = Task(name: name)
+    func addTask(name: String, uid: String) {
+        let newTask = Task(name: name, uid: uid)
         let thisCategory = newTask.category
         
         // Check what the position of the category name is, return 17 (other) if nothing found
@@ -234,13 +263,15 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
             } else {
                 if let newItemID = ref?.documentID {
                     newTask.itemID = newItemID
+                    newTask.uid = self.currentUserID
                     
                     // Adding the task to array
                     print("Item \(newTask.name) has category of \(newTask.category) with number \(newTask.number) & id \(newTask.itemID!)")
                     let count = self.sections[newTask.number].items.count - 1
                     self.sections[newTask.number].items[count].itemID = ref?.documentID
+                    self.sections[newTask.number].items[count].itemID = self.currentUserID ?? "hello"
                     self.sections[newTask.number].items = []
-                    self.sections[newTask.number].items.append(Task(name: name))
+                    self.sections[newTask.number].items.append(newTask)
                     self.sections[newTask.number].isExpanded = true
                 }
             }
@@ -254,7 +285,6 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
     
     func changeButton(state: Bool, indexSection: Int?, indexRow: Int?, itemID: String?) {
         sections[indexSection!].items[indexRow!].checked = state
-        print("Before: \(sections[indexSection!].items.count)")
         
         if let itemID = itemID {
             let itemRef = db.collection(K.FStore.lists).document(currentListID!).collection(K.FStore.sections).document("\(indexSection!)").collection(K.FStore.items).document(itemID)
@@ -269,7 +299,6 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
                         print("Error writing document: \(err)")
                     } else {
                         print("Document successfully written!")
-                        print("After: \(self.sections[indexSection!].items.count)")
                     }
                 }
             } else {
@@ -280,7 +309,6 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
                         print("Error writing document: \(err)")
                     } else {
                         print("Document successfully written!")
-                        print("After: \(self.sections[indexSection!].items.count)")
                     }
                 }
             }
@@ -414,7 +442,6 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
     func loadItems(listID: String, section: Int) {
         
         var newItems = [Task]()
-        // self.sections[section].items.removeAll()
         let itemRef = db.collection(K.FStore.lists).document(listID).collection(K.FStore.sections).document("\(section)").collection(K.FStore.items)
         
         itemRef.addSnapshotListener { querySnapshot, error in
@@ -429,8 +456,9 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
                 let name = document.data()[K.Item.name] as! String
                 let isChecked = document.data()[K.Item.isChecked] as! Bool
                 let documentID = document.documentID as! String
-    
-                let newTask = Task(name: name, isChecked: isChecked, itemID: documentID)
+                let uid = document.data()[K.Item.uid] as! String
+                
+                let newTask = Task(name: name, isChecked: isChecked, itemID: documentID, uid: uid)
                 newItems.append(newTask)
             }
             self.sections[section].items.removeAll()

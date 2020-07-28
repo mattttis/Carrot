@@ -40,52 +40,17 @@ class RegisterViewController: UIViewController {
                         K.User.lists: []
                     ]
                     
-                    let db = Firestore.firestore()
-                    let userRef = db.collection(K.FStore.users).document(authData.user.uid)
+                    let userRef = Firestore.firestore().collection(K.FStore.users).document(authData.user.uid)
                     
-                    userRef.setData(dict) { (error) in
-                        if error != nil {
-                            self.errorMessage.text = error?.localizedDescription
-                        } else {
-                            
-                            // Create a new list and save it to FireStore
-                            var currentListID: String?
-                            
-                            let listRef = db.collection(K.FStore.lists)
-                            let someData = [
-                                K.List.dateCreated: Date(),
-                                K.List.name: "Groceries",
-                                K.List.sections: FoodData.foodCategories,
-                                K.List.createdBy: authData.user.uid,
-                                K.List.members: [authData.user.uid],
-                                K.List.membersEmail: [authData.user.email]
-                                ] as [String : Any]
-                            
-                            let aDoc = listRef.document()
-                            currentListID = aDoc.documentID
-                            aDoc.setData(someData)
-                            
-                            // Append previously created list ID to user's "lists" array
-                            userRef.updateData([
-                                K.User.lists: FieldValue.arrayUnion([currentListID])
-                            ])
-                            
-                            // Redirect user to groceries
-                            self.performSegue(withIdentifier: K.registerSegue, sender: self)
-                            UserDefaults.standard.set(true, forKey: "isLoggedIn")
-                            UserDefaults.standard.synchronize()
-                            
-                            // Set up sections
-                            for (index, section) in FoodData.foodCategories.enumerated() {
-                                db.collection(K.FStore.lists).document(currentListID!).collection(K.FStore.sections).document("\(index)").setData([
-                                    K.Section.name: "\(section)",
-                                    K.Section.index: "\(index)",
-                                    K.Section.dateCreated: Date()
-                                ])
-                            }
-                        }
-                    }
+                    userRef.setData(dict)
                 }
+                
+                // Redirect user to groceries
+                UserDefaults.standard.set(true, forKey: "isLoggedIn")
+                UserDefaults.standard.set(authResult?.user.uid, forKey: "uid")
+                UserDefaults.standard.synchronize()
+                self.performSegue(withIdentifier: K.Segues.registerToAddList, sender: self)
+                
             }
         }
     }
