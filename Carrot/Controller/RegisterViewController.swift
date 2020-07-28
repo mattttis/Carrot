@@ -37,8 +37,12 @@ class RegisterViewController: UIViewController {
                         K.User.firstName: firstName,
                         K.User.email: authData.user.email,
                         K.User.dateCreated: Date(),
+                        K.User.profilePicture: "",
                         K.User.lists: []
                     ]
+
+                    UserDefaults.standard.set(dict[K.User.firstName], forKey: "firstName")
+                    UserDefaults.standard.synchronize()
                     
                     let userRef = Firestore.firestore().collection(K.FStore.users).document(authData.user.uid)
                     
@@ -49,6 +53,7 @@ class RegisterViewController: UIViewController {
                 UserDefaults.standard.set(true, forKey: "isLoggedIn")
                 UserDefaults.standard.set(authResult?.user.uid, forKey: "uid")
                 UserDefaults.standard.synchronize()
+                
                 self.performSegue(withIdentifier: K.Segues.registerToAddList, sender: self)
                 
             }

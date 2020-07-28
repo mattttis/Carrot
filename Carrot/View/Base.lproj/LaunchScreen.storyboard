@@ -25,9 +25,8 @@
                                             <constraint firstAttribute="height" constant="67" id="6NC-ZP-5oE"/>
                                         </constraints>
                                     </view>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Carrot" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iCY-De-YFT">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Carrot" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iCY-De-YFT">
                                         <rect key="frame" x="129.08958197715015" y="423.74585231989886" width="152.99999999999997" height="63"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="52"/>
                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -35,8 +34,10 @@
                                 </subviews>
                                 <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
                                 <constraints>
+                                    <constraint firstItem="iCY-De-YFT" firstAttribute="centerX" secondItem="3pN-hH-wFd" secondAttribute="centerX" id="0K5-rz-ppp"/>
                                     <constraint firstItem="iiR-KN-dXX" firstAttribute="leading" secondItem="3pN-hH-wFd" secondAttribute="leading" id="6cf-pB-ZgX"/>
                                     <constraint firstAttribute="bottom" secondItem="iiR-KN-dXX" secondAttribute="bottom" id="MzO-Dv-MYJ"/>
+                                    <constraint firstItem="iCY-De-YFT" firstAttribute="centerY" secondItem="3pN-hH-wFd" secondAttribute="centerY" id="TlV-iM-1R7"/>
                                     <constraint firstAttribute="trailing" secondItem="iiR-KN-dXX" secondAttribute="trailing" id="kD7-Nw-SAi"/>
                                 </constraints>
                             </view>

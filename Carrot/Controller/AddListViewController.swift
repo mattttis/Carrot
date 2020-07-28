@@ -43,9 +43,14 @@ class AddListViewController: UIViewController {
                         listRef.document(document.documentID).updateData(([
                             K.List.members: FieldValue.arrayUnion([self.user!.uid])
                             ]))
+                        
+                        UserDefaults.standard.set(enteredCode, forKey: "code")
+                        UserDefaults.standard.synchronize()
+                        
                         userRef.updateData([
                             K.User.lists: FieldValue.arrayUnion([document.documentID])
                         ])
+
                         
                         // Redirect user to groceries
                         self.performSegue(withIdentifier: K.Segues.addListToTable, sender: self)
@@ -79,6 +84,9 @@ class AddListViewController: UIViewController {
             K.List.membersEmail: [Auth.auth().currentUser?.email],
             K.List.code: code
         ] as [String : Any]
+        
+        UserDefaults.standard.set(code, forKey: "code")
+        UserDefaults.standard.synchronize()
         
         let aDoc = listRef.document()
         currentListID = aDoc.documentID

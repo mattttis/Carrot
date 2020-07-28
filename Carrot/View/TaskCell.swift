@@ -21,6 +21,7 @@ class TaskCell: UITableViewCell {
     var items: [Task]?
     var itemID: String?
     var uid: String?
+    var imageURL: String?
     var currentUid = Auth.auth().currentUser!.uid
     
     @IBAction func checkBoxAction(_ sender: Any) {
@@ -37,6 +38,10 @@ class TaskCell: UITableViewCell {
         let tap = UITapGestureRecognizer(target: self, action: #selector(TaskCell.tapFunction))
         taskNameLabel.addGestureRecognizer(tap)
         taskNameLabel.isUserInteractionEnabled = true
+        
+        // profilePicture.layer.cornerRadius = 20
+        profilePicture.layer.cornerRadius = profilePicture.frame.height / 2
+        profilePicture.clipsToBounds = true
     }
     
     @objc func tapFunction(sender:UITapGestureRecognizer) {

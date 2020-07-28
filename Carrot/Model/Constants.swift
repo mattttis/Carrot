@@ -41,6 +41,7 @@ struct K {
         static let email = "email"
         static let dateCreated = "dateCreated"
         static let lists = "lists"
+        static let profilePicture = "profilePicture"
     }
     
     struct List {

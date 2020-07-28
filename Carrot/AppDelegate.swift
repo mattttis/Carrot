@@ -19,6 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FirebaseApp.configure()
         
         let db = Firestore.firestore()
+        let storage = Storage.storage()
         
         self.window = UIWindow(frame: UIScreen.main.bounds)
         let storyboard =  UIStoryboard(name: "Main", bundle: nil)

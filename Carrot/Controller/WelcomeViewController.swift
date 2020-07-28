@@ -19,7 +19,7 @@ class WelcomeViewController: UIViewController {
             performSegue(withIdentifier: K.welcomeSegue, sender: self)
         }
         
-        print("UD ID: \(UserDefaults.standard.string(forKey: "uid"))")
+        // print("UD ID: \(UserDefaults.standard.string(forKey: "uid"))")
     }
     
     override func viewDidLoad() {
