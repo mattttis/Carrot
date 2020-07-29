@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="9yQ-6x-1Xa">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="tfO-um-3vd">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="-100" translatesAutoresizingMaskIntoConstraints="NO" id="9za-js-Omu">
-                                <rect key="frame" x="0.0" y="372" width="414" height="331"/>
+                                <rect key="frame" x="0.0" y="320" width="414" height="331"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XQq-Pf-uHl" userLabel="EmailView">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="177"/>
@@ -122,7 +122,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hi there, this is Carrot!" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FED-iG-R7v">
-                                <rect key="frame" x="0.0" y="254" width="414" height="110"/>
+                                <rect key="frame" x="0.0" y="202" width="414" height="110"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="46"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -159,7 +159,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QnV-gb-Pox" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1705.7971014492755" y="-285.26785714285711"/>
+            <point key="canvasLocation" x="2615.9420289855075" y="-285.26785714285711"/>
         </scene>
         <!--Add List View Controller-->
         <scene sceneID="Kxg-ut-ikX">
@@ -214,7 +214,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qMX-j9-Wjr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2637.68115942029" y="-284.59821428571428"/>
+            <point key="canvasLocation" x="3547.826086956522" y="-284.59821428571428"/>
         </scene>
         <!--Groceries-->
         <scene sceneID="hKQ-pw-zhy">
@@ -310,7 +310,9 @@
                     <tabBarItem key="tabBarItem" title="" image="list.bullet" catalog="system" selectedImage="list.bullet" id="sqU-Do-mhu">
                         <color key="badgeColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBarItem>
-                    <navigationItem key="navigationItem" title="Groceries" largeTitleDisplayMode="always" id="MU1-Jy-DqV"/>
+                    <navigationItem key="navigationItem" title="Groceries" largeTitleDisplayMode="always" id="MU1-Jy-DqV">
+                        <barButtonItem key="rightBarButtonItem" title="Share" image="arrowshape.turn.up.right.circle.fill" catalog="system" id="pAm-ia-u2U"/>
+                    </navigationItem>
                     <nil key="simulatedTopBarMetrics"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
@@ -319,7 +321,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qYD-hj-zCe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5047.826086956522" y="-259.15178571428572"/>
+            <point key="canvasLocation" x="5957.971014492754" y="-259.15178571428572"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="oQT-Yt-vKA">
@@ -450,30 +452,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="baj-tb-ExM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1705.7971014492755" y="676.33928571428567"/>
+            <point key="canvasLocation" x="2615.9420289855075" y="676.33928571428567"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="jNa-Ac-ye8">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" hidesBarsOnSwipe="YES" hidesBarsWhenVerticallyCompact="YES" id="9yQ-6x-1Xa" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="VyW-I5-61f">
-                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="2Xs-gN-d9L" kind="relationship" relationship="rootViewController" id="Clr-gU-O2R"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="zHv-VT-FD5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-299" y="136"/>
-        </scene>
-        <!--Welcome View Controller-->
+        <!--Welcome-->
         <scene sceneID="2Ab-4D-4Bg">
             <objects>
-                <viewController storyboardIdentifier="WelcomeViewController" id="2Xs-gN-d9L" customClass="WelcomeViewController" customModule="Carrot" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WelcomeViewController" title="Welcome" id="2Xs-gN-d9L" customClass="WelcomeViewController" customModule="Carrot" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="vwb-pk-uiU">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -516,7 +500,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="🥕Carrot" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gof-hC-D5h" customClass="CLTypingLabel" customModule="CLTypingLabel">
-                                <rect key="frame" x="92.5" y="470" width="229" height="60"/>
+                                <rect key="frame" x="92.5" y="418" width="229" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="4JB-0z-SYl"/>
                                 </constraints>
@@ -547,7 +531,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o59-Qo-8qu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="582.60869565217399" y="135.9375"/>
+            <point key="canvasLocation" x="1492.753623188406" y="135.9375"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="WnU-cc-mPU">
@@ -568,7 +552,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yN7-W8-GcJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4207" y="162"/>
+            <point key="canvasLocation" x="5115.9420289855079" y="161.38392857142856"/>
         </scene>
         <!--My Account-->
         <scene sceneID="Cpx-7A-cZb">
@@ -659,13 +643,32 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ImO-8A-TnP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5047.826086956522" y="530.35714285714289"/>
+            <point key="canvasLocation" x="5957.971014492754" y="530.35714285714289"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="mXk-LO-fYR">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="tfO-um-3vd" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="5n7-zz-ZB7">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="2Xs-gN-d9L" kind="relationship" relationship="rootViewController" id="v9k-Jp-ysO"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="88l-nA-6N6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="582.60869565217399" y="135.9375"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="ELv-9J-ITG"/>
+        <segue reference="xMn-2U-tBA"/>
     </inferredMetricsTieBreakers>
     <resources>
+        <image name="arrowshape.turn.up.right.circle.fill" catalog="system" width="128" height="121"/>
         <image name="checkBoxOUTLINE " width="22" height="22"/>
         <image name="list.bullet" catalog="system" width="128" height="88"/>
         <image name="person.crop.circle" catalog="system" width="128" height="121"/>

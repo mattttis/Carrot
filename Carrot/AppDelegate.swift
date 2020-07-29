@@ -28,14 +28,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Check if user is logged
         let currentUser = Auth.auth().currentUser
-        if currentUser != nil {
-            self.window?.rootViewController = startMainVC
-            print("User not logged in")
-        } else {
-            self.window?.rootViewController = startIntroVC
-            print("User logged in")
-        }
-        
+//        if currentUser != nil {
+//            self.window?.rootViewController = startMainVC
+//            print("User not logged in")
+//        } else {
+//            self.window?.rootViewController = startIntroVC
+//            print("User logged in")
+//        }
         
         return true
     }

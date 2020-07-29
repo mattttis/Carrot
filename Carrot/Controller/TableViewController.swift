@@ -33,10 +33,14 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
         super.viewWillAppear(animated)
         
         // Setting up title of ViewController
-        self.navigationController?.isNavigationBarHidden = false
+        // self.navigationController?.isNavigationBarHidden = false
         self.navigationController?.navigationBar.topItem?.title = "Groceries"
-        self.navigationController?.navigationBar.prefersLargeTitles = true
-        self.navigationItem.hidesBackButton = true
+        
+        title = "Groceries"
+        navigationController?.navigationBar.prefersLargeTitles = true
+        
+        // self.navigationController?.navigationBar.prefersLargeTitles = true
+        // self.navigationItem.hidesBackButton = true
         
         // let image = UIImage(systemName: "list.bullet")
         // tabBar.image = image
