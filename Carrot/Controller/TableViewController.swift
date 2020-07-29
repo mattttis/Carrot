@@ -161,14 +161,16 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
                     }
                 }
                 
-                db.collection(K.FStore.users).document(cell.uid!).getDocument { (snapshot, error) in
-                    if let e = error {
-                        print("Error retrieving profile picture: \(e)")
-                    } else {
-                        print(snapshot?.data())
-                        let imageURL = snapshot?.data()![K.User.profilePicture] as? String
-                        let realURL = URL(string: imageURL!)
-                        downloadImage(from: realURL!)
+                DispatchQueue.main.async() {
+                    self.db.collection(K.FStore.users).document(cell.uid!).getDocument { (snapshot, error) in
+                        if let e = error {
+                            print("Error retrieving profile picture: \(e)")
+                        } else {
+                            print(snapshot?.data())
+                            let imageURL = snapshot?.data()![K.User.profilePicture] as? String
+                            let realURL = URL(string: imageURL!)
+                            downloadImage(from: realURL!)
+                        }
                     }
                 }
             }
@@ -522,7 +524,9 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
     
     func refreshTable() {
         // loadSections(listID: currentListID!)
-        tableView.reloadData()
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
     }
 }
 

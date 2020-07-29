@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import FirebaseStorage
 
 class AccountViewController: UIViewController {
     
@@ -39,50 +40,49 @@ class AccountViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         self.navigationItem.titleView = UIView()
         
-        title = "My account"
-        
         userFirstName = UserDefaults.standard.string(forKey: "firstName")
         listCodeString = UserDefaults.standard.string(forKey: "code")
         
         heyName.text = "Hey \(userFirstName!)!"
         listCode.text = listCodeString
         
-        DispatchQueue.main.async {
-            let user = Auth.auth().currentUser
-                    if let user = user {
-                        self.currentUserID = user.uid
-                        self.userRef = self.db.collection(K.FStore.users).document(self.currentUserID!)
-                        self.userRef!.getDocument { (snapshot, error) in
-                            if let data = snapshot?.data() {
-                                self.userFirstName = (data[K.User.firstName] as! String)
-                                self.navigationController?.title = "Hey \(self.userFirstName!)"
-                                self.userEmail = (data[K.User.email] as! String)
-                                self.currentLists = (data[K.User.lists] as! [String])
-                                self.imageURL = (data[K.User.profilePicture] as! String)
-                                self.currentListID = self.currentLists[0]
-                                self.listRef = self.db.collection(K.FStore.lists).document(self.currentListID!)
-            
-                                self.emailAddress.text = self.userEmail!
-                                self.firstName.text = self.userFirstName!
-                                
-                                self.listRef?.getDocument(completion: { (snapshot, error) in
-                                    if let data = snapshot?.data() {
-                                        self.listCodeString = (data[K.List.code] as! String)
-                                        // self.heyName.text = "Hey \(self.userFirstName!)!"
-                                        self.listCode.text = self.listCodeString
-                                    }
-                                })
-                                
-                                if let url = self.imageURL {
-                                    let image = URL(string: url)!
-                                    self.downloadImage(from: image)
-                                }
-                                
-                            } else {
-                                print("Could not find document")
-                            }
+        
+        let user = Auth.auth().currentUser
+        if let user = user {
+            self.currentUserID = user.uid
+            self.userRef = self.db.collection(K.FStore.users).document(self.currentUserID!)
+            self.userRef!.getDocument { (snapshot, error) in
+                if let data = snapshot?.data() {
+                    self.userFirstName = (data[K.User.firstName] as! String)
+                    self.navigationController?.title = "Hey \(self.userFirstName!)"
+                    self.userEmail = (data[K.User.email] as! String)
+                    self.currentLists = (data[K.User.lists] as! [String])
+                    self.imageURL = (data[K.User.profilePicture] as! String)
+                    self.currentListID = self.currentLists[0]
+                    self.listRef = self.db.collection(K.FStore.lists).document(self.currentListID!)
+                    
+                    self.emailAddress.text = self.userEmail!
+                    self.firstName.text = self.userFirstName!
+                    
+                    self.listRef?.getDocument(completion: { (snapshot, error) in
+                        if let data = snapshot?.data() {
+                            self.listCodeString = (data[K.List.code] as! String)
+                            // self.heyName.text = "Hey \(self.userFirstName!)!"
+                            self.listCode.text = self.listCodeString
+                        }
+                    })
+                    
+                    DispatchQueue.main.async() {
+                        if let url = self.imageURL {
+                            let image = URL(string: url)!
+                            self.downloadImage(from: image)
                         }
                     }
+                    
+                } else {
+                    print("Could not find document")
+                }
+            }
         }
     }
     
@@ -166,7 +166,7 @@ extension AccountViewController: UIImagePickerControllerDelegate, UINavigationCo
             return
         }
         
-        guard let imageData = imageSelected.jpegData(compressionQuality: 0.05) else {
+        guard let imageData = imageSelected.jpegData(compressionQuality: 0.005) else {
             return
         }
         
