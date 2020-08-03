@@ -46,9 +46,6 @@ class TaskCell: UITableViewCell {
     
     @objc func tapFunction(sender:UITapGestureRecognizer) {
         
-        print("TaskCell I: \(uid!)")
-        print("TaskCell II: \(currentUid)")
-        
         if uid == currentUid {
             profilePicture.isHidden = true
         } else {

@@ -31,20 +31,6 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        // Setting up title of ViewController
-        // self.navigationController?.isNavigationBarHidden = false
-        self.navigationController?.navigationBar.topItem?.title = "Groceries"
-        
-        title = "Groceries"
-        navigationController?.navigationBar.prefersLargeTitles = true
-        
-        // self.navigationController?.navigationBar.prefersLargeTitles = true
-        // self.navigationItem.hidesBackButton = true
-        
-        // let image = UIImage(systemName: "list.bullet")
-        // tabBar.image = image
-        // tabBarItem.image = image
     }
     
     @objc func addTapped() {
@@ -54,12 +40,7 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Add", style: .plain, target: self, action: #selector(addTapped))
-        
-        title = "Groceries"
-        self.navigationItem.setHidesBackButton(true, animated: true)
-        // navigationItem.hidesBackButton = true
-        print(self.navigationItem.hidesBackButton)
+        setUpNavBar()
         
         // Storing user variables locally
         let user = Auth.auth().currentUser
@@ -150,11 +131,8 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
                 }
                 
                 func downloadImage(from url: URL) {
-                    print("Download Started")
                     getData(from: url) { data, response, error in
                         guard let data = data, error == nil else { return }
-                        print(response?.suggestedFilename ?? url.lastPathComponent)
-                        print("Download Finished")
                         DispatchQueue.main.async() { [weak self] in
                             cell.profilePicture.image = UIImage(data: data)
                         }
@@ -166,7 +144,6 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
                         if let e = error {
                             print("Error retrieving profile picture: \(e)")
                         } else {
-                            print(snapshot?.data())
                             let imageURL = snapshot?.data()![K.User.profilePicture] as? String
                             let realURL = URL(string: imageURL!)
                             downloadImage(from: realURL!)
@@ -177,6 +154,12 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
             
             return cell
         }
+    }
+    
+    //MARK: - Navigation bar
+    
+    func setUpNavBar() {
+        print(123)
     }
     
     //MARK: - Swipeable cells
@@ -447,7 +430,6 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
     
     //MARK: - Load sections
     func loadSections(listID: String) {
-        // print("Loading sections...")
         let listRef = db.collection(K.FStore.lists).document(listID)
         
         listRef.getDocument { (document, error) in

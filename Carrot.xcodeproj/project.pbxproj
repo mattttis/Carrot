@@ -26,6 +26,7 @@
 		A0ACFEAD24BBA320008943E4 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0ACFEAC24BBA320008943E4 /* Constants.swift */; };
 		A0AE90C124B8F2DA00E31B68 /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0AE90C024B8F2DA00E31B68 /* Section.swift */; };
 		A0C466B124B12FF400DDDAAA /* FoodData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C466B024B12FF400DDDAAA /* FoodData.swift */; };
+		A0FD6D4A24D71BEE0054ECEB /* NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0FD6D4924D71BEE0054ECEB /* NavigationBar.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +51,7 @@
 		A0ACFEAC24BBA320008943E4 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		A0AE90C024B8F2DA00E31B68 /* Section.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Section.swift; path = Carrot/Controller/Section.swift; sourceTree = SOURCE_ROOT; };
 		A0C466B024B12FF400DDDAAA /* FoodData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodData.swift; sourceTree = "<group>"; };
+		A0FD6D4924D71BEE0054ECEB /* NavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBar.swift; sourceTree = "<group>"; };
 		DD9E70B64D89EFFCE59BE41C /* Pods-Carrot.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Carrot.release.xcconfig"; path = "Target Support Files/Pods-Carrot/Pods-Carrot.release.xcconfig"; sourceTree = "<group>"; };
 		E04A748A672CA8543E3991F9 /* Pods_Carrot.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Carrot.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -124,6 +126,7 @@
 		A03C5D7B24B11A0E00C2BB4D /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				A0FD6D4924D71BEE0054ECEB /* NavigationBar.swift */,
 				7B59B01D24AA7A59005FBC70 /* TableViewController.swift */,
 				A02C91BA24BFB38300BE0489 /* LoginViewController.swift */,
 				A03F5A2624C1EF4F008054A7 /* RegisterViewController.swift */,
@@ -272,6 +275,7 @@
 				A05BDA4524CDC78D00854F00 /* AddListViewController.swift in Sources */,
 				A0812ADF24C76C2E002A03EB /* AccountViewController.swift in Sources */,
 				7B59B01C24AA7A33005FBC70 /* TaskCell.swift in Sources */,
+				A0FD6D4A24D71BEE0054ECEB /* NavigationBar.swift in Sources */,
 				7B59B00824AA7811005FBC70 /* AppDelegate.swift in Sources */,
 				7B59B01E24AA7A59005FBC70 /* TableViewController.swift in Sources */,
 				7B194FDB24AA7D190099AE9F /* Task.swift in Sources */,

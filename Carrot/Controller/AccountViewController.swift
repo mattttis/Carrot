@@ -38,7 +38,6 @@ class AccountViewController: UIViewController {
     
     
     override func viewWillAppear(_ animated: Bool) {
-        self.navigationItem.titleView = UIView()
         
         userFirstName = UserDefaults.standard.string(forKey: "firstName")
         listCodeString = UserDefaults.standard.string(forKey: "code")
