@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Lps-xM-5NG">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="4dn-th-RBU">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="-100" translatesAutoresizingMaskIntoConstraints="NO" id="9za-js-Omu">
-                                <rect key="frame" x="0.0" y="320" width="414" height="331"/>
+                                <rect key="frame" x="0.0" y="372" width="414" height="331"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XQq-Pf-uHl" userLabel="EmailView">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="177"/>
@@ -122,7 +122,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hi there, this is Carrot!" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FED-iG-R7v">
-                                <rect key="frame" x="0.0" y="202" width="414" height="110"/>
+                                <rect key="frame" x="0.0" y="254" width="414" height="110"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="46"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -159,7 +159,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QnV-gb-Pox" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4436.231884057971" y="-285.26785714285711"/>
+            <point key="canvasLocation" x="5344.9275362318849" y="-285.26785714285711"/>
         </scene>
         <!--Add List View Controller-->
         <scene sceneID="Kxg-ut-ikX">
@@ -214,7 +214,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qMX-j9-Wjr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5368.115942028986" y="-284.59821428571428"/>
+            <point key="canvasLocation" x="6278.2608695652179" y="-284.59821428571428"/>
         </scene>
         <!--Bananas-->
         <scene sceneID="hKQ-pw-zhy">
@@ -307,16 +307,15 @@
                             <outlet property="delegate" destination="JKY-RQ-H6R" id="0Cb-44-zVT"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="Item" id="x94-9f-Shk"/>
-                    <navigationItem key="navigationItem" title="Groceries" largeTitleDisplayMode="always" id="MU1-Jy-DqV">
+                    <tabBarItem key="tabBarItem" title="" image="list.bullet" catalog="system" selectedImage="list.bullet" id="x94-9f-Shk"/>
+                    <navigationItem key="navigationItem" title="Groceries" leftItemsSupplementBackButton="YES" id="MU1-Jy-DqV">
+                        <barButtonItem key="backBarButtonItem" title="Teruggaan" id="6Kw-rd-iha"/>
                         <barButtonItem key="rightBarButtonItem" title="Share" image="arrowshape.turn.up.right.circle.fill" catalog="system" id="pAm-ia-u2U"/>
                     </navigationItem>
-                    <nil key="simulatedTopBarMetrics"/>
-                    <nil key="simulatedBottomBarMetrics"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qYD-hj-zCe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7889.8550724637689" y="-154.01785714285714"/>
+            <point key="canvasLocation" x="8793" y="-536"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="oQT-Yt-vKA">
@@ -447,7 +446,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="baj-tb-ExM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4436.231884057971" y="676.33928571428567"/>
+            <point key="canvasLocation" x="5344.9275362318849" y="676.33928571428567"/>
         </scene>
         <!--Welcome-->
         <scene sceneID="2Ab-4D-4Bg">
@@ -495,7 +494,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="🥕Carrot" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gof-hC-D5h" customClass="CLTypingLabel" customModule="CLTypingLabel">
-                                <rect key="frame" x="92.5" y="418" width="229" height="60"/>
+                                <rect key="frame" x="92.5" y="470" width="229" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="4JB-0z-SYl"/>
                                 </constraints>
@@ -526,7 +525,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o59-Qo-8qu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3313.04347826087" y="135.9375"/>
+            <point key="canvasLocation" x="4223.188405797102" y="135.9375"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="WnU-cc-mPU">
@@ -538,16 +537,33 @@
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <color key="selectedImageTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
                         <segue destination="JKY-RQ-H6R" kind="relationship" relationship="viewControllers" id="wRj-8q-BJ9"/>
+                        <segue destination="zJG-yH-Hgm" kind="relationship" relationship="viewControllers" id="TKZ-xi-Qap"/>
                         <segue destination="HY1-ew-6Fz" kind="relationship" relationship="viewControllers" id="1VQ-DV-9fd"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yN7-W8-GcJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6936.2318840579719" y="161.38392857142856"/>
+            <point key="canvasLocation" x="7846.3768115942039" y="161.38392857142856"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="hM4-OT-wMw">
+            <objects>
+                <viewController id="zJG-yH-Hgm" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Kf9-49-CnW">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="2SE-hT-9ev"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="" image="barcode.viewfinder" catalog="system" id="Odx-xJ-Tz0"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vac-Br-Zr0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="8793" y="270"/>
         </scene>
         <!--Apples-->
         <scene sceneID="Cpx-7A-cZb">
@@ -618,6 +634,18 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="tintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8OM-wu-atb">
+                                <rect key="frame" x="19" y="433" width="141" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Scan AH Bonuskaart"/>
+                                <connections>
+                                    <action selector="scanCardAction:" destination="HY1-ew-6Fz" eventType="touchUpInside" id="cWs-Zf-HAa"/>
+                                </connections>
+                            </button>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GIc-io-ZJI">
+                                <rect key="frame" x="20" y="490" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -626,37 +654,57 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="nTI-c5-4va"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="3oR-0f-obQ"/>
-                    <navigationItem key="navigationItem" id="AtB-Lg-0DW"/>
+                    <tabBarItem key="tabBarItem" title="" image="person.crop.circle.fill" catalog="system" selectedImage="person.crop.circle.fill" id="3oR-0f-obQ"/>
+                    <navigationItem key="navigationItem" title="My Account" leftItemsSupplementBackButton="YES" largeTitleDisplayMode="always" id="AtB-Lg-0DW">
+                        <barButtonItem key="backBarButtonItem" title=" Terug" id="nIp-XG-lWX"/>
+                    </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
+                        <outlet property="cardView" destination="GIc-io-ZJI" id="Ur1-mM-BOe"/>
                         <outlet property="emailAddress" destination="2dQ-fH-g2y" id="YsK-ad-hV6"/>
                         <outlet property="firstName" destination="rfp-0N-2Ge" id="aTL-f5-hPc"/>
                         <outlet property="heyName" destination="m1c-BZ-QjE" id="C7r-D7-8gq"/>
                         <outlet property="listCode" destination="Ble-BE-V5l" id="ck3-dv-0I1"/>
                         <outlet property="profilePicture" destination="AY9-AC-QHW" id="4FP-px-hdg"/>
+                        <outlet property="scanCardOutlet" destination="8OM-wu-atb" id="hDp-8E-H98"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ImO-8A-TnP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7889.8550724637689" y="535.71428571428567"/>
+            <point key="canvasLocation" x="8793" y="1086"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="UL8-30-NdT">
+        <!--Barcode Scanner View Controller-->
+        <scene sceneID="1AJ-IC-XPN">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Lps-xM-5NG" sceneMemberID="viewController">
+                <viewController id="I46-Qj-1fb" customClass="BarcodeScannerViewController" customModule="BarcodeScanner" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="A3L-xU-xId">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="w4c-Nc-Zcl"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NSA-nk-372" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="9594" y="1086"/>
+        </scene>
+        <!--MATT-->
+        <scene sceneID="baa-1h-76V">
+            <objects>
+                <navigationController title="MATT" automaticallyAdjustsScrollViewInsets="NO" id="4dn-th-RBU" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="uUD-pM-SMN">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="8ee-DF-VTe">
+                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="2Xs-gN-d9L" kind="relationship" relationship="rootViewController" id="ERi-7g-GVr"/>
+                        <segue destination="2Xs-gN-d9L" kind="relationship" relationship="rootViewController" id="zxv-js-Ue9"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ZHz-uL-It9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="m5T-0B-YeN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2402.898550724638" y="135.9375"/>
+            <point key="canvasLocation" x="3313.04347826087" y="135.9375"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
@@ -664,7 +712,9 @@
     </inferredMetricsTieBreakers>
     <resources>
         <image name="arrowshape.turn.up.right.circle.fill" catalog="system" width="128" height="121"/>
+        <image name="barcode.viewfinder" catalog="system" width="128" height="114"/>
         <image name="checkBoxOUTLINE " width="22" height="22"/>
+        <image name="list.bullet" catalog="system" width="128" height="88"/>
         <image name="person.crop.circle" catalog="system" width="128" height="121"/>
         <image name="person.crop.circle.fill" catalog="system" width="128" height="121"/>
         <image name="plus" catalog="system" width="128" height="113"/>

@@ -11,8 +11,6 @@ pod 'Firebase/Auth'
 pod 'Firebase/Firestore'
 pod 'Firebase/Analytics'
 pod 'Firebase/Storage'
-
-# pod 'Firebase/DynamicLinks'
-# pod 'SwipeCellKit'
+pod 'BarcodeScanner'
 
 end

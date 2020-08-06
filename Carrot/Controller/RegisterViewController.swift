@@ -42,6 +42,7 @@ class RegisterViewController: UIViewController {
                     ]
 
                     UserDefaults.standard.set(dict[K.User.firstName], forKey: "firstName")
+                    UserDefaults.standard.set(dict[K.User.email], forKey: "email")
                     UserDefaults.standard.synchronize()
                     
                     let userRef = Firestore.firestore().collection(K.FStore.users).document(authData.user.uid)

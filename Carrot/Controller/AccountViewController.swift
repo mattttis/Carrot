@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import FirebaseStorage
+import BarcodeScanner
 
 class AccountViewController: UIViewController {
     
@@ -24,6 +25,7 @@ class AccountViewController: UIViewController {
     var currentUserID: String?
     var currentLists: [String] = []
     var currentListID: String?
+   
     var listCodeString: String?
     
     // Profile picture
@@ -35,15 +37,20 @@ class AccountViewController: UIViewController {
     @IBOutlet weak var tabBar: UITabBarItem!
     @IBOutlet weak var emailAddress: UITextField!
     @IBOutlet weak var firstName: UITextField!
+     @IBOutlet weak var scanCardOutlet: UIButton!
+    @IBOutlet weak var cardView: UIImageView!
     
     
     override func viewWillAppear(_ animated: Bool) {
         
         userFirstName = UserDefaults.standard.string(forKey: "firstName")
+        userEmail = UserDefaults.standard.string(forKey: "email")
         listCodeString = UserDefaults.standard.string(forKey: "code")
         
         heyName.text = "Hey \(userFirstName!)!"
         listCode.text = listCodeString
+        firstName.text = userFirstName
+        emailAddress.text = userEmail
         
         
         let user = Auth.auth().currentUser
@@ -73,8 +80,9 @@ class AccountViewController: UIViewController {
                     
                     DispatchQueue.main.async() {
                         if let url = self.imageURL {
-                            let image = URL(string: url)!
-                            self.downloadImage(from: image)
+                            if let image = URL(string: url) {
+                                self.downloadImage(from: image)
+                            }
                         }
                     }
                     
@@ -139,7 +147,22 @@ class AccountViewController: UIViewController {
         
         self.present(alert, animated: true, completion: nil)
     }
+    
+    
+    @IBAction func scanCardAction(_ sender: Any) {
+        
+        let barcodeVC = BarcodeScannerViewController()
+        barcodeVC.codeDelegate = self
+        barcodeVC.errorDelegate = self
+        barcodeVC.dismissalDelegate = self
+
+        present(barcodeVC, animated: true, completion: nil)
+        
+    }
 }
+
+
+
 
 //MARK: - Profile picture delegate methods
 
@@ -170,7 +193,7 @@ extension AccountViewController: UIImagePickerControllerDelegate, UINavigationCo
         }
         
         let storageRef = Storage.storage().reference(forURL: "gs://carrot-ios.appspot.com")
-        let storageProfileRef = storageRef.child("profile").child(currentUserID!)
+        let storageProfileRef = storageRef.child("profile").child(currentUserID!).child("avatar")
         
         let metaData = StorageMetadata()
         metaData.contentType = "image/jpg"
@@ -203,4 +226,52 @@ extension AccountViewController: UIImagePickerControllerDelegate, UINavigationCo
             }
         }
     }
+}
+
+extension AccountViewController: BarcodeScannerCodeDelegate {
+  func scanner(_ controller: BarcodeScannerViewController, didCaptureCode code: String, type: String) {
+    print("Barcode Data: \(code)")
+    print("Symbology Type: \(type)")
+    
+    let barcode = UIImage(barcode: code)
+    cardView.image = barcode
+    
+    controller.dismiss(animated: true, completion: nil)
+
+    DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
+      controller.resetWithError()
+    }
+  }
+}
+
+// MARK: - BarcodeScannerErrorDelegate
+extension AccountViewController: BarcodeScannerErrorDelegate {
+  func scanner(_ controller: BarcodeScannerViewController, didReceiveError error: Error) {
+    print(error)
+  }
+}
+
+// MARK: - BarcodeScannerDismissalDelegate
+extension AccountViewController: BarcodeScannerDismissalDelegate {
+  func scannerDidDismiss(_ controller: BarcodeScannerViewController) {
+    controller.dismiss(animated: true, completion: nil)
+  }
+}
+
+extension UIImage {
+
+    convenience init?(barcode: String) {
+        let data = barcode.data(using: .ascii)
+        guard let filter = CIFilter(name: "CICode128BarcodeGenerator") else {
+            return nil
+        }
+        
+        filter.setValue(data, forKey: "inputMessage")
+        guard let ciImage = filter.outputImage else {
+            return nil
+        }
+        
+        self.init(ciImage: ciImage)
+    }
+
 }

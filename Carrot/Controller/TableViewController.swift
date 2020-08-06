@@ -33,14 +33,17 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
         super.viewWillAppear(animated)
     }
     
-    @objc func addTapped() {
-        print("Share list")
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setUpNavBar()
+        // Navigation bar setup
+        navigationController?.title = "Groceries"
+        self.navigationItem.leftBarButtonItem = nil
+        self.navigationItem.hidesBackButton = true
+        
+        // self.navigationBar.title = "Groceries"
+        self.navigationItem.title = "Groceries1"
+        self.navigationItem.setHidesBackButton(true, animated: true)
         
         // Storing user variables locally
         let user = Auth.auth().currentUser
@@ -154,12 +157,6 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
             
             return cell
         }
-    }
-    
-    //MARK: - Navigation bar
-    
-    func setUpNavBar() {
-        print(123)
     }
     
     //MARK: - Swipeable cells
@@ -284,6 +281,12 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
                     newTask.itemID = newItemID
                     newTask.uid = self.currentUserID
                     
+//                    let generator = UIImpactFeedbackGenerator(style: .medium)
+//                    generator.impactOccurred()
+                    
+                    let generator = UINotificationFeedbackGenerator()
+                    generator.notificationOccurred(.success)
+                    
                     // Adding the task to array
                     print("Item \(newTask.name) has category of \(newTask.category) with number \(newTask.number) & id \(newTask.itemID!)")
                     let count = self.sections[newTask.number].items.count - 1
@@ -318,6 +321,8 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
                         print("Error writing document: \(err)")
                     } else {
                         print("Document successfully written!")
+                        let generator = UINotificationFeedbackGenerator()
+                        generator.notificationOccurred(.success)
                     }
                 }
             } else {
@@ -328,6 +333,8 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
                         print("Error writing document: \(err)")
                     } else {
                         print("Document successfully written!")
+                        let generator = UINotificationFeedbackGenerator()
+                        generator.notificationOccurred(.success)
                     }
                 }
             }
@@ -509,6 +516,9 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }
+        
+        let generator = UINotificationFeedbackGenerator()
+        generator.notificationOccurred(.success)
     }
 }
 
