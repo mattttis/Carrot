@@ -85,7 +85,7 @@ class AddListViewController: UIViewController {
             K.List.code: code
         ] as [String : Any]
         
-        UserDefaults.standard.set(code, forKey: "code")
+        UserDefaults.standard.set(String(code), forKey: "code")
         UserDefaults.standard.synchronize()
         
         let aDoc = listRef.document()

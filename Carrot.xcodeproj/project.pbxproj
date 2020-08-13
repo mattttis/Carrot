@@ -126,13 +126,13 @@
 		A03C5D7B24B11A0E00C2BB4D /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				A0727D5B24D9A70C003732F6 /* BarCodeViewController.swift */,
 				7B59B01D24AA7A59005FBC70 /* TableViewController.swift */,
+				A0812ADE24C76C2E002A03EB /* AccountViewController.swift */,
+				A03F5A2824C1F564008054A7 /* WelcomeViewController.swift */,
 				A02C91BA24BFB38300BE0489 /* LoginViewController.swift */,
 				A03F5A2624C1EF4F008054A7 /* RegisterViewController.swift */,
 				A05BDA4424CDC78D00854F00 /* AddListViewController.swift */,
-				A03F5A2824C1F564008054A7 /* WelcomeViewController.swift */,
-				A0812ADE24C76C2E002A03EB /* AccountViewController.swift */,
+				A0727D5B24D9A70C003732F6 /* BarCodeViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";

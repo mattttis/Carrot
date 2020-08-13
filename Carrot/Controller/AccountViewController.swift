@@ -32,22 +32,26 @@ class AccountViewController: UIViewController {
     var image: UIImage? = nil
     
     @IBOutlet weak var profilePicture: UIImageView!
-    @IBOutlet weak var heyName: UILabel!
     @IBOutlet weak var listCode: UILabel!
     @IBOutlet weak var tabBar: UITabBarItem!
     @IBOutlet weak var emailAddress: UITextField!
     @IBOutlet weak var firstName: UITextField!
      @IBOutlet weak var scanCardOutlet: UIButton!
+    
     @IBOutlet weak var cardView: UIImageView!
+    @IBOutlet weak var cardView2: UIImageView!
+    @IBOutlet weak var cardView3: UIImageView!
     
     
     override func viewWillAppear(_ animated: Bool) {
         
+        // Store UserDefaults variables locally
         userFirstName = UserDefaults.standard.string(forKey: "firstName")
         userEmail = UserDefaults.standard.string(forKey: "email")
         listCodeString = UserDefaults.standard.string(forKey: "code")
         
-        heyName.text = "Hey \(userFirstName!)!"
+        // Change labels & text fields
+        tabBarController?.title = "Hey \(userFirstName!)!"
         listCode.text = listCodeString
         firstName.text = userFirstName
         emailAddress.text = userEmail
@@ -78,6 +82,7 @@ class AccountViewController: UIViewController {
                         }
                     })
                     
+                    // Load profile picture asynchronously
                     DispatchQueue.main.async() {
                         if let url = self.imageURL {
                             if let image = URL(string: url) {
@@ -148,20 +153,16 @@ class AccountViewController: UIViewController {
         self.present(alert, animated: true, completion: nil)
     }
     
-    
+    // When the button is pressed, the scannerVC is presented
     @IBAction func scanCardAction(_ sender: Any) {
-        
         let barcodeVC = BarcodeScannerViewController()
         barcodeVC.codeDelegate = self
         barcodeVC.errorDelegate = self
         barcodeVC.dismissalDelegate = self
 
         present(barcodeVC, animated: true, completion: nil)
-        
     }
 }
-
-
 
 
 //MARK: - Profile picture delegate methods
@@ -228,16 +229,20 @@ extension AccountViewController: UIImagePickerControllerDelegate, UINavigationCo
     }
 }
 
+//MARK: - Delegate methods of the BarcodeScanner
 extension AccountViewController: BarcodeScannerCodeDelegate {
+    
   func scanner(_ controller: BarcodeScannerViewController, didCaptureCode code: String, type: String) {
     print("Barcode Data: \(code)")
     print("Symbology Type: \(type)")
     
-    let barcode = UIImage(barcode: code)
-    cardView.image = barcode
+    cardView.image = nil
     
-    controller.dismiss(animated: true, completion: nil)
-
+    if let barcode = BarCode.generateBarcode(from: code) {
+        cardView.image = barcode
+        controller.dismiss(animated: true, completion: nil)
+    }
+    
     DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
       controller.resetWithError()
     }
@@ -258,20 +263,47 @@ extension AccountViewController: BarcodeScannerDismissalDelegate {
   }
 }
 
-extension UIImage {
-
-    convenience init?(barcode: String) {
-        let data = barcode.data(using: .ascii)
-        guard let filter = CIFilter(name: "CICode128BarcodeGenerator") else {
-            return nil
-        }
+// MARK: - Generate barcode from string
+class BarCode {
+    class func generateBarcode(from string: String) -> UIImage? {
+        print("generateBarCode: \(string)")
+        let data = string.data(using: String.Encoding.ascii)
         
-        filter.setValue(data, forKey: "inputMessage")
-        guard let ciImage = filter.outputImage else {
-            return nil
+        if let filter = CIFilter(name: "CICode128BarcodeGenerator") {
+            filter.setDefaults()
+            
+            //Margin
+            filter.setValue(7.00, forKey: "inputQuietSpace")
+            filter.setValue(data, forKey: "inputMessage")
+            
+            //Scaling
+            let transform = CGAffineTransform(scaleX: 3, y: 3)
+            
+            if let output = filter.outputImage?.transformed(by: transform) {
+                let context:CIContext = CIContext.init(options: nil)
+                let cgImage:CGImage = context.createCGImage(output, from: output.extent)!
+                let rawImage:UIImage = UIImage.init(cgImage: cgImage)
+                
+                
+                let cgimage: CGImage = (rawImage.cgImage)!
+                let cropZone = CGRect(x: 0, y: 0, width: Int(rawImage.size.width), height: Int(rawImage.size.height))
+                let cWidth: size_t  = size_t(cropZone.size.width)
+                let cHeight: size_t  = size_t(cropZone.size.height)
+                let bitsPerComponent: size_t = cgimage.bitsPerComponent
+                let bytesPerRow = (cgimage.bytesPerRow) / (cgimage.width  * cWidth)
+                
+                let context2: CGContext = CGContext(data: nil, width: cWidth, height: cHeight, bitsPerComponent: bitsPerComponent, bytesPerRow: bytesPerRow, space: CGColorSpaceCreateDeviceRGB(), bitmapInfo: cgimage.bitmapInfo.rawValue)!
+                
+                context2.draw(cgimage, in: cropZone)
+                
+                let result: CGImage  = context2.makeImage()!
+                let finalImage = UIImage(cgImage: result)
+                
+                return finalImage
+            }
         }
-        
-        self.init(ciImage: ciImage)
+        return nil
     }
-
 }
+
+

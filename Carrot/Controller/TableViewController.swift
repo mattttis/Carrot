@@ -31,19 +31,18 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        // Navigation bar setup
+        tabBarController?.title = "Groceries"
+        let configuration = UIImage.SymbolConfiguration(weight: .semibold)
+        let shareImage = UIImage(systemName: "person.crop.circle.badge.plus", withConfiguration: configuration)
+        let shareButton = UIBarButtonItem(image: shareImage, style: .plain, target: self, action: #selector(shareFunction))
+        shareButton.tintColor = UIColor.black
+        tabBarController?.navigationItem.rightBarButtonItem = shareButton
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Navigation bar setup
-        navigationController?.title = "Groceries"
-        self.navigationItem.leftBarButtonItem = nil
-        self.navigationItem.hidesBackButton = true
-        
-        // self.navigationBar.title = "Groceries"
-        self.navigationItem.title = "Groceries1"
-        self.navigationItem.setHidesBackButton(true, animated: true)
         
         // Storing user variables locally
         let user = Auth.auth().currentUser
@@ -56,7 +55,6 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
                     self.userEmail = (data[K.User.email] as! String)
                     self.currentLists = (data[K.User.lists] as! [String])
                     self.currentListID = self.currentLists![0]
-                    // self.currentListID = "1ywo6EfVPhsHVrSxWpVg"
                     self.listsRef = self.db.collection(K.FStore.lists).document(self.currentListID!)
                     
                     // Load the section names
@@ -79,6 +77,7 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
         
         // print("UD ID: \(UserDefaults.standard.string(forKey: "uid"))")
     }
+    
     
 
     // MARK: - TableView data source
@@ -519,6 +518,23 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
         
         let generator = UINotificationFeedbackGenerator()
         generator.notificationOccurred(.success)
+    }
+    
+    @objc func shareFunction() {
+        let listCode = "STRING"
+        let myWebsite = NSURL(string:"https://stackoverflow.com/users/4600136/mr-javed-multani?tab=profile")
+        let text = "Hey, I'm using Carrot so we can have a shared grocery list! Download the app and create an account - it only takes one minute. To join my list, enter the code \(listCode). You can download the app here: \(String(describing: NSURL(string:"https://stackoverflow.com/users/4600136/mr-javed-multani?tab=profile")))"
+
+        // set up activity view controller
+        let textToShare = [text]
+        let activityViewController = UIActivityViewController(activityItems: textToShare, applicationActivities: nil)
+        activityViewController.popoverPresentationController?.sourceView = self.view
+
+        // exclude some activity types from the list (optional)
+        activityViewController.excludedActivityTypes = [UIActivity.ActivityType.postToFacebook]
+
+        // present the view controller
+        self.present(activityViewController, animated: true, completion: nil)
     }
 }
 
