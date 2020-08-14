@@ -13,6 +13,5 @@ class BarCodeViewController: BarcodeScannerViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
     }
 }

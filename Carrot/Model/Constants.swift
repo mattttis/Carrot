@@ -21,6 +21,7 @@ struct K {
         static let addListToTable = "addListToTable"
         static let loginToTable = "loginToTable"
         static let welcomeToTable = "welcomeToTable"
+        static let accountToCard = "accountToCard"
     }
     
     struct FStore {

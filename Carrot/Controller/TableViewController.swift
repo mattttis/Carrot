@@ -37,7 +37,7 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
         let configuration = UIImage.SymbolConfiguration(weight: .semibold)
         let shareImage = UIImage(systemName: "person.crop.circle.badge.plus", withConfiguration: configuration)
         let shareButton = UIBarButtonItem(image: shareImage, style: .plain, target: self, action: #selector(shareFunction))
-        shareButton.tintColor = UIColor.black
+        shareButton.tintColor = UIColor.label
         tabBarController?.navigationItem.rightBarButtonItem = shareButton
     }
     

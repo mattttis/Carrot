@@ -56,6 +56,12 @@ class AccountViewController: UIViewController {
         firstName.text = userFirstName
         emailAddress.text = userEmail
         
+        let configuration = UIImage.SymbolConfiguration(weight: .semibold)
+        let shareImage = UIImage(systemName: "barcode.viewfinder", withConfiguration: configuration)
+        let shareButton = UIBarButtonItem(image: shareImage, style: .plain, target: self, action: #selector(showCard))
+        shareButton.tintColor = UIColor.label
+        tabBarController?.navigationItem.rightBarButtonItem = shareButton
+        
         
         let user = Auth.auth().currentUser
         if let user = user {
@@ -226,6 +232,11 @@ extension AccountViewController: UIImagePickerControllerDelegate, UINavigationCo
                 self?.profilePicture.image = UIImage(data: data)
             }
         }
+    }
+    
+    @objc func showCard() {
+        print("Showing card...")
+        performSegue(withIdentifier: K.Segues.accountToCard, sender: self)
     }
 }
 
