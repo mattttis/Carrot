@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-class TableViewController: UITableViewController, AddTask, ChangeButton {
+class TableViewController: UITableViewController, UITabBarDelegate, AddTask, ChangeButton, UITabBarControllerDelegate {
     
     var refreshControlMT = UIRefreshControl()
     var sections: [Section] = []
@@ -34,11 +34,13 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
         
         // Navigation bar setup
         tabBarController?.title = "Groceries"
+        self.tabBarController?.delegate = self
+        
         let configuration = UIImage.SymbolConfiguration(weight: .semibold)
         let shareImage = UIImage(systemName: "person.crop.circle.badge.plus", withConfiguration: configuration)
         let shareButton = UIBarButtonItem(image: shareImage, style: .plain, target: self, action: #selector(shareFunction))
         shareButton.tintColor = UIColor.label
-        tabBarController?.navigationItem.rightBarButtonItem = shareButton
+        tabBarController?.navigationItem.rightBarButtonItems = [shareButton]
     }
     
     override func viewDidLoad() {
@@ -536,6 +538,13 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
         // present the view controller
         self.present(activityViewController, animated: true, completion: nil)
     }
+    
+    func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
+        if item.tag == 1 {
+            print("Hello...")
+        }
+    }
+
 }
 
 
