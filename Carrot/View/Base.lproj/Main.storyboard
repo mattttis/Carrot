@@ -632,7 +632,7 @@
                             <userDefinedRuntimeAttribute type="boolean" keyPath="hidesBackButton" value="YES"/>
                         </userDefinedRuntimeAttributes>
                     </navigationItem>
-                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="FZx-dp-BbV">
+                    <tabBar key="tabBar" contentMode="scaleAspectFit" insetsLayoutMarginsFromSafeArea="NO" id="FZx-dp-BbV">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -658,7 +658,6 @@
                         <viewLayoutGuide key="safeArea" id="iRs-vo-O5u"/>
                     </view>
                     <tabBarItem key="tabBarItem" tag="1" title="" image="plus.circle.fill" catalog="system" id="fLr-vl-oEp">
-                        <inset key="imageInsets" minX="0.0" minY="-25" maxX="0.0" maxY="0.0"/>
                         <color key="badgeColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </tabBarItem>
                 </viewController>

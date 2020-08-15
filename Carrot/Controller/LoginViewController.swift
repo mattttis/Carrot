@@ -10,12 +10,12 @@ import UIKit
 import Firebase
 
 class LoginViewController: UIViewController {
+    
+    let db = Firestore.firestore().collection(K.FStore.lists)
 
     @IBOutlet weak var hiThere: UILabel!
     @IBOutlet weak var errorMessage: UILabel!
-    
     @IBOutlet weak var emailTextField: UITextField!
-    
     @IBOutlet weak var passwordTextfield: UITextField!
     
     override func viewDidLoad() {
@@ -46,12 +46,13 @@ class LoginViewController: UIViewController {
                 UserDefaults.standard.set(authResult?.user.uid, forKey: "uid")
                 UserDefaults.standard.synchronize()
                 
-                Firestore.firestore().collection(K.FStore.lists).whereField(K.List.members, arrayContains: authResult?.user.uid).getDocuments { (querySnapshot, err) in
+                self.db.whereField("members", arrayContains: authResult!.user.uid).getDocuments { (querySnapshot, err) in
                     if let e = err {
                         print("Error getting documents: \(err)")
                     } else {
                         for document in querySnapshot!.documents {
-                            let listCode = document.data()[K.List.code]
+                            print(document)
+                            let listCode = document.data()[K.List.code]!
                             UserDefaults.standard.set(listCode, forKey: "code")
                             UserDefaults.standard.synchronize()
                         }

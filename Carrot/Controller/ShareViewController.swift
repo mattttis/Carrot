@@ -10,14 +10,16 @@ import UIKit
 
 class ShareViewController: UIViewController {
     
-    let code = UserDefaults.value(forKey: "code") as! String
+    let code = UserDefaults.standard.string(forKey: "code")
+    let gesture = UITapGestureRecognizer(target: self, action: "shareAction:")
     
     @IBOutlet weak var listCode: UILabel!
     @IBOutlet weak var shareButtonView: UIView!
     
     override func viewWillAppear(_ animated: Bool) {
         listCode.text = code
-        
+        shareButtonView.isUserInteractionEnabled = true
+        shareButtonView.addGestureRecognizer(gesture)
     }
     
     override func viewDidLoad() {
