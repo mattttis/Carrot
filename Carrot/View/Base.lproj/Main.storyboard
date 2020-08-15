@@ -311,6 +311,9 @@
                     <navigationItem key="navigationItem" title="MMMMM" id="MU1-Jy-DqV">
                         <barButtonItem key="rightBarButtonItem" title="Share" image="arrowshape.turn.up.right.circle.fill" catalog="system" id="pAm-ia-u2U"/>
                     </navigationItem>
+                    <connections>
+                        <segue destination="o1N-pS-PVJ" kind="presentation" identifier="tableToShare" id="91t-kx-gRN"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qYD-hj-zCe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -319,11 +322,79 @@
         <!--Invite code-->
         <scene sceneID="KeZ-Is-ShH">
             <objects>
-                <viewController title="Invite code" id="x9J-U8-k6N" sceneMemberID="viewController">
+                <viewController title="Invite code" id="x9J-U8-k6N" customClass="ShareViewController" customModule="Carrot" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="7pZ-nR-DHW">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wxN-Jv-znF">
+                                <rect key="frame" x="66" y="239" width="282" height="364"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Share your code out loud or send it in a message" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bCK-oJ-UNc">
+                                        <rect key="frame" x="17" y="196" width="249" height="51"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="249" id="K2S-kb-xtx"/>
+                                            <constraint firstAttribute="height" constant="51" id="blB-Xx-E8i"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="D28-C8-cwc">
+                                        <rect key="frame" x="65" y="278" width="152" height="55"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="onN-BB-uab">
+                                                <rect key="frame" x="18" y="12" width="117" height="30"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                                <state key="normal" title="Share your code">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="shareButton:" destination="x9J-U8-k6N" eventType="touchUpInside" id="f2Z-yP-MAy"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="55" id="rAf-Pv-2T7"/>
+                                            <constraint firstAttribute="width" constant="152" id="z56-1c-7KN"/>
+                                        </constraints>
+                                    </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Share this invite code with the people you want in your list:" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xHd-R5-mxT">
+                                        <rect key="frame" x="14" y="18" width="255" height="115"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="115" id="6tO-mg-8Nc"/>
+                                            <constraint firstAttribute="width" constant="255" id="TNR-CM-cmi"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="22"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="GH6KB" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Rm-Y7-EeM">
+                                        <rect key="frame" x="52" y="141" width="179" height="47"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="39"/>
+                                        <color key="textColor" systemColor="systemIndigoColor" red="0.34509803919999998" green="0.33725490200000002" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstItem="4Rm-Y7-EeM" firstAttribute="centerX" secondItem="wxN-Jv-znF" secondAttribute="centerX" id="38a-i1-MTC"/>
+                                    <constraint firstItem="xHd-R5-mxT" firstAttribute="top" secondItem="wxN-Jv-znF" secondAttribute="top" constant="18" id="6eU-8R-PUT"/>
+                                    <constraint firstItem="D28-C8-cwc" firstAttribute="top" secondItem="bCK-oJ-UNc" secondAttribute="bottom" constant="31" id="VX5-AV-G9y"/>
+                                    <constraint firstAttribute="bottom" secondItem="D28-C8-cwc" secondAttribute="bottom" constant="31" id="WWb-Pq-vBH"/>
+                                    <constraint firstItem="xHd-R5-mxT" firstAttribute="centerX" secondItem="wxN-Jv-znF" secondAttribute="centerX" id="bUA-jx-jEc"/>
+                                    <constraint firstItem="bCK-oJ-UNc" firstAttribute="top" secondItem="4Rm-Y7-EeM" secondAttribute="bottom" constant="8" id="msE-hL-XbZ"/>
+                                    <constraint firstItem="D28-C8-cwc" firstAttribute="centerX" secondItem="wxN-Jv-znF" secondAttribute="centerX" id="nzk-F0-1ae"/>
+                                    <constraint firstItem="4Rm-Y7-EeM" firstAttribute="top" secondItem="xHd-R5-mxT" secondAttribute="bottom" constant="8" id="orO-as-FUa"/>
+                                    <constraint firstItem="bCK-oJ-UNc" firstAttribute="centerX" secondItem="wxN-Jv-znF" secondAttribute="centerX" id="sem-ec-wf0"/>
+                                </constraints>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="wxN-Jv-znF" firstAttribute="centerX" secondItem="7pZ-nR-DHW" secondAttribute="centerX" id="3YM-hs-dbN"/>
+                            <constraint firstItem="wxN-Jv-znF" firstAttribute="centerY" secondItem="7pZ-nR-DHW" secondAttribute="centerY" id="669-TY-86F"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="HAf-ed-0SG"/>
                     </view>
                     <navigationItem key="navigationItem" title="Invite family members" id="ccr-l8-yYw">
@@ -331,6 +402,10 @@
                             <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="listCode" destination="4Rm-Y7-EeM" id="olB-GW-crb"/>
+                        <outlet property="shareButtonView" destination="D28-C8-cwc" id="EJD-T3-LRF"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LgD-sO-LSc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -549,7 +624,7 @@
         <!--Account-->
         <scene sceneID="WnU-cc-mPU">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="HCg-eC-Nrv" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="NavController" automaticallyAdjustsScrollViewInsets="NO" id="HCg-eC-Nrv" customClass="NavController" customModule="Carrot" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Account" largeTitleDisplayMode="always" id="JAk-aN-NqH">
                         <barButtonItem key="backBarButtonItem" title="Terug" id="eYy-3Y-Ylb"/>
@@ -813,7 +888,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="o1N-pS-PVJ" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="qsd-ye-YDT">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>

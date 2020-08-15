@@ -17,6 +17,7 @@
 		7B59B01424AA7816005FBC70 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7B59B01224AA7816005FBC70 /* LaunchScreen.storyboard */; };
 		7B59B01C24AA7A33005FBC70 /* TaskCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B59B01B24AA7A33005FBC70 /* TaskCell.swift */; };
 		7B59B01E24AA7A59005FBC70 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B59B01D24AA7A59005FBC70 /* TableViewController.swift */; };
+		A004A1C724E7F6AE008CF844 /* NavController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A004A1C624E7F6AE008CF844 /* NavController.swift */; };
 		A0177DE424E5ED0D003358DC /* CardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0177DE324E5ED0D003358DC /* CardViewController.swift */; };
 		A0177DE624E5F379003358DC /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0177DE524E5F379003358DC /* ShareViewController.swift */; };
 		A02C91BB24BFB38300BE0489 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02C91BA24BFB38300BE0489 /* LoginViewController.swift */; };
@@ -44,6 +45,7 @@
 		7B59B01B24AA7A33005FBC70 /* TaskCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCell.swift; sourceTree = "<group>"; };
 		7B59B01D24AA7A59005FBC70 /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		96D38123B0D97AA341E9A3B5 /* Pods-Carrot.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Carrot.debug.xcconfig"; path = "Target Support Files/Pods-Carrot/Pods-Carrot.debug.xcconfig"; sourceTree = "<group>"; };
+		A004A1C624E7F6AE008CF844 /* NavController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavController.swift; sourceTree = "<group>"; };
 		A0177DE324E5ED0D003358DC /* CardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewController.swift; sourceTree = "<group>"; };
 		A0177DE524E5F379003358DC /* ShareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
 		A02C91BA24BFB38300BE0489 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -130,6 +132,7 @@
 		A03C5D7B24B11A0E00C2BB4D /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				A004A1C624E7F6AE008CF844 /* NavController.swift */,
 				A0177DE524E5F379003358DC /* ShareViewController.swift */,
 				7B59B01D24AA7A59005FBC70 /* TableViewController.swift */,
 				A0812ADE24C76C2E002A03EB /* AccountViewController.swift */,
@@ -283,6 +286,7 @@
 				7B59B01C24AA7A33005FBC70 /* TaskCell.swift in Sources */,
 				7B59B00824AA7811005FBC70 /* AppDelegate.swift in Sources */,
 				7B59B01E24AA7A59005FBC70 /* TableViewController.swift in Sources */,
+				A004A1C724E7F6AE008CF844 /* NavController.swift in Sources */,
 				7B194FDB24AA7D190099AE9F /* Task.swift in Sources */,
 				7B59B00A24AA7811005FBC70 /* SceneDelegate.swift in Sources */,
 				A0727D5C24D9A70C003732F6 /* BarCodeViewController.swift in Sources */,

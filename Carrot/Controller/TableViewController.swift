@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-class TableViewController: UITableViewController, UITabBarDelegate, AddTask, ChangeButton, UITabBarControllerDelegate {
+class TableViewController: UITableViewController, AddTask, ChangeButton {
     
     var refreshControlMT = UIRefreshControl()
     var sections: [Section] = []
@@ -34,7 +34,6 @@ class TableViewController: UITableViewController, UITabBarDelegate, AddTask, Cha
         
         // Navigation bar setup
         tabBarController?.title = "Groceries"
-        self.tabBarController?.delegate = self
         
         let configuration = UIImage.SymbolConfiguration(weight: .semibold)
         let shareImage = UIImage(systemName: "person.crop.circle.badge.plus", withConfiguration: configuration)
@@ -76,8 +75,6 @@ class TableViewController: UITableViewController, UITabBarDelegate, AddTask, Cha
         refreshControlMT.attributedTitle = NSAttributedString(string: "Refreshing...")
         refreshControlMT.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
         tableView.addSubview(refreshControlMT)
-        
-        // print("UD ID: \(UserDefaults.standard.string(forKey: "uid"))")
     }
     
     
@@ -148,9 +145,11 @@ class TableViewController: UITableViewController, UITabBarDelegate, AddTask, Cha
                         if let e = error {
                             print("Error retrieving profile picture: \(e)")
                         } else {
-                            let imageURL = snapshot?.data()![K.User.profilePicture] as? String
-                            let realURL = URL(string: imageURL!)
-                            downloadImage(from: realURL!)
+                            if let imageURL = snapshot?.data()![K.User.profilePicture] as? String {
+                                if let realURL = URL(string: imageURL) {
+                                    downloadImage(from: realURL)
+                                }
+                            }
                         }
                     }
                 }
@@ -523,28 +522,36 @@ class TableViewController: UITableViewController, UITabBarDelegate, AddTask, Cha
     }
     
     @objc func shareFunction() {
-        let listCode = "STRING"
-        let myWebsite = NSURL(string:"https://stackoverflow.com/users/4600136/mr-javed-multani?tab=profile")
-        let text = "Hey, I'm using Carrot so we can have a shared grocery list! Download the app and create an account - it only takes one minute. To join my list, enter the code \(listCode). You can download the app here: \(String(describing: NSURL(string:"https://stackoverflow.com/users/4600136/mr-javed-multani?tab=profile")))"
-
-        // set up activity view controller
-        let textToShare = [text]
-        let activityViewController = UIActivityViewController(activityItems: textToShare, applicationActivities: nil)
-        activityViewController.popoverPresentationController?.sourceView = self.view
-
-        // exclude some activity types from the list (optional)
-        activityViewController.excludedActivityTypes = [UIActivity.ActivityType.postToFacebook]
-
-        // present the view controller
-        self.present(activityViewController, animated: true, completion: nil)
-    }
-    
-    func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
-        if item.tag == 1 {
-            print("Hello...")
+            performSegue(withIdentifier: K.Segues.tableToShare, sender: self)
+            
+    //        let listCode = "STRING"
+    //        let myWebsite = NSURL(string:"https://stackoverflow.com/users/4600136/mr-javed-multani?tab=profile")
+    //        let text = "Hey, I'm using Carrot so we can have a shared grocery list! Download the app and create an account - it only takes one minute. To join my list, enter the code \(listCode). You can download the app here: \(String(describing: NSURL(string:"https://stackoverflow.com/users/4600136/mr-javed-multani?tab=profile")))"
+    //
+    //        // set up activity view controller
+    //        let textToShare = [text]
+    //        let activityViewController = UIActivityViewController(activityItems: textToShare, applicationActivities: nil)
+    //        activityViewController.popoverPresentationController?.sourceView = self.view
+    //
+    //        // exclude some activity types from the list (optional)
+    //        activityViewController.excludedActivityTypes = [UIActivity.ActivityType.postToFacebook]
+    //
+    //        // present the view controller
+    //        self.present(activityViewController, animated: true, completion: nil)
         }
+
+}
+
+extension UIViewController {
+    func hideKeyboardWhenTappedAround() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
     }
 
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
 }
 
 

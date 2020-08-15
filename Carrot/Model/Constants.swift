@@ -22,6 +22,7 @@ struct K {
         static let loginToTable = "loginToTable"
         static let welcomeToTable = "welcomeToTable"
         static let accountToCard = "accountToCard"
+        static let tableToShare = "tableToShare"
         static let tableToAccount = "tableToAccount"
     }
     

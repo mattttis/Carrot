@@ -9,22 +9,40 @@
 import UIKit
 
 class ShareViewController: UIViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+    
+    let code = UserDefaults.value(forKey: "code") as! String
+    
+    @IBOutlet weak var listCode: UILabel!
+    @IBOutlet weak var shareButtonView: UIView!
+    
+    override func viewWillAppear(_ animated: Bool) {
+        listCode.text = code
+        
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
     }
-    */
 
+    @IBAction func shareButton(_ sender: Any) {
+        shareAction()
+    }
+    
+    func shareAction() {
+        let listCode = code
+        let myWebsite = NSURL(string:"https://google.com/")
+        let text = "Hey, I'm using Carrot so we can have a shared grocery list! Download the app and create an account - it only takes one minute. To join my list, enter the code \(listCode). You can download the app here: \(String(describing: NSURL(string:"https://stackoverflow.com/users/4600136/mr-javed-multani?tab=profile")))"
+        
+        // set up activity view controller
+        let textToShare = [text]
+        let activityViewController = UIActivityViewController(activityItems: textToShare, applicationActivities: nil)
+        activityViewController.popoverPresentationController?.sourceView = self.view
+        
+        // exclude some activity types from the list (optional)
+        activityViewController.excludedActivityTypes = [UIActivity.ActivityType.postToFacebook]
+        
+        // present the view controller
+        self.present(activityViewController, animated: true, completion: nil)
+    }
 }

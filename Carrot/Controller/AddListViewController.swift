@@ -18,6 +18,7 @@ class AddListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.hideKeyboardWhenTappedAround() 
     }
     
     @IBAction func existingListPrimaryAction(_ sender: Any) {

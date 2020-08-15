@@ -15,10 +15,9 @@ class WelcomeViewController: UIViewController {
         navigationController?.isNavigationBarHidden = true
         
         // Redirect to tableView if user is logged in
-        if UserDefaults.standard.bool(forKey: "isLoggedIn") {
-            performSegue(withIdentifier: K.welcomeSegue, sender: self)
-        }
-        
+//        if UserDefaults.standard.bool(forKey: "isLoggedIn") {
+//            performSegue(withIdentifier: K.welcomeSegue, sender: self)
+//        }
         // print("UD ID: \(UserDefaults.standard.string(forKey: "uid"))")
     }
     

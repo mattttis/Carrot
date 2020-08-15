@@ -20,7 +20,7 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.hideKeyboardWhenTappedAround() 
         errorMessage.text = ""
         
         hiThere.text = ""
@@ -42,10 +42,23 @@ class LoginViewController: UIViewController {
             if let e = error {
                 self.errorMessage.text = e.localizedDescription
             } else {
-                self.performSegue(withIdentifier: K.Segues.loginToTable, sender: self)
                 UserDefaults.standard.set(true, forKey: "isLoggedIn")
                 UserDefaults.standard.set(authResult?.user.uid, forKey: "uid")
                 UserDefaults.standard.synchronize()
+                
+                Firestore.firestore().collection(K.FStore.lists).whereField(K.List.members, arrayContains: authResult?.user.uid).getDocuments { (querySnapshot, err) in
+                    if let e = err {
+                        print("Error getting documents: \(err)")
+                    } else {
+                        for document in querySnapshot!.documents {
+                            let listCode = document.data()[K.List.code]
+                            UserDefaults.standard.set(listCode, forKey: "code")
+                            UserDefaults.standard.synchronize()
+                        }
+                    }
+                }
+                
+                self.performSegue(withIdentifier: K.Segues.loginToTable, sender: self)
             }
         }
     }

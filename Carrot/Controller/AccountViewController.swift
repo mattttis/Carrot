@@ -108,6 +108,7 @@ class AccountViewController: UIViewController {
         super.viewDidLoad()
         
         setupAvatar()
+        self.hideKeyboardWhenTappedAround() 
         
         self.navigationItem.setHidesBackButton(true, animated: false)
         self.navigationItem.hidesBackButton = true

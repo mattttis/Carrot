@@ -22,20 +22,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let db = Firestore.firestore()
         let storage = Storage.storage()
         
-        self.window = UIWindow(frame: UIScreen.main.bounds)
-        let storyboard =  UIStoryboard(name: "Main", bundle: nil)
-        let startMainVC = storyboard.instantiateViewController(withIdentifier: "TableViewController")
-        let startIntroVC = storyboard.instantiateViewController(withIdentifier: "WelcomeViewController")
-        
-        // Check if user is logged
-        let currentUser = Auth.auth().currentUser
-//        if currentUser != nil {
-//            self.window?.rootViewController = startMainVC
-//            print("User not logged in")
-//        } else {
-//            self.window?.rootViewController = startIntroVC
-//            print("User logged in")
-//        }
+//        self.window = UIWindow(frame: UIScreen.main.bounds)
+//        let storyboard =  UIStoryboard(name: "Main", bundle: nil)
+//        let startMainVC = storyboard.instantiateViewController(withIdentifier: "TableViewController")
+//        let startIntroVC = storyboard.instantiateViewController(withIdentifier: "WelcomeViewController")
         
         return true
     }
