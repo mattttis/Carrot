@@ -2,6 +2,33 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>UIApplicationShortcutItems</key>
+	<array>
+		<dict>
+			<key>UIApplicationShortcutItemIconType</key>
+			<string>UIApplicationShortcutIconTypeAdd</string>
+			<key>UIApplicationShortcutItemTitle</key>
+			<string>Add Item</string>
+			<key>UIApplicationShortcutItemType</key>
+			<string>is.mattt.Carrot.addItem</string>
+		</dict>
+		<dict>
+			<key>UIApplicationShortcutItemType</key>
+			<string>is.mattt.Carrot.showCard</string>
+			<key>UIApplicationShortcutItemTitle</key>
+			<string>Show bonuskaart</string>
+			<key>UIApplicationShortcutItemIconSymbolName</key>
+			<string>barcode</string>
+		</dict>
+		<dict>
+			<key>UIApplicationShortcutItemType</key>
+			<string>is.mattt.Carrot.shareList</string>
+			<key>UIApplicationShortcutItemTitle</key>
+			<string>Share list</string>
+			<key>UIApplicationShortcutItemIconSymbolName</key>
+			<string>person.badge.plus.fill</string>
+		</dict>
+	</array>
 	<key>NSCameraUsageDescription</key>
 	<string>We ask to use your camera in order to scan your AH Bonuskaart</string>
 	<key>CFBundleDevelopmentRegion</key>
