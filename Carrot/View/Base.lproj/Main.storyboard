@@ -308,16 +308,17 @@
                         </connections>
                     </tableView>
                     <tabBarItem key="tabBarItem" title="" image="list.bullet" catalog="system" selectedImage="list.bullet" id="x94-9f-Shk"/>
-                    <navigationItem key="navigationItem" title="MMMMM" id="MU1-Jy-DqV">
+                    <navigationItem key="navigationItem" title="MMMMM" largeTitleDisplayMode="always" id="MU1-Jy-DqV">
                         <barButtonItem key="rightBarButtonItem" title="Share" image="arrowshape.turn.up.right.circle.fill" catalog="system" id="pAm-ia-u2U"/>
                     </navigationItem>
                     <connections>
                         <segue destination="o1N-pS-PVJ" kind="presentation" identifier="tableToShare" id="91t-kx-gRN"/>
+                        <segue destination="biQ-zZ-FQu" kind="presentation" identifier="tableToCard" id="OY0-sT-tkz"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qYD-hj-zCe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="8793" y="-536"/>
+            <point key="canvasLocation" x="8810" y="-569"/>
         </scene>
         <!--Invite code-->
         <scene sceneID="KeZ-Is-ShH">
@@ -327,8 +328,23 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="786"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wxN-Jv-znF">
-                                <rect key="frame" x="66" y="239" width="282" height="267"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vmk-uA-yO7">
+                                <rect key="frame" x="113.5" y="514" width="187" height="44"/>
+                                <color key="backgroundColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="2ht-eg-wya"/>
+                                    <constraint firstAttribute="width" constant="187" id="ruo-bM-og3"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
+                                <state key="normal" title="Share your list">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="shareButton2:" destination="x9J-U8-k6N" eventType="touchUpInside" id="ZBY-3w-WTg"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wxN-Jv-znF">
+                                <rect key="frame" x="66" y="251" width="282" height="226"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Share your code out loud or send it in a message" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bCK-oJ-UNc">
                                         <rect key="frame" x="17" y="196" width="249" height="51"/>
@@ -365,27 +381,13 @@
                                     <constraint firstItem="bCK-oJ-UNc" firstAttribute="centerX" secondItem="wxN-Jv-znF" secondAttribute="centerX" id="sem-ec-wf0"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vmk-uA-yO7">
-                                <rect key="frame" x="113.5" y="514" width="187" height="44"/>
-                                <color key="backgroundColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="2ht-eg-wya"/>
-                                    <constraint firstAttribute="width" constant="187" id="ruo-bM-og3"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
-                                <state key="normal" title="Share your list">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <connections>
-                                    <action selector="shareButton2:" destination="x9J-U8-k6N" eventType="touchUpInside" id="ZBY-3w-WTg"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="wxN-Jv-znF" firstAttribute="centerX" secondItem="7pZ-nR-DHW" secondAttribute="centerX" id="3YM-hs-dbN"/>
                             <constraint firstItem="wxN-Jv-znF" firstAttribute="centerY" secondItem="7pZ-nR-DHW" secondAttribute="centerY" id="669-TY-86F"/>
                             <constraint firstItem="vmk-uA-yO7" firstAttribute="centerX" secondItem="7pZ-nR-DHW" secondAttribute="centerX" id="EDz-E8-IMu"/>
+                            <constraint firstItem="vmk-uA-yO7" firstAttribute="top" secondItem="7pZ-nR-DHW" secondAttribute="topMargin" constant="514" id="g2y-qK-7yK"/>
                             <constraint firstItem="vmk-uA-yO7" firstAttribute="top" secondItem="wxN-Jv-znF" secondAttribute="bottom" constant="8" id="jtr-RQ-NtW"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="HAf-ed-0SG"/>
@@ -627,10 +629,11 @@
                             <userDefinedRuntimeAttribute type="boolean" keyPath="hidesBackButton" value="YES"/>
                         </userDefinedRuntimeAttributes>
                     </navigationItem>
-                    <tabBar key="tabBar" contentMode="scaleAspectFit" insetsLayoutMarginsFromSafeArea="NO" id="FZx-dp-BbV">
+                    <tabBar key="tabBar" contentMode="scaleAspectFit" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="FZx-dp-BbV">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="selectedImageTintColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                     </tabBar>
                     <connections>
                         <segue destination="JKY-RQ-H6R" kind="relationship" relationship="viewControllers" id="wRj-8q-BJ9"/>
@@ -647,7 +650,7 @@
             <objects>
                 <viewController id="v9n-dA-hOh" customClass="ActionViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="miZ-3s-NfH">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="iRs-vo-O5u"/>
@@ -665,7 +668,7 @@
             <objects>
                 <viewController title="Apples" id="HY1-ew-6Fz" customClass="AccountViewController" customModule="Carrot" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="AnA-Yo-rU4">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="G7H9" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ble-BE-V5l">
@@ -892,7 +895,8 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="3vQ-JR-Z8p"/>
+        <segue reference="OY0-sT-tkz"/>
+        <segue reference="ELv-9J-ITG"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Bonuskaart" width="816" height="1218"/>

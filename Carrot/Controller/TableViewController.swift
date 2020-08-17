@@ -38,8 +38,14 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
         let configuration = UIImage.SymbolConfiguration(weight: .semibold)
         let shareImage = UIImage(systemName: "person.crop.circle.badge.plus", withConfiguration: configuration)
         let shareButton = UIBarButtonItem(image: shareImage, style: .plain, target: self, action: #selector(shareFunction))
+        
+        let configuration2 = UIImage.SymbolConfiguration(weight: .semibold)
+        let cardImage = UIImage(systemName: "barcode.viewfinder", withConfiguration: configuration)
+        let cardButton = UIBarButtonItem(image: cardImage, style: .plain, target: self, action: #selector(showCard))
+        cardButton.tintColor = UIColor.label
+        
         shareButton.tintColor = UIColor.label
-        tabBarController?.navigationItem.rightBarButtonItems = [shareButton]
+        tabBarController?.navigationItem.rightBarButtonItems = [shareButton, cardButton]
     }
     
     override func viewDidLoad() {
@@ -532,8 +538,16 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
         generator.impactOccurred()
         performSegue(withIdentifier: K.Segues.tableToShare, sender: self)
     }
+    
+    @objc func showCard() {
+        print("Showing card...")
+        performSegue(withIdentifier: K.Segues.tableToCard, sender: self)
+    }
+    
 }
 
+
+//MARK: - Hide the keyboard extension
 extension UIViewController {
     func hideKeyboardWhenTappedAround() {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))

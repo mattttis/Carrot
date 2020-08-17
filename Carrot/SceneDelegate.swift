@@ -29,7 +29,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
             // Then push that view controller onto the navigation stack
             let rootViewController = self.window?.rootViewController as! UINavigationController;
-            rootViewController.pushViewController(viewController, animated: true);
+            rootViewController.pushViewController(viewController, animated: false);
             
         } else {
             print("User not logged in")
