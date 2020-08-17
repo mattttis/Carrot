@@ -52,15 +52,25 @@ class AccountViewController: UIViewController {
         
         // Change labels & text fields
         tabBarController?.title = "Hey \(userFirstName!)!"
-        listCode.text = listCodeString
-        firstName.text = userFirstName
-        emailAddress.text = userEmail
+        
         
         let configuration = UIImage.SymbolConfiguration(weight: .semibold)
         let shareImage = UIImage(systemName: "barcode.viewfinder", withConfiguration: configuration)
         let shareButton = UIBarButtonItem(image: shareImage, style: .plain, target: self, action: #selector(showCard))
         shareButton.tintColor = UIColor.label
         tabBarController?.navigationItem.rightBarButtonItem = shareButton
+        
+        listCode.text = listCodeString
+        firstName.text = userFirstName
+        emailAddress.text = userEmail
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        setupAvatar()
+        self.hideKeyboardWhenTappedAround()
+        
         
         
         let user = Auth.auth().currentUser
@@ -102,18 +112,6 @@ class AccountViewController: UIViewController {
                 }
             }
         }
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        setupAvatar()
-        self.hideKeyboardWhenTappedAround() 
-        
-        self.navigationItem.setHidesBackButton(true, animated: false)
-        self.navigationItem.hidesBackButton = true
-        self.navigationItem.backBarButtonItem?.accessibilityElementsHidden = true
-        
     }
     
     //MARK: - Profile picture
@@ -201,7 +199,7 @@ extension AccountViewController: UIImagePickerControllerDelegate, UINavigationCo
         }
         
         let storageRef = Storage.storage().reference(forURL: "gs://carrot-ios.appspot.com")
-        let storageProfileRef = storageRef.child("profile").child(currentUserID!).child("avatar")
+        let storageProfileRef = storageRef.child(K.FStore.users).child(currentUserID!).child(K.User.profilePicture)
         
         let metaData = StorageMetadata()
         metaData.contentType = "image/jpg"

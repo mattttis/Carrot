@@ -8,16 +8,53 @@
 
 import UIKit
 import FirebaseStorage
+import FirebaseAuth
+import FirebaseFirestore
 import BarcodeScanner
 
 class CardViewController: UIViewController {
 
+    var currentBrightNess: CGFloat? = nil
+    let dbRef = Firestore.firestore().collection(K.FStore.users).document(Auth.auth().currentUser!.uid)
+    let storageRef = Storage.storage().reference().child(K.FStore.users).child(Auth.auth().currentUser!.uid)
+    var image: UIImage?
+    // let cardImageRef: StorageReference?
+    
     @IBOutlet weak var cardNumber: UILabel!
     @IBOutlet weak var cardCode: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
 
+    override func viewWillAppear(_ animated: Bool) {
+        // cardImageRef = storageRef.child(K.User.barcodeImage)
+        
+        currentBrightNess = UIScreen.main.brightness
+        setBrightness(to: CGFloat(1.0))
+        
+        dbRef.getDocument { (document, err) in
+            if let e = err {
+                print("Error retrieving document: \(e)")
+            } else {
+                let data = document?.data()
+                
+                if let imageURL = data?[K.User.barcodeImage] as? String {
+                    // let url = URL(fileURLWithPath: imageURL)
+                    let url = NSURL(string: imageURL)
+                    self.downloadImage(from: url as! URL)
+                    let number = data![K.User.barcodeNumber] as! String
+                    self.cardNumber.text = number
+                    UserDefaults.standard.set(number, forKey: K.User.barcodeNumber)
+                }
+                
+                
+            }
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        setBrightness(to: currentBrightNess!)
     }
     
     @IBAction func rescanCode(_ sender: Any) {
@@ -31,6 +68,67 @@ class CardViewController: UIViewController {
     
     @IBAction func dismissVC(_ sender: Any) {
         dismiss(animated: true, completion: nil)
+    }
+    
+    func setBrightness(to value: CGFloat, duration: TimeInterval = 0.3, ticksPerSecond: Double = 120) {
+        let startingBrightness = UIScreen.main.brightness
+        let delta = value - startingBrightness
+        let totalTicks = Int(ticksPerSecond * duration)
+        let changePerTick = delta / CGFloat(totalTicks)
+        let delayBetweenTicks = 1 / ticksPerSecond
+
+        let time = DispatchTime.now()
+
+        for i in 1...totalTicks {
+            DispatchQueue.main.asyncAfter(deadline: time + delayBetweenTicks * Double(i)) {
+                UIScreen.main.brightness = max(min(startingBrightness + (changePerTick * CGFloat(i)),1),0)
+            }
+        }
+    }
+    
+    func saveImage() {
+        guard let imageSelected = self.image else {
+            print("Avatar is nil")
+            return
+        }
+        
+        guard let imageData = imageSelected.jpegData(compressionQuality: 0.005) else {
+            return
+        }
+        
+        let storageRef = Storage.storage().reference(forURL: "gs://carrot-ios.appspot.com")
+        let storageProfileRef = storageRef.child(K.FStore.users).child(Auth.auth().currentUser!.uid).child(K.User.barcodeImage)
+        
+        let metaData = StorageMetadata()
+        metaData.contentType = "image/jpg"
+        storageProfileRef.putData(imageData, metadata: metaData) { (storageMetaData, error) in
+            if let e = error {
+                print("Error uploading profile picture: \(e.localizedDescription)")
+                return
+            }
+            
+            storageProfileRef.downloadURL { (url, error) in
+                if let metaImageURL = url?.absoluteString {
+                    self.dbRef.updateData([
+                        K.User.barcodeImage: metaImageURL
+                    ])
+                }
+            }
+        }
+    }
+    
+    func getData(from url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
+        URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
+    }
+    
+    func downloadImage(from url: URL) {
+        getData(from: url) { data, response, error in
+            guard let data = data, error == nil else { return }
+            print(response?.suggestedFilename ?? url.lastPathComponent)
+            DispatchQueue.main.async() { [weak self] in
+                self?.cardCode.image = UIImage(data: data)
+            }
+        }
     }
 }
 
@@ -46,13 +144,22 @@ extension CardViewController: BarcodeScannerCodeDelegate {
     cardCode.image = nil
     
     if let barcode = BarCodeI.generateBarcode(from: code) {
+        image = barcode
+        saveImage()
         cardCode.image = barcode
+        cardCode.backgroundColor = UIColor.white
         controller.dismiss(animated: true, completion: nil)
+        
+        // Save code to Firestore
+        dbRef.updateData([
+            K.User.barcodeNumber: code
+        ])
     }
     
     DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
       controller.resetWithError()
     }
+    
   }
 }
 
@@ -93,7 +200,8 @@ class BarCodeI {
                 
                 
                 let cgimage: CGImage = (rawImage.cgImage)!
-                let cropZone = CGRect(x: 0, y: 0, width: Int(rawImage.size.width), height: Int(rawImage.size.height))
+                // let cropZone = CGRect(x: 0, y: 0, width: Int(rawImage.size.width), height: Int(rawImage.size.height))
+                let cropZone = CGRect(x: 0, y: 0, width: Int(280), height: Int(110))
                 let cWidth: size_t  = size_t(cropZone.size.width)
                 let cHeight: size_t  = size_t(cropZone.size.height)
                 let bitsPerComponent: size_t = cgimage.bitsPerComponent

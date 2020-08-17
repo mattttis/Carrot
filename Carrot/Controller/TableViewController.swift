@@ -308,6 +308,12 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
     func changeButton(state: Bool, indexSection: Int?, indexRow: Int?, itemID: String?) {
         sections[indexSection!].items[indexRow!].checked = state
         
+//        let generator = UINotificationFeedbackGenerator()
+//        generator.notificationOccurred(.success)
+        
+        let generator = UIImpactFeedbackGenerator(style: .light)
+        generator.impactOccurred()
+        
         if let itemID = itemID {
             let itemRef = db.collection(K.FStore.lists).document(currentListID!).collection(K.FStore.sections).document("\(indexSection!)").collection(K.FStore.items).document(itemID)
             
@@ -321,8 +327,8 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
                         print("Error writing document: \(err)")
                     } else {
                         print("Document successfully written!")
-                        let generator = UINotificationFeedbackGenerator()
-                        generator.notificationOccurred(.success)
+//                        let generator = UINotificationFeedbackGenerator()
+//                        generator.notificationOccurred(.success)
                     }
                 }
             } else {
@@ -333,8 +339,8 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
                         print("Error writing document: \(err)")
                     } else {
                         print("Document successfully written!")
-                        let generator = UINotificationFeedbackGenerator()
-                        generator.notificationOccurred(.success)
+//                        let generator = UINotificationFeedbackGenerator()
+//                        generator.notificationOccurred(.success)
                     }
                 }
             }
@@ -522,24 +528,10 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
     }
     
     @objc func shareFunction() {
-            performSegue(withIdentifier: K.Segues.tableToShare, sender: self)
-            
-    //        let listCode = "STRING"
-    //        let myWebsite = NSURL(string:"https://stackoverflow.com/users/4600136/mr-javed-multani?tab=profile")
-    //        let text = "Hey, I'm using Carrot so we can have a shared grocery list! Download the app and create an account - it only takes one minute. To join my list, enter the code \(listCode). You can download the app here: \(String(describing: NSURL(string:"https://stackoverflow.com/users/4600136/mr-javed-multani?tab=profile")))"
-    //
-    //        // set up activity view controller
-    //        let textToShare = [text]
-    //        let activityViewController = UIActivityViewController(activityItems: textToShare, applicationActivities: nil)
-    //        activityViewController.popoverPresentationController?.sourceView = self.view
-    //
-    //        // exclude some activity types from the list (optional)
-    //        activityViewController.excludedActivityTypes = [UIActivity.ActivityType.postToFacebook]
-    //
-    //        // present the view controller
-    //        self.present(activityViewController, animated: true, completion: nil)
-        }
-
+        let generator = UIImpactFeedbackGenerator(style: .medium)
+        generator.impactOccurred()
+        performSegue(withIdentifier: K.Segues.tableToShare, sender: self)
+    }
 }
 
 extension UIViewController {

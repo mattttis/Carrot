@@ -14,26 +14,28 @@ class ShareViewController: UIViewController {
     let gesture = UITapGestureRecognizer(target: self, action: "shareAction:")
     
     @IBOutlet weak var listCode: UILabel!
-    @IBOutlet weak var shareButtonView: UIView!
+    
+    @IBAction func dismissVC(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         if let code2 = code {
             listCode.text = code2
         }
-        
-        shareButtonView.isUserInteractionEnabled = true
-        shareButtonView.addGestureRecognizer(gesture)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-
-    @IBAction func shareButton(_ sender: Any) {
+    
+    @IBAction func shareButton2(_ sender: Any) {
         shareAction()
     }
     
+    
     @objc func shareAction() {
+
         let listCode = code
         let myWebsite = NSURL(string:"https://google.com/")
         let text = "Hey, I'm using Carrot so we can have a shared grocery list! Download the app and create an account - it only takes one minute. To join my list, enter the code \(listCode). You can download the app here: \(String(describing: NSURL(string:"https://stackoverflow.com/users/4600136/mr-javed-multani?tab=profile")))"

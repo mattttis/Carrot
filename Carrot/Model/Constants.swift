@@ -39,12 +39,18 @@ struct K {
         // static let checkedBy = "checkedBy"
     }
     
+    struct FStorage {
+        static let user = "user"
+    }
+    
     struct User {
         static let firstName = "firstname"
         static let email = "email"
         static let dateCreated = "dateCreated"
         static let lists = "lists"
         static let profilePicture = "profilePicture"
+        static let barcodeNumber = "barcodeNumber"
+        static let barcodeImage = "barcodeImage"
     }
     
     struct List {
