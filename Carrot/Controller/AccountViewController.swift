@@ -194,7 +194,7 @@ extension AccountViewController: UIImagePickerControllerDelegate, UINavigationCo
             return
         }
         
-        guard let imageData = imageSelected.jpegData(compressionQuality: 0.005) else {
+        guard let imageData = imageSelected.jpegData(compressionQuality: 0.000005) else {
             return
         }
         

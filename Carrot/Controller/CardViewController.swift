@@ -11,13 +11,15 @@ import FirebaseStorage
 import FirebaseAuth
 import FirebaseFirestore
 import BarcodeScanner
+import Kingfisher
 
 class CardViewController: UIViewController {
 
     var currentBrightNess: CGFloat? = nil
     let dbRef = Firestore.firestore().collection(K.FStore.users).document(Auth.auth().currentUser!.uid)
-    let storageRef = Storage.storage().reference().child(K.FStore.users).child(Auth.auth().currentUser!.uid)
+    let storageRef = Storage.storage().reference().child(K.FStore.users).child(Auth.auth().currentUser!.uid).child(K.User.barcodeImage)
     var image: UIImage?
+    let imageCache = NSCache<NSString, AnyObject>()
     // let cardImageRef: StorageReference?
     
     @IBOutlet weak var cardNumber: UILabel!
@@ -25,6 +27,28 @@ class CardViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        dbRef.getDocument { (document, err) in
+            if let e = err {
+                print("Error retrieving document: \(e)")
+            } else {
+                let data = document?.data()
+                if let imageURL = data?[K.User.barcodeImage] as? String {
+                    
+                    let url = URL(string: imageURL)
+                    UserDefaults.standard.set(imageURL, forKey: K.User.barcodeImage)
+                    self.cardCode.kf.setImage(with: url)
+                    
+                    
+                    let number = data![K.User.barcodeNumber] as! String
+                    self.cardNumber.text = number
+                    UserDefaults.standard.set(number, forKey: K.User.barcodeNumber)
+                    UserDefaults.standard.synchronize()
+                }
+                
+               
+            }
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -33,24 +57,14 @@ class CardViewController: UIViewController {
         currentBrightNess = UIScreen.main.brightness
         setBrightness(to: CGFloat(1.0))
         
-        dbRef.getDocument { (document, err) in
-            if let e = err {
-                print("Error retrieving document: \(e)")
-            } else {
-                let data = document?.data()
-                
-                if let imageURL = data?[K.User.barcodeImage] as? String {
-                    // let url = URL(fileURLWithPath: imageURL)
-                    let url = NSURL(string: imageURL)
-                    self.downloadImage(from: url as! URL)
-                    let number = data![K.User.barcodeNumber] as! String
-                    self.cardNumber.text = number
-                    UserDefaults.standard.set(number, forKey: K.User.barcodeNumber)
-                }
-                
-                
-            }
-        }
+//        storageRef.getData(maxSize: 1 * 1024 * 1024) { data, error in
+//            if let error = error {
+//                print(error)
+//            } else {
+//                let image = UIImage(data: data!)
+//                self.cardCode.image = image
+//            }
+//        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -69,6 +83,8 @@ class CardViewController: UIViewController {
     @IBAction func dismissVC(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
+    
+    
     
     func setBrightness(to value: CGFloat, duration: TimeInterval = 0.3, ticksPerSecond: Double = 120) {
         let startingBrightness = UIScreen.main.brightness
@@ -113,20 +129,6 @@ class CardViewController: UIViewController {
                         K.User.barcodeImage: metaImageURL
                     ])
                 }
-            }
-        }
-    }
-    
-    func getData(from url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
-        URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
-    }
-    
-    func downloadImage(from url: URL) {
-        getData(from: url) { data, response, error in
-            guard let data = data, error == nil else { return }
-            print(response?.suggestedFilename ?? url.lastPathComponent)
-            DispatchQueue.main.async() { [weak self] in
-                self?.cardCode.image = UIImage(data: data)
             }
         }
     }
