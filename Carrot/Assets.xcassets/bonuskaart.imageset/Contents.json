@@ -1,15 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Bonuskaart.png",
+      "filename" : "Bonuskaart-1.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "Bonuskaart-2.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "Bonuskaart-3.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

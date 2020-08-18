@@ -9,7 +9,25 @@
 import UIKit
 import Firebase
 
-class TableViewController: UITableViewController, AddTask, ChangeButton {
+class TableViewController: UITableViewController, AddTask, ChangeButton, UITableViewDragDelegate, UITableViewDropDelegate {
+    
+    func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
+        return [UIDragItem(itemProvider: NSItemProvider())]
+    }
+    
+    func tableView(_ tableView: UITableView, performDropWith coordinator: UITableViewDropCoordinator) {
+        
+    }
+    
+    func tableView(_ tableView: UITableView, dropSessionDidUpdate session: UIDropSession, withDestinationIndexPath destinationIndexPath: IndexPath?) -> UITableViewDropProposal {
+
+        if session.localDragSession != nil { // Drag originated from the same app.
+            return UITableViewDropProposal(operation: .move, intent: .insertAtDestinationIndexPath)
+        }
+
+        return UITableViewDropProposal(operation: .cancel, intent: .unspecified)
+    }
+
     
     var refreshControlMT = UIRefreshControl()
     var sections: [Section] = []
@@ -34,27 +52,39 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
         
         // Navigation bar setup
         tabBarController?.title = "Groceries"
+
         
+        // Share list BarButton
         let configuration = UIImage.SymbolConfiguration(weight: .semibold)
         let shareImage = UIImage(systemName: "person.crop.circle.badge.plus", withConfiguration: configuration)
         let shareButton = UIBarButtonItem(image: shareImage, style: .plain, target: self, action: #selector(shareFunction))
+        shareButton.tintColor = UIColor.label
         
-        let configuration2 = UIImage.SymbolConfiguration(weight: .semibold)
+        // Present Bonuskaart BarButton
         let cardImage = UIImage(systemName: "barcode.viewfinder", withConfiguration: configuration)
         let cardButton = UIBarButtonItem(image: cardImage, style: .plain, target: self, action: #selector(showCard))
         cardButton.tintColor = UIColor.label
         
-        shareButton.tintColor = UIColor.label
+//        let editImage = UIImage(systemName: "square.and.pencil", withConfiguration: configuration)
+//        let editButton = UIBarButtonItem(image: editImage, style: .plain, target: self, action: #selector(editAction))
+//        editButton.tintColor = UIColor.label
+
+        
         tabBarController?.navigationItem.rightBarButtonItems = [shareButton, cardButton]
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        tableView.dragInteractionEnabled = true
+        tableView.dragDelegate = self
+        tableView.dropDelegate = self
+        
         // Storing user variables locally
         let user = Auth.auth().currentUser
         if let user = user {
             currentUserID = user.uid
+            print(currentUserID)
             userRef = db.collection(K.FStore.users).document(currentUserID!)
             userRef!.getDocument { (snapshot, error) in
                 if let data = snapshot?.data() {
@@ -139,7 +169,7 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
             if cell.uid == cell.currentUid {
                 cell.profilePicture.isHidden = true
             } else {
-                DispatchQueue.global(qos: .userInteractive).async() {
+                DispatchQueue.global(qos: .background).async() {
                     func getData(from url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
                         URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
                     }
@@ -178,6 +208,65 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
         
         let delete = deleteAction(at: indexPath)
         return UISwipeActionsConfiguration(actions: [delete])
+    }
+    
+    override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        return .none
+    }
+
+    override func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
+        return false
+    }
+    
+    override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        
+        let movedObject = self.sections[sourceIndexPath.section].items[sourceIndexPath.row]
+        movedObject.number = destinationIndexPath.section
+        
+        sections[sourceIndexPath.section].items.remove(at: sourceIndexPath.row)
+        sections[destinationIndexPath.section].items.insert(movedObject, at: destinationIndexPath.row)
+        
+        let itemRef = listsRef?.collection(K.FStore.sections).document(String(sourceIndexPath.section)).collection(K.FStore.items).document(movedObject.itemID!)
+        
+        itemRef!.getDocument { (document, error) in
+            if let document = document, document.exists {
+                let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
+                print(document.data()!["dateCreated"])
+                
+                // Get the properties of the item
+                let name = document.data()?[K.Item.name] as? String
+                let uid = document.data()?[K.Item.uid] as? String
+                let category = destinationIndexPath.section
+                let isChecked = document.data()?[K.Item.isChecked] as? Bool
+                let dateCreated = document.data()?[K.Item.date] as? Timestamp
+                let date2 = Date(timeIntervalSince1970: TimeInterval(dateCreated!.seconds))
+                
+                let dateChecked = document.data()?[K.Item.dateChecked] as? Timestamp
+                let date3 = Date(timeIntervalSince1970: TimeInterval(dateChecked!.seconds))
+                let checkedBy = document.data()?[K.Item.checkedBy] as? String
+                
+                print("DateCreated: \(dateCreated)")
+                print("DateChecked: \(dateChecked)")
+                
+                var ref: DocumentReference? = nil
+                
+                // Save the properties of the item in sectionsDeleted
+                ref = self.db.collection(K.lists).document(self.currentListID!).collection(K.FStore.sections).document("\(destinationIndexPath.section)").collection(K.FStore.items).addDocument(data: [
+                        K.Item.name: name,
+                        K.Item.isChecked: isChecked,
+                        K.Item.categoryNumber: category,
+                        K.Item.date: date2,
+                        K.Item.dateChecked: date3,
+                        K.Item.checkedBy: checkedBy,
+                        K.Item.uid: uid
+                ]) { err in
+                    itemRef!.delete()
+                }
+            } else {
+                print("Document does not exist")
+            }
+        }
+    
     }
     
     func deleteAction(at indexPath: IndexPath) -> UIContextualAction {
@@ -314,6 +403,8 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
         
         refreshTable()
     }
+    
+    
     
     
     //MARK: - Change isChecked state & button
@@ -550,6 +641,19 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
         let generator = UIImpactFeedbackGenerator(style: .medium)
         generator.impactOccurred()
         performSegue(withIdentifier: K.Segues.tableToCard, sender: self)
+    }
+    
+    @objc func editAction() {
+        
+        if tableView.isEditing {
+            tableView.setEditing(false, animated: true)
+        } else {
+            tableView.setEditing(true, animated: true)
+            
+            // listsRef?.collection(K.FStore.sections).document()
+            
+        }
+        
     }
     
 }
