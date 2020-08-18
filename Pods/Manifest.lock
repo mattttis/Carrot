@@ -219,6 +219,7 @@ PODS:
   - BoringSSL-GRPC/Implementation (0.0.7):
     - BoringSSL-GRPC/Interface (= 0.0.7)
   - BoringSSL-GRPC/Interface (0.0.7)
+  - CocoaTextField (1.1.0)
   - Firebase/Analytics (6.27.1):
     - Firebase/Core
   - Firebase/Auth (6.27.1):
@@ -345,6 +346,7 @@ PODS:
 
 DEPENDENCIES:
   - BarcodeScanner
+  - CocoaTextField
   - Firebase/Analytics
   - Firebase/Auth
   - Firebase/Firestore
@@ -356,6 +358,7 @@ SPEC REPOS:
     - abseil
     - BarcodeScanner
     - BoringSSL-GRPC
+    - CocoaTextField
     - Firebase
     - FirebaseAnalytics
     - FirebaseAuth
@@ -380,6 +383,7 @@ SPEC CHECKSUMS:
   abseil: 6c8eb7892aefa08d929b39f9bb108e5367e3228f
   BarcodeScanner: fce1ad2b3f28286b1ab5091fe0979789618bee27
   BoringSSL-GRPC: 8edf627ee524575e2f8d19d56f068b448eea3879
+  CocoaTextField: f48bf179bb968eeeb0f3ebace1e1c5bf97d585c7
   Firebase: 919186c8e119dd9372a45fd1dd17a8a942bc1892
   FirebaseAnalytics: 5fa308e1b13f838d0f6dc74719ac2a72e8c5afc4
   FirebaseAuth: b85c064e0ac60f82486728d50a4803f235687302
@@ -400,6 +404,6 @@ SPEC CHECKSUMS:
   nanopb: c43f40fadfe79e8b8db116583945847910cbabc9
   PromisesObjC: b48e0338dbbac2207e611750777895f7a5811b75
 
-PODFILE CHECKSUM: 2de67fce1e779378f8103e59b2d112bdbeb9aa87
+PODFILE CHECKSUM: 229405ba099c0f859a31d7bd2a5970802144c084
 
 COCOAPODS: 1.9.3

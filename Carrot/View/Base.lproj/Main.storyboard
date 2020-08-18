@@ -8,6 +8,33 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--View Controller-->
+        <scene sceneID="QJZ-u7-yUS">
+            <objects>
+                <viewController id="yKk-J4-f0L" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="rgV-Df-c5V">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" borderStyle="roundedRect" placeholder="First name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3lW-29-pAZ" customClass="CocoaTextField" customModule="CocoaTextField">
+                                <rect key="frame" x="74.5" y="416" width="265" height="64"/>
+                                <attributedString key="attributedText"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="3lW-29-pAZ" firstAttribute="centerX" secondItem="rgV-Df-c5V" secondAttribute="centerX" id="W0s-3W-pEh"/>
+                            <constraint firstItem="3lW-29-pAZ" firstAttribute="centerY" secondItem="rgV-Df-c5V" secondAttribute="centerY" id="mTy-AC-2Ec"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="DQV-Yc-v0Q"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="jZl-8v-yC9"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4fV-Lj-XA9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4123.188405797102" y="-644.19642857142856"/>
+        </scene>
         <!--Register-->
         <scene sceneID="PDZ-2X-zmC">
             <objects>
@@ -193,10 +220,15 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2x7-JX-RLV">
-                                <rect key="frame" x="104" y="431" width="206" height="34"/>
+                                <rect key="frame" x="100" y="418" width="214" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="existingListAction:" destination="4eS-P9-CWv" eventType="editingDidEnd" id="v36-1n-Ygq"/>
                                     <action selector="existingListPrimaryAction:" destination="4eS-P9-CWv" eventType="primaryActionTriggered" id="NMu-Im-yKK"/>
@@ -593,6 +625,13 @@
                                 <color key="textColor" name="BrandBlue"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5sx-I9-mRQ">
+                                <rect key="frame" x="184" y="359" width="46" height="30"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <segue destination="yKk-J4-f0L" kind="show" id="lrD-fX-Qlr"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -602,6 +641,7 @@
                             <constraint firstItem="ZUA-Ge-EyS" firstAttribute="trailing" secondItem="xzx-fx-jXE" secondAttribute="trailing" constant="74" id="S4a-gr-q33"/>
                             <constraint firstItem="ZUA-Ge-EyS" firstAttribute="trailing" secondItem="gof-hC-D5h" secondAttribute="trailing" constant="92.510000000000005" id="Tx9-fI-5Db"/>
                             <constraint firstItem="xzx-fx-jXE" firstAttribute="leading" secondItem="ZUA-Ge-EyS" secondAttribute="leading" constant="74" id="XVd-aN-lLj"/>
+                            <constraint firstItem="5sx-I9-mRQ" firstAttribute="top" secondItem="ZUA-Ge-EyS" secondAttribute="top" constant="219" id="YaB-OJ-8SC"/>
                             <constraint firstItem="gof-hC-D5h" firstAttribute="top" secondItem="ZUA-Ge-EyS" secondAttribute="top" constant="330" id="fZA-eR-Lwx"/>
                             <constraint firstItem="gof-hC-D5h" firstAttribute="leading" secondItem="ZUA-Ge-EyS" secondAttribute="leading" constant="92.489999999999995" id="kZl-SO-sha"/>
                             <constraint firstItem="ZUA-Ge-EyS" firstAttribute="trailing" secondItem="mJJ-Sa-SzC" secondAttribute="trailing" constant="74" id="p7C-I9-B5b"/>

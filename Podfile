@@ -13,5 +13,6 @@ pod 'Firebase/Analytics'
 pod 'Firebase/Storage'
 pod 'BarcodeScanner'
 pod 'Kingfisher'
+pod 'CocoaTextField'
 
 end

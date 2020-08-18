@@ -61,15 +61,21 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
                     self.userFirstName = (data[K.User.firstName] as! String)
                     self.userEmail = (data[K.User.email] as! String)
                     self.currentLists = (data[K.User.lists] as! [String])
-                    self.currentListID = self.currentLists![0]
+                    
+                    if let current = self.currentLists?[0] {
+                        self.currentListID = current
+                    }
+                    
                     self.listsRef = self.db.collection(K.FStore.lists).document(self.currentListID!)
                     
                     // Load the section names
                     self.loadSections(listID: self.currentListID!)
                     
                     // Save variables in UserDefaults
-                    UserDefaults.standard.set(self.userFirstName, forKey: "firstName")
-                    UserDefaults.standard.synchronize()
+                    DispatchQueue.global(qos: .background).async {
+                        UserDefaults.standard.set(self.userFirstName, forKey: "firstName")
+                        UserDefaults.standard.synchronize()
+                    }
                     
                 } else {
                     print("Could not find document")
@@ -129,36 +135,37 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
             cell.uid = sections[indexPath.section].items[indexPath.row].uid
             
             //MARK: - Profile picture loading
+            
             if cell.uid == cell.currentUid {
                 cell.profilePicture.isHidden = true
             } else {
-                
-                func getData(from url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
-                    URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
-                }
-                
-                func downloadImage(from url: URL) {
-                    getData(from: url) { data, response, error in
-                        guard let data = data, error == nil else { return }
-                        DispatchQueue.main.async() { [weak self] in
-                            cell.profilePicture.image = UIImage(data: data)
+                DispatchQueue.global(qos: .userInteractive).async() {
+                    func getData(from url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
+                        URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
+                    }
+                    
+                    func downloadImage(from url: URL) {
+                        getData(from: url) { data, response, error in
+                            guard let data = data, error == nil else { return }
+                            DispatchQueue.main.async() { [weak self] in
+                                cell.profilePicture.image = UIImage(data: data)
+                            }
                         }
                     }
-                }
-                
-                DispatchQueue.main.async() {
-                    self.db.collection(K.FStore.users).document(cell.uid!).getDocument { (snapshot, error) in
-                        if let e = error {
-                            print("Error retrieving profile picture: \(e)")
-                        } else {
-                            if let imageURL = snapshot?.data()![K.User.profilePicture] as? String {
-                                if let realURL = URL(string: imageURL) {
-                                    downloadImage(from: realURL)
+                    
+                    
+                        self.db.collection(K.FStore.users).document(cell.uid!).getDocument { (snapshot, error) in
+                            if let e = error {
+                                print("Error retrieving profile picture: \(e)")
+                            } else {
+                                if let imageURL = snapshot?.data()![K.User.profilePicture] as? String {
+                                    if let realURL = URL(string: imageURL) {
+                                        downloadImage(from: realURL)
+                                    }
                                 }
                             }
                         }
                     }
-                }
             }
             
             return cell
@@ -540,7 +547,8 @@ class TableViewController: UITableViewController, AddTask, ChangeButton {
     }
     
     @objc func showCard() {
-        print("Showing card...")
+        let generator = UIImpactFeedbackGenerator(style: .medium)
+        generator.impactOccurred()
         performSegue(withIdentifier: K.Segues.tableToCard, sender: self)
     }
     
