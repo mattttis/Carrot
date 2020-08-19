@@ -52,7 +52,6 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
         
         // Navigation bar setup
         tabBarController?.title = "Groceries"
-
         
         // Share list BarButton
         let configuration = UIImage.SymbolConfiguration(weight: .semibold)
@@ -64,18 +63,14 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
         let cardImage = UIImage(systemName: "barcode.viewfinder", withConfiguration: configuration)
         let cardButton = UIBarButtonItem(image: cardImage, style: .plain, target: self, action: #selector(showCard))
         cardButton.tintColor = UIColor.label
-        
-//        let editImage = UIImage(systemName: "square.and.pencil", withConfiguration: configuration)
-//        let editButton = UIBarButtonItem(image: editImage, style: .plain, target: self, action: #selector(editAction))
-//        editButton.tintColor = UIColor.label
 
-        
         tabBarController?.navigationItem.rightBarButtonItems = [shareButton, cardButton]
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Methods for drag and drop
         tableView.dragInteractionEnabled = true
         tableView.dragDelegate = self
         tableView.dropDelegate = self
@@ -84,7 +79,6 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
         let user = Auth.auth().currentUser
         if let user = user {
             currentUserID = user.uid
-            print(currentUserID)
             userRef = db.collection(K.FStore.users).document(currentUserID!)
             userRef!.getDocument { (snapshot, error) in
                 if let data = snapshot?.data() {
@@ -210,13 +204,13 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
         return UISwipeActionsConfiguration(actions: [delete])
     }
     
-    override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
-        return .none
-    }
-
-    override func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
-        return false
-    }
+//    override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+//        return .none
+//    }
+//
+//    override func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
+//        return false
+//    }
     
     override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         
@@ -231,7 +225,6 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
         itemRef!.getDocument { (document, error) in
             if let document = document, document.exists {
                 let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
-                print(document.data()!["dateCreated"])
                 
                 // Get the properties of the item
                 let name = document.data()?[K.Item.name] as? String
@@ -240,14 +233,16 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
                 let isChecked = document.data()?[K.Item.isChecked] as? Bool
                 let dateCreated = document.data()?[K.Item.date] as? Timestamp
                 let date2 = Date(timeIntervalSince1970: TimeInterval(dateCreated!.seconds))
-                
                 let dateChecked = document.data()?[K.Item.dateChecked] as? Timestamp
-                let date3 = Date(timeIntervalSince1970: TimeInterval(dateChecked!.seconds))
-                let checkedBy = document.data()?[K.Item.checkedBy] as? String
+                var date3: Date?
                 
-                print("DateCreated: \(dateCreated)")
-                print("DateChecked: \(dateChecked)")
                 
+                if let dateChecked = dateChecked {
+                    date3 = Date(timeIntervalSince1970: TimeInterval(dateChecked.seconds))
+                }
+                
+                    let checkedBy = document.data()?[K.Item.checkedBy] as? String
+            
                 var ref: DocumentReference? = nil
                 
                 // Save the properties of the item in sectionsDeleted
@@ -256,7 +251,7 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
                         K.Item.isChecked: isChecked,
                         K.Item.categoryNumber: category,
                         K.Item.date: date2,
-                        K.Item.dateChecked: date3,
+                        K.Item.dateChecked: date3 ?? nil,
                         K.Item.checkedBy: checkedBy,
                         K.Item.uid: uid
                 ]) { err in
@@ -271,6 +266,8 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
     
     func deleteAction(at indexPath: IndexPath) -> UIContextualAction {
         let item = sections[indexPath.section].items[indexPath.row]
+        
+        
         let action = UIContextualAction(style: .destructive, title: "Delete") { (action, view, completion) in
             
             // Item's properties variables
@@ -328,27 +325,15 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
                     print("Document does not exist")
                 }
             }
+            
             self.tableView.reloadData()
-            // self.refreshTable()
             completion(true)
         }
         
-        func resizeImage(image: UIImage, newWidth: CGFloat) -> UIImage? {
-
-            let scale = newWidth / image.size.width
-            let newHeight = image.size.height * scale
-            UIGraphicsBeginImageContext(CGSize(width: newWidth, height: newHeight))
-            image.draw(in: CGRect(x: 0, y: 0, width: newWidth, height: newHeight))
-
-            let newImage = UIGraphicsGetImageFromCurrentImageContext()
-            UIGraphicsEndImageContext()
-
-            return newImage
-        }
-        
-        let image = #imageLiteral(resourceName: "delete")
-        
-        action.image = resizeImage(image: image, newWidth: 20)
+        // Set image of swipe action
+        let image = UIImage(systemName: "trash.fill")
+        image!.withTintColor(UIColor.white)
+        action.image = image!
         
         return action
     }
@@ -360,7 +345,7 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
         let newTask = Task(name: name, uid: uid)
         let thisCategory = newTask.category
         
-        // Check what the position of the category name is, return 17 (other) if nothing found
+        // Check what the position of the category name is, return 17 ('Other') if nothing found
         if thisCategory != "" {
             newTask.number = FoodData.foodCategories.firstIndex(of: thisCategory) ?? 17
         } else {
@@ -382,9 +367,6 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
                 if let newItemID = ref?.documentID {
                     newTask.itemID = newItemID
                     newTask.uid = self.currentUserID
-                    
-//                    let generator = UIImpactFeedbackGenerator(style: .medium)
-//                    generator.impactOccurred()
                     
                     let generator = UINotificationFeedbackGenerator()
                     generator.notificationOccurred(.success)
@@ -412,9 +394,6 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
     func changeButton(state: Bool, indexSection: Int?, indexRow: Int?, itemID: String?) {
         sections[indexSection!].items[indexRow!].checked = state
         
-//        let generator = UINotificationFeedbackGenerator()
-//        generator.notificationOccurred(.success)
-        
         let generator = UIImpactFeedbackGenerator(style: .light)
         generator.impactOccurred()
         
@@ -431,8 +410,7 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
                         print("Error writing document: \(err)")
                     } else {
                         print("Document successfully written!")
-//                        let generator = UINotificationFeedbackGenerator()
-//                        generator.notificationOccurred(.success)
+                        
                     }
                 }
             } else {
@@ -580,7 +558,7 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
     func loadItems(listID: String, section: Int) {
         
         var newItems = [Task]()
-        let itemRef = db.collection(K.FStore.lists).document(listID).collection(K.FStore.sections).document("\(section)").collection(K.FStore.items)
+        let itemRef = db.collection(K.FStore.lists).document(listID).collection(K.FStore.sections).document("\(section)").collection(K.FStore.items).order(by: K.Item.date)
         
         itemRef.addSnapshotListener { querySnapshot, error in
             guard let documents = querySnapshot?.documents else {
@@ -622,7 +600,6 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
     //MARK: - Refresh function that can be used globally
     
     func refreshTable() {
-        // loadSections(listID: currentListID!)
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }
@@ -631,31 +608,21 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
         generator.notificationOccurred(.success)
     }
     
+    // Present shareVC modally, called by right bar button
     @objc func shareFunction() {
         let generator = UIImpactFeedbackGenerator(style: .medium)
         generator.impactOccurred()
+        
         performSegue(withIdentifier: K.Segues.tableToShare, sender: self)
     }
     
+    // Present the bonuskaart modally, called by right bar button
     @objc func showCard() {
         let generator = UIImpactFeedbackGenerator(style: .medium)
         generator.impactOccurred()
+        
         performSegue(withIdentifier: K.Segues.tableToCard, sender: self)
     }
-    
-    @objc func editAction() {
-        
-        if tableView.isEditing {
-            tableView.setEditing(false, animated: true)
-        } else {
-            tableView.setEditing(true, animated: true)
-            
-            // listsRef?.collection(K.FStore.sections).document()
-            
-        }
-        
-    }
-    
 }
 
 

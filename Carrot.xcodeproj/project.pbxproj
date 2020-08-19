@@ -13,7 +13,6 @@
 		7B59B00824AA7811005FBC70 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B59B00724AA7811005FBC70 /* AppDelegate.swift */; };
 		7B59B00A24AA7811005FBC70 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B59B00924AA7811005FBC70 /* SceneDelegate.swift */; };
 		7B59B00F24AA7811005FBC70 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7B59B00D24AA7811005FBC70 /* Main.storyboard */; };
-		7B59B01124AA7816005FBC70 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7B59B01024AA7816005FBC70 /* Assets.xcassets */; };
 		7B59B01424AA7816005FBC70 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7B59B01224AA7816005FBC70 /* LaunchScreen.storyboard */; };
 		7B59B01C24AA7A33005FBC70 /* TaskCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B59B01B24AA7A33005FBC70 /* TaskCell.swift */; };
 		7B59B01E24AA7A59005FBC70 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B59B01D24AA7A59005FBC70 /* TableViewController.swift */; };
@@ -29,6 +28,7 @@
 		A0812ADF24C76C2E002A03EB /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0812ADE24C76C2E002A03EB /* AccountViewController.swift */; };
 		A0ACFEAD24BBA320008943E4 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0ACFEAC24BBA320008943E4 /* Constants.swift */; };
 		A0AE90C124B8F2DA00E31B68 /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0AE90C024B8F2DA00E31B68 /* Section.swift */; };
+		A0B38CD724EC8F1D00511F06 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7B59B01024AA7816005FBC70 /* Assets.xcassets */; };
 		A0C466B124B12FF400DDDAAA /* FoodData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C466B024B12FF400DDDAAA /* FoodData.swift */; };
 /* End PBXBuildFile section */
 
@@ -225,7 +225,7 @@
 			files = (
 				7B59B01424AA7816005FBC70 /* LaunchScreen.storyboard in Resources */,
 				A044EF6724BB1FEC009C93B2 /* GoogleService-Info.plist in Resources */,
-				7B59B01124AA7816005FBC70 /* Assets.xcassets in Resources */,
+				A0B38CD724EC8F1D00511F06 /* Assets.xcassets in Resources */,
 				7B59B00F24AA7811005FBC70 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
