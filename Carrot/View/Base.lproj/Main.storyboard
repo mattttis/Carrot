@@ -221,10 +221,10 @@
             </objects>
             <point key="canvasLocation" x="6278.2608695652179" y="-284.59821428571428"/>
         </scene>
-        <!--Bananas-->
+        <!--Groceries-->
         <scene sceneID="hKQ-pw-zhy">
             <objects>
-                <tableViewController storyboardIdentifier="TableViewController" title="Bananas" extendedLayoutIncludesOpaqueBars="YES" providesPresentationContextTransitionStyle="YES" modalPresentationStyle="fullScreen" clearsSelectionOnViewWillAppear="NO" id="JKY-RQ-H6R" customClass="TableViewController" customModule="Carrot" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="TableViewController" title="Groceries" extendedLayoutIncludesOpaqueBars="YES" providesPresentationContextTransitionStyle="YES" modalPresentationStyle="fullScreen" clearsSelectionOnViewWillAppear="NO" id="JKY-RQ-H6R" customClass="TableViewController" customModule="Carrot" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="lUu-ok-zsl">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -271,6 +271,14 @@
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
+                                        <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" ambiguous="YES" progressViewStyle="bar" translatesAutoresizingMaskIntoConstraints="NO" id="KJv-RG-jjJ">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="2.5"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="42" id="z87-mc-qx4"/>
+                                            </constraints>
+                                            <color key="progressTintColor" systemColor="systemGray6Color" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="trackTintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </progressView>
                                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B6T-Y6-Dpo">
                                             <rect key="frame" x="20" y="11" width="22" height="22"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -294,15 +302,26 @@
                                                 <constraint firstAttribute="width" constant="22" id="Ca7-5O-gaM"/>
                                             </constraints>
                                         </imageView>
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eZh-7p-QiI">
+                                            <rect key="frame" x="286" y="3" width="34" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" title="Start"/>
+                                            <connections>
+                                                <action selector="startAction:" destination="IwI-ln-UVA" eventType="touchUpInside" id="H1I-JX-g7J"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstItem="KJv-RG-jjJ" firstAttribute="leading" secondItem="WAd-u4-D5P" secondAttribute="leading" id="1Xs-Xe-FfL"/>
                                         <constraint firstItem="ol4-tW-f4s" firstAttribute="centerY" secondItem="WAd-u4-D5P" secondAttribute="centerY" id="5iD-tR-QI3"/>
+                                        <constraint firstAttribute="trailing" secondItem="KJv-RG-jjJ" secondAttribute="trailing" id="GGe-g3-SAe"/>
                                         <constraint firstAttribute="trailing" secondItem="ol4-tW-f4s" secondAttribute="trailing" constant="27" id="ga2-Hb-WXC"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="checkBoxOutlet" destination="B6T-Y6-Dpo" id="ziq-SD-dnh"/>
                                     <outlet property="profilePicture" destination="ol4-tW-f4s" id="xaa-Q1-gmP"/>
+                                    <outlet property="progressBar" destination="KJv-RG-jjJ" id="pdI-yE-Vrk"/>
                                     <outlet property="taskNameLabel" destination="Tfs-oQ-fja" id="VIp-tE-KeN"/>
                                 </connections>
                             </tableViewCell>
@@ -323,7 +342,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qYD-hj-zCe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="8810" y="-569"/>
+            <point key="canvasLocation" x="8808.6956521739139" y="-569.19642857142856"/>
         </scene>
         <!--Invite code-->
         <scene sceneID="KeZ-Is-ShH">
@@ -668,10 +687,10 @@
             </objects>
             <point key="canvasLocation" x="8811" y="161"/>
         </scene>
-        <!--Apples-->
+        <!--Account-->
         <scene sceneID="Cpx-7A-cZb">
             <objects>
-                <viewController title="Apples" id="HY1-ew-6Fz" customClass="AccountViewController" customModule="Carrot" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Account" id="HY1-ew-6Fz" customClass="AccountViewController" customModule="Carrot" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="AnA-Yo-rU4">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -719,9 +738,8 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="First name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rfp-0N-2Ge">
-                                <rect key="frame" x="20" y="320" width="313" height="34"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <textField opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="First name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rfp-0N-2Ge">
+                                <rect key="frame" x="20" y="332" width="313" height="22"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
@@ -730,11 +748,30 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="tintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </imageView>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progressViewStyle="bar" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="qJE-VF-dbg">
+                                <rect key="frame" x="0.0" y="413" width="414" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="6s4-tt-IYN"/>
+                                </constraints>
+                            </progressView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kEQ-uF-CJ4">
+                                <rect key="frame" x="20" y="362" width="46" height="30"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="button1A:" destination="HY1-ew-6Fz" eventType="touchUpInside" id="v7c-s1-9ZY"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="nTI-c5-4va" firstAttribute="bottom" secondItem="kEQ-uF-CJ4" secondAttribute="bottom" constant="421" id="8F9-Eh-OOI"/>
+                            <constraint firstItem="qJE-VF-dbg" firstAttribute="leading" secondItem="AnA-Yo-rU4" secondAttribute="leading" id="MXt-Lw-fx9"/>
+                            <constraint firstItem="Jxf-a5-LjN" firstAttribute="top" secondItem="qJE-VF-dbg" secondAttribute="bottom" constant="328" id="Y87-4D-X46"/>
+                            <constraint firstAttribute="trailing" secondItem="qJE-VF-dbg" secondAttribute="trailing" id="bFO-pR-8FS"/>
                             <constraint firstItem="nTI-c5-4va" firstAttribute="bottom" secondItem="Jxf-a5-LjN" secondAttribute="bottom" constant="22" id="gkC-Mj-4AH"/>
                             <constraint firstItem="Jxf-a5-LjN" firstAttribute="centerX" secondItem="AnA-Yo-rU4" secondAttribute="centerX" id="tBw-OQ-xoz"/>
+                            <constraint firstItem="kEQ-uF-CJ4" firstAttribute="leading" secondItem="nTI-c5-4va" secondAttribute="leading" constant="20" id="yKp-eQ-XFZ"/>
+                            <constraint firstItem="kEQ-uF-CJ4" firstAttribute="top" secondItem="rfp-0N-2Ge" secondAttribute="bottom" constant="8" id="ynM-gi-z7B"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="nTI-c5-4va"/>
                     </view>
@@ -742,16 +779,18 @@
                     <navigationItem key="navigationItem" title="Account" largeTitleDisplayMode="always" id="AtB-Lg-0DW"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
+                        <outlet property="button1" destination="kEQ-uF-CJ4" id="njJ-yU-vdr"/>
                         <outlet property="emailAddress" destination="2dQ-fH-g2y" id="YsK-ad-hV6"/>
                         <outlet property="firstName" destination="rfp-0N-2Ge" id="aTL-f5-hPc"/>
                         <outlet property="listCode" destination="Ble-BE-V5l" id="ck3-dv-0I1"/>
                         <outlet property="profilePicture" destination="AY9-AC-QHW" id="4FP-px-hdg"/>
+                        <outlet property="progress1" destination="qJE-VF-dbg" id="2Q2-e8-3Ui"/>
                         <segue destination="biQ-zZ-FQu" kind="presentation" identifier="accountToCard" id="psZ-Yt-ffV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ImO-8A-TnP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="8793" y="1086"/>
+            <point key="canvasLocation" x="8792.753623188406" y="1085.4910714285713"/>
         </scene>
         <!--Bonuskaart-->
         <scene sceneID="7B4-2C-nyL">
@@ -901,7 +940,7 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="OY0-sT-tkz"/>
-        <segue reference="ELv-9J-ITG"/>
+        <segue reference="0Oi-ty-78c"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="arrowshape.turn.up.right.circle.fill" catalog="system" width="128" height="121"/>

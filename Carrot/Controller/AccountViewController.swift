@@ -36,8 +36,17 @@ class AccountViewController: UIViewController {
     @IBOutlet weak var emailAddress: UITextField!
     @IBOutlet weak var firstName: UITextField!
     
+    @IBOutlet weak var button1: UIButton!
+    @IBOutlet weak var progress1: UIProgressView!
+    @IBAction func button1A(_ sender: Any) {
+        UIView.animate(withDuration: 5.0) {
+            self.progress1.setProgress(1.0, animated: true)
+        }
+    }
     
     override func viewWillAppear(_ animated: Bool) {
+        
+        progress1.progress = 0.0
         
         // Store UserDefaults variables locally
         userFirstName = UserDefaults.standard.string(forKey: "firstName")
@@ -63,10 +72,8 @@ class AccountViewController: UIViewController {
                 if let error = error {
                     print(error)
                 } else {
-                    DispatchQueue.main.async {
                         let image = UIImage(data: data!)
-                        self.profilePicture.image = image
-                    }
+                    self.profilePicture.image = image
                 }
             }
         }
@@ -107,14 +114,18 @@ class AccountViewController: UIViewController {
                     })
                     
                     // Load profile picture asynchronously
-                    DispatchQueue.main.async() {
-                        if let url = self.imageURL {
-                            self.profilePicture.kf.indicatorType = .activity
-                            let url2 = URL(string: url)
-                            self.profilePicture.kf.setImage(with: url2)
-                            
-                        }
-                    }
+//                    DispatchQueue.main.async() {
+//
+//
+//                        if self.imageURL == nil {
+//                            print("ImageURL is nil")
+//                        } else if let url = self.imageURL {
+//                            print(url)
+//                            self.profilePicture.kf.indicatorType = .activity
+//                            let url2 = URL(string: url)
+//                            self.profilePicture.kf.setImage(with: url2)
+//                        }
+//                    }
                     
                 } else {
                     print("Could not find document")

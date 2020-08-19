@@ -8,26 +8,9 @@
 
 import UIKit
 import Firebase
+import Kingfisher
 
 class TableViewController: UITableViewController, AddTask, ChangeButton, UITableViewDragDelegate, UITableViewDropDelegate {
-    
-    func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
-        return [UIDragItem(itemProvider: NSItemProvider())]
-    }
-    
-    func tableView(_ tableView: UITableView, performDropWith coordinator: UITableViewDropCoordinator) {
-        
-    }
-    
-    func tableView(_ tableView: UITableView, dropSessionDidUpdate session: UIDropSession, withDestinationIndexPath destinationIndexPath: IndexPath?) -> UITableViewDropProposal {
-
-        if session.localDragSession != nil { // Drag originated from the same app.
-            return UITableViewDropProposal(operation: .move, intent: .insertAtDestinationIndexPath)
-        }
-
-        return UITableViewDropProposal(operation: .cancel, intent: .unspecified)
-    }
-
     
     var refreshControlMT = UIRefreshControl()
     var sections: [Section] = []
@@ -164,27 +147,27 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
                 cell.profilePicture.isHidden = true
             } else {
                 DispatchQueue.global(qos: .background).async() {
-                    func getData(from url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
-                        URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
-                    }
-                    
-                    func downloadImage(from url: URL) {
-                        getData(from: url) { data, response, error in
-                            guard let data = data, error == nil else { return }
-                            DispatchQueue.main.async() { [weak self] in
-                                cell.profilePicture.image = UIImage(data: data)
-                            }
-                        }
-                    }
-                    
-                    
+//                    func getData(from url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
+//                        URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
+//                    }
+//
+//                    func downloadImage(from url: URL) {
+//                        getData(from: url) { data, response, error in
+//                            guard let data = data, error == nil else { return }
+//                            DispatchQueue.main.async() { [weak self] in
+//                                cell.profilePicture.image = UIImage(data: data)
+//                            }
+//                        }
+//                    }
+//
+//
                         self.db.collection(K.FStore.users).document(cell.uid!).getDocument { (snapshot, error) in
                             if let e = error {
                                 print("Error retrieving profile picture: \(e)")
                             } else {
                                 if let imageURL = snapshot?.data()![K.User.profilePicture] as? String {
                                     if let realURL = URL(string: imageURL) {
-                                        downloadImage(from: realURL)
+                                        cell.profilePicture.kf.setImage(with: realURL)
                                     }
                                 }
                             }
@@ -202,58 +185,6 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
         
         let delete = deleteAction(at: indexPath)
         return UISwipeActionsConfiguration(actions: [delete])
-    }
-
-    override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        
-        let movedObject = self.sections[sourceIndexPath.section].items[sourceIndexPath.row]
-        movedObject.number = destinationIndexPath.section
-        
-        sections[sourceIndexPath.section].items.remove(at: sourceIndexPath.row)
-        sections[destinationIndexPath.section].items.insert(movedObject, at: destinationIndexPath.row)
-        
-        let itemRef = listsRef?.collection(K.FStore.sections).document(String(sourceIndexPath.section)).collection(K.FStore.items).document(movedObject.itemID!)
-        
-        itemRef!.getDocument { (document, error) in
-            if let document = document, document.exists {
-                let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
-                
-                // Get the properties of the item
-                let name = document.data()?[K.Item.name] as? String
-                let uid = document.data()?[K.Item.uid] as? String
-                let category = destinationIndexPath.section
-                let isChecked = document.data()?[K.Item.isChecked] as? Bool
-                let dateCreated = document.data()?[K.Item.date] as? Timestamp
-                let date2 = Date(timeIntervalSince1970: TimeInterval(dateCreated!.seconds))
-                let dateChecked = document.data()?[K.Item.dateChecked] as? Timestamp
-                var date3: Date?
-                
-                
-                if let dateChecked = dateChecked {
-                    date3 = Date(timeIntervalSince1970: TimeInterval(dateChecked.seconds))
-                }
-                
-                    let checkedBy = document.data()?[K.Item.checkedBy] as? String
-            
-                var ref: DocumentReference? = nil
-                
-                // Save the properties of the item in sectionsDeleted
-                ref = self.db.collection(K.lists).document(self.currentListID!).collection(K.FStore.sections).document("\(destinationIndexPath.section)").collection(K.FStore.items).addDocument(data: [
-                        K.Item.name: name,
-                        K.Item.isChecked: isChecked,
-                        K.Item.categoryNumber: category,
-                        K.Item.date: date2,
-                        K.Item.dateChecked: date3 ?? nil,
-                        K.Item.checkedBy: checkedBy,
-                        K.Item.uid: uid
-                ]) { err in
-                    itemRef!.delete()
-                }
-            } else {
-                print("Document does not exist")
-            }
-        }
-    
     }
     
     func deleteAction(at indexPath: IndexPath) -> UIContextualAction {
@@ -330,6 +261,74 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
         return action
     }
     
+    //MARK: - Drag and drop, move tableViewCells
+    
+    func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
+        return [UIDragItem(itemProvider: NSItemProvider())]
+    }
+    
+    func tableView(_ tableView: UITableView, performDropWith coordinator: UITableViewDropCoordinator) {
+        
+    }
+    
+    func tableView(_ tableView: UITableView, dropSessionDidUpdate session: UIDropSession, withDestinationIndexPath destinationIndexPath: IndexPath?) -> UITableViewDropProposal {
+
+        if session.localDragSession != nil { // Drag originated from the same app.
+            return UITableViewDropProposal(operation: .move, intent: .insertAtDestinationIndexPath)
+        }
+
+        return UITableViewDropProposal(operation: .cancel, intent: .unspecified)
+    }
+
+    override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        
+        let movedObject = self.sections[sourceIndexPath.section].items[sourceIndexPath.row]
+        movedObject.number = destinationIndexPath.section
+        
+        sections[sourceIndexPath.section].items.remove(at: sourceIndexPath.row)
+        sections[destinationIndexPath.section].items.insert(movedObject, at: destinationIndexPath.row)
+        
+        let itemRef = listsRef?.collection(K.FStore.sections).document(String(sourceIndexPath.section)).collection(K.FStore.items).document(movedObject.itemID!)
+        
+        itemRef!.getDocument { (document, error) in
+            if let document = document, document.exists {
+                let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
+                
+                // Get the properties of the item
+                let name = document.data()?[K.Item.name] as? String
+                let uid = document.data()?[K.Item.uid] as? String
+                let category = destinationIndexPath.section
+                let isChecked = document.data()?[K.Item.isChecked] as? Bool
+                let dateCreated = document.data()?[K.Item.date] as? Timestamp
+                let date2 = Date(timeIntervalSince1970: TimeInterval(dateCreated!.seconds))
+                let dateChecked = document.data()?[K.Item.dateChecked] as? Timestamp
+                var date3: Date?
+                
+                if let dateChecked = dateChecked {
+                    date3 = Date(timeIntervalSince1970: TimeInterval(dateChecked.seconds))
+                }
+                
+                let checkedBy = document.data()?[K.Item.checkedBy] as? String
+                var ref: DocumentReference? = nil
+                
+                // Save the properties of the item in sectionsDeleted
+                ref = self.db.collection(K.lists).document(self.currentListID!).collection(K.FStore.sections).document("\(destinationIndexPath.section)").collection(K.FStore.items).addDocument(data: [
+                        K.Item.name: name,
+                        K.Item.isChecked: isChecked,
+                        K.Item.categoryNumber: category,
+                        K.Item.date: date2,
+                        K.Item.dateChecked: date3 ?? nil,
+                        K.Item.checkedBy: checkedBy,
+                        K.Item.uid: uid
+                ]) { err in
+                    itemRef!.delete()
+                }
+            } else {
+                print("Document does not exist")
+            }
+        }
+    }
+    
     
     //MARK: - Adding task (protocol)
     
@@ -383,8 +382,41 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
     
     //MARK: - Change isChecked state & button
     
+//    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+//
+//        if indexPath != IndexPath(item: 0, section: 0) {
+//            let cell1 = cell as! TaskCell
+//            UIView.animate(withDuration: 3.3) {
+//                cell1.progressBar.setProgress(0.1, animated: false)
+//                cell1.taskNameLabel.textColor = UIColor.red
+//            }
+//        }
+//
+//    }
+    
     func changeButton(state: Bool, indexSection: Int?, indexRow: Int?, itemID: String?) {
         sections[indexSection!].items[indexRow!].checked = state
+        
+        if indexSection != 0 {
+            let indexPath = IndexPath(item: indexRow!, section: indexSection!)
+            let cell1 = tableView.cellForRow(at: indexPath) as! TaskCell
+            cell1.startActionII()
+        }
+        
+//        if indexSection != 0 {
+//            let indexPath = IndexPath(item: indexRow!, section: indexSection!)
+//            let cell1 = tableView.cellForRow(at: indexPath) as! TaskCell
+//            
+//            UIView.animate(withDuration: 2.0) {
+//                cell1.animateProgress()
+//            }
+//           
+//            print(cell1)
+//            
+//            let attributeString: NSMutableAttributedString = NSMutableAttributedString(string: sections[indexSection!].items[indexRow!].name)
+//            attributeString.addAttribute(NSAttributedString.Key.strikethroughStyle, value: 2, range: NSMakeRange(0, attributeString.length))
+//            cell1.taskNameLabel.attributedText = attributeString
+//        }
         
         let generator = UIImpactFeedbackGenerator(style: .light)
         generator.impactOccurred()
@@ -406,9 +438,9 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
                         DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
                             print("Moving item to itemsChecked...")
                             
-                            let item = self.sections[indexSection!].items[indexRow!]
+                            if let indexSection = indexSection, let indexRow = indexRow {
+                                                                let item = self.sections[indexSection].items[indexRow]
 
-                                print("Moving item to itemsChecked2...")
                                 // Item's properties variables
                                 let itemID: String
                                 let name: String
@@ -418,13 +450,12 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
                                 let dateCreated: Date
                                 let dateChecked: Date
                                 
-                                let itemRef = self.db.collection(K.FStore.lists).document(self.currentListID!).collection(K.FStore.sections).document("\(indexSection!)").collection(K.FStore.items).document(item.itemID!)
+                                let itemRef = self.db.collection(K.FStore.lists).document(self.currentListID!).collection(K.FStore.sections).document("\(indexSection)").collection(K.FStore.items).document(item.itemID!)
                                 
                                 itemRef.getDocument { (document, error) in
                                     if let document = document, document.exists {
                                         let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
                                         
-                                        print("Moving item to itemsChecked3...")
                                         
                                         // Get the properties of the item
                                         let name = document.data()?[K.Item.name] as? String
@@ -471,6 +502,7 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
                         }
                         
                     }
+                }
                 }
             } else {
                 itemRef.updateData([
