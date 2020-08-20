@@ -14,8 +14,6 @@ protocol ChangeButton {
 }
 
 class TaskCell: UITableViewCell {
-    
-    weak var delegateI: AnimatingProgressViewDelegate?
     var delegate: ChangeButton?
     var indexSection: Int?
     var indexRow: Int?
@@ -35,11 +33,9 @@ class TaskCell: UITableViewCell {
         
         if items![indexRow!].checked {
             delegate?.changeButton(state: false, indexSection: indexSection!, indexRow: indexRow!, itemID: itemID)
-            delegateI?.startButtonDidTap(progressView: progressBar)
         } else {
             delegate?.changeButton(state: true, indexSection: indexSection!, indexRow: indexRow!, itemID: itemID)
             // startActionII()
-            delegateI?.startButtonDidTap(progressView: progressBar)
         }
     }
     
@@ -58,10 +54,23 @@ class TaskCell: UITableViewCell {
         // profilePicture.layer.cornerRadius = 20
         profilePicture.layer.cornerRadius = profilePicture.frame.height / 2
         profilePicture.clipsToBounds = true
+        
+        
     }
     
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+
+//        if uid == currentUid {
+//            profilePicture.isHidden = true
+//        } else {
+//            profilePicture.isHidden = false
+//        }
+    }
+
+    
     @objc func tapFunction(sender:UITapGestureRecognizer) {
-        
+
         if uid == currentUid {
             profilePicture.isHidden = true
         } else {
@@ -74,7 +83,6 @@ class TaskCell: UITableViewCell {
             
         } else {
             delegate?.changeButton(state: true, indexSection: indexSection!, indexRow: indexRow!, itemID: itemID)
-            self.startActionII()
             let attributeString: NSMutableAttributedString = NSMutableAttributedString(string: self.taskNameLabel.text!)
             attributeString.addAttribute(NSAttributedString.Key.strikethroughStyle, value: 2, range: NSMakeRange(0, attributeString.length))
             self.taskNameLabel.attributedText = attributeString
@@ -82,13 +90,19 @@ class TaskCell: UITableViewCell {
     }
     
     @IBAction func startAction(_ sender: Any) {
-        delegateI?.startButtonDidTap(progressView: progressBar)
+        
     }
     
     func startActionII() {
-        UIView.animate(withDuration: 5) {
-            print("Starting animation...")
-            self.progressBar.setProgress(1, animated: true)
+        if items![indexRow!].checked {
+            delegate?.changeButton(state: false, indexSection: indexSection!, indexRow: indexRow!, itemID: itemID)
+            self.progressBar.setProgress(0, animated: true)
+            
+        } else {
+            delegate?.changeButton(state: true, indexSection: indexSection!, indexRow: indexRow!, itemID: itemID)
+            let attributeString: NSMutableAttributedString = NSMutableAttributedString(string: self.taskNameLabel.text!)
+            attributeString.addAttribute(NSAttributedString.Key.strikethroughStyle, value: 2, range: NSMakeRange(0, attributeString.length))
+            self.taskNameLabel.attributedText = attributeString
         }
     }
     

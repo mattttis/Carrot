@@ -382,40 +382,13 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
     
     //MARK: - Change isChecked state & button
     
-//    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-//
-//        if indexPath != IndexPath(item: 0, section: 0) {
-//            let cell1 = cell as! TaskCell
-//            UIView.animate(withDuration: 3.3) {
-//                cell1.progressBar.setProgress(0.1, animated: false)
-//                cell1.taskNameLabel.textColor = UIColor.red
-//            }
-//        }
-//
-//    }
-    
     func changeButton(state: Bool, indexSection: Int?, indexRow: Int?, itemID: String?) {
         sections[indexSection!].items[indexRow!].checked = state
-        
-        if indexSection != 0 {
-            let indexPath = IndexPath(item: indexRow!, section: indexSection!)
-            let cell1 = tableView.cellForRow(at: indexPath) as! TaskCell
-            cell1.startActionII()
-        }
         
 //        if indexSection != 0 {
 //            let indexPath = IndexPath(item: indexRow!, section: indexSection!)
 //            let cell1 = tableView.cellForRow(at: indexPath) as! TaskCell
-//            
-//            UIView.animate(withDuration: 2.0) {
-//                cell1.animateProgress()
-//            }
-//           
-//            print(cell1)
-//            
-//            let attributeString: NSMutableAttributedString = NSMutableAttributedString(string: sections[indexSection!].items[indexRow!].name)
-//            attributeString.addAttribute(NSAttributedString.Key.strikethroughStyle, value: 2, range: NSMakeRange(0, attributeString.length))
-//            cell1.taskNameLabel.attributedText = attributeString
+//            // cell1.startActionII()
 //        }
         
         let generator = UIImpactFeedbackGenerator(style: .light)
@@ -717,19 +690,6 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
         let cell = tableView.cellForRow(at: IndexPath(item: 0, section: 0)) as! InputCell
         
         cell.newTaskField.becomeFirstResponder()
-    }
-}
-
-protocol AnimatingProgressViewDelegate: class {
-    func startButtonDidTap(progressView: UIProgressView)
-}
-
-extension TableViewController: AnimatingProgressViewDelegate {
-    func startButtonDidTap(progressView: UIProgressView) {
-        UIView.animate(withDuration: 5, animations: {
-            print("Hello...")
-            progressView.setProgress(1, animated: true)
-        })
     }
 }
 
