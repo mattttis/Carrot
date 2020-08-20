@@ -712,6 +712,25 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
         
         performSegue(withIdentifier: K.Segues.tableToCard, sender: self)
     }
+    
+    func startEditing() {
+        let cell = tableView.cellForRow(at: IndexPath(item: 0, section: 0)) as! InputCell
+        
+        cell.newTaskField.becomeFirstResponder()
+    }
+}
+
+protocol AnimatingProgressViewDelegate: class {
+    func startButtonDidTap(progressView: UIProgressView)
+}
+
+extension TableViewController: AnimatingProgressViewDelegate {
+    func startButtonDidTap(progressView: UIProgressView) {
+        UIView.animate(withDuration: 5, animations: {
+            print("Hello...")
+            progressView.setProgress(1, animated: true)
+        })
+    }
 }
 
 

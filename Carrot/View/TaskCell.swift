@@ -15,6 +15,7 @@ protocol ChangeButton {
 
 class TaskCell: UITableViewCell {
     
+    weak var delegateI: AnimatingProgressViewDelegate?
     var delegate: ChangeButton?
     var indexSection: Int?
     var indexRow: Int?
@@ -34,9 +35,11 @@ class TaskCell: UITableViewCell {
         
         if items![indexRow!].checked {
             delegate?.changeButton(state: false, indexSection: indexSection!, indexRow: indexRow!, itemID: itemID)
+            delegateI?.startButtonDidTap(progressView: progressBar)
         } else {
             delegate?.changeButton(state: true, indexSection: indexSection!, indexRow: indexRow!, itemID: itemID)
-            startActionII()
+            // startActionII()
+            delegateI?.startButtonDidTap(progressView: progressBar)
         }
     }
     
@@ -79,7 +82,7 @@ class TaskCell: UITableViewCell {
     }
     
     @IBAction func startAction(_ sender: Any) {
-        startActionII()
+        delegateI?.startButtonDidTap(progressView: progressBar)
     }
     
     func startActionII() {

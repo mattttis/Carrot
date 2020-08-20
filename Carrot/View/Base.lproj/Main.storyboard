@@ -332,7 +332,7 @@
                         </connections>
                     </tableView>
                     <tabBarItem key="tabBarItem" title="" image="list.bullet" catalog="system" selectedImage="list.bullet" id="x94-9f-Shk"/>
-                    <navigationItem key="navigationItem" title="MMMMM" largeTitleDisplayMode="always" id="MU1-Jy-DqV">
+                    <navigationItem key="navigationItem" largeTitleDisplayMode="always" id="MU1-Jy-DqV">
                         <barButtonItem key="rightBarButtonItem" title="Share" image="arrowshape.turn.up.right.circle.fill" catalog="system" id="pAm-ia-u2U"/>
                     </navigationItem>
                     <connections>
@@ -645,7 +645,7 @@
         <!--Account-->
         <scene sceneID="WnU-cc-mPU">
             <objects>
-                <tabBarController storyboardIdentifier="NavController" automaticallyAdjustsScrollViewInsets="NO" id="HCg-eC-Nrv" customClass="NavController" customModule="Carrot" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="NavController" automaticallyAdjustsScrollViewInsets="NO" id="HCg-eC-Nrv" customClass="CustomTabBarController" customModule="Carrot" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Account" largeTitleDisplayMode="always" id="JAk-aN-NqH">
                         <barButtonItem key="backBarButtonItem" title="Terug" id="eYy-3Y-Ylb"/>
@@ -676,12 +676,28 @@
                     <view key="view" contentMode="scaleToFill" id="miZ-3s-NfH">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E2v-eI-fOr">
+                                <rect key="frame" x="184" y="391.5" width="46" height="30"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="segueStart:" destination="v9n-dA-hOh" eventType="touchUpInside" id="KeP-w0-AEl"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="E2v-eI-fOr" firstAttribute="centerX" secondItem="miZ-3s-NfH" secondAttribute="centerX" id="soM-zs-LbE"/>
+                            <constraint firstItem="E2v-eI-fOr" firstAttribute="centerY" secondItem="miZ-3s-NfH" secondAttribute="centerY" id="ywT-NX-B9b"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="iRs-vo-O5u"/>
                     </view>
-                    <tabBarItem key="tabBarItem" tag="1" title="" image="plus.circle.fill" catalog="system" id="fLr-vl-oEp">
+                    <tabBarItem key="tabBarItem" tag="5" title="" image="plus.circle.fill" catalog="system" id="fLr-vl-oEp">
                         <color key="badgeColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </tabBarItem>
+                    <connections>
+                        <segue destination="JKY-RQ-H6R" kind="show" identifier="addToTable" destinationCreationSelector="addToTable" animates="NO" id="Kt0-Do-RVx"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1ah-qf-cwf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -941,6 +957,7 @@
     <inferredMetricsTieBreakers>
         <segue reference="OY0-sT-tkz"/>
         <segue reference="0Oi-ty-78c"/>
+        <segue reference="Kt0-Do-RVx"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="arrowshape.turn.up.right.circle.fill" catalog="system" width="128" height="121"/>
