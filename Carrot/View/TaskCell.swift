@@ -14,6 +14,7 @@ protocol ChangeButton {
 }
 
 class TaskCell: UITableViewCell {
+
     var delegate: ChangeButton?
     var indexSection: Int?
     var indexRow: Int?
@@ -24,24 +25,9 @@ class TaskCell: UITableViewCell {
     var currentUid = Auth.auth().currentUser!.uid
     
     @IBAction func checkBoxAction(_ sender: Any) {
-        if uid == currentUid {
-            profilePicture.isHidden = true
-            startActionII()
-        } else {
-            profilePicture.isHidden = false
-        }
-        
-        if items![indexRow!].checked {
-            delegate?.changeButton(state: false, indexSection: indexSection!, indexRow: indexRow!, itemID: itemID)
-        } else {
-            delegate?.changeButton(state: true, indexSection: indexSection!, indexRow: indexRow!, itemID: itemID)
-            // startActionII()
-        }
-    }
-    
-    func animateProgress() {
-        print("Animating in progress...")
-        self.progressBar.setProgress(1.0, animated: true)
+        // startActionII()
+        startActionII()
+        startAnimation()
     }
     
     override func awakeFromNib() {
@@ -54,8 +40,6 @@ class TaskCell: UITableViewCell {
         // profilePicture.layer.cornerRadius = 20
         profilePicture.layer.cornerRadius = profilePicture.frame.height / 2
         profilePicture.clipsToBounds = true
-        
-        
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -83,27 +67,47 @@ class TaskCell: UITableViewCell {
             
         } else {
             delegate?.changeButton(state: true, indexSection: indexSection!, indexRow: indexRow!, itemID: itemID)
-            let attributeString: NSMutableAttributedString = NSMutableAttributedString(string: self.taskNameLabel.text!)
-            attributeString.addAttribute(NSAttributedString.Key.strikethroughStyle, value: 2, range: NSMakeRange(0, attributeString.length))
-            self.taskNameLabel.attributedText = attributeString
+//            let attributeString: NSMutableAttributedString = NSMutableAttributedString(string: self.taskNameLabel.text!)
+//            attributeString.addAttribute(NSAttributedString.Key.strikethroughStyle, value: 2, range: NSMakeRange(0, attributeString.length))
+//            self.taskNameLabel.attributedText = attributeString
         }
     }
     
     @IBAction func startAction(_ sender: Any) {
+        // startActionII()
+        UIView.animate(withDuration: 10.0) {
+            self.progressBar.setProgress(1.0, animated: true)
+            
+            DispatchQueue.global(qos: .background).async {
+                self.startActionII()
+            }
+        }
+        
         
     }
     
+    func startAnimation() {
+        UIView.animate(withDuration: 6.0) {
+            self.progressBar.setProgress(1.0, animated: true)
+        }
+    }
+    
     func startActionII() {
+        
+        print("Doing logic...")
+        
         if items![indexRow!].checked {
             delegate?.changeButton(state: false, indexSection: indexSection!, indexRow: indexRow!, itemID: itemID)
-            self.progressBar.setProgress(0, animated: true)
-            
         } else {
             delegate?.changeButton(state: true, indexSection: indexSection!, indexRow: indexRow!, itemID: itemID)
-            let attributeString: NSMutableAttributedString = NSMutableAttributedString(string: self.taskNameLabel.text!)
-            attributeString.addAttribute(NSAttributedString.Key.strikethroughStyle, value: 2, range: NSMakeRange(0, attributeString.length))
-            self.taskNameLabel.attributedText = attributeString
         }
+        
+        
+            // self.progressBar.setProgress(1.0, animated: true)
+//            let attributeString: NSMutableAttributedString = NSMutableAttributedString(string: self.taskNameLabel.text!)
+//            attributeString.addAttribute(NSAttributedString.Key.strikethroughStyle, value: 2, range: NSMakeRange(0, attributeString.length))
+//            self.taskNameLabel.attributedText = attributeString
+        
     }
     
     @IBOutlet weak var profilePicture: UIImageView!

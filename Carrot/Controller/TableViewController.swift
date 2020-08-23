@@ -383,34 +383,37 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
     //MARK: - Change isChecked state & button
     
     func changeButton(state: Bool, indexSection: Int?, indexRow: Int?, itemID: String?) {
+        
+        print("Doing logic II...")
+        
         sections[indexSection!].items[indexRow!].checked = state
-        
-//        if indexSection != 0 {
-//            let indexPath = IndexPath(item: indexRow!, section: indexSection!)
-//            let cell1 = tableView.cellForRow(at: indexPath) as! TaskCell
-//            // cell1.startActionII()
-//        }
-        
+
         let generator = UIImpactFeedbackGenerator(style: .light)
         generator.impactOccurred()
-        
+
         if let itemID = itemID {
             let itemRef = db.collection(K.FStore.lists).document(currentListID!).collection(K.FStore.sections).document("\(indexSection!)").collection(K.FStore.items).document(itemID)
-            
-            if sections[indexSection!].items[indexRow!].checked {
+
+
+
+             if sections[indexSection!].items[indexRow!].checked {
                 itemRef.updateData([
-                    K.Item.isChecked : true,
-                    K.Item.checkedBy: currentUserID!,
-                    K.Item.dateChecked: Date()
+                     K.Item.isChecked: true,
+                     K.Item.checkedBy: currentUserID!,
+                     K.Item.dateChecked: Date()
                 ]) { err in
                     if let err = err {
                         print("Error writing document: \(err)")
                     } else {
                         print("Document successfully written!")
-                        
+                    }
+
+                print("hello")
+
+
                         DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
                             print("Moving item to itemsChecked...")
-                            
+
                             if let indexSection = indexSection, let indexRow = indexRow {
                                                                 let item = self.sections[indexSection].items[indexRow]
 
@@ -422,14 +425,14 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
                                 let checkedBy: String
                                 let dateCreated: Date
                                 let dateChecked: Date
-                                
+
                                 let itemRef = self.db.collection(K.FStore.lists).document(self.currentListID!).collection(K.FStore.sections).document("\(indexSection)").collection(K.FStore.items).document(item.itemID!)
-                                
+
                                 itemRef.getDocument { (document, error) in
                                     if let document = document, document.exists {
                                         let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
-                                        
-                                        
+
+
                                         // Get the properties of the item
                                         let name = document.data()?[K.Item.name] as? String
                                         let uid = document.data()?[K.Item.uid] as? String
@@ -438,9 +441,9 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
                                         let dateCreated = document.data()?[K.Item.date] as? Date
                                         let dateChecked = document.data()?[K.Item.dateChecked] as? Date
                                         let checkedBy = document.data()?[K.Item.checkedBy] as? String
-                                        
+
                                         var ref: DocumentReference? = nil
-                                        
+
                                         // Save the properties of the item in sectionsDeleted
                                         ref = self.db.collection(K.lists).document(self.currentListID!).collection(K.FStore.sectionsChecked).document("\(category!)").collection(K.FStore.items).addDocument(data: [
                                                 K.Item.name: name,
@@ -470,13 +473,9 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
                                         print("Document does not exist")
                                     }
                                 }
-                                
+
                                 self.tableView.reloadData()
-                        }
-                        
-                    }
-                }
-                }
+
             } else {
                 itemRef.updateData([
                     K.Item.isChecked : false
@@ -486,15 +485,17 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
                     } else {
                         print("Document successfully written!")
                     }
-                }
-            }
-        } else {
-            print("No item ID")
+                                }
         }
-        
+//                            else {
+//            print("No item ID")
+//        }
+                    } } } }
+
         refreshTable()
-        
     }
+    
+    
     
     
     //MARK: - Section title

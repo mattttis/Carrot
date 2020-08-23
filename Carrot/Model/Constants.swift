@@ -25,7 +25,6 @@ struct K {
         static let tableToShare = "tableToShare"
         static let tableToAccount = "tableToAccount"
         static let tableToCard = "tableToCard"
-        static let addToTable = "addToTable"
     }
     
     struct FStore {
