@@ -459,12 +459,13 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
                                                 print("Error adding document: \(err)")
                                             } else {
 
-                                                // If successfull, delete the item in the normal collection
+                                                // If successful, delete the item in the normal collection
                                                 itemRef.delete() { err in
                                                     if let err = err {
                                                         print("Error removing document: \(err)")
                                                     } else {
                                                         print("Document successfully removed!")
+                                                        // self.tableView.reloadData()
                                                     }
                                                 }
                                             }
@@ -474,7 +475,7 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
                                     }
                                 }
 
-                                self.tableView.reloadData()
+                                
 
             } else {
                 itemRef.updateData([
@@ -484,6 +485,7 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
                         print("Error writing document: \(err)")
                     } else {
                         print("Document successfully written!")
+                        self.refreshTable()
                     }
                                 }
         }
@@ -492,7 +494,7 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
 //        }
                     } } } }
 
-        refreshTable()
+        
     }
     
     

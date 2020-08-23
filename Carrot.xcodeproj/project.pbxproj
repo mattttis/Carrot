@@ -21,9 +21,9 @@
 		A02C91BB24BFB38300BE0489 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02C91BA24BFB38300BE0489 /* LoginViewController.swift */; };
 		A03F5A2724C1EF4F008054A7 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03F5A2624C1EF4F008054A7 /* RegisterViewController.swift */; };
 		A03F5A2924C1F564008054A7 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03F5A2824C1F564008054A7 /* WelcomeViewController.swift */; };
-		A044EF6724BB1FEC009C93B2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A044EF6624BB1FEC009C93B2 /* GoogleService-Info.plist */; };
 		A05BDA4524CDC78D00854F00 /* AddListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05BDA4424CDC78D00854F00 /* AddListViewController.swift */; };
 		A06DE5AC24F17A020023E0DB /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B59B01D24AA7A59005FBC70 /* TableViewController.swift */; };
+		A06DE5AE24F2838B0023E0DB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A06DE5AD24F2838A0023E0DB /* GoogleService-Info.plist */; };
 		A0727D5C24D9A70C003732F6 /* BarCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0727D5B24D9A70C003732F6 /* BarCodeViewController.swift */; };
 		A0812ADF24C76C2E002A03EB /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0812ADE24C76C2E002A03EB /* AccountViewController.swift */; };
 		A0ACFEAD24BBA320008943E4 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0ACFEAC24BBA320008943E4 /* Constants.swift */; };
@@ -51,8 +51,8 @@
 		A02C91BA24BFB38300BE0489 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		A03F5A2624C1EF4F008054A7 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		A03F5A2824C1F564008054A7 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
-		A044EF6624BB1FEC009C93B2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A05BDA4424CDC78D00854F00 /* AddListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddListViewController.swift; sourceTree = "<group>"; };
+		A06DE5AD24F2838A0023E0DB /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		A0727D5B24D9A70C003732F6 /* BarCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarCodeViewController.swift; sourceTree = "<group>"; };
 		A0812ADE24C76C2E002A03EB /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AccountViewController.swift; path = Carrot/Controller/AccountViewController.swift; sourceTree = SOURCE_ROOT; };
 		A0ACFEAC24BBA320008943E4 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -102,7 +102,7 @@
 				A03C5D7924B11A0000C2BB4D /* Model */,
 				7B59B01024AA7816005FBC70 /* Assets.xcassets */,
 				7B59B01524AA7816005FBC70 /* Info.plist */,
-				A044EF6624BB1FEC009C93B2 /* GoogleService-Info.plist */,
+				A06DE5AD24F2838A0023E0DB /* GoogleService-Info.plist */,
 			);
 			path = Carrot;
 			sourceTree = "<group>";
@@ -224,7 +224,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7B59B01424AA7816005FBC70 /* LaunchScreen.storyboard in Resources */,
-				A044EF6724BB1FEC009C93B2 /* GoogleService-Info.plist in Resources */,
+				A06DE5AE24F2838B0023E0DB /* GoogleService-Info.plist in Resources */,
 				A0B38CD724EC8F1D00511F06 /* Assets.xcassets in Resources */,
 				7B59B00F24AA7811005FBC70 /* Main.storyboard in Resources */,
 			);
