@@ -29,6 +29,7 @@
 		A0ACFEAD24BBA320008943E4 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0ACFEAC24BBA320008943E4 /* Constants.swift */; };
 		A0AE90C124B8F2DA00E31B68 /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0AE90C024B8F2DA00E31B68 /* Section.swift */; };
 		A0B38CD724EC8F1D00511F06 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7B59B01024AA7816005FBC70 /* Assets.xcassets */; };
+		A0BE923824F5BE6C00A8A89D /* ActionAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0BE923724F5BE6C00A8A89D /* ActionAddViewController.swift */; };
 		A0C466B124B12FF400DDDAAA /* FoodData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C466B024B12FF400DDDAAA /* FoodData.swift */; };
 /* End PBXBuildFile section */
 
@@ -57,6 +58,7 @@
 		A0812ADE24C76C2E002A03EB /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AccountViewController.swift; path = Carrot/Controller/AccountViewController.swift; sourceTree = SOURCE_ROOT; };
 		A0ACFEAC24BBA320008943E4 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		A0AE90C024B8F2DA00E31B68 /* Section.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Section.swift; path = Carrot/Controller/Section.swift; sourceTree = SOURCE_ROOT; };
+		A0BE923724F5BE6C00A8A89D /* ActionAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionAddViewController.swift; sourceTree = "<group>"; };
 		A0C466B024B12FF400DDDAAA /* FoodData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodData.swift; sourceTree = "<group>"; };
 		DD9E70B64D89EFFCE59BE41C /* Pods-Carrot.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Carrot.release.xcconfig"; path = "Target Support Files/Pods-Carrot/Pods-Carrot.release.xcconfig"; sourceTree = "<group>"; };
 		E04A748A672CA8543E3991F9 /* Pods_Carrot.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Carrot.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -133,6 +135,7 @@
 			isa = PBXGroup;
 			children = (
 				A004A1C624E7F6AE008CF844 /* NavController.swift */,
+				A0BE923724F5BE6C00A8A89D /* ActionAddViewController.swift */,
 				A0177DE524E5F379003358DC /* ShareViewController.swift */,
 				7B59B01D24AA7A59005FBC70 /* TableViewController.swift */,
 				A0812ADE24C76C2E002A03EB /* AccountViewController.swift */,
@@ -283,6 +286,7 @@
 				A03F5A2724C1EF4F008054A7 /* RegisterViewController.swift in Sources */,
 				A05BDA4524CDC78D00854F00 /* AddListViewController.swift in Sources */,
 				A0812ADF24C76C2E002A03EB /* AccountViewController.swift in Sources */,
+				A0BE923824F5BE6C00A8A89D /* ActionAddViewController.swift in Sources */,
 				7B59B01C24AA7A33005FBC70 /* TaskCell.swift in Sources */,
 				7B59B00824AA7811005FBC70 /* AppDelegate.swift in Sources */,
 				A004A1C724E7F6AE008CF844 /* NavController.swift in Sources */,

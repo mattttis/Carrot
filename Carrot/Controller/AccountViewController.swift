@@ -36,17 +36,7 @@ class AccountViewController: UIViewController {
     @IBOutlet weak var emailAddress: UITextField!
     @IBOutlet weak var firstName: UITextField!
     
-    @IBOutlet weak var button1: UIButton!
-    @IBOutlet weak var progress1: UIProgressView!
-    @IBAction func button1A(_ sender: Any) {
-        UIView.animate(withDuration: 5.0) {
-            self.progress1.setProgress(1.0, animated: true)
-        }
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
-        
-        progress1.progress = 0.0
         
         // Store UserDefaults variables locally
         userFirstName = UserDefaults.standard.string(forKey: "firstName")
@@ -162,7 +152,7 @@ class AccountViewController: UIViewController {
             print("Signing out canceled")
         }))
         
-        alert.addAction(UIAlertAction(title: "Sign out", style: UIAlertAction.Style.default, handler: {(_: UIAlertAction!) in
+        alert.addAction(UIAlertAction(title: "Sign out", style: UIAlertAction.Style.destructive, handler: {(_: UIAlertAction!) in
             do {
                 try Auth.auth().signOut()
                 UserDefaults.standard.set(false, forKey: "isLoggedIn")
