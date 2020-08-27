@@ -10,7 +10,6 @@ import UIKit
 import Firebase
 
 protocol ChangeButton {
-    func updateModel(state: Bool, indexSection: Int?, indexRow: Int?)
     func changeButton(state: Bool, indexSection: Int?, indexRow: Int?, itemID: String?)
     func moveItem(indexSection: Int?, indexRow: Int?)
 }
@@ -27,11 +26,7 @@ class TaskCell: UITableViewCell {
     var currentUid = Auth.auth().currentUser!.uid
     
     @IBAction func checkBoxAction(_ sender: Any) {
-        // startActionII()
         self.startAnimation()
-        // DispatchQueue.global(qos: .background).sync {
-            
-        // }
     }
     
     override func awakeFromNib() {
@@ -66,17 +61,6 @@ class TaskCell: UITableViewCell {
         } else {
             profilePicture.isHidden = false
         }
-        
-//        if items![indexRow!].checked {
-//            delegate?.changeButton(state: false, indexSection: indexSection!, indexRow: indexRow!, itemID: itemID)
-//            self.progressBar.setProgress(0, animated: true)
-//
-//        } else {
-//            delegate?.changeButton(state: true, indexSection: indexSection!, indexRow: indexRow!, itemID: itemID)
-////            let attributeString: NSMutableAttributedString = NSMutableAttributedString(string: self.taskNameLabel.text!)
-////            attributeString.addAttribute(NSAttributedString.Key.strikethroughStyle, value: 2, range: NSMakeRange(0, attributeString.length))
-////            self.taskNameLabel.attributedText = attributeString
-//        }
     }
     
     func startAnimation() {
@@ -97,18 +81,6 @@ class TaskCell: UITableViewCell {
                 }
             }
         }
-        
-//        if items![indexRow!].checked {
-//            delegate?.changeButton(state: false, indexSection: indexSection!, indexRow: indexRow!, itemID: itemID!)
-//        } else {
-//            UIView.animate(withDuration: 6.0, animations: {
-//                self.progressBar.setProgress(1.0, animated: true)
-//            }) { (finished: Bool) in
-//                DispatchQueue.main.asyncAfter(deadline: .now() + 6.0) {
-//                    self.delegate?.changeButton(state: true, indexSection: self.indexSection!, indexRow: self.indexRow!, itemID: self.itemID)
-//                }
-//            }
-//        }
     }
     
     func startActionII() {
@@ -120,13 +92,6 @@ class TaskCell: UITableViewCell {
         } else {
             delegate?.changeButton(state: true, indexSection: indexSection!, indexRow: indexRow!, itemID: itemID)
         }
-        
-        
-            // self.progressBar.setProgress(1.0, animated: true)
-//            let attributeString: NSMutableAttributedString = NSMutableAttributedString(string: self.taskNameLabel.text!)
-//            attributeString.addAttribute(NSAttributedString.Key.strikethroughStyle, value: 2, range: NSMakeRange(0, attributeString.length))
-//            self.taskNameLabel.attributedText = attributeString
-        
     }
     
     @IBOutlet weak var profilePicture: UIImageView!

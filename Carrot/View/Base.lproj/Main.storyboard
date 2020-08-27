@@ -245,8 +245,8 @@
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <textInputTraits key="textInputTraits"/>
                                         </textField>
-                                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OKw-36-mv6">
-                                            <rect key="frame" x="356" y="6" width="30" height="30"/>
+                                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OKw-36-mv6">
+                                            <rect key="frame" x="334" y="6" width="52" height="30"/>
                                             <state key="normal" title="Add"/>
                                             <connections>
                                                 <action selector="saveNewTaskAction:" destination="FLb-zj-NIe" eventType="touchUpInside" id="asg-8v-v1P"/>
@@ -297,9 +297,9 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.crop.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="ol4-tW-f4s">
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.crop.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="ol4-tW-f4s">
                                             <rect key="frame" x="365" y="11.5" width="22" height="21"/>
-                                            <color key="tintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="tintColor" systemColor="systemGray4Color" red="0.81960784310000001" green="0.81960784310000001" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="22" id="1ig-3I-qgu"/>
                                                 <constraint firstAttribute="width" constant="22" id="Ca7-5O-gaM"/>
@@ -664,10 +664,10 @@
             </objects>
             <point key="canvasLocation" x="7846.3768115942039" y="161.38392857142856"/>
         </scene>
-        <!--Action Add View Controller-->
+        <!--View Controller-->
         <scene sceneID="4e7-dM-PTG">
             <objects>
-                <viewController id="v9n-dA-hOh" customClass="ActionAddViewController" customModule="Carrot" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="v9n-dA-hOh" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="miZ-3s-NfH">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -922,7 +922,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="psZ-Yt-ffV"/>
+        <segue reference="OY0-sT-tkz"/>
         <segue reference="ELv-9J-ITG"/>
         <segue reference="wRj-8q-BJ9"/>
     </inferredMetricsTieBreakers>
@@ -930,7 +930,6 @@
         <image name="bonuskaart" width="408" height="609"/>
         <image name="checkBoxOUTLINE " width="22" height="22"/>
         <image name="list.bullet" catalog="system" width="128" height="88"/>
-        <image name="person.crop.circle" catalog="system" width="128" height="121"/>
         <image name="person.crop.circle.fill" catalog="system" width="128" height="121"/>
         <image name="plus" catalog="system" width="128" height="113"/>
         <image name="plus2" width="72.5" height="72.5"/>

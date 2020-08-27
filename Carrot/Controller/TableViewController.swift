@@ -116,18 +116,6 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
             return 0
         }
         
-        
-//        for section1 in sections {
-//            if section1.items.count == 0 {
-//                var emptyLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.bounds.size.width, height: self.view.bounds.size.height))
-//                emptyLabel.text = "You haven't added any items to your list yet."
-//                emptyLabel.textColor = UIColor.gray
-//                emptyLabel.textAlignment = NSTextAlignment.center
-//                self.tableView.backgroundView = emptyLabel
-//                self.tableView.separatorStyle = UITableViewCell.SeparatorStyle.none
-//            }
-//        }
-        
         return sections[section].items.count
     }
     
@@ -163,20 +151,6 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
                 cell.profilePicture.isHidden = true
             } else {
                 DispatchQueue.global(qos: .background).async() {
-//                    func getData(from url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
-//                        URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
-//                    }
-//
-//                    func downloadImage(from url: URL) {
-//                        getData(from: url) { data, response, error in
-//                            guard let data = data, error == nil else { return }
-//                            DispatchQueue.main.async() { [weak self] in
-//                                cell.profilePicture.image = UIImage(data: data)
-//                            }
-//                        }
-//                    }
-//
-//
                         self.db.collection(K.FStore.users).document(cell.uid!).getDocument { (snapshot, error) in
                             if let e = error {
                                 print("Error retrieving profile picture: \(e)")
@@ -209,20 +183,10 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
         
         let action = UIContextualAction(style: .destructive, title: "Delete") { (action, view, completion) in
             
-            // Item's properties variables
-            let itemID: String
-            let name: String
-            let uid: String
-            let isChecked: Bool
-            let checkedBy: String
-            let dateCreated: Date
-            let dateChecked: Date
-            
             let itemRef = self.db.collection(K.FStore.lists).document(self.currentListID!).collection(K.FStore.sections).document("\(indexPath.section)").collection(K.FStore.items).document(item.itemID!)
             
             itemRef.getDocument { (document, error) in
                 if let document = document, document.exists {
-                    let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
                     
                     // Get the properties of the item
                     let name = document.data()?[K.Item.name] as? String
@@ -233,10 +197,7 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
                     let dateChecked = document.data()?[K.Item.dateChecked] as? Date
                     let checkedBy = document.data()?[K.Item.checkedBy] as? String
                     
-                    var ref: DocumentReference? = nil
-                    
-                    // Save the properties of the item in sectionsDeleted
-                    ref = self.db.collection(K.lists).document(self.currentListID!).collection(K.FStore.sectionsDeleted).document("\(category!)").collection(K.FStore.items).addDocument(data: [
+                    self.db.collection(K.lists).document(self.currentListID!).collection(K.FStore.sectionsDeleted).document("\(category!)").collection(K.FStore.items).addDocument(data: [
                             K.Item.name: name,
                             K.Item.isChecked: isChecked,
                             K.Item.categoryNumber: category,
@@ -302,7 +263,7 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
         movedObject.number = destinationIndexPath.section
         
         sections[sourceIndexPath.section].items.remove(at: sourceIndexPath.row)
-        sections[destinationIndexPath.section].items.insert(movedObject, at: destinationIndexPath.row)
+        sections[destinationIndexPath.section].items.insert(movedObject, at: sections[destinationIndexPath.section].items.count)
         
         let itemRef = listsRef?.collection(K.FStore.sections).document(String(sourceIndexPath.section)).collection(K.FStore.items).document(movedObject.itemID!)
         
@@ -428,20 +389,10 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
                     if self.sections[indexSection].items != nil {
                         let item = self.sections[indexSection].items[indexRow]
                         
-                        // Item's properties variables
-                        let itemID: String
-                        let name: String
-                        let uid: String
-                        let isChecked: Bool
-                        let checkedBy: String
-                        let dateCreated: Date
-                        let dateChecked: Date
-                        
                         let itemRef = self.db.collection(K.FStore.lists).document(self.currentListID!).collection(K.FStore.sections).document("\(indexSection)").collection(K.FStore.items).document(item.itemID!)
                         
                         itemRef.getDocument { (document, error) in
                             if let document = document, document.exists {
-                                let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
                                 
                                 
                                 // Get the properties of the item
@@ -453,10 +404,7 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
                                 let dateChecked = document.data()?[K.Item.dateChecked] as? Date
                                 let checkedBy = document.data()?[K.Item.checkedBy] as? String
                                 
-                                var ref: DocumentReference? = nil
-                                
-                                // Save the properties of the item in sectionsDeleted
-                                ref = self.db.collection(K.lists).document(self.currentListID!).collection(K.FStore.sectionsChecked).document("\(category!)").collection(K.FStore.items).addDocument(data: [
+                                self.db.collection(K.lists).document(self.currentListID!).collection(K.FStore.sectionsChecked).document("\(category!)").collection(K.FStore.items).addDocument(data: [
                                     K.Item.name: name,
                                     K.Item.isChecked: isChecked,
                                     K.Item.categoryNumber: category,
@@ -505,37 +453,17 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
         }
     }
     
-    func updateModel(state: Bool, indexSection: Int?, indexRow: Int?) {
-        let item = sections[indexSection!].items[indexRow!]
-        item.checked = state
-        
-        let indexPath = IndexPath(row: indexRow!, section: indexSection!)
-        
-        let cell = tableView.cellForRow(at: indexPath) as! TaskCell
-        tableView.reloadRows(at: [indexPath], with: .none)
-    }
-    
     func moveItem(indexSection: Int?, indexRow: Int?) {
         print("Moving item to itemsChecked...")
 
         if let indexSection = indexSection, let indexRow = indexRow {
                                             let item = self.sections[indexSection].items[indexRow]
-
-            // Item's properties variables
-            let itemID: String
-            let name: String
-            let uid: String
-            let isChecked: Bool
-            let checkedBy: String
-            let dateCreated: Date
-            let dateChecked: Date
+            
 
             let itemRef = self.db.collection(K.FStore.lists).document(self.currentListID!).collection(K.FStore.sections).document("\(indexSection)").collection(K.FStore.items).document(item.itemID!)
 
             itemRef.getDocument { (document, error) in
                 if let document = document, document.exists {
-                    let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
-
 
                     // Get the properties of the item
                     let name = document.data()?[K.Item.name] as? String
@@ -546,10 +474,8 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
                     let dateChecked = document.data()?[K.Item.dateChecked] as? Date
                     let checkedBy = document.data()?[K.Item.checkedBy] as? String
 
-                    var ref: DocumentReference? = nil
-
                     // Save the properties of the item in sectionsDeleted
-                    ref = self.db.collection(K.lists).document(self.currentListID!).collection(K.FStore.sectionsChecked).document("\(category!)").collection(K.FStore.items).addDocument(data: [
+                    self.db.collection(K.lists).document(self.currentListID!).collection(K.FStore.sectionsChecked).document("\(category!)").collection(K.FStore.items).addDocument(data: [
                             K.Item.name: name,
                             K.Item.isChecked: isChecked,
                             K.Item.categoryNumber: category,
@@ -674,7 +600,7 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
     func emptyTableView() {
         if self.sections[1].items.count == 0 && self.sections[2].items.count == 0 && self.sections[3].items.count == 0 && self.sections[4].items.count == 0 && self.sections[5].items.count == 0 && self.sections[6].items.count == 0 && self.sections[7].items.count == 0 && self.sections[8].items.count == 0 && self.sections[9].items.count == 0 && self.sections[10].items.count == 0 && self.sections[11].items.count == 0 && self.sections[12].items.count == 0 && self.sections[13].items.count == 0 && self.sections[14].items.count == 0 && self.sections[15].items.count == 0 && self.sections[16].items.count == 0 && self.sections[17].items.count == 0 {
             print("All items are empty \(self.sections)")
-            var emptyLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.bounds.size.width, height: self.view.bounds.size.height))
+            let emptyLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.bounds.size.width, height: self.view.bounds.size.height))
             emptyLabel.text = "You haven't added any items to your list yet."
             emptyLabel.textColor = UIColor.gray
             emptyLabel.textAlignment = NSTextAlignment.center
@@ -690,7 +616,6 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
         
         listRef.getDocument { (document, error) in
             if let document = document, document.exists {
-                let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
                 let sectionNames = document.data()![K.List.sections] as? [String]
                 
                 self.sections.removeAll()
@@ -732,7 +657,7 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
             for document in documents {
                 let name = document.data()[K.Item.name] as! String
                 let isChecked = document.data()[K.Item.isChecked] as! Bool
-                let documentID = document.documentID as! String
+                let documentID = document.documentID
                 let uid = document.data()[K.Item.uid] as! String
                 
                 let newTask = Task(name: name, isChecked: isChecked, itemID: documentID, uid: uid)

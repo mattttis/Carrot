@@ -90,6 +90,8 @@ class CardViewController: UIViewController {
     
     @IBAction func rescanCode(_ sender: Any) {
         let barcodeVC = BarcodeScannerViewController()
+        barcodeVC.headerViewController.titleLabel.tintColor = UIColor.label
+        barcodeVC.headerViewController.closeButton.tintColor = UIColor.label
         barcodeVC.codeDelegate = self
         barcodeVC.errorDelegate = self
         barcodeVC.dismissalDelegate = self
