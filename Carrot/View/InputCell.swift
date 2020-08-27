@@ -18,7 +18,6 @@ class InputCell: UITableViewCell {
     @IBAction func saveNewTaskAction(_ sender: Any) {
         if newTaskField.text != "" {
             delegate?.addTask(name: newTaskField.text!, uid: Auth.auth().currentUser!.uid)
-            print("InputCell: \(Auth.auth().currentUser!.uid)")
             newTaskField.text = ""
             newTaskField.resignFirstResponder()
         }

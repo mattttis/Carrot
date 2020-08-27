@@ -24,9 +24,16 @@ class TaskCell: UITableViewCell {
     var uid: String?
     var imageURL: String?
     var currentUid = Auth.auth().currentUser!.uid
+    var tempState: Bool? = false
+    
+    private var workItem: DispatchWorkItem?
     
     @IBAction func checkBoxAction(_ sender: Any) {
-        self.startAnimation()
+        if tempState == false {
+            startAnimation()
+        } else {
+            stopAnimation()
+        }
     }
     
     override func awakeFromNib() {
@@ -36,25 +43,18 @@ class TaskCell: UITableViewCell {
         taskNameLabel.addGestureRecognizer(tap)
         taskNameLabel.isUserInteractionEnabled = true
         
-        // profilePicture.layer.cornerRadius = 20
         profilePicture.layer.cornerRadius = profilePicture.frame.height / 2
         profilePicture.clipsToBounds = true
-    }
-    
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-//        if uid == currentUid {
-//            profilePicture.isHidden = true
-//        } else {
-//            profilePicture.isHidden = false
-//        }
     }
 
     
     @objc func tapFunction(sender:UITapGestureRecognizer) {
         
-        startAnimation()
+        if tempState == false {
+            startAnimation()
+        } else {
+            stopAnimation()
+        }
 
         if uid == currentUid {
             profilePicture.isHidden = true
@@ -63,34 +63,47 @@ class TaskCell: UITableViewCell {
         }
     }
     
+    func stopAnimation() {
+        workItem?.cancel()
+        self.progressBar.setProgress(0.0, animated: false)
+        self.checkBoxOutlet.setBackgroundImage(#imageLiteral(resourceName: "checkBoxOUTLINE "), for: .normal)
+        self.tempState = false
+        
+//        let attrString = NSMutableAttributedString(string: taskNameLabel.text!, attributes: [NSAttributedString.Key.strikethroughStyle: NSUnderlineStyle.single.rawValue])
+//        attrString.removeAttribute(NSAttributedString.Key.strikethroughStyle, range: NSMakeRange(0, attrString.length))
+//        taskNameLabel.attributedText = attrString
+    }
+    
     func startAnimation() {
         let generator = UIImpactFeedbackGenerator(style: .medium)
         generator.impactOccurred()
+        
         if items![indexRow!].checked {
             self.delegate?.changeButton(state: false, indexSection: indexSection!, indexRow: indexRow!, itemID: itemID!)
             self.progressBar.setProgress(0.0, animated: false)
             self.checkBoxOutlet.setBackgroundImage(#imageLiteral(resourceName: "checkBoxOUTLINE "), for: .normal)
         } else {
+//            
+//            let attrString = NSAttributedString(string: taskNameLabel.text!, attributes: [NSAttributedString.Key.strikethroughStyle: NSUnderlineStyle.single.rawValue])
+//            taskNameLabel.attributedText = attrString
+            
             self.checkBoxOutlet.setBackgroundImage(#imageLiteral(resourceName: "checkBoxFILLED "), for: .normal)
+            self.tempState = true
             UIView.animate(withDuration: 4.0, animations: {
-                // self.delegate?.updateModel(state: false, indexSection: self.indexSection, indexRow: self.indexRow)
                 self.progressBar.setProgress(1.0, animated: true)
           }) { (finished: Bool) in
-                DispatchQueue.main.asyncAfter(deadline: .now() + 3.3) {
+            
+                self.workItem = DispatchWorkItem {
                     self.delegate?.changeButton(state: true, indexSection: self.indexSection!, indexRow: self.indexRow!, itemID: self.itemID)
+//                    let attrString = NSMutableAttributedString(string: self.taskNameLabel.text!, attributes: [NSAttributedString.Key.strikethroughStyle: NSUnderlineStyle.single.rawValue])
+//                    attrString.removeAttribute(NSAttributedString.Key.strikethroughStyle, range: NSMakeRange(0, attrString.length))
+//                    self.taskNameLabel.attributedText = attrString
                 }
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 3.3, execute: self.workItem!)
+            
+            
             }
-        }
-    }
-    
-    func startActionII() {
-        
-        print("Doing logic...")
-        
-        if items![indexRow!].checked {
-            delegate?.changeButton(state: false, indexSection: indexSection!, indexRow: indexRow!, itemID: itemID)
-        } else {
-            delegate?.changeButton(state: true, indexSection: indexSection!, indexRow: indexRow!, itemID: itemID)
         }
     }
     

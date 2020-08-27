@@ -40,7 +40,7 @@ class NavController: UITabBarController, UITabBarControllerDelegate {
         }
         
         if item.tag == 4 {
-            NotificationCenter.default.post(name: Notification.Name("NewFunctionName"), object: nil)
+            NotificationCenter.default.post(name: Notification.Name("addNewItem"), object: nil)
             print(isAccount)
             if self.isAccount == true {
                 print("isAccount = true")

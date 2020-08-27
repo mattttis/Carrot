@@ -14,9 +14,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
-        // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
-        // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         
         // Check if user is logged
         let currentUser = Auth.auth().currentUser
@@ -59,18 +56,28 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     func windowScene(_ windowScene: UIWindowScene, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
-        
                
         switch shortcutItem.type {
+            
+            // Add item
             case "is.mattt.Carrot.addItem":
                 print("Adding item...")
+                NotificationCenter.default.post(name: Notification.Name("addNewItem"), object: nil)
                 break
+            
+            // Show AH Bonuskaart
             case "is.mattt.Carrot.showCard":
                 print("Showing card...")
+                NotificationCenter.default.post(name: Notification.Name("showCard"), object: nil)
                 break
+            
+            // Share list
             case "is.mattt.Carrot.shareList":
                 print("Sharing list...")
+                NotificationCenter.default.post(name: Notification.Name("shareFunction"), object: nil)
                 break
+            
+            
             default:
                 break
             }

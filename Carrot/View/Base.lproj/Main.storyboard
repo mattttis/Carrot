@@ -778,7 +778,7 @@
         <!--Bonuskaart-->
         <scene sceneID="7B4-2C-nyL">
             <objects>
-                <viewController id="hZV-Kh-coq" customClass="CardViewController" customModule="Carrot" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="cardVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="hZV-Kh-coq" customClass="CardViewController" customModule="Carrot" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="827-tO-8PF">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="786"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -922,7 +922,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="OY0-sT-tkz"/>
+        <segue reference="psZ-Yt-ffV"/>
         <segue reference="ELv-9J-ITG"/>
         <segue reference="wRj-8q-BJ9"/>
     </inferredMetricsTieBreakers>
