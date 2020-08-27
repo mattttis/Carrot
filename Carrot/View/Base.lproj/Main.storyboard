@@ -347,26 +347,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="786"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vmk-uA-yO7">
-                                <rect key="frame" x="113.5" y="514" width="187" height="44"/>
-                                <color key="backgroundColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="2ht-eg-wya"/>
-                                    <constraint firstAttribute="width" constant="187" id="ruo-bM-og3"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
-                                <state key="normal" title="Share your list">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <connections>
-                                    <action selector="shareButton2:" destination="x9J-U8-k6N" eventType="touchUpInside" id="ZBY-3w-WTg"/>
-                                </connections>
-                            </button>
-                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wxN-Jv-znF">
-                                <rect key="frame" x="66" y="251" width="282" height="226"/>
+                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wxN-Jv-znF">
+                                <rect key="frame" x="66" y="180" width="282" height="426"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Share your code out loud or send it in a message" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bCK-oJ-UNc">
-                                        <rect key="frame" x="17" y="196" width="249" height="51"/>
+                                        <rect key="frame" x="17" y="210" width="249" height="51"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="249" id="K2S-kb-xtx"/>
                                             <constraint firstAttribute="height" constant="51" id="blB-Xx-E8i"/>
@@ -380,13 +365,13 @@
                                             <constraint firstAttribute="height" constant="115" id="6tO-mg-8Nc"/>
                                             <constraint firstAttribute="width" constant="255" id="TNR-CM-cmi"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="22"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="27"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="GH6KB" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Rm-Y7-EeM">
-                                        <rect key="frame" x="52" y="141" width="179" height="47"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="39"/>
-                                        <color key="textColor" systemColor="systemIndigoColor" red="0.34509803919999998" green="0.33725490200000002" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <rect key="frame" x="52" y="141" width="179" height="61"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="51"/>
+                                        <color key="textColor" systemColor="linkColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
@@ -400,14 +385,34 @@
                                     <constraint firstItem="bCK-oJ-UNc" firstAttribute="centerX" secondItem="wxN-Jv-znF" secondAttribute="centerX" id="sem-ec-wf0"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vmk-uA-yO7">
+                                <rect key="frame" x="20" y="646" width="374" height="60"/>
+                                <color key="backgroundColor" systemColor="linkColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="53m-Uf-oA5"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="21"/>
+                                <state key="normal" title="Share your list">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="shareButton2:" destination="x9J-U8-k6N" eventType="touchUpInside" id="ZBY-3w-WTg"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="wxN-Jv-znF" firstAttribute="centerX" secondItem="7pZ-nR-DHW" secondAttribute="centerX" id="3YM-hs-dbN"/>
                             <constraint firstItem="wxN-Jv-znF" firstAttribute="centerY" secondItem="7pZ-nR-DHW" secondAttribute="centerY" id="669-TY-86F"/>
                             <constraint firstItem="vmk-uA-yO7" firstAttribute="centerX" secondItem="7pZ-nR-DHW" secondAttribute="centerX" id="EDz-E8-IMu"/>
-                            <constraint firstItem="vmk-uA-yO7" firstAttribute="top" secondItem="7pZ-nR-DHW" secondAttribute="topMargin" constant="514" id="g2y-qK-7yK"/>
-                            <constraint firstItem="vmk-uA-yO7" firstAttribute="top" secondItem="wxN-Jv-znF" secondAttribute="bottom" constant="8" id="jtr-RQ-NtW"/>
+                            <constraint firstItem="wxN-Jv-znF" firstAttribute="top" secondItem="HAf-ed-0SG" secondAttribute="top" constant="180" id="S2E-jO-a4J"/>
+                            <constraint firstItem="HAf-ed-0SG" firstAttribute="bottom" secondItem="vmk-uA-yO7" secondAttribute="bottom" constant="80" id="bJb-90-C7H"/>
+                            <constraint firstItem="HAf-ed-0SG" firstAttribute="trailing" secondItem="vmk-uA-yO7" secondAttribute="trailing" constant="20" id="l3N-tG-9Lw"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="HAf-ed-0SG"/>
                     </view>

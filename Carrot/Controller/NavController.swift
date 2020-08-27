@@ -23,14 +23,6 @@ class NavController: UITabBarController, UITabBarControllerDelegate {
         
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        if tabBarItem.tag == 4 {
-            print("HELLO")
-        }
-        
-        
-    }
-    
     
     
     override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
@@ -41,9 +33,7 @@ class NavController: UITabBarController, UITabBarControllerDelegate {
         
         if item.tag == 4 {
             NotificationCenter.default.post(name: Notification.Name("addNewItem"), object: nil)
-            print(isAccount)
             if self.isAccount == true {
-                print("isAccount = true")
                 self.selectedIndex = 0
             }
         }
