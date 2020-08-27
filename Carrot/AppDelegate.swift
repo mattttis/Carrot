@@ -22,10 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let db = Firestore.firestore()
         let storage = Storage.storage()
         
-//        self.window = UIWindow(frame: UIScreen.main.bounds)
-//        let storyboard =  UIStoryboard(name: "Main", bundle: nil)
-//        let startMainVC = storyboard.instantiateViewController(withIdentifier: "TableViewController")
-//        let startIntroVC = storyboard.instantiateViewController(withIdentifier: "WelcomeViewController")
+        // UITabBar.appearance().unselectedItemTintColor = UIColor.orange
         
         return true
     }

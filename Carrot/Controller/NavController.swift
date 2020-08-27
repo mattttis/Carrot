@@ -15,18 +15,19 @@ class NavController: UITabBarController, UITabBarControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         delegate = self
+        
+        
+        if tabBarItem.tag == 4 {
+            self.tabBar.unselectedItemTintColor = UIColor.orange
+        }
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        // if tabBarItem.tag == 4 {
-            let image = UIImage(systemName: "plus.square.fill", withConfiguration: UIImage.SymbolConfiguration(weight: .bold))
-            tabBarItem.image = image!
-            tabBarController?.tabBarItem.image = image!
-        // }
-        
         if tabBarItem.tag == 4 {
-            tabBarItem.badgeValue = "HHe"
+            print("HELLO")
         }
+        
         
     }
     
@@ -46,6 +47,7 @@ class NavController: UITabBarController, UITabBarControllerDelegate {
                 self.selectedIndex = 0
             }
         }
+        
     }
     
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
