@@ -76,8 +76,6 @@ class AccountViewController: UIViewController {
         setupAvatar()
         self.hideKeyboardWhenTappedAround()
         
-        
-        
         let user = Auth.auth().currentUser
         if let user = user {
             self.currentUserID = user.uid

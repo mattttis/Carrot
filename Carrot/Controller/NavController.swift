@@ -9,17 +9,11 @@
 import UIKit
 
 class NavController: UITabBarController, UITabBarControllerDelegate {
-
+    
+    var isAccount: Bool = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        let vc1 = TableViewController()
-//        let vc2 = ActionAddViewController()
-//        let vc3 = AccountViewController()
-//        
-//        
-//        viewControllers = [vc1, vc2, vc3]
-        
         delegate = self
     }
     
@@ -29,12 +23,28 @@ class NavController: UITabBarController, UITabBarControllerDelegate {
             tabBarItem.image = image!
             tabBarController?.tabBarItem.image = image!
         // }
+        
+        if tabBarItem.tag == 4 {
+            tabBarItem.badgeValue = "HHe"
+        }
+        
     }
+    
+    
     
     override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
         
+        if item.tag == 5 {
+            isAccount = true
+        }
+        
         if item.tag == 4 {
             NotificationCenter.default.post(name: Notification.Name("NewFunctionName"), object: nil)
+            print(isAccount)
+            if self.isAccount == true {
+                print("isAccount = true")
+                self.selectedIndex = 0
+            }
         }
     }
     
@@ -45,5 +55,5 @@ class NavController: UITabBarController, UITabBarControllerDelegate {
             return true
         }
     }
-
 }
+
