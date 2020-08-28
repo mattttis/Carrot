@@ -11,8 +11,9 @@ pod 'Firebase/Auth'
 pod 'Firebase/Firestore'
 pod 'Firebase/Analytics'
 pod 'Firebase/Storage'
+pod 'Firebase/Messaging'
 pod 'BarcodeScanner'
 pod 'Kingfisher'
-pod 'CocoaTextField'
+# pod 'CocoaTextField'
 
 end

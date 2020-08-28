@@ -60,19 +60,19 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         switch shortcutItem.type {
             
             // Add item
-            case "is.mattt.Carrot.addItem":
+            case "com.mattt.Carrot.addItem":
                 print("Adding item...")
                 NotificationCenter.default.post(name: Notification.Name("addNewItem"), object: nil)
                 break
             
             // Show AH Bonuskaart
-            case "is.mattt.Carrot.showCard":
+            case "com.mattt.Carrot.showCard":
                 print("Showing card...")
                 NotificationCenter.default.post(name: Notification.Name("showCard"), object: nil)
                 break
             
             // Share list
-            case "is.mattt.Carrot.shareList":
+            case "com.mattt.Carrot.shareList":
                 print("Sharing list...")
                 NotificationCenter.default.post(name: Notification.Name("shareFunction"), object: nil)
                 break

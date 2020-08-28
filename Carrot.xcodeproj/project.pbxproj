@@ -23,8 +23,8 @@
 		A03F5A2924C1F564008054A7 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03F5A2824C1F564008054A7 /* WelcomeViewController.swift */; };
 		A05BDA4524CDC78D00854F00 /* AddListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05BDA4424CDC78D00854F00 /* AddListViewController.swift */; };
 		A06DE5AC24F17A020023E0DB /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B59B01D24AA7A59005FBC70 /* TableViewController.swift */; };
-		A06DE5AE24F2838B0023E0DB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A06DE5AD24F2838A0023E0DB /* GoogleService-Info.plist */; };
 		A0727D5C24D9A70C003732F6 /* BarCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0727D5B24D9A70C003732F6 /* BarCodeViewController.swift */; };
+		A07E2C2224F930F400058F35 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A07E2C2124F930F400058F35 /* GoogleService-Info.plist */; };
 		A0812ADF24C76C2E002A03EB /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0812ADE24C76C2E002A03EB /* AccountViewController.swift */; };
 		A0ACFEAD24BBA320008943E4 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0ACFEAC24BBA320008943E4 /* Constants.swift */; };
 		A0AE90C124B8F2DA00E31B68 /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0AE90C024B8F2DA00E31B68 /* Section.swift */; };
@@ -52,8 +52,9 @@
 		A03F5A2624C1EF4F008054A7 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		A03F5A2824C1F564008054A7 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		A05BDA4424CDC78D00854F00 /* AddListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddListViewController.swift; sourceTree = "<group>"; };
-		A06DE5AD24F2838A0023E0DB /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		A0727D5B24D9A70C003732F6 /* BarCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarCodeViewController.swift; sourceTree = "<group>"; };
+		A07E2C2124F930F400058F35 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		A07E2C2324F9320D00058F35 /* Carrot.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Carrot.entitlements; sourceTree = "<group>"; };
 		A0812ADE24C76C2E002A03EB /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AccountViewController.swift; path = Carrot/Controller/AccountViewController.swift; sourceTree = SOURCE_ROOT; };
 		A0ACFEAC24BBA320008943E4 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		A0AE90C024B8F2DA00E31B68 /* Section.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Section.swift; path = Carrot/Controller/Section.swift; sourceTree = SOURCE_ROOT; };
@@ -97,12 +98,13 @@
 			children = (
 				7B59B00724AA7811005FBC70 /* AppDelegate.swift */,
 				7B59B00924AA7811005FBC70 /* SceneDelegate.swift */,
+				A07E2C2324F9320D00058F35 /* Carrot.entitlements */,
 				A03C5D7B24B11A0E00C2BB4D /* Controller */,
 				A03C5D7A24B11A0800C2BB4D /* View */,
 				A03C5D7924B11A0000C2BB4D /* Model */,
 				7B59B01024AA7816005FBC70 /* Assets.xcassets */,
 				7B59B01524AA7816005FBC70 /* Info.plist */,
-				A06DE5AD24F2838A0023E0DB /* GoogleService-Info.plist */,
+				A07E2C2124F930F400058F35 /* GoogleService-Info.plist */,
 			);
 			path = Carrot;
 			sourceTree = "<group>";
@@ -223,8 +225,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A07E2C2224F930F400058F35 /* GoogleService-Info.plist in Resources */,
 				7B59B01424AA7816005FBC70 /* LaunchScreen.storyboard in Resources */,
-				A06DE5AE24F2838B0023E0DB /* GoogleService-Info.plist in Resources */,
 				A0B38CD724EC8F1D00511F06 /* Assets.xcassets in Resources */,
 				7B59B00F24AA7811005FBC70 /* Main.storyboard in Resources */,
 			);
@@ -443,15 +445,18 @@
 			baseConfigurationReference = 96D38123B0D97AA341E9A3B5 /* Pods-Carrot.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = T6QGKH9CMS;
+				CODE_SIGN_ENTITLEMENTS = Carrot/Carrot.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Alexander Tolmeijer (2U4YPW7355)";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = 2C75387PJ6;
 				INFOPLIST_FILE = Carrot/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = is.mattt.Carrot;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mattt.Carrot;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = CarrotDevelopmentProfile;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -462,15 +467,18 @@
 			baseConfigurationReference = DD9E70B64D89EFFCE59BE41C /* Pods-Carrot.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = T6QGKH9CMS;
+				CODE_SIGN_ENTITLEMENTS = Carrot/Carrot.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Alexander Tolmeijer (2U4YPW7355)";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = 2C75387PJ6;
 				INFOPLIST_FILE = Carrot/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = is.mattt.Carrot;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mattt.Carrot;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = CarrotDevelopmentProfile;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

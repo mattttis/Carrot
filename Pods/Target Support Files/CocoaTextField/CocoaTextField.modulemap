@@ -1,6 +1,0 @@
-framework module CocoaTextField {
-  umbrella header "CocoaTextField-umbrella.h"
-
-  export *
-  module * { export * }
-}

@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-class AddListViewController: UIViewController {
+class AddListViewController: UIViewController, UNUserNotificationCenterDelegate {
     
     let db = Firestore.firestore()
     let user = Auth.auth().currentUser

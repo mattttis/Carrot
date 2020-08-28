@@ -64,14 +64,12 @@ class TaskCell: UITableViewCell {
     }
     
     func stopAnimation() {
+        let generator = UIImpactFeedbackGenerator(style: .medium)
+        generator.impactOccurred()
         workItem?.cancel()
         self.progressBar.setProgress(0.0, animated: false)
         self.checkBoxOutlet.setBackgroundImage(#imageLiteral(resourceName: "checkBoxOUTLINE "), for: .normal)
         self.tempState = false
-        
-//        let attrString = NSMutableAttributedString(string: taskNameLabel.text!, attributes: [NSAttributedString.Key.strikethroughStyle: NSUnderlineStyle.single.rawValue])
-//        attrString.removeAttribute(NSAttributedString.Key.strikethroughStyle, range: NSMakeRange(0, attrString.length))
-//        taskNameLabel.attributedText = attrString
     }
     
     func startAnimation() {
