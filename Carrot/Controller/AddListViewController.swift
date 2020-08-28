@@ -105,6 +105,7 @@ class AddListViewController: UIViewController, UNUserNotificationCenterDelegate 
                 K.Section.index: "\(index)",
                 K.Section.dateCreated: Date()
             ])
+            print("Until heree")
         }
         
         // Redirect user to groceries

@@ -75,9 +75,14 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
                     self.userEmail = (data[K.User.email] as! String)
                     self.currentLists = (data[K.User.lists] as! [String])
                     
+                    // if let current = self.currentLists?[0] {
                     if let current = self.currentLists?[0] {
                         self.currentListID = current
+                        Messaging.messaging().subscribe(toTopic: current) { error in
+                          print("Subscribed to topic: \(current)")
+                        }
                     }
+                    
                     
                     self.listsRef = self.db.collection(K.FStore.lists).document(self.currentListID!)
                     
@@ -100,6 +105,11 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
         refreshControlMT.attributedTitle = NSAttributedString(string: "Refreshing...")
         refreshControlMT.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
         tableView.addSubview(refreshControlMT)
+    }
+    
+    func reorderSections() {
+        // tableView
+        
     }
     
     
@@ -330,6 +340,7 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
                 K.Item.isChecked: newTask.checked,
                 K.Item.categoryNumber: newTask.number,
                 K.Item.date: Date(),
+                K.Item.firstName: self.userFirstName,
                 K.Item.uid: currentUserID!
         ]) { err in
             if let err = err {

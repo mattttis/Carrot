@@ -79,6 +79,7 @@ struct K {
         static let date = "dateCreated"
         static let dateChecked = "dateChecked"
         static let dateDeleted = "dateDeleted"
+        static let firstName = "firstName"
     }
     
 }
