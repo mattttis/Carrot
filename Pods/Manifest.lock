@@ -359,6 +359,7 @@ PODS:
   - nanopb/encode (1.30905.0)
   - PromisesObjC (1.2.9)
   - Protobuf (3.13.0)
+  - TextFieldEffects (1.6.0)
 
 DEPENDENCIES:
   - BarcodeScanner
@@ -368,6 +369,7 @@ DEPENDENCIES:
   - Firebase/Messaging
   - Firebase/Storage
   - Kingfisher
+  - TextFieldEffects
 
 SPEC REPOS:
   trunk:
@@ -396,6 +398,7 @@ SPEC REPOS:
     - nanopb
     - PromisesObjC
     - Protobuf
+    - TextFieldEffects
 
 SPEC CHECKSUMS:
   abseil: 6c8eb7892aefa08d929b39f9bb108e5367e3228f
@@ -423,7 +426,8 @@ SPEC CHECKSUMS:
   nanopb: c43f40fadfe79e8b8db116583945847910cbabc9
   PromisesObjC: b48e0338dbbac2207e611750777895f7a5811b75
   Protobuf: 3dac39b34a08151c6d949560efe3f86134a3f748
+  TextFieldEffects: 529b8aff706fb40f82c41c780c0777941a893796
 
-PODFILE CHECKSUM: 94ed901a54574f719f31bf3537f5bd8e8ea5d7fb
+PODFILE CHECKSUM: de3abdbe410e376e1206b6f9ade2ce301698b711
 
 COCOAPODS: 1.9.3

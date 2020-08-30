@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import FirebaseStorage
+import TextFieldEffects
 
 class AccountViewController: UIViewController {
     
@@ -72,6 +73,8 @@ class AccountViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let field = TextFieldEffects()
         
         setupAvatar()
         self.hideKeyboardWhenTappedAround()
@@ -165,6 +168,8 @@ class AccountViewController: UIViewController {
         
         self.present(alert, animated: true, completion: nil)
     }
+    
+    
 }
 
 

@@ -142,6 +142,16 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
 extension AppDelegate: MessagingDelegate {
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
       print("Firebase registration token: \(fcmToken)")
+        
+        DispatchQueue.global(qos: .background).async {
+            let userRef = Firestore.firestore().collection(K.FStore.users).document(Auth.auth().currentUser!.uid)
+            
+            userRef.updateData([
+                K.User.token: fcmToken
+            ])
+            
+            
+        }
 
       let dataDict:[String: String] = ["token": fcmToken]
       NotificationCenter.default.post(name: Notification.Name("FCMToken"), object: nil, userInfo: dataDict)

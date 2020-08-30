@@ -14,6 +14,7 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
     
     var refreshControlMT = UIRefreshControl()
     var sections: [Section] = []
+    var items: [Task]?
     
     // Database references
     let db = Firestore.firestore()
@@ -26,9 +27,8 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
     var currentUserID: String?
     var userFirstName: String?
     var userEmail: String?
-    var items: [Task]?
-    
-    @IBOutlet weak var tabBar: UITabBarItem!
+    var userToken: String?
+    var receiverTokens: [String]?
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -74,26 +74,60 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
                     self.userFirstName = (data[K.User.firstName] as! String)
                     self.userEmail = (data[K.User.email] as! String)
                     self.currentLists = (data[K.User.lists] as! [String])
+                    self.userToken = (data[K.User.token] as! String)
                     
                     // if let current = self.currentLists?[0] {
-                    if let current = self.currentLists?[0] {
-                        self.currentListID = current
-                        Messaging.messaging().subscribe(toTopic: current) { error in
-                          print("Subscribed to topic: \(current)")
+                    print(self.currentLists)
+                    if self.currentLists != [] {
+                        print(self.currentLists)
+                        if let current = self.currentLists?[0] {
+                            self.currentListID = current
+                            Messaging.messaging().subscribe(toTopic: current) { error in
+                              print("Subscribed to topic: \(current)")
+                            }
+                        } else {
+                            self.performSegue(withIdentifier: K.Segues.tableToAddList, sender: self)
                         }
                     }
                     
                     
                     self.listsRef = self.db.collection(K.FStore.lists).document(self.currentListID!)
                     
+                    DispatchQueue.global(qos: .background).async {
+                        self.listsRef?.getDocument(completion: { (document, error) in
+                            if let e = error {
+                                print("Error accessing listRef: \(e)")
+                            } else {
+                                
+                                let token = Messaging.messaging().fcmToken
+                                self.receiverTokens = document?.data()?[K.List.tokens] as? [String]
+                                print(self.receiverTokens)
+                                
+                                print("Line 106")
+                                if let tokenss = self.receiverTokens {
+                                    if tokenss.contains(token!) {
+                                        print("Token already in list")
+                                    } else {
+                                        self.listsRef?.updateData([
+                                            K.List.tokens: FieldValue.arrayUnion([token])
+                                        ])
+                                    }
+                                } else {
+                                    self.listsRef?.updateData([
+                                        K.List.tokens: FieldValue.arrayUnion([token])
+                                    ])
+                                }
+                                
+                            }
+                        })
+                    }
+                    
                     // Load the section names
                     self.loadSections(listID: self.currentListID!)
                     
                     // Save variables in UserDefaults
-                    DispatchQueue.global(qos: .background).async {
-                        UserDefaults.standard.set(self.userFirstName, forKey: "firstName")
-                        UserDefaults.standard.synchronize()
-                    }
+                    UserDefaults.standard.set(self.userFirstName, forKey: "firstName")
+                    UserDefaults.standard.synchronize()
                     
                 } else {
                     print("Could not find document")
@@ -106,12 +140,6 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
         refreshControlMT.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
         tableView.addSubview(refreshControlMT)
     }
-    
-    func reorderSections() {
-        // tableView
-        
-    }
-    
     
 
     // MARK: - TableView data source
@@ -332,6 +360,13 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
         if thisCategory != "" {
             newTask.number = FoodData.foodCategories.firstIndex(of: thisCategory) ?? 17
         }
+       
+        // Remove the device's messaging token from the list's pushTokens -> user that adds the item doesn't receive notification
+        // Push notifications are handled by Firebase Functions in the root document/triggers. Language: node.js
+        if var sendToTokens = self.receiverTokens {
+            if let index = sendToTokens.firstIndex(of: self.userToken!) {
+                sendToTokens.remove(at: index)
+            }
         
         // Adding to Firestore
         var ref: DocumentReference? = nil
@@ -341,7 +376,9 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
                 K.Item.categoryNumber: newTask.number,
                 K.Item.date: Date(),
                 K.Item.firstName: self.userFirstName,
-                K.Item.uid: currentUserID!
+                K.Item.uid: currentUserID!,
+                K.User.token: self.userToken,
+                K.Item.tokens: sendToTokens
         ]) { err in
             if let err = err {
                 print("Error adding document: \(err)")
@@ -363,6 +400,7 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
                     self.sections[newTask.number].isExpanded = true
                 }
             }
+        }
         }
         
         refreshTable()

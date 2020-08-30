@@ -25,6 +25,7 @@ struct K {
         static let tableToShare = "tableToShare"
         static let tableToAccount = "tableToAccount"
         static let tableToCard = "tableToCard"
+        static let tableToAddList = "tableToAddList"
     }
     
     struct FStore {
@@ -52,6 +53,7 @@ struct K {
         static let profilePicture = "profilePicture"
         static let barcodeNumber = "barcodeNumber"
         static let barcodeImage = "barcodeImage"
+        static let token = "token"
     }
     
     struct List {
@@ -62,6 +64,7 @@ struct K {
         static let members = "members"
         static let membersEmail = "membersEmail"
         static let code = "code"
+        static let tokens = "tokens"
     }
     
     struct Section {
@@ -80,6 +83,7 @@ struct K {
         static let dateChecked = "dateChecked"
         static let dateDeleted = "dateDeleted"
         static let firstName = "firstName"
+        static let tokens = "tokens"
     }
     
 }

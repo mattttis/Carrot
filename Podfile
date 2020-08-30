@@ -14,6 +14,7 @@ pod 'Firebase/Storage'
 pod 'Firebase/Messaging'
 pod 'BarcodeScanner'
 pod 'Kingfisher'
+pod 'TextFieldEffects'
 # pod 'CocoaTextField'
 
 end
