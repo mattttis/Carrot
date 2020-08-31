@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class ShareViewController: UIViewController {
     
@@ -38,7 +39,8 @@ class ShareViewController: UIViewController {
 
         let listCode = code
         let myWebsite = NSURL(string:"https://google.com/")
-        let text = "Hey, I'm using Carrot so we can have a shared grocery list! Download the app and create an account - it only takes one minute. To join my list, enter the code \(listCode). You can download the app here: \(String(describing: NSURL(string:"https://stackoverflow.com/users/4600136/mr-javed-multani?tab=profile")))"
+        
+        let text = "Hey, I'm using Carrot so we can have a shared grocery list! Download the app and create an account - it only takes one minute. To join my list, enter the code \(listCode). You can download the app here: \(String(describing: myWebsite!))"
         
         // set up activity view controller
         let textToShare = [text]
@@ -47,6 +49,15 @@ class ShareViewController: UIViewController {
         
         // exclude some activity types from the list (optional)
         activityViewController.excludedActivityTypes = [UIActivity.ActivityType.postToFacebook]
+        
+        // Log analytics event
+        if let code2 = code {
+            Analytics.logEvent(AnalyticsEventShare, parameters: [
+                AnalyticsParameterItemID: code2
+            ])
+        }
+        
+        
         
         // present the view controller
         self.present(activityViewController, animated: true, completion: nil)

@@ -48,6 +48,10 @@ class RegisterViewController: UIViewController {
                     
                     let userRef = Firestore.firestore().collection(K.FStore.users).document(authData.user.uid)
                     
+                    Analytics.logEvent(AnalyticsEventSignUp, parameters: [
+                        AnalyticsParameterMethod: self.method
+                    ])
+                    
                     userRef.setData(dict)
                 }
                 

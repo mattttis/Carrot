@@ -144,13 +144,14 @@ extension AppDelegate: MessagingDelegate {
       print("Firebase registration token: \(fcmToken)")
         
         DispatchQueue.global(qos: .background).async {
-            let userRef = Firestore.firestore().collection(K.FStore.users).document(Auth.auth().currentUser!.uid)
             
-            userRef.updateData([
-                K.User.token: fcmToken
-            ])
-            
-            
+            if Auth.auth().currentUser != nil {
+                let userRef = Firestore.firestore().collection(K.FStore.users).document(Auth.auth().currentUser!.uid)
+                
+                userRef.updateData([
+                    K.User.token: fcmToken
+                ])
+            }
         }
 
       let dataDict:[String: String] = ["token": fcmToken]

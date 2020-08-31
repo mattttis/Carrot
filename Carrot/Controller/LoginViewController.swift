@@ -44,17 +44,32 @@ class LoginViewController: UIViewController {
             } else {
                 UserDefaults.standard.set(true, forKey: "isLoggedIn")
                 UserDefaults.standard.set(authResult?.user.uid, forKey: "uid")
+                UserDefaults.standard.set(email, forKey: "email")
                 UserDefaults.standard.synchronize()
+                
+                Analytics.logEvent(AnalyticsEventLogin, parameters: [
+                    AnalyticsParameterMethod: self.method
+                ])
+                
+                Firestore.firestore().collection(K.FStore.users).document((authResult?.user.uid)!).getDocument { (doc, error) in
+                    if let e = error {
+                        print(e)
+                    } else {
+                        let firstName = doc?.data()?[K.User.firstName]
+                        UserDefaults.standard.set(firstName, forKey: "firstName")
+                        UserDefaults.standard.synchronize()
+                    }
+                }
                 
                 self.db.whereField("members", arrayContains: authResult!.user.uid).getDocuments { (querySnapshot, err) in
                     if let e = err {
                         print("Error getting documents: \(err)")
                     } else {
                         for document in querySnapshot!.documents {
-                            print(document)
                             let listCode = document.data()[K.List.code]!
                             UserDefaults.standard.set(listCode, forKey: "code")
                             UserDefaults.standard.synchronize()
+                            print("The code is: \(UserDefaults.standard.string(forKey: "code"))")
                         }
                     }
                 }
