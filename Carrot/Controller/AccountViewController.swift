@@ -9,7 +9,6 @@
 import UIKit
 import Firebase
 import FirebaseStorage
-import TextFieldEffects
 
 class AccountViewController: UIViewController {
     
@@ -46,19 +45,13 @@ class AccountViewController: UIViewController {
         
         // Change labels & text fields
         tabBarController?.title = "Hey \(userFirstName!)!"
-        
-        
-//        let configuration = UIImage.SymbolConfiguration(weight: .semibold)
-//        let shareImage = UIImage(systemName: "barcode.viewfinder", withConfiguration: configuration)
-//        let shareButton = UIBarButtonItem(image: shareImage, style: .plain, target: self, action: #selector(showCard))
-//        shareButton.tintColor = UIColor.label
         tabBarController?.navigationItem.rightBarButtonItems = nil
         
         listCode.text = listCodeString
         firstName.text = userFirstName
         emailAddress.text = userEmail
         
-        DispatchQueue.global(qos: .background).async {
+        // DispatchQueue.global(qos: .background).async {
             self.storageRef.getData(maxSize: 1 * 1024 * 1024) { data, error in
                 if let error = error {
                     print(error)
@@ -67,15 +60,13 @@ class AccountViewController: UIViewController {
                     self.profilePicture.image = image
                 }
             }
-        }
+        // }
         
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let field = TextFieldEffects()
-        
+
         setupAvatar()
         self.hideKeyboardWhenTappedAround()
         
