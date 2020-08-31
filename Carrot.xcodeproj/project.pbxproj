@@ -30,6 +30,7 @@
 		A0AE90C124B8F2DA00E31B68 /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0AE90C024B8F2DA00E31B68 /* Section.swift */; };
 		A0B38CD724EC8F1D00511F06 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7B59B01024AA7816005FBC70 /* Assets.xcassets */; };
 		A0C466B124B12FF400DDDAAA /* FoodData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C466B024B12FF400DDDAAA /* FoodData.swift */; };
+		A0DCFC4E24FD90140037D750 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A0DCFC4D24FD90140037D750 /* Localizable.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -59,6 +60,7 @@
 		A0ACFEAC24BBA320008943E4 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		A0AE90C024B8F2DA00E31B68 /* Section.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Section.swift; path = Carrot/Controller/Section.swift; sourceTree = SOURCE_ROOT; };
 		A0C466B024B12FF400DDDAAA /* FoodData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodData.swift; sourceTree = "<group>"; };
+		A0DCFC4D24FD90140037D750 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		DD9E70B64D89EFFCE59BE41C /* Pods-Carrot.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Carrot.release.xcconfig"; path = "Target Support Files/Pods-Carrot/Pods-Carrot.release.xcconfig"; sourceTree = "<group>"; };
 		E04A748A672CA8543E3991F9 /* Pods_Carrot.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Carrot.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -98,12 +100,13 @@
 			children = (
 				7B59B00724AA7811005FBC70 /* AppDelegate.swift */,
 				7B59B00924AA7811005FBC70 /* SceneDelegate.swift */,
-				A07E2C2324F9320D00058F35 /* Carrot.entitlements */,
+				A0DCFC4D24FD90140037D750 /* Localizable.strings */,
 				A03C5D7B24B11A0E00C2BB4D /* Controller */,
 				A03C5D7A24B11A0800C2BB4D /* View */,
 				A03C5D7924B11A0000C2BB4D /* Model */,
 				7B59B01024AA7816005FBC70 /* Assets.xcassets */,
 				7B59B01524AA7816005FBC70 /* Info.plist */,
+				A07E2C2324F9320D00058F35 /* Carrot.entitlements */,
 				A07E2C2124F930F400058F35 /* GoogleService-Info.plist */,
 			);
 			path = Carrot;
@@ -225,6 +228,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A0DCFC4E24FD90140037D750 /* Localizable.strings in Resources */,
 				A07E2C2224F930F400058F35 /* GoogleService-Info.plist in Resources */,
 				7B59B01424AA7816005FBC70 /* LaunchScreen.storyboard in Resources */,
 				A0B38CD724EC8F1D00511F06 /* Assets.xcassets in Resources */,

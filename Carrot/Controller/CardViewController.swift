@@ -28,6 +28,7 @@ class CardViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        print("BARCODE " + UserDefaults.standard.string(forKey: K.User.barcodeNumber)!)
         if let code = UserDefaults.standard.string(forKey: K.User.barcodeNumber) {
             self.cardNumber.text = code
             
@@ -69,19 +70,8 @@ class CardViewController: UIViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        // cardImageRef = storageRef.child(K.User.barcodeImage)
-        
         currentBrightNess = UIScreen.main.brightness
         setBrightness(to: CGFloat(1.0))
-        
-//        storageRef.getData(maxSize: 1 * 1024 * 1024) { data, error in
-//            if let error = error {
-//                print(error)
-//            } else {
-//                let image = UIImage(data: data!)
-//                self.cardCode.image = image
-//            }
-//        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -175,6 +165,9 @@ extension CardViewController: BarcodeScannerCodeDelegate {
         dbRef.updateData([
             K.User.barcodeNumber: code
         ])
+        
+        UserDefaults.standard.set(code, forKey: K.User.barcodeNumber)
+        UserDefaults.standard.synchronize()
     }
     
     DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
