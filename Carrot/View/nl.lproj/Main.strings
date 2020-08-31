@@ -1,0 +1,162 @@
+
+/* Class = "UITextField"; placeholder = "Password"; ObjectID = "2X4-j1-YLI"; */
+"2X4-j1-YLI.placeholder" = "Wachtwoord";
+
+/* Class = "UITextField"; text = "12345678"; ObjectID = "2X4-j1-YLI"; */
+"2X4-j1-YLI.text" = "12345678";
+
+/* Class = "UIViewController"; title = "Welcome"; ObjectID = "2Xs-gN-d9L"; */
+"2Xs-gN-d9L.title" = "Welkom";
+
+/* Class = "UITextField"; placeholder = "Email"; ObjectID = "2dQ-fH-g2y"; */
+"2dQ-fH-g2y.placeholder" = "Email";
+
+/* Class = "UILabel"; text = "GH6KB"; ObjectID = "4Rm-Y7-EeM"; */
+"4Rm-Y7-EeM.text" = "GH6KB";
+
+/* Class = "UINavigationItem"; title = "Account"; ObjectID = "AtB-Lg-0DW"; */
+"AtB-Lg-0DW.title" = "Account";
+
+/* Class = "UILabel"; text = "G7H9"; ObjectID = "Ble-BE-V5l"; */
+"Ble-BE-V5l.text" = "G7H9";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "F9q-9p-CA0"; */
+"F9q-9p-CA0.normalTitle" = "Knop";
+
+/* Class = "UILabel"; text = "Hi there, this is Carrot!"; ObjectID = "FED-iG-R7v"; */
+"FED-iG-R7v.text" = "Hoi, dit is Carrot!";
+
+/* Class = "UIButton"; normalTitle = "Create a new list"; ObjectID = "FUh-XH-yMz"; */
+"FUh-XH-yMz.normalTitle" = "Maak een nieuwe lijst";
+
+/* Class = "UILabel"; text = "Email"; ObjectID = "GLw-5d-Yoh"; */
+"GLw-5d-Yoh.text" = "Email";
+
+/* Class = "UILabel"; text = "Password"; ObjectID = "GxP-x1-3SY"; */
+"GxP-x1-3SY.text" = "Wachtwoord";
+
+/* Class = "UIViewController"; title = "Account"; ObjectID = "HY1-ew-6Fz"; */
+"HY1-ew-6Fz.title" = "Account";
+
+/* Class = "UINavigationItem"; title = "Account"; ObjectID = "JAk-aN-NqH"; */
+"JAk-aN-NqH.title" = "Account";
+
+/* Class = "UITableViewController"; title = "Groceries"; ObjectID = "JKY-RQ-H6R"; */
+"JKY-RQ-H6R.title" = "Boodschappen";
+
+/* Class = "UIButton"; normalTitle = "Log out"; ObjectID = "Jxf-a5-LjN"; */
+"Jxf-a5-LjN.normalTitle" = "Uitloggen";
+
+/* Class = "UIButton"; normalTitle = "Register"; ObjectID = "LAj-3j-NHd"; */
+"LAj-3j-NHd.normalTitle" = "Registreren";
+
+/* Class = "UILabel"; text = "First name"; ObjectID = "LLp-6b-zhQ"; */
+"LLp-6b-zhQ.text" = "Voornaam";
+
+/* Class = "UIButton"; normalTitle = "Log In"; ObjectID = "M6p-cE-Uf5"; */
+"M6p-cE-Uf5.normalTitle" = "Inloggen";
+
+/* Class = "UINavigationItem"; title = "Groceries"; ObjectID = "MU1-Jy-DqV"; */
+"MU1-Jy-DqV.title" = "Boodschappen";
+
+/* Class = "UITextField"; placeholder = "Email"; ObjectID = "N22-mC-smB"; */
+"N22-mC-smB.placeholder" = "Email";
+
+/* Class = "UITextField"; text = "matthijs@tolmeijer.net"; ObjectID = "N22-mC-smB"; */
+"N22-mC-smB.text" = "matthijs@tolmeijer.net";
+
+/* Class = "UIButton"; normalTitle = "Add"; ObjectID = "OKw-36-mv6"; */
+"OKw-36-mv6.normalTitle" = "Toevoegen";
+
+/* Class = "UITextField"; placeholder = "First name"; ObjectID = "QJL-n2-ohe"; */
+"QJL-n2-ohe.placeholder" = "Voornaam";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "Tfs-oQ-fja"; */
+"Tfs-oQ-fja.text" = "Label";
+
+/* Class = "UIButton"; normalTitle = "Log In"; ObjectID = "Wj7-go-xjV"; */
+"Wj7-go-xjV.normalTitle" = "Inloggen";
+
+/* Class = "UIBarButtonItem"; title = "Done"; ObjectID = "Xvw-EG-W4P"; */
+"Xvw-EG-W4P.title" = "Klaar";
+
+/* Class = "UIViewController"; title = "Register"; ObjectID = "aod-CA-8gM"; */
+"aod-CA-8gM.title" = "Registreren";
+
+/* Class = "UILabel"; text = "Share your code out loud or send it in a message"; ObjectID = "bCK-oJ-UNc"; */
+"bCK-oJ-UNc.text" = "Deel deze code hardop of stuur hem in een bericht";
+
+/* Class = "UINavigationItem"; title = "Invite family members"; ObjectID = "ccr-l8-yYw"; */
+"ccr-l8-yYw.title" = "Nodig gezinsleden uit";
+
+/* Class = "UITextField"; placeholder = "Email"; ObjectID = "d9q-mU-Yy5"; */
+"d9q-mU-Yy5.placeholder" = "Email";
+
+/* Class = "UITextField"; placeholder = "New item"; ObjectID = "eCz-MS-0xe"; */
+"eCz-MS-0xe.placeholder" = "Nieuw product";
+
+/* Class = "UIBarButtonItem"; title = "Terug"; ObjectID = "eYy-3Y-Ylb"; */
+"eYy-3Y-Ylb.title" = "Terug";
+
+/* Class = "UITextField"; placeholder = "Password"; ObjectID = "es3-X0-dAn"; */
+"es3-X0-dAn.placeholder" = "Wachtwoord";
+
+/* Class = "UITextField"; text = "12345678"; ObjectID = "es3-X0-dAn"; */
+"es3-X0-dAn.text" = "12345678";
+
+/* Class = "UILabel"; text = "Here goes the localized error message, made by Firebase"; ObjectID = "fZo-Pm-5xf"; */
+"fZo-Pm-5xf.text" = "Here goes the localized error message, made by Firebase";
+
+/* Class = "UIButton"; normalTitle = "Rescan code"; ObjectID = "fdc-C7-KPn"; */
+"fdc-C7-KPn.normalTitle" = "Herscan bonuskaart";
+
+/* Class = "UINavigationItem"; title = "Bonuskaart"; ObjectID = "feB-pg-dZh"; */
+"feB-pg-dZh.title" = "Bonuskaart";
+
+/* Class = "UILabel"; text = "🥕Carrot"; ObjectID = "gof-hC-D5h"; */
+"gof-hC-D5h.text" = "🥕Carrot";
+
+/* Class = "UILabel"; text = "Hi there, nice to see you again!"; ObjectID = "kNb-Es-q8U"; */
+"kNb-Es-q8U.text" = "Hoi, leuk je weer te zien!";
+
+/* Class = "UITextField"; placeholder = "Email"; ObjectID = "kYV-83-SDt"; */
+"kYV-83-SDt.placeholder" = "Email";
+
+/* Class = "UITextField"; text = "matthijs@tolmeijer.net"; ObjectID = "kYV-83-SDt"; */
+"kYV-83-SDt.text" = "matthijs@tolmeijer.net";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "kfj-nF-s2m"; */
+"kfj-nF-s2m.text" = "Label";
+
+/* Class = "UIButton"; normalTitle = "Log In"; ObjectID = "mJJ-Sa-SzC"; */
+"mJJ-Sa-SzC.normalTitle" = "Inloggen";
+
+/* Class = "UITextField"; placeholder = "First name"; ObjectID = "rfp-0N-2Ge"; */
+"rfp-0N-2Ge.placeholder" = "Voornaam";
+
+/* Class = "UILabel"; text = "Hi there, nice to see you again!"; ObjectID = "tSc-sm-lHI"; */
+"tSc-sm-lHI.text" = "Hoi, leuk je weer te zien!";
+
+/* Class = "UITextField"; placeholder = "Password"; ObjectID = "uNJ-hx-2Mx"; */
+"uNJ-hx-2Mx.placeholder" = "Wachtwoord";
+
+/* Class = "UIBarButtonItem"; title = "Terug"; ObjectID = "vG7-KV-SDX"; */
+"vG7-KV-SDX.title" = "Terug";
+
+/* Class = "UILabel"; text = "or"; ObjectID = "vXS-p2-qzh"; */
+"vXS-p2-qzh.text" = "of";
+
+/* Class = "UIButton"; normalTitle = "Share your list"; ObjectID = "vmk-uA-yO7"; */
+"vmk-uA-yO7.normalTitle" = "Deel je lijst";
+
+/* Class = "UIViewController"; title = "Invite code"; ObjectID = "x9J-U8-k6N"; */
+"x9J-U8-k6N.title" = "Uitnodigingscode ";
+
+/* Class = "UILabel"; text = "Share this invite code with the people you want in your list:"; ObjectID = "xHd-R5-mxT"; */
+"xHd-R5-mxT.text" = "Dit is de toegangscode van je booschappenlijst:";
+
+/* Class = "UIButton"; normalTitle = "Register"; ObjectID = "xzx-fx-jXE"; */
+"xzx-fx-jXE.normalTitle" = "Registreren";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "zC3-7D-y8u"; */
+"zC3-7D-y8u.text" = "Label";

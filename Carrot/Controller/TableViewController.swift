@@ -34,7 +34,11 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
         super.viewWillAppear(animated)
         
         // Navigation bar setup
-        tabBarController?.title = "Groceries"
+        
+        
+        let formatString = NSLocalizedString("Groceries",
+                                             comment: "TableVC Title")
+        tabBarController?.title = String.localizedStringWithFormat(formatString)
         
         // Share list BarButton
         let configuration = UIImage.SymbolConfiguration(weight: .semibold)

@@ -37,6 +37,7 @@ class AccountViewController: UIViewController {
     @IBOutlet weak var firstName: UITextField!
     
     override func viewWillAppear(_ animated: Bool) {
+
         
         // Store UserDefaults variables locally
         userFirstName = UserDefaults.standard.string(forKey: "firstName")
@@ -137,14 +138,24 @@ class AccountViewController: UIViewController {
     
     
     @IBAction func logOutPressed(_ sender: Any) {
-        let alert = UIAlertController(title: "Sign out?", message: "You can always access your content by signing back in", preferredStyle: UIAlertController.Style.alert)
+        
+        let signOutString = NSLocalizedString("Sign out?",
+                                             comment: "Displayed in modal title")
+        let signOutMessageString = NSLocalizedString("You can always access your content by signing back in",
+        comment: "Displayed in modal description")
+        let signOutButtonString = NSLocalizedString("Sign out",
+        comment: "Displayed to sign out in modal")
+        let signOutButtonCancelString = NSLocalizedString("Cancel",
+        comment: "Displayed to cancel signing out in modal")
+        
+        let alert = UIAlertController(title: String.localizedStringWithFormat(signOutString), message: String.localizedStringWithFormat(signOutMessageString), preferredStyle: UIAlertController.Style.alert)
 
-        alert.addAction(UIAlertAction(title: "Cancel", style:
+        alert.addAction(UIAlertAction(title: String.localizedStringWithFormat(signOutButtonCancelString), style:
             UIAlertAction.Style.default, handler: { _ in
             print("Signing out canceled")
         }))
         
-        alert.addAction(UIAlertAction(title: "Sign out", style: UIAlertAction.Style.destructive, handler: {(_: UIAlertAction!) in
+        alert.addAction(UIAlertAction(title: String.localizedStringWithFormat(signOutButtonString), style: UIAlertAction.Style.destructive, handler: {(_: UIAlertAction!) in
             do {
                 try Auth.auth().signOut()
                 UserDefaults.standard.set(false, forKey: "isLoggedIn")

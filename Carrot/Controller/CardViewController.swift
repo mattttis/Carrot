@@ -28,7 +28,6 @@ class CardViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print("BARCODE " + UserDefaults.standard.string(forKey: K.User.barcodeNumber)!)
         if let code = UserDefaults.standard.string(forKey: K.User.barcodeNumber) {
             self.cardNumber.text = code
             
@@ -79,7 +78,22 @@ class CardViewController: UIViewController {
     }
     
     @IBAction func rescanCode(_ sender: Any) {
+        
+        let headerLabel = NSLocalizedString("Scan barcode",
+        comment: "Displayed in the scanner view controller")
+        
+        let headerButtonCancel = NSLocalizedString("Cancel",
+        comment: "Displayed in the scanner view controller to cancel modal")
+        
+        let messageText = NSLocalizedString("You don't have to press anything, we will start scanning automatically once we detect a barcode within the window.",
+        comment: "Displayed in the scanner view controller to explain the scanning process")
+        
+        
         let barcodeVC = BarcodeScannerViewController()
+        barcodeVC.headerViewController.titleLabel.text = String.localizedStringWithFormat(headerLabel)
+        barcodeVC.headerViewController.closeButton.setTitle(String.localizedStringWithFormat(headerButtonCancel), for: .normal)
+        
+        barcodeVC.messageViewController.textLabel.text = String.localizedStringWithFormat(messageText)
         barcodeVC.headerViewController.titleLabel.tintColor = UIColor.label
         barcodeVC.headerViewController.closeButton.tintColor = UIColor.label
         barcodeVC.codeDelegate = self

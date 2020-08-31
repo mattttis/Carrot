@@ -1,0 +1,16 @@
+/* 
+  Localizable.strings
+  Carrot
+
+  Created by Matthijs Tolmeijer on 31/08/2020.
+  Copyright © 2020 Matthijs Tolmeijer. All rights reserved.
+*/
+
+"Groceries" = "Boodschappen";
+"Sign out?" = "Uitloggen?";
+"You can always access your content by signing back in" = "Je kunt je gegevens weer terugvinden door terug in te loggen";
+"Sign out" = "Uitloggen";
+"Cancel" = "Annuleren";
+
+// BarcodeVC
+"You don't have to press anything, we will start scanning automatically once we detect a barcode within the window." = "Je hoeft nergens te klikken. Wanneer we een barcode zien in het venster scannen we hem automatisch.";
