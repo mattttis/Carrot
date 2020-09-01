@@ -2,6 +2,13 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>Shake</key>
+	<dict>
+		<key>APIClientID</key>
+		<string>X79a65R5JhglSCL3BOoKt9p2CUTN1cfLepcrGUyt</string>
+		<key>APIClientSecret</key>
+		<string>MgRdZHlxyG89FxRW36FbZIS4xXnal5dRFcdV4zhMYdwZSfn9NksNoJd</string>
+	</dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>
@@ -33,6 +40,10 @@
 	<true/>
 	<key>NSCameraUsageDescription</key>
 	<string>We ask to use your camera in order to scan your AH Bonuskaart</string>
+	<key>NSUserActivityTypes</key>
+	<array>
+		<string>IntentIntent</string>
+	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

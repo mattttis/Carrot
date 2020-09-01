@@ -15,6 +15,11 @@ pod 'Firebase/Messaging'
 pod 'BarcodeScanner'
 pod 'Kingfisher'
 pod 'SkyFloatingLabelTextField'
+pod 'Smartlook'
+pod 'Shake'
+
+# pod 'UXCam'
+# pod 'Instabug'
 # pod 'TextFieldEffects'
 # pod 'CocoaTextField'
 

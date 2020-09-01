@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import FirebaseStorage
+import Shake
 
 class AccountViewController: UIViewController {
     
@@ -138,6 +139,7 @@ class AccountViewController: UIViewController {
     
     
     @IBAction func logOutPressed(_ sender: Any) {
+        
         
         let signOutString = NSLocalizedString("Sign out?",
                                              comment: "Displayed in modal title")

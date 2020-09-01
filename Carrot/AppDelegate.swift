@@ -9,6 +9,8 @@
 import UIKit
 import Firebase
 import FirebaseStorage
+import Smartlook
+import Shake
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -18,6 +20,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        Smartlook.setup(key: "ad9ccab51377fa7547094f27492218c25d9b9d85")
+        Smartlook.startRecording()
+        
         FirebaseApp.configure()
         
         let db = Firestore.firestore()
@@ -38,6 +44,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
 
         application.registerForRemoteNotifications()
+        
+        Shake.configuration.isInvokedByShakeDeviceEvent = true
+        Shake.configuration.isInvokedByScreenshot = false
+
+        Shake.start()
         
         Messaging.messaging().delegate = self
         
@@ -133,7 +144,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     // Messaging.messaging().appDidReceiveMessage(userInfo)
 
     // Print full message.
-    print(userInfo)
+    // print(userInfo)
 
     completionHandler()
   }
@@ -141,7 +152,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
 
 extension AppDelegate: MessagingDelegate {
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
-      print("Firebase registration token: \(fcmToken)")
+      // print("Firebase registration token: \(fcmToken)")
         
         DispatchQueue.global(qos: .background).async {
             
