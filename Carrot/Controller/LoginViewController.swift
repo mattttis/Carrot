@@ -86,9 +86,12 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                         } else {
                             for document in querySnapshot!.documents {
                                 let listCode = document.data()[K.List.code]!
+                                let language = document.data()[K.List.language] as? String
                                 UserDefaults.standard.set(listCode, forKey: "code")
+                                UserDefaults.standard.set(language, forKey: "language")
+                                FoodData.language = language
+                                print("LANGUAGE IS: \(language)")
                                 UserDefaults.standard.synchronize()
-                                print("The code is: \(UserDefaults.standard.string(forKey: "code"))")
                             }
                         }
                     }

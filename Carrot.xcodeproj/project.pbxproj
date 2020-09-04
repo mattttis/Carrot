@@ -23,7 +23,6 @@
 		A03F5A2924C1F564008054A7 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03F5A2824C1F564008054A7 /* WelcomeViewController.swift */; };
 		A05BDA4524CDC78D00854F00 /* AddListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05BDA4424CDC78D00854F00 /* AddListViewController.swift */; };
 		A06DE5AC24F17A020023E0DB /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B59B01D24AA7A59005FBC70 /* TableViewController.swift */; };
-		A0727D5C24D9A70C003732F6 /* BarCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0727D5B24D9A70C003732F6 /* BarCodeViewController.swift */; };
 		A07E2C2224F930F400058F35 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A07E2C2124F930F400058F35 /* GoogleService-Info.plist */; };
 		A0812ADF24C76C2E002A03EB /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0812ADE24C76C2E002A03EB /* AccountViewController.swift */; };
 		A0ACFEAD24BBA320008943E4 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0ACFEAC24BBA320008943E4 /* Constants.swift */; };
@@ -66,13 +65,12 @@
 		A03F5A2624C1EF4F008054A7 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		A03F5A2824C1F564008054A7 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		A05BDA4424CDC78D00854F00 /* AddListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddListViewController.swift; sourceTree = "<group>"; };
-		A0727D5B24D9A70C003732F6 /* BarCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarCodeViewController.swift; sourceTree = "<group>"; };
 		A07E2C2124F930F400058F35 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A07E2C2324F9320D00058F35 /* Carrot.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Carrot.entitlements; sourceTree = "<group>"; };
 		A0812ADE24C76C2E002A03EB /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AccountViewController.swift; path = Carrot/Controller/AccountViewController.swift; sourceTree = SOURCE_ROOT; };
 		A0ACFEAC24BBA320008943E4 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		A0AE90C024B8F2DA00E31B68 /* Section.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Section.swift; path = Carrot/Controller/Section.swift; sourceTree = SOURCE_ROOT; };
-		A0C466B024B12FF400DDDAAA /* FoodData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodData.swift; sourceTree = "<group>"; };
+		A0C466B024B12FF400DDDAAA /* FoodData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodData.swift; sourceTree = "<group>"; usesTabs = 0; };
 		A0DCFC5624FD97610037D750 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Main.strings; sourceTree = "<group>"; };
 		A0DCFC5724FD97620037D750 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		A0DCFC5924FD976C0037D750 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -161,7 +159,6 @@
 				A02C91BA24BFB38300BE0489 /* LoginViewController.swift */,
 				A03F5A2624C1EF4F008054A7 /* RegisterViewController.swift */,
 				A05BDA4424CDC78D00854F00 /* AddListViewController.swift */,
-				A0727D5B24D9A70C003732F6 /* BarCodeViewController.swift */,
 				A004A1C624E7F6AE008CF844 /* NavController.swift */,
 			);
 			path = Controller;
@@ -313,7 +310,6 @@
 				A06DE5AC24F17A020023E0DB /* TableViewController.swift in Sources */,
 				7B194FDB24AA7D190099AE9F /* Task.swift in Sources */,
 				7B59B00A24AA7811005FBC70 /* SceneDelegate.swift in Sources */,
-				A0727D5C24D9A70C003732F6 /* BarCodeViewController.swift in Sources */,
 				A0AE90C124B8F2DA00E31B68 /* Section.swift in Sources */,
 				7B35934B24AB521F00A8CC4F /* InputCell.swift in Sources */,
 				A0177DE424E5ED0D003358DC /* CardViewController.swift in Sources */,

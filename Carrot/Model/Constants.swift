@@ -16,11 +16,15 @@ struct K {
     static let welcomeSegue = "welcomeToTable"
     
     struct Segues {
-        static let registerToTable = "registerToTable"
+        // Onboarding
+        static let welcomeToAddList = "welcomeToAddList"
         static let registerToAddList = "registerToAddList"
+        static let registerToTable = "registerToTable"
         static let addListToTable = "addListToTable"
         static let loginToTable = "loginToTable"
         static let welcomeToTable = "welcomeToTable"
+        
+        // Normal app usage
         static let accountToCard = "accountToCard"
         static let tableToShare = "tableToShare"
         static let tableToAccount = "tableToAccount"
@@ -65,6 +69,7 @@ struct K {
         static let membersEmail = "membersEmail"
         static let code = "code"
         static let tokens = "tokens"
+        static let language = "language"
     }
     
     struct Section {

@@ -43,7 +43,7 @@ class AddListViewController: UIViewController, UNUserNotificationCenterDelegate 
                     for document in querySnapshot!.documents {
                         listRef.document(document.documentID).updateData(([
                             K.List.members: FieldValue.arrayUnion([self.user!.uid])
-                            ]))
+                        ]))
                         
                         UserDefaults.standard.set(enteredCode, forKey: "code")
                         UserDefaults.standard.synchronize()
@@ -66,48 +66,64 @@ class AddListViewController: UIViewController, UNUserNotificationCenterDelegate 
     @IBAction func createPressed(_ sender: Any) {
         print("Create list")
         
-        let userRef = db.collection(K.FStore.users).document(Auth.auth().currentUser!.uid)
-        
-        // Create a new list and save it to FireStore
         var currentListID: String?
         
         // Create 5 letter random string to save as code
         let letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
-        let code = ((0..<5).map{ _ in letters.randomElement()! })
+        let code1 = ((0..<5).map{ _ in letters.randomElement()! })
+        let code = String(code1)
+        print(code)
         
+        
+//        print("Create list")
+//
+        let userRef = db.collection(K.FStore.users).document(Auth.auth().currentUser!.uid)
+//
+//        // Create a new list and save it to FireStore
+//        var currentListID: String?
+//
+//        // Create 5 letter random string to save as code
+//        let letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+//        let code = ((0..<5).map{ _ in letters.randomElement()! })
+//
         let listRef = db.collection(K.FStore.lists)
         let someData = [
-            K.List.dateCreated: Date(),
+            // K.List.dateCreated: Date(),
+            K.List.dateCreated: Timestamp(date: Date()),
             K.List.name: "Groceries",
             K.List.sections: FoodData.foodCategories,
             K.List.createdBy: Auth.auth().currentUser!.uid,
             K.List.members: [Auth.auth().currentUser!.uid],
             K.List.membersEmail: [Auth.auth().currentUser?.email],
-            K.List.code: code
+            K.List.code: code,
+            K.List.language: Locale.current.languageCode
         ] as [String : Any]
-        
+
         UserDefaults.standard.set(String(code), forKey: "code")
+        UserDefaults.standard.set(String(Locale.current.languageCode!), forKey: "language")
         UserDefaults.standard.synchronize()
-        
+
         let aDoc = listRef.document()
         currentListID = aDoc.documentID
         aDoc.setData(someData)
-        
-        // Append previously created list ID to user's "lists" array
+
+        //  Append previously created list ID to user's "lists" array
         userRef.updateData([
-            K.User.lists: FieldValue.arrayUnion([currentListID])
+            // K.User.lists: FieldValue.arrayUnion([currentListID])
+            K.User.lists: [currentListID]
         ])
-        
+
         // Set up sections
         for (index, section) in FoodData.foodCategories.enumerated() {
+            print("Got till line 103")
             db.collection(K.FStore.lists).document(currentListID!).collection(K.FStore.sections).document("\(index)").setData([
                 K.Section.name: "\(section)",
                 K.Section.index: "\(index)",
-                K.Section.dateCreated: Date()
+                K.Section.dateCreated: Timestamp(date: Date())
             ])
             print("Until heree")
         }
-        
+
         // Redirect user to groceries
         self.performSegue(withIdentifier: K.Segues.addListToTable, sender: self)
     }

@@ -61,7 +61,6 @@ class RegisterViewController: UIViewController {
                 UserDefaults.standard.synchronize()
                 
                 self.performSegue(withIdentifier: K.Segues.registerToAddList, sender: self)
-                
             }
         }
     }

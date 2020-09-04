@@ -35,7 +35,6 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
         
         // Navigation bar setup
         
-        
         let formatString = NSLocalizedString("Groceries",
                                              comment: "TableVC Title")
         tabBarController?.title = String.localizedStringWithFormat(formatString)
@@ -56,6 +55,8 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        print(FoodData.dairy)
         
         NotificationCenter.default.addObserver(self, selector: #selector(addNewItem), name: Notification.Name("addNewItem"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(showCard), name: Notification.Name("showCard"), object: nil)
@@ -78,60 +79,56 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
                     self.userFirstName = (data[K.User.firstName] as! String)
                     self.userEmail = (data[K.User.email] as! String)
                     self.currentLists = (data[K.User.lists] as! [String])
-                    self.userToken = (data[K.User.token] as! String)
+                    self.userToken = (data[K.User.token] as? String)
                     
                     // if let current = self.currentLists?[0] {
                     print(self.currentLists)
                     if self.currentLists != [] {
                         print(self.currentLists)
-                        if let current = self.currentLists?[0] {
-                            self.currentListID = current
-                            Messaging.messaging().subscribe(toTopic: current) { error in
-                              print("Subscribed to topic: \(current)")
+                        if self.currentLists?[0] != nil {
+                            
+                            self.currentListID = self.currentLists![0]
+                            self.listsRef = self.db.collection(K.FStore.lists).document(self.currentListID!)
+                            
+                            DispatchQueue.global(qos: .background).async {
+                                self.listsRef?.getDocument(completion: { (document, error) in
+                                    if let e = error {
+                                        print("Error accessing listRef: \(e)")
+                                    } else {
+                                        
+                                        let token = Messaging.messaging().fcmToken
+                                        self.receiverTokens = document?.data()?[K.List.tokens] as? [String]
+                                        if let tokenss = self.receiverTokens {
+                                            if tokenss.contains(token!) {
+                                                print("Token already in list")
+                                            } else {
+                                                self.listsRef?.updateData([
+                                                    K.List.tokens: FieldValue.arrayUnion([token])
+                                                ])
+                                            }
+                                        } else {
+                                            self.listsRef?.updateData([
+                                                K.List.tokens: FieldValue.arrayUnion([token])
+                                            ])
+                                        }
+                                    }
+                                })
                             }
+                            
+                            // Load the section names
+                            self.loadSections(listID: self.currentListID!)
+                            
+                            // Save variables in UserDefaults
+                            UserDefaults.standard.set(self.userFirstName, forKey: "firstName")
+                            UserDefaults.standard.synchronize()
                         } else {
                             self.performSegue(withIdentifier: K.Segues.tableToAddList, sender: self)
                         }
+                    } else {
+                        
+                        self.performSegue(withIdentifier: K.Segues.tableToAddList, sender: self)
+                        
                     }
-                    
-                    
-                    self.listsRef = self.db.collection(K.FStore.lists).document(self.currentListID!)
-                    
-                    DispatchQueue.global(qos: .background).async {
-                        self.listsRef?.getDocument(completion: { (document, error) in
-                            if let e = error {
-                                print("Error accessing listRef: \(e)")
-                            } else {
-                                
-                                let token = Messaging.messaging().fcmToken
-                                self.receiverTokens = document?.data()?[K.List.tokens] as? [String]
-                                print(self.receiverTokens)
-                                
-                                print("Line 106")
-                                if let tokenss = self.receiverTokens {
-                                    if tokenss.contains(token!) {
-                                        print("Token already in list")
-                                    } else {
-                                        self.listsRef?.updateData([
-                                            K.List.tokens: FieldValue.arrayUnion([token])
-                                        ])
-                                    }
-                                } else {
-                                    self.listsRef?.updateData([
-                                        K.List.tokens: FieldValue.arrayUnion([token])
-                                    ])
-                                }
-                                
-                            }
-                        })
-                    }
-                    
-                    // Load the section names
-                    self.loadSections(listID: self.currentListID!)
-                    
-                    // Save variables in UserDefaults
-                    UserDefaults.standard.set(self.userFirstName, forKey: "firstName")
-                    UserDefaults.standard.synchronize()
                     
                 } else {
                     print("Could not find document")
@@ -143,6 +140,14 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
         refreshControlMT.attributedTitle = NSAttributedString(string: "Refreshing...")
         refreshControlMT.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
         tableView.addSubview(refreshControlMT)
+    }
+    
+    func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!) {
+        if (segue.identifier == K.Segues.tableToAddList) {
+            if let nextViewController = segue.destination as? AddListViewController {
+                nextViewController.tabBarController?.navigationItem.hidesBackButton = true
+            }
+        }
     }
     
 
@@ -362,7 +367,7 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
         
         // Check what the position of the category name is, return 17 ('Other') if nothing found
         if thisCategory != "" {
-            newTask.number = FoodData.foodCategories.firstIndex(of: thisCategory) ?? 17
+            newTask.number = FoodData.foodCategories.firstIndex(of: thisCategory) ?? 10
         }
        
         // Remove the device's messaging token from the list's pushTokens -> user that adds the item doesn't receive notification
@@ -655,8 +660,7 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
     //MARK: - Show label when there are no items
     
     func emptyTableView() {
-        if self.sections[1].items.count == 0 && self.sections[2].items.count == 0 && self.sections[3].items.count == 0 && self.sections[4].items.count == 0 && self.sections[5].items.count == 0 && self.sections[6].items.count == 0 && self.sections[7].items.count == 0 && self.sections[8].items.count == 0 && self.sections[9].items.count == 0 && self.sections[10].items.count == 0 && self.sections[11].items.count == 0 && self.sections[12].items.count == 0 && self.sections[13].items.count == 0 && self.sections[14].items.count == 0 && self.sections[15].items.count == 0 && self.sections[16].items.count == 0 && self.sections[17].items.count == 0 {
-            print("All items are empty \(self.sections)")
+        if self.sections[1].items.count == 0 && self.sections[2].items.count == 0 && self.sections[3].items.count == 0 && self.sections[4].items.count == 0 && self.sections[5].items.count == 0 && self.sections[6].items.count == 0 && self.sections[7].items.count == 0 && self.sections[8].items.count == 0 && self.sections[9].items.count == 0 && self.sections[10].items.count == 0 {
             let emptyLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.bounds.size.width, height: self.view.bounds.size.height))
             emptyLabel.text = "You haven't added any items to your list yet."
             emptyLabel.textColor = UIColor.gray
@@ -669,29 +673,41 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
     
     //MARK: - Load sections
     func loadSections(listID: String) {
-        let listRef = db.collection(K.FStore.lists).document(listID)
+//        let listRef = db.collection(K.FStore.lists).document(listID)
+//
+//        listRef.getDocument { (document, error) in
+//            if let document = document, document.exists {
+//                let sectionNames = document.data()![K.List.sections] as? [String]
+//
+//                self.sections.removeAll()
+//                if let sectionNames = sectionNames {
+//                    for (index, item) in sectionNames.enumerated() {
+//                        let newSection = Section(name: item, isExpanded: true, items: [])
+//                        self.sections.append(newSection)
+//
+//                        DispatchQueue.main.async {
+//                            self.loadItems(listID: listID, section: index)
+//                        }
+//                    }
+//                }
+//                self.tableView.reloadData()
+//
+//            } else {
+//                print("Document does not exist")
+//            }
+//        }
         
-        listRef.getDocument { (document, error) in
-            if let document = document, document.exists {
-                let sectionNames = document.data()![K.List.sections] as? [String]
+        let sectionNames = FoodData.foodCategories
+        self.sections.removeAll()
+            for (index, item) in sectionNames.enumerated() {
+                let newSection = Section(name: item, isExpanded: true, items: [])
+                self.sections.append(newSection)
                 
-                self.sections.removeAll()
-                if let sectionNames = sectionNames {
-                    for (index, item) in sectionNames.enumerated() {
-                        let newSection = Section(name: item, isExpanded: true, items: [])
-                        self.sections.append(newSection)
-                        
-                        DispatchQueue.main.async {
-                            self.loadItems(listID: listID, section: index)
-                        }
-                    }
+                DispatchQueue.main.async {
+                    self.loadItems(listID: listID, section: index)
                 }
-                self.tableView.reloadData()
-                
-            } else {
-                print("Document does not exist")
-            }
         }
+        self.tableView.reloadData()
     }
     
     
