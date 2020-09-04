@@ -21,19 +21,23 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.hideKeyboardWhenTappedAround() 
+//        errorMessage.text = ""
+//
+//        // Typing animation
+//        hiThere.text = ""
+//        var charIndex = 0
+//        let titleText = "Hi there, nice to see you again!"
+//
+//        for letter in titleText {
+//            Timer.scheduledTimer(withTimeInterval: 0.08 * Double(charIndex), repeats: false) { (timer) in
+//                self.hiThere.text?.append(letter)
+//            }
+//            charIndex += 1
+//        }
+        
         errorMessage.text = ""
-        
-        // Typing animation
-        hiThere.text = ""
-        var charIndex = 0
-        let titleText = "Hi there, nice to see you again!"
-        
-        for letter in titleText {
-            Timer.scheduledTimer(withTimeInterval: 0.08 * Double(charIndex), repeats: false) { (timer) in
-                self.hiThere.text?.append(letter)
-            }
-            charIndex += 1
-        }
+        hiThere.text = NSLocalizedString("Hi there, nice to see you again",
+        comment: "Login title")
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

@@ -355,6 +355,7 @@ PODS:
     - nanopb/encode (= 1.30906.0)
   - nanopb/decode (1.30906.0)
   - nanopb/encode (1.30906.0)
+  - PinCodeTextField (0.1.0)
   - PromisesObjC (1.2.10)
   - Protobuf (3.13.0)
   - Shake (10.0.6)
@@ -369,6 +370,7 @@ DEPENDENCIES:
   - Firebase/Messaging
   - Firebase/Storage
   - Kingfisher
+  - PinCodeTextField
   - Shake
   - SkyFloatingLabelTextField
   - Smartlook
@@ -397,6 +399,7 @@ SPEC REPOS:
     - Kingfisher
     - leveldb-library
     - nanopb
+    - PinCodeTextField
     - PromisesObjC
     - Protobuf
     - Shake
@@ -426,12 +429,13 @@ SPEC CHECKSUMS:
   Kingfisher: 1acb67597a520c2d0310677e66d6e0af455ef757
   leveldb-library: 55d93ee664b4007aac644a782d11da33fba316f7
   nanopb: 59317e09cf1f1a0af72f12af412d54edf52603fc
+  PinCodeTextField: a3c39be58bde3ed1d6888d0fb1d88b0a4a2277cc
   PromisesObjC: b14b1c6b68e306650688599de8a45e49fae81151
   Protobuf: 3dac39b34a08151c6d949560efe3f86134a3f748
   Shake: 56c29f2babd4d2fd8266ec0a1dd82aad2808e5b1
   SkyFloatingLabelTextField: 5a338412114808e961fe2d14ea2c5452c8b6e4aa
   Smartlook: a83db121ff758fef7c5353bab64046a40dd85f82
 
-PODFILE CHECKSUM: 5b6c2a543ff5bc93f62d352f923b4ab8afa48908
+PODFILE CHECKSUM: 87a535fe1932120046874f235bc4b1eee7f1bb62
 
 COCOAPODS: 1.9.3

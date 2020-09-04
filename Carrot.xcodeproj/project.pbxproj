@@ -21,6 +21,7 @@
 		A02C91BB24BFB38300BE0489 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02C91BA24BFB38300BE0489 /* LoginViewController.swift */; };
 		A03F5A2724C1EF4F008054A7 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03F5A2624C1EF4F008054A7 /* RegisterViewController.swift */; };
 		A03F5A2924C1F564008054A7 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03F5A2824C1F564008054A7 /* WelcomeViewController.swift */; };
+		A04F5C0E250281CF00FAB696 /* RegisterViewControllerOne.swift in Sources */ = {isa = PBXBuildFile; fileRef = A04F5C0D250281CF00FAB696 /* RegisterViewControllerOne.swift */; };
 		A05BDA4524CDC78D00854F00 /* AddListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05BDA4424CDC78D00854F00 /* AddListViewController.swift */; };
 		A06DE5AC24F17A020023E0DB /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B59B01D24AA7A59005FBC70 /* TableViewController.swift */; };
 		A07E2C2224F930F400058F35 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A07E2C2124F930F400058F35 /* GoogleService-Info.plist */; };
@@ -64,6 +65,7 @@
 		A02C91BA24BFB38300BE0489 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		A03F5A2624C1EF4F008054A7 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		A03F5A2824C1F564008054A7 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
+		A04F5C0D250281CF00FAB696 /* RegisterViewControllerOne.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewControllerOne.swift; sourceTree = "<group>"; };
 		A05BDA4424CDC78D00854F00 /* AddListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddListViewController.swift; sourceTree = "<group>"; };
 		A07E2C2124F930F400058F35 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A07E2C2324F9320D00058F35 /* Carrot.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Carrot.entitlements; sourceTree = "<group>"; };
@@ -71,7 +73,7 @@
 		A0ACFEAC24BBA320008943E4 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		A0AE90C024B8F2DA00E31B68 /* Section.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Section.swift; path = Carrot/Controller/Section.swift; sourceTree = SOURCE_ROOT; };
 		A0C466B024B12FF400DDDAAA /* FoodData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodData.swift; sourceTree = "<group>"; usesTabs = 0; };
-		A0DCFC5624FD97610037D750 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Main.strings; sourceTree = "<group>"; };
+		A0DCFC5624FD97610037D750 /* nl */ = {isa = PBXFileReference; explicitFileType = text.plist.strings; name = nl; path = nl.lproj/Main.strings; sourceTree = "<group>"; };
 		A0DCFC5724FD97620037D750 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		A0DCFC5924FD976C0037D750 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		A0DCFC5B24FD97720037D750 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -160,6 +162,7 @@
 				A03F5A2624C1EF4F008054A7 /* RegisterViewController.swift */,
 				A05BDA4424CDC78D00854F00 /* AddListViewController.swift */,
 				A004A1C624E7F6AE008CF844 /* NavController.swift */,
+				A04F5C0D250281CF00FAB696 /* RegisterViewControllerOne.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -302,6 +305,7 @@
 			files = (
 				A0C466B124B12FF400DDDAAA /* FoodData.swift in Sources */,
 				A03F5A2724C1EF4F008054A7 /* RegisterViewController.swift in Sources */,
+				A04F5C0E250281CF00FAB696 /* RegisterViewControllerOne.swift in Sources */,
 				A05BDA4524CDC78D00854F00 /* AddListViewController.swift in Sources */,
 				A0812ADF24C76C2E002A03EB /* AccountViewController.swift in Sources */,
 				7B59B01C24AA7A33005FBC70 /* TaskCell.swift in Sources */,

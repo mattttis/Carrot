@@ -36,36 +36,6 @@ class CardViewController: UIViewController {
                 self.cardCode.backgroundColor = UIColor.white
             }
         }
-        
-        
-//        dbRef.getDocument { (document, err) in
-//            if let e = err {
-//                print("Error retrieving document: \(e)")
-//            } else {
-//                let data = document?.data()
-////                if let imageURL = data?[K.User.barcodeImage] as? String {
-////
-////                    let url = URL(string: imageURL)
-////                    UserDefaults.standard.set(imageURL, forKey: K.User.barcodeImage)
-////                    // self.cardCode.kf.setImage(with: url)
-////
-////                    let number = data![K.User.barcodeNumber] as! String
-////                    self.cardNumber.text = number
-////                    UserDefaults.standard.set(number, forKey: K.User.barcodeNumber)
-////                    UserDefaults.standard.synchronize()
-////
-////                    if let barcode = BarCodeI.generateBarcode(from: number) {
-////                        self.image = barcode
-////                        self.cardCode.image = barcode
-////                        self.cardCode.backgroundColor = UIColor.white
-////                    }
-//
-//                let number = data![K.User.barcodeNumber] as! String
-//                self.cardNumber.text = number
-//                UserDefaults.standard.set(number, forKey: K.User.barcodeNumber)
-//                UserDefaults.standard.synchronize()
-//            }
-//    }
     }
 
     override func viewWillAppear(_ animated: Bool) {

@@ -8,25 +8,37 @@
 
 import UIKit
 import Firebase
+import PinCodeTextField
 
-class AddListViewController: UIViewController, UNUserNotificationCenterDelegate {
+class AddListViewController: UIViewController, UNUserNotificationCenterDelegate, PinCodeTextFieldDelegate {
     
     let db = Firestore.firestore()
     let user = Auth.auth().currentUser
 
-    @IBOutlet weak var existingListOutlet: UITextField!
+    @IBOutlet weak var existingListOutlet: PinCodeTextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.hideKeyboardWhenTappedAround() 
+        self.hideKeyboardWhenTappedAround()
+        
+        existingListOutlet.delegate = self
     }
     
-    @IBAction func existingListPrimaryAction(_ sender: Any) {
-        existingList()
+    func textFieldShouldReturn(_ textField: PinCodeTextField) -> Bool {
+        print(textField.text)
+        self.existingList()
+        return true
     }
     
-    @IBAction func existingListAction(_ sender: Any) {
-        existingList()
+//    func textFieldDidEndEditing(_ textField: PinCodeTextField) {
+//        print(textField.text)
+//        self.existingList()
+//    }
+    
+    func textFieldShouldEndEditing(_ textField: PinCodeTextField) -> Bool {
+        print(textField.text)
+        self.existingList()
+        return true
     }
     
     func existingList() {

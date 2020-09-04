@@ -11,6 +11,23 @@
 "You can always access your content by signing back in" = "Je kunt je gegevens weer terugvinden door terug in te loggen";
 "Sign out" = "Uitloggen";
 "Cancel" = "Annuleren";
+"Refreshing..." = "Vernieuwen...";
+
+// Sign upVC
+"Hi there, welcome to Carrot!" = "Hé, welkom bij Carrot!";
+"Next" = "Volgende";
+"Please fill in both fields." = "Vul beide velden in om verder te gaan.";
+"First name" = "Voornaam";
+"Last name" = "Achternaam";
+"Placeholder" = "Wachtwoord";
+"Sign up" = "Registreren";
+"Password" = "Wachtwoord";
 
 // BarcodeVC
 "You don't have to press anything, we will start scanning automatically once we detect a barcode within the window." = "Je hoeft nergens te klikken. Wanneer we een barcode zien in het venster scannen we hem automatisch.";
+
+// LoginVC
+"Hi there, nice to see you again" = "Hoi, leuk je weer te zien!";
+
+// TableVC
+"You haven't added any items to your list yet." = "Je hebt nog niks aan je boodschappenlijst toegevoegd.";

@@ -959,9 +959,7 @@
                     <connections>
                         <outlet property="errorMessage" destination="jFx-WY-Els" id="Cn5-IR-2EL"/>
                         <outlet property="firstName" destination="enH-4U-pLT" id="4M4-3b-Uhh"/>
-                        <outlet property="hiThere" destination="du7-GT-tUW" id="7i4-bM-O4J"/>
                         <outlet property="lastName" destination="bUL-Du-qP4" id="QAB-m4-oDa"/>
-                        <outlet property="nextButton" destination="Zri-bz-zXz" id="hU8-Ks-l3T"/>
                         <segue destination="Q1a-hP-l3m" kind="show" identifier="stepOne" id="tnm-PX-1qh"/>
                     </connections>
                 </viewController>
@@ -1114,7 +1112,6 @@
                         <outlet property="errorMessage" destination="qmT-9J-ex9" id="MKx-pQ-jUn"/>
                         <outlet property="passwordTextfield" destination="GNj-aX-g30" id="zdf-ij-Gkd"/>
                         <outlet property="profilePicture" destination="PzD-8J-Ava" id="y2V-ap-FRl"/>
-                        <outlet property="signUp" destination="0RL-IL-hSK" id="J0W-bh-ikW"/>
                         <segue destination="4eS-P9-CWv" kind="show" identifier="registerToAddList" id="3OA-L9-CNT"/>
                     </connections>
                 </viewController>

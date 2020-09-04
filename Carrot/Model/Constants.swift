@@ -23,6 +23,7 @@ struct K {
         static let addListToTable = "addListToTable"
         static let loginToTable = "loginToTable"
         static let welcomeToTable = "welcomeToTable"
+        static let registerOneToTwo = "stepOne"
         
         // Normal app usage
         static let accountToCard = "accountToCard"
@@ -51,6 +52,7 @@ struct K {
     
     struct User {
         static let firstName = "firstname"
+        static let lastName = "lastName"
         static let email = "email"
         static let dateCreated = "dateCreated"
         static let lists = "lists"

@@ -137,7 +137,8 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
         }
         
         // Adding pull to refresh functionality
-        refreshControlMT.attributedTitle = NSAttributedString(string: "Refreshing...")
+        refreshControlMT.attributedTitle = NSAttributedString(string: NSLocalizedString("Refreshing...",
+        comment: "Pull to refresh"))
         refreshControlMT.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
         tableView.addSubview(refreshControlMT)
     }
@@ -662,7 +663,7 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
     func emptyTableView() {
         if self.sections[1].items.count == 0 && self.sections[2].items.count == 0 && self.sections[3].items.count == 0 && self.sections[4].items.count == 0 && self.sections[5].items.count == 0 && self.sections[6].items.count == 0 && self.sections[7].items.count == 0 && self.sections[8].items.count == 0 && self.sections[9].items.count == 0 && self.sections[10].items.count == 0 {
             let emptyLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.bounds.size.width, height: self.view.bounds.size.height))
-            emptyLabel.text = "You haven't added any items to your list yet."
+            emptyLabel.text = NSLocalizedString("You haven't added any items to your list yet.", comment: "Shown on empty tableView")
             emptyLabel.textColor = UIColor.gray
             emptyLabel.textAlignment = NSTextAlignment.center
             self.tableView.backgroundView = emptyLabel

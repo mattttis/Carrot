@@ -17,6 +17,7 @@ pod 'Kingfisher'
 pod 'SkyFloatingLabelTextField'
 pod 'Smartlook'
 pod 'Shake'
+pod 'PinCodeTextField'
 
 # pod 'UXCam'
 # pod 'Instabug'

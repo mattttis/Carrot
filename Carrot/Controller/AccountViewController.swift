@@ -83,7 +83,11 @@ class AccountViewController: UIViewController {
                     self.userEmail = (data[K.User.email] as! String)
                     self.currentLists = (data[K.User.lists] as! [String])
                     self.imageURL = (data[K.User.profilePicture] as! String)
-                    self.currentListID = self.currentLists[0]
+                    
+                    if self.currentLists != nil {
+                        self.currentListID = self.currentLists[0]
+                    }
+                    
                     self.listRef = self.db.collection(K.FStore.lists).document(self.currentListID!)
                     
                     self.emailAddress.text = self.userEmail!
