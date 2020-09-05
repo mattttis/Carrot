@@ -85,7 +85,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                     }
                     
                     self.db.whereField("members", arrayContains: authResult!.user.uid).getDocuments { (querySnapshot, err) in
-                        if let e = err {
+                        if err != nil {
                             print("Error getting documents: \(err)")
                         } else {
                             for document in querySnapshot!.documents {
@@ -94,7 +94,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                                 UserDefaults.standard.set(listCode, forKey: "code")
                                 UserDefaults.standard.set(language, forKey: "language")
                                 FoodData.language = language
-                                print("LANGUAGE IS: \(language)")
                                 UserDefaults.standard.synchronize()
                             }
                         }

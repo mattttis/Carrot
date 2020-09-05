@@ -57,8 +57,6 @@ class ShareViewController: UIViewController {
             ])
         }
         
-        
-        
         // present the view controller
         self.present(activityViewController, animated: true, completion: nil)
     }

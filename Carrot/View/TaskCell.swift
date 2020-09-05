@@ -11,7 +11,7 @@ import Firebase
 
 protocol ChangeButton {
     func changeButton(state: Bool, indexSection: Int?, indexRow: Int?, itemID: String?)
-    func moveItem(indexSection: Int?, indexRow: Int?)
+    // func moveItem(indexSection: Int?, indexRow: Int?)
 }
 
 class TaskCell: UITableViewCell {

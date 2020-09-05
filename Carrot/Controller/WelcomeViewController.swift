@@ -31,7 +31,7 @@ class WelcomeViewController: UIViewController {
         
         let margins = login.layoutMarginsGuide
         let margins2 = registerEmail.layoutMarginsGuide
-        let appleMargins = appleButton.layoutMarginsGuide
+        // let appleMargins = appleButton.layoutMarginsGuide
 //        appleButton.leadingAnchor.constraint(equalTo: appleMargins.leadingAnchor, constant: 60).isActive = true
 //        appleButton.trailingAnchor.constraint(equalTo: appleMargins.trailingAnchor, constant: 60).isActive = true
         
@@ -166,9 +166,9 @@ extension WelcomeViewController: ASAuthorizationControllerDelegate {
             Auth.auth().signIn(with: firebaseCredential) { [weak self] (authResult, error) in
                 if let authData = authResult {
                         // Save profile picture
-                        var dict: Dictionary<String, Any> = [
+                    let dict: Dictionary<String, Any> = [
                             K.User.firstName: user.firstName,
-                            K.User.email: authData.user.email,
+                            K.User.email: authData.user.email!,
                             K.User.dateCreated: Date(),
                             K.User.profilePicture: "",
                             K.User.lists: []

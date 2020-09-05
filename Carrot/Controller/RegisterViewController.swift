@@ -50,10 +50,10 @@ class RegisterViewController: UIViewController, UIImagePickerControllerDelegate,
                 
                 if let authData = authResult {
                     // Save profile picture
-                    var dict: Dictionary<String, Any> = [
+                    let dict: Dictionary<String, Any> = [
                         K.User.firstName: firstName,
                         K.User.lastName: lastName,
-                        K.User.email: authData.user.email,
+                        K.User.email: authData.user.email!,
                         K.User.dateCreated: Date(),
                         K.User.profilePicture: "",
                         K.User.lists: []

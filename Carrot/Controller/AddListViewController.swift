@@ -25,7 +25,6 @@ class AddListViewController: UIViewController, UNUserNotificationCenterDelegate,
     }
     
     func textFieldShouldReturn(_ textField: PinCodeTextField) -> Bool {
-        print(textField.text)
         self.existingList()
         return true
     }
@@ -36,7 +35,6 @@ class AddListViewController: UIViewController, UNUserNotificationCenterDelegate,
 //    }
     
     func textFieldShouldEndEditing(_ textField: PinCodeTextField) -> Bool {
-        print(textField.text)
         self.existingList()
         return true
     }
@@ -108,7 +106,7 @@ class AddListViewController: UIViewController, UNUserNotificationCenterDelegate,
             K.List.members: [Auth.auth().currentUser!.uid],
             K.List.membersEmail: [Auth.auth().currentUser?.email],
             K.List.code: code,
-            K.List.language: Locale.current.languageCode
+            K.List.language: Locale.current.languageCode!
         ] as [String : Any]
 
         UserDefaults.standard.set(String(code), forKey: "code")
