@@ -10,6 +10,7 @@ import Foundation
 
 class Task {
     var name = ""
+    var quantity: String?
     var checked = false
     var date = Date()
     var category: String
@@ -45,8 +46,9 @@ class Task {
         self.category = findCategory(itemName: name.lowercased())
     }
     
-    init(name: String, isChecked: Bool, itemID: String, uid: String) {
+    init(name: String, isChecked: Bool, itemID: String, uid: String, quantity: String?) {
         self.name = name
+        self.quantity = quantity
         self.checked = isChecked
         self.date = Date()
         self.number = 10
@@ -58,6 +60,17 @@ class Task {
     
     init(name: String, uid: String) {
         self.name = name
+        self.checked = false
+        self.date = Date()
+        self.number = 10
+        self.category = ""
+        self.category = findCategory(itemName: name.lowercased())
+        self.uid = uid
+    }
+    
+    init(name: String, uid: String, quantity: String) {
+        self.name = name
+        self.quantity = quantity
         self.checked = false
         self.date = Date()
         self.number = 10

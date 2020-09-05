@@ -10,26 +10,68 @@ import UIKit
 import Firebase
 
 protocol AddTask {
-    func addTask(name: String, uid: String)
+    func addTask(name: String, uid: String, quantity: String?)
 }
 
-class InputCell: UITableViewCell {
-
-    @IBAction func saveNewTaskAction(_ sender: Any) {
-        if newTaskField.text != "" {
-            delegate?.addTask(name: newTaskField.text!, uid: Auth.auth().currentUser!.uid)
-            newTaskField.text = ""
-            newTaskField.resignFirstResponder()
-        }
-    }
+class InputCell: UITableViewCell, UITextFieldDelegate {
     
-    @IBOutlet weak var saveNewTaskOutlet: UIButton!
+    @IBOutlet weak var saveNewTaskOutlet: UIImageView!
     @IBOutlet weak var newTaskField: UITextField!
+    @IBOutlet weak var quantityField: UITextField!
+    
     
     var delegate: AddTask?
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        newTaskField.addTarget(self, action: #selector(saveNewTaskAction), for: .editingDidEndOnExit)
+        newTaskField.addTarget(self, action: #selector(nextField), for: .editingDidEndOnExit)
+        quantityField.addTarget(self, action: #selector(saveNewTaskAction), for: .editingDidEndOnExit)
+        
+//        let tap = UIGestureRecognizer(target: self, action: #selector(saveNewTaskAction))
+//        saveNewTaskOutlet.isUserInteractionEnabled = true
+//        saveNewTaskOutlet.addGestureRecognizer(tap)
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(InputCell.saveNewTaskAction))
+        saveNewTaskOutlet.addGestureRecognizer(tapGesture)
+        
+        quantityField.attributedPlaceholder = NSAttributedString(string: NSLocalizedString("QUANTITY", comment: "Quantity text field placeholder"),
+        attributes: [NSAttributedString.Key.foregroundColor: UIColor.darkGray])
+        
+        newTaskField.attributedPlaceholder = NSAttributedString(string: NSLocalizedString("Item name", comment: "New item name field placeholder"),
+        attributes: [NSAttributedString.Key.foregroundColor: UIColor.darkGray])
+        
+        quantityField.delegate = self
+    }
+    
+    @objc func saveNewTaskAction() {
+        print("I'm tapped")
+        if newTaskField.text != "" {
+            delegate?.addTask(name: newTaskField.text!, uid: Auth.auth().currentUser!.uid, quantity: quantityField.text)
+            newTaskField.text = ""
+            quantityField.text = ""
+            newTaskField.resignFirstResponder()
+            quantityField.resignFirstResponder()
+        }
+    }
+    
+    
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+        if textField == quantityField {
+            if string == "" {
+                // User presses backspace
+                textField.deleteBackward()
+            } else {
+                // User presses a key or pastes
+                textField.insertText(string.uppercased())
+            }
+            // Do not let specified text range to be changed
+            return false
+        }
+
+        return true
+    }
+    
+    @objc func nextField() {
+        quantityField.becomeFirstResponder()
     }
 }

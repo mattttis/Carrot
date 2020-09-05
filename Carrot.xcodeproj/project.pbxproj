@@ -21,6 +21,9 @@
 		A02C91BB24BFB38300BE0489 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02C91BA24BFB38300BE0489 /* LoginViewController.swift */; };
 		A03F5A2724C1EF4F008054A7 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03F5A2624C1EF4F008054A7 /* RegisterViewController.swift */; };
 		A03F5A2924C1F564008054A7 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03F5A2824C1F564008054A7 /* WelcomeViewController.swift */; };
+		A04435402503B83F007270A2 /* SF-Compact-Text-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = A044353D2503B83E007270A2 /* SF-Compact-Text-Regular.otf */; };
+		A04435412503B83F007270A2 /* SF-Compact-Text-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = A044353E2503B83E007270A2 /* SF-Compact-Text-Medium.otf */; };
+		A04435422503B83F007270A2 /* SF-Compact-Text-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = A044353F2503B83F007270A2 /* SF-Compact-Text-Light.otf */; };
 		A04F5C0E250281CF00FAB696 /* RegisterViewControllerOne.swift in Sources */ = {isa = PBXBuildFile; fileRef = A04F5C0D250281CF00FAB696 /* RegisterViewControllerOne.swift */; };
 		A05BDA4524CDC78D00854F00 /* AddListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05BDA4424CDC78D00854F00 /* AddListViewController.swift */; };
 		A06DE5AC24F17A020023E0DB /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B59B01D24AA7A59005FBC70 /* TableViewController.swift */; };
@@ -65,6 +68,9 @@
 		A02C91BA24BFB38300BE0489 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		A03F5A2624C1EF4F008054A7 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		A03F5A2824C1F564008054A7 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
+		A044353D2503B83E007270A2 /* SF-Compact-Text-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Compact-Text-Regular.otf"; sourceTree = "<group>"; };
+		A044353E2503B83E007270A2 /* SF-Compact-Text-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Compact-Text-Medium.otf"; sourceTree = "<group>"; };
+		A044353F2503B83F007270A2 /* SF-Compact-Text-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Compact-Text-Light.otf"; sourceTree = "<group>"; };
 		A04F5C0D250281CF00FAB696 /* RegisterViewControllerOne.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewControllerOne.swift; sourceTree = "<group>"; };
 		A05BDA4424CDC78D00854F00 /* AddListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddListViewController.swift; sourceTree = "<group>"; };
 		A07E2C2124F930F400058F35 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -120,6 +126,7 @@
 				A03C5D7B24B11A0E00C2BB4D /* Controller */,
 				A03C5D7A24B11A0800C2BB4D /* View */,
 				A03C5D7924B11A0000C2BB4D /* Model */,
+				A044353C2503B813007270A2 /* Fonts */,
 				7B59B01024AA7816005FBC70 /* Assets.xcassets */,
 				7B59B01524AA7816005FBC70 /* Info.plist */,
 				A07E2C2324F9320D00058F35 /* Carrot.entitlements */,
@@ -165,6 +172,16 @@
 				A04F5C0D250281CF00FAB696 /* RegisterViewControllerOne.swift */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		A044353C2503B813007270A2 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				A044353F2503B83F007270A2 /* SF-Compact-Text-Light.otf */,
+				A044353E2503B83E007270A2 /* SF-Compact-Text-Medium.otf */,
+				A044353D2503B83E007270A2 /* SF-Compact-Text-Regular.otf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 		CAFEAECB567A3E3E5D34EBBB /* Frameworks */ = {
@@ -248,8 +265,11 @@
 			files = (
 				A0DCFC5824FD976C0037D750 /* Localizable.strings in Resources */,
 				A07E2C2224F930F400058F35 /* GoogleService-Info.plist in Resources */,
+				A04435412503B83F007270A2 /* SF-Compact-Text-Medium.otf in Resources */,
 				7B59B01424AA7816005FBC70 /* LaunchScreen.storyboard in Resources */,
+				A04435422503B83F007270A2 /* SF-Compact-Text-Light.otf in Resources */,
 				A0B38CD724EC8F1D00511F06 /* Assets.xcassets in Resources */,
+				A04435402503B83F007270A2 /* SF-Compact-Text-Regular.otf in Resources */,
 				7B59B00F24AA7811005FBC70 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

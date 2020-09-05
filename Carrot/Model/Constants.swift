@@ -82,6 +82,7 @@ struct K {
     
     struct Item {
         static let name = "name"
+        static let quantity = "quantity"
         static let isChecked = "isChecked"
         static let checkedBy = "checkedBy"
         static let uid = "createdBy"

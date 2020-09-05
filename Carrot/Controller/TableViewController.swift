@@ -169,6 +169,12 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
         return sections[section].items.count
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath) as? TaskCell
+        
+        cell?.startAnimation()
+    }
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         // First section (1 cell) should use the inputCell
@@ -181,6 +187,23 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
             let current = sections[indexPath.section].items[indexPath.row]
             cell.taskNameLabel.text = current.name
             
+            if let quantity = current.quantity {
+                cell.quantityLabel.text = quantity.uppercased()
+            } else {
+//                
+//                func removeAllConstraintsFromView(view: UIView) {
+//                    for c in view.constraints {
+//                        view.removeConstraint(c)
+//                    }
+//                }
+//                
+//                cell.quantityLabel.isHidden = true
+//                removeAllConstraintsFromView(view: cell)
+//                cell.noQuantity()
+//                cell.taskNameLabel.centerYAnchor.constraint(equalTo: cell.centerYAnchor).isActive = true
+            }
+            
+            
             if current.checked {
                 cell.checkBoxOutlet.setBackgroundImage(#imageLiteral(resourceName: "checkBoxFILLED "), for: UIControl.State.normal)
             } else {
@@ -189,6 +212,7 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
             
             cell.delegate = self
             cell.items = sections[indexPath.section].items
+            cell.quantity = sections[indexPath.section].items[indexPath.row].quantity
             cell.indexSection = indexPath.section
             cell.indexRow = indexPath.row
             cell.itemID = sections[indexPath.section].items[indexPath.row].itemID
@@ -359,8 +383,9 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
     
     //MARK: - Adding task (protocol)
     
-    func addTask(name: String, uid: String) {
+    func addTask(name: String, uid: String, quantity: String?) {
         let newTask = Task(name: name, uid: uid)
+        
         let thisCategory = newTask.category
         
         self.tableView.backgroundView = nil
@@ -369,6 +394,12 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
         // Check what the position of the category name is, return 17 ('Other') if nothing found
         if thisCategory != "" {
             newTask.number = FoodData.foodCategories.firstIndex(of: thisCategory) ?? 10
+        }
+        
+        newTask.quantity = quantity
+        
+        if quantity != nil {
+            newTask.quantity = quantity
         }
        
         // Remove the device's messaging token from the list's pushTokens -> user that adds the item doesn't receive notification
@@ -380,14 +411,15 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
         
         // Adding to Firestore
         var ref: DocumentReference? = nil
-        ref = db.collection(K.lists).document(currentListID!).collection(K.FStore.sections).document("\(newTask.number)").collection(K.FStore.items).addDocument(data: [
+            ref = db.collection(K.lists).document(currentListID!).collection(K.FStore.sections).document("\(newTask.number)").collection(K.FStore.items).addDocument(data: [
                 K.Item.name: newTask.name,
+                K.Item.quantity: newTask.quantity,
                 K.Item.isChecked: newTask.checked,
                 K.Item.categoryNumber: newTask.number,
                 K.Item.date: Date(),
                 K.Item.firstName: self.userFirstName,
                 K.Item.uid: currentUserID!,
-                K.User.token: self.userToken,
+                "language": UserDefaults.standard.string(forKey: K.List.language),
                 K.Item.tokens: sendToTokens
         ]) { err in
             if let err = err {
@@ -401,12 +433,19 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
                     generator.notificationOccurred(.success)
                     
                     // Adding the task to array
-                    print("Item \(newTask.name) has category of \(newTask.category) with number \(newTask.number) & id \(newTask.itemID!)")
+                    print("Item \(newTask.name) has category of \(newTask.category) with number \(newTask.number) & id \(newTask.itemID!) & quantity \(newTask.quantity)")
                     let count = self.sections[newTask.number].items.count - 1
                     self.sections[newTask.number].items[count].itemID = ref?.documentID
-                    self.sections[newTask.number].items[count].itemID = self.currentUserID ?? "hello"
+                    // self.sections[newTask.number].items[count].itemID = self.currentUserID ?? "hello"
                     self.sections[newTask.number].items = []
                     self.sections[newTask.number].items.append(newTask)
+                    
+                    let items = self.sections[newTask.number].items
+                    
+                    for item in items {
+                        print("Hehehehe \(item.quantity)")
+                    }
+                    
                     self.sections[newTask.number].isExpanded = true
                 }
             }
@@ -420,8 +459,8 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
     //MARK: - Change isChecked state & button
     
     func changeButton(state: Bool, indexSection: Int?, indexRow: Int?, itemID: String?) {
-        if let indexSection = indexSection, let indexRow = indexRow {
-            sections[indexSection].items[indexRow].checked = state
+        if indexSection != nil && indexRow != nil {
+            sections[indexSection!].items[indexRow!].checked = state
         }
         
         let generator = UIImpactFeedbackGenerator(style: .light)
@@ -440,9 +479,6 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
                         print("Error writing document: \(err)")
                     } else {
                         print("Document successfully written!")
-                        
-                        
-                        
                     }
                     
                     if let indexSection = indexSection, let indexRow = indexRow {
@@ -457,6 +493,7 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
                                     
                                     // Get the properties of the item
                                     let name = document.data()?[K.Item.name] as? String
+                                    let quantity = document.data()?[K.Item.quantity] as? String
                                     let uid = document.data()?[K.Item.uid] as? String
                                     let category = document.data()?[K.Item.categoryNumber] as? Int
                                     let isChecked = document.data()?[K.Item.isChecked] as? Bool
@@ -466,6 +503,7 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
                                     
                                     self.db.collection(K.lists).document(self.currentListID!).collection(K.FStore.sectionsChecked).document("\(category!)").collection(K.FStore.items).addDocument(data: [
                                         K.Item.name: name,
+                                        K.Item.quantity: quantity,
                                         K.Item.isChecked: isChecked,
                                         K.Item.categoryNumber: category,
                                         K.Item.date: dateCreated,
@@ -730,11 +768,12 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
             newItems.removeAll()
             for document in documents {
                 let name = document.data()[K.Item.name] as! String
+                let quantity = document.data()[K.Item.quantity] as? String
                 let isChecked = document.data()[K.Item.isChecked] as! Bool
                 let documentID = document.documentID
                 let uid = document.data()[K.Item.uid] as! String
                 
-                let newTask = Task(name: name, isChecked: isChecked, itemID: documentID, uid: uid)
+                let newTask = Task(name: name, isChecked: isChecked, itemID: documentID, uid: uid, quantity: quantity)
                 newItems.append(newTask)
                 self.tableView.backgroundView = nil
                 self.tableView.separatorStyle = UITableViewCell.SeparatorStyle.singleLine

@@ -17,14 +17,17 @@ protocol ChangeButton {
 class TaskCell: UITableViewCell {
 
     var delegate: ChangeButton?
+    
     var indexSection: Int?
     var indexRow: Int?
+    
     var items: [Task]?
     var itemID: String?
     var uid: String?
     var imageURL: String?
     var currentUid = Auth.auth().currentUser!.uid
     var tempState: Bool? = false
+    var quantity: String?
     
     private var workItem: DispatchWorkItem?
     
@@ -45,6 +48,13 @@ class TaskCell: UITableViewCell {
         
         profilePicture.layer.cornerRadius = profilePicture.frame.height / 2
         profilePicture.clipsToBounds = true
+    }
+    
+    func noQuantity() {
+        self.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            taskNameLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor)
+        ])
     }
 
     
@@ -81,9 +91,6 @@ class TaskCell: UITableViewCell {
             self.progressBar.setProgress(0.0, animated: false)
             self.checkBoxOutlet.setBackgroundImage(#imageLiteral(resourceName: "checkBoxOUTLINE "), for: .normal)
         } else {
-//            
-//            let attrString = NSAttributedString(string: taskNameLabel.text!, attributes: [NSAttributedString.Key.strikethroughStyle: NSUnderlineStyle.single.rawValue])
-//            taskNameLabel.attributedText = attrString
             
             self.checkBoxOutlet.setBackgroundImage(#imageLiteral(resourceName: "checkBoxFILLED "), for: .normal)
             self.tempState = true
@@ -93,9 +100,6 @@ class TaskCell: UITableViewCell {
             
                 self.workItem = DispatchWorkItem {
                     self.delegate?.changeButton(state: true, indexSection: self.indexSection!, indexRow: self.indexRow!, itemID: self.itemID)
-//                    let attrString = NSMutableAttributedString(string: self.taskNameLabel.text!, attributes: [NSAttributedString.Key.strikethroughStyle: NSUnderlineStyle.single.rawValue])
-//                    attrString.removeAttribute(NSAttributedString.Key.strikethroughStyle, range: NSMakeRange(0, attrString.length))
-//                    self.taskNameLabel.attributedText = attrString
                 }
                 
                 DispatchQueue.main.asyncAfter(deadline: .now() + 3.3, execute: self.workItem!)
@@ -109,6 +113,7 @@ class TaskCell: UITableViewCell {
     @IBOutlet weak var taskNameLabel: UILabel!
     @IBOutlet weak var checkBoxOutlet: UIButton!
     @IBOutlet weak var progressBar: UIProgressView!
+    @IBOutlet weak var quantityLabel: UILabel!
     
     
 }

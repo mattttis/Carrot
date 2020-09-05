@@ -11,17 +11,27 @@ exports.sendNewChangesNotification = functions.firestore
     const data = snapshot.data()
     const listId = context.params.listId
     const tokensI = snapshot.data()['tokens']
+    const language = snapshot.data()['language']
     
-    console.log(tokensI)
-    console.log(data.tokens)
+    var message
 		
-    // A message that contains the notification that devices will receive	
-    var message = {
-        tokens: tokensI,
-        notification: {
-            body: data.firstName + ' added ' + data.name + ' to your grocery list'
-        }
-    };
+    // A message that contains the notification that devices will receive
+
+    if (language === "en") {
+        message = {
+            tokens: tokensI,
+            notification: {
+                body: data.firstName + ' added ' + data.name + ' to your grocery list'
+            }
+        };
+    } else if (language === "nl") {
+        message = {
+            tokens: tokensI,
+            notification: {
+                body: data.firstName + ' heeft ' + data.name + ' aan je boodschappenlijst toegevoegd'
+            }
+        };
+    }
             
     return admin.messaging().sendMulticast(message).then(function (response) {
         console.log('Successfully sent message to:', listId, response, data.name + ' was added to your grocery list');
