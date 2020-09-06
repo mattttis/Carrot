@@ -34,6 +34,8 @@ class RegisterViewControllerOne: UIViewController {
     @IBAction func nextButton(_ sender: Any) {
         if firstName.text != "" && lastName.text != "" {
             performSegue(withIdentifier: K.Segues.registerOneToTwo, sender: self)
+            let generator = UIImpactFeedbackGenerator(style: .light)
+            generator.impactOccurred()
         } else {
             errorMessage.text = NSLocalizedString("Please fill in both fields.", comment: "Shown on register screen step one")
         }

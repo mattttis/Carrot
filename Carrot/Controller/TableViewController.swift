@@ -183,6 +183,8 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
             let cell = tableView.dequeueReusableCell(withIdentifier: "taskCell", for: indexPath) as! TaskCell
             let current = sections[indexPath.section].items[indexPath.row]
             cell.taskNameLabel.text = current.name
+            cell.quantityLabel.isHidden = false
+            cell.taskNameLabel.centerYAnchor.constraint(equalTo: cell.centerYAnchor).isActive = false
             
             if current.quantity != nil && current.quantity != "" {
                 cell.quantityLabel.text = current.quantity!.uppercased()
@@ -336,6 +338,7 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
                 
                 // Get the properties of the item
                 let name = document.data()?[K.Item.name] as? String
+                let quantity = document.data()?[K.Item.quantity] as? String
                 let uid = document.data()?[K.Item.uid] as? String
                 let category = destinationIndexPath.section
                 let isChecked = document.data()?[K.Item.isChecked] as? Bool
@@ -354,12 +357,13 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
                 // Save the properties of the item in sectionsDeleted
                 ref = self.db.collection(K.lists).document(self.currentListID!).collection(K.FStore.sections).document("\(destinationIndexPath.section)").collection(K.FStore.items).addDocument(data: [
                         K.Item.name: name!,
+                        K.Item.quantity: quantity,
                         K.Item.isChecked: isChecked!,
                         K.Item.categoryNumber: category,
                         K.Item.date: date2,
-                        K.Item.dateChecked: date3 ?? nil!,
-                        K.Item.checkedBy: checkedBy!,
-                        K.Item.uid: uid!
+                        K.Item.dateChecked: date3 ?? nil,
+                        K.Item.checkedBy: checkedBy,
+                        K.Item.uid: uid
                 ]) { err in
                     itemRef!.delete()
                 }
@@ -443,7 +447,7 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
     
     func changeButton(state: Bool, indexSection: Int?, indexRow: Int?, itemID: String?) {
         if indexSection != nil && indexRow != nil {
-            sections[indexSection!].items[indexRow!].checked = state
+            sections[indexSection ?? 1].items[indexRow ?? 1].checked = state
         }
         
         let generator = UIImpactFeedbackGenerator(style: .light)

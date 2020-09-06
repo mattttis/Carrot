@@ -7,7 +7,6 @@ exports.sendNewChangesNotification = functions.firestore
   .document('lists/{listId}/sections/{sectionId}/items/{itemId}')
   .onCreate((snapshot, context) => {
 
-    var topic = "Serenity";
     const data = snapshot.data()
     const listId = context.params.listId
     const tokensI = snapshot.data()['tokens']
@@ -21,14 +20,14 @@ exports.sendNewChangesNotification = functions.firestore
         message = {
             tokens: tokensI,
             notification: {
-                body: data.firstName + ' added ' + data.name + ' to your grocery list'
+                body: data.firstName + ' added ' + data.name.toLowerCase() + ' to your grocery list'
             }
         };
     } else if (language === "nl") {
         message = {
             tokens: tokensI,
             notification: {
-                body: data.firstName + ' heeft ' + data.name + ' aan je boodschappenlijst toegevoegd'
+                body: data.firstName + ' heeft ' + data.name.toLowerCase() + ' aan je boodschappenlijst toegevoegd'
             }
         };
     }

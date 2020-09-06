@@ -2,19 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>UIAppFonts</key>
-	<array>
-		<string>SF-Compact-Text-Medium.otf</string>
-		<string>SF-Compact-Text-Regular.otf</string>
-		<string>SF-Compact-Text-Light.otf</string>
-	</array>
-	<key>Shake</key>
-	<dict>
-		<key>APIClientID</key>
-		<string>X79a65R5JhglSCL3BOoKt9p2CUTN1cfLepcrGUyt</string>
-		<key>APIClientSecret</key>
-		<string>MgRdZHlxyG89FxRW36FbZIS4xXnal5dRFcdV4zhMYdwZSfn9NksNoJd</string>
-	</dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>
@@ -42,6 +29,8 @@
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
@@ -49,6 +38,19 @@
 	<key>NSUserActivityTypes</key>
 	<array>
 		<string>IntentIntent</string>
+	</array>
+	<key>Shake</key>
+	<dict>
+		<key>APIClientID</key>
+		<string>X79a65R5JhglSCL3BOoKt9p2CUTN1cfLepcrGUyt</string>
+		<key>APIClientSecret</key>
+		<string>MgRdZHlxyG89FxRW36FbZIS4xXnal5dRFcdV4zhMYdwZSfn9NksNoJd</string>
+	</dict>
+	<key>UIAppFonts</key>
+	<array>
+		<string>SF-Compact-Text-Medium.otf</string>
+		<string>SF-Compact-Text-Regular.otf</string>
+		<string>SF-Compact-Text-Light.otf</string>
 	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>

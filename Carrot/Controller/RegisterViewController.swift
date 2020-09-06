@@ -81,6 +81,9 @@ class RegisterViewController: UIViewController, UIImagePickerControllerDelegate,
                 UserDefaults.standard.set(authResult?.user.uid, forKey: "uid")
                 UserDefaults.standard.synchronize()
                 
+                let generator = UIImpactFeedbackGenerator(style: .medium)
+                generator.impactOccurred()
+                
                 self.performSegue(withIdentifier: K.Segues.registerToAddList, sender: self)
             }
         }

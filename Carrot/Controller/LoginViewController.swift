@@ -99,6 +99,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                         }
                     }
                     
+                    let generator = UIImpactFeedbackGenerator(style: .light)
+                    generator.impactOccurred()
+                    
                     self.performSegue(withIdentifier: K.Segues.loginToTable, sender: self)
                 }
             }

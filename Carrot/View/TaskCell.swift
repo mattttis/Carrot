@@ -73,6 +73,15 @@ class TaskCell: UITableViewCell {
         }
     }
     
+//    func stopAnimation() {
+//        let generator = UIImpactFeedbackGenerator(style: .medium)
+//        generator.impactOccurred()
+//        workItem?.cancel()
+//        self.progressBar.setProgress(0.0, animated: false)
+//        self.checkBoxOutlet.setBackgroundImage(#imageLiteral(resourceName: "checkBoxOUTLINE "), for: .normal)
+//        self.tempState = false
+//    }
+    
     func stopAnimation() {
         let generator = UIImpactFeedbackGenerator(style: .medium)
         generator.impactOccurred()
@@ -88,7 +97,7 @@ class TaskCell: UITableViewCell {
         
         if items![indexRow!].checked {
             self.delegate?.changeButton(state: false, indexSection: indexSection!, indexRow: indexRow!, itemID: itemID!)
-            self.progressBar.setProgress(0.0, animated: false)
+            // self.progressBar.setProgress(0.0, animated: false)
             self.checkBoxOutlet.setBackgroundImage(#imageLiteral(resourceName: "checkBoxOUTLINE "), for: .normal)
         } else {
             
@@ -107,6 +116,32 @@ class TaskCell: UITableViewCell {
             
             }
         }
+        
+//        func startAnimation() {
+//        let generator = UIImpactFeedbackGenerator(style: .medium)
+//        generator.impactOccurred()
+//
+//        if items![indexRow!].checked {
+//            self.delegate?.changeButton(state: false, indexSection: indexSection!, indexRow: indexRow!, itemID: itemID!)
+//            self.progressBar.setProgress(0.0, animated: false)
+//            self.checkBoxOutlet.setBackgroundImage(#imageLiteral(resourceName: "checkBoxOUTLINE "), for: .normal)
+//        } else {
+//
+//            self.checkBoxOutlet.setBackgroundImage(#imageLiteral(resourceName: "checkBoxFILLED "), for: .normal)
+//            self.tempState = true
+//            UIView.animate(withDuration: 4.0, animations: {
+//                self.progressBar.setProgress(1.0, animated: true)
+//          }) { (finished: Bool) in
+//
+//                self.workItem = DispatchWorkItem {
+//                    self.delegate?.changeButton(state: true, indexSection: self.indexSection!, indexRow: self.indexRow!, itemID: self.itemID)
+//                }
+//
+//                DispatchQueue.main.asyncAfter(deadline: .now() + 3.3, execute: self.workItem!)
+//
+//
+//            }
+//        }
     }
     
     @IBOutlet weak var profilePicture: UIImageView!

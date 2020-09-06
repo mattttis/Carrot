@@ -12,7 +12,7 @@ import Firebase
 class ShareViewController: UIViewController {
     
     let code = UserDefaults.standard.string(forKey: "code")
-    let gesture = UITapGestureRecognizer(target: self, action: "shareAction:")
+    let gesture = UITapGestureRecognizer(target: self, action: #selector(shareAction))
     
     @IBOutlet weak var listCode: UILabel!
     
