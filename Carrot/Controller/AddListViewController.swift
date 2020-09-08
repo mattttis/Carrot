@@ -20,8 +20,12 @@ class AddListViewController: UIViewController, UNUserNotificationCenterDelegate,
     override func viewDidLoad() {
         super.viewDidLoad()
         self.hideKeyboardWhenTappedAround()
-        
+
         existingListOutlet.delegate = self
+    }
+    
+    func myTextFieldTextChanged (textField: UITextField) {
+        textField.text =  textField.text?.uppercased()
     }
     
     func textFieldShouldReturn(_ textField: PinCodeTextField) -> Bool {
@@ -45,7 +49,7 @@ class AddListViewController: UIViewController, UNUserNotificationCenterDelegate,
         let listRef = db.collection(K.FStore.lists)
         let userRef = db.collection(K.FStore.users).document(user!.uid)
         
-        if let enteredCode = existingListOutlet.text {
+        if let enteredCode = existingListOutlet.text?.uppercased() {
             listRef.whereField(K.List.code, isEqualTo: enteredCode).getDocuments { (querySnapshot, error) in
                 if let e = error {
                     print("Error getting documents: \(e)")

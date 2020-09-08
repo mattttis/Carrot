@@ -43,6 +43,7 @@ import UIKit
     public var autocorrectionType: UITextAutocorrectionType = UITextAutocorrectionType.no
     public var font: UIFont = UIFont.systemFont(ofSize: 14)
     public var allowedCharacterSet: CharacterSet = CharacterSet.alphanumerics
+    // public var autocapitalizationType: UITextAutocapitalizationType = UITextAutocapitalizationType.allCharacters
     
     private var _inputView: UIView?
     public override var inputView: UIView? {

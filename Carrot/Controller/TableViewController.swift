@@ -61,7 +61,9 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
         NotificationCenter.default.addObserver(self, selector: #selector(addNewItem), name: Notification.Name("addNewItem"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(showCard), name: Notification.Name("showCard"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(shareFunction), name: Notification.Name("shareFunction"), object: nil)
-
+        NotificationCenter.default.addObserver(self, selector: #selector(appTerminated(notification:)), name: NSNotification.Name(UIApplication.willTerminateNotification.rawValue), object: nil)
+        
+        
         self.hideKeyboardWhenTappedAround()
         
         // Methods for drag and drop
@@ -254,6 +256,9 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
             itemRef.getDocument { (document, error) in
                 if let document = document, document.exists {
                     
+                    let cell = self.tableView.cellForRow(at: indexPath) as? TaskCell
+                    cell?.quantityLabel.isHidden = false
+                    
                     // Get the properties of the item
                     let name = document.data()?[K.Item.name] as? String
                     let uid = document.data()?[K.Item.uid] as? String
@@ -266,11 +271,11 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
                     self.db.collection(K.lists).document(self.currentListID!).collection(K.FStore.sectionsDeleted).document("\(category!)").collection(K.FStore.items).addDocument(data: [
                         K.Item.name: name!,
                         K.Item.isChecked: isChecked!,
-                            K.Item.categoryNumber: category!,
+                            K.Item.categoryNumber: category,
                             K.Item.date: dateCreated,
-                            K.Item.dateChecked: dateChecked!,
-                            K.Item.checkedBy: checkedBy!,
-                            K.Item.uid: uid!,
+                            K.Item.dateChecked: dateChecked,
+                            K.Item.checkedBy: checkedBy,
+                            K.Item.uid: uid,
                             K.Item.dateDeleted: Date()
                     ]) { err in
                         if let err = err {
@@ -307,6 +312,11 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
     //MARK: - Drag and drop, move tableViewCells
     
     func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
+        
+        for section in sections.enumerated() {
+            sections[section.offset].isExpanded = true
+        }
+        
         return [UIDragItem(itemProvider: NSItemProvider())]
     }
     
@@ -319,57 +329,87 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
         if session.localDragSession != nil { // Drag originated from the same app.
             return UITableViewDropProposal(operation: .move, intent: .insertAtDestinationIndexPath)
         }
+        
+        
 
         return UITableViewDropProposal(operation: .cancel, intent: .unspecified)
+    }
+    
+    func tableView(_ tableView: UITableView, dragSessionWillBegin session: UIDragSession) {
+//        for section in sections.enumerated() {
+//            sections[section.offset].isExpanded = true
+//            tableView.reloadData()
+//        }
+        self.sections[1].isExpanded = true
+        print("Editing began....")
+        sections[1].isExpanded = true
+    }
+    
+    override func tableView(_ tableView: UITableView, targetIndexPathForMoveFromRowAt sourceIndexPath: IndexPath, toProposedIndexPath proposedDestinationIndexPath: IndexPath) -> IndexPath {
+        
+        if proposedDestinationIndexPath.section == 0 {
+            return sourceIndexPath
+        } else {
+            
+            var indexPath = proposedDestinationIndexPath
+            
+            if sourceIndexPath.section != proposedDestinationIndexPath.section {
+                indexPath.row = sections[indexPath.section].items.count
+            } else {
+                indexPath.row = sourceIndexPath.row
+            }
+            
+            return indexPath
+        }
     }
 
     override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         
-        let movedObject = self.sections[sourceIndexPath.section].items[sourceIndexPath.row]
-        movedObject.number = destinationIndexPath.section
-        
-        sections[sourceIndexPath.section].items.remove(at: sourceIndexPath.row)
-        sections[destinationIndexPath.section].items.insert(movedObject, at: sections[destinationIndexPath.section].items.count)
-        
-        let itemRef = listsRef?.collection(K.FStore.sections).document(String(sourceIndexPath.section)).collection(K.FStore.items).document(movedObject.itemID!)
-        
-        itemRef!.getDocument { (document, error) in
-            if let document = document, document.exists {
-                
-                // Get the properties of the item
-                let name = document.data()?[K.Item.name] as? String
-                let quantity = document.data()?[K.Item.quantity] as? String
-                let uid = document.data()?[K.Item.uid] as? String
-                let category = destinationIndexPath.section
-                let isChecked = document.data()?[K.Item.isChecked] as? Bool
-                let dateCreated = document.data()?[K.Item.date] as? Timestamp
-                let date2 = Date(timeIntervalSince1970: TimeInterval(dateCreated!.seconds))
-                let dateChecked = document.data()?[K.Item.dateChecked] as? Timestamp
-                var date3: Date?
-                
-                if let dateChecked = dateChecked {
-                    date3 = Date(timeIntervalSince1970: TimeInterval(dateChecked.seconds))
+            let movedObject = self.sections[sourceIndexPath.section].items[sourceIndexPath.row]
+            movedObject.number = destinationIndexPath.section
+            
+            sections[sourceIndexPath.section].items.remove(at: sourceIndexPath.row)
+            sections[destinationIndexPath.section].items.insert(movedObject, at: sections[destinationIndexPath.section].items.count)
+            
+            let itemRef = listsRef?.collection(K.FStore.sections).document(String(sourceIndexPath.section)).collection(K.FStore.items).document(movedObject.itemID!)
+            
+            itemRef!.getDocument { (document, error) in
+                if let document = document, document.exists {
+                    
+                    // Get the properties of the item
+                    let name = document.data()?[K.Item.name] as? String
+                    let quantity = document.data()?[K.Item.quantity] as? String
+                    let uid = document.data()?[K.Item.uid] as? String
+                    let category = destinationIndexPath.section
+                    let isChecked = document.data()?[K.Item.isChecked] as? Bool
+                    let dateCreated = document.data()?[K.Item.date] as? Timestamp
+                    let date2 = Date(timeIntervalSince1970: TimeInterval(dateCreated!.seconds))
+                    let dateChecked = document.data()?[K.Item.dateChecked] as? Timestamp
+                    var date3: Date?
+                    
+                    if let dateChecked = dateChecked {
+                        date3 = Date(timeIntervalSince1970: TimeInterval(dateChecked.seconds))
+                    }
+                    
+                    let checkedBy = document.data()?[K.Item.checkedBy] as? String
+                    var ref: DocumentReference? = nil
+                    
+                    // Save the properties of the item in sectionsDeleted
+                    ref = self.db.collection(K.lists).document(self.currentListID!).collection(K.FStore.sections).document("\(destinationIndexPath.section)").collection(K.FStore.items).addDocument(data: [
+                            K.Item.name: name!,
+                            K.Item.quantity: quantity,
+                            K.Item.isChecked: isChecked!,
+                            K.Item.categoryNumber: category,
+                            K.Item.date: date2,
+                            K.Item.dateChecked: date3 ?? nil,
+                            K.Item.checkedBy: checkedBy,
+                            K.Item.uid: uid
+                    ]) { err in
+                        itemRef!.delete()
+                    }
+                } else {
+                    print("Document does not exist")
                 }
-                
-                let checkedBy = document.data()?[K.Item.checkedBy] as? String
-                var ref: DocumentReference? = nil
-                
-                // Save the properties of the item in sectionsDeleted
-                ref = self.db.collection(K.lists).document(self.currentListID!).collection(K.FStore.sections).document("\(destinationIndexPath.section)").collection(K.FStore.items).addDocument(data: [
-                        K.Item.name: name!,
-                        K.Item.quantity: quantity,
-                        K.Item.isChecked: isChecked!,
-                        K.Item.categoryNumber: category,
-                        K.Item.date: date2,
-                        K.Item.dateChecked: date3 ?? nil,
-                        K.Item.checkedBy: checkedBy,
-                        K.Item.uid: uid
-                ]) { err in
-                    itemRef!.delete()
-                }
-            } else {
-                print("Document does not exist")
-            }
         }
     }
     
@@ -509,13 +549,13 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
                                             }
                                             
                                             // If successful, delete the item in the normal collection
-                                            itemRef.delete() { err in
-                                                if let err = err {
-                                                    print("Error removing document: \(err)")
-                                                } else {
-                                                    print("Document successfully removed!")
-                                                }
-                                            }
+//                                            itemRef.delete() { err in
+//                                                if let err = err {
+//                                                    print("Error removing document: \(err)")
+//                                                } else {
+//                                                    print("Document successfully removed!")
+//                                                }
+//                                            }
                                         }
                                     }
                                 }
@@ -536,6 +576,41 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
                 }
             }
         }
+    }
+    
+    @objc func appTerminated(notification: NSNotification) {
+        
+        print("App terminated")
+        
+        let itemRef = db.collection(K.FStore.lists).document(currentListID!).collection(K.FStore.sections).document("1").collection(K.FStore.items).order(by: K.Item.date)
+        
+        itemRef.getDocuments { (snapshot, error) in
+            if let e = error {
+                print(e)
+            } else {
+                
+                for document in snapshot!.documents {
+                    print(document.data()[K.Item.name])
+                }
+            }
+        
+//            for section in sections.enumerated() {
+//                if let currentListID = currentListID {
+//                    let itemsRef = db.collection(K.FStore.lists).document(currentListID).collection(K.FStore.sections).document("\(section.offset)").collection(K.FStore.items).whereField(K.Item.isChecked, isEqualTo: true)
+//
+//                itemsRef.getDocuments(completion: { (snapshot, error) in
+//                    if let e = error {
+//                        print(e)
+//                    } else {
+//                        for document in snapshot!.documents {
+//                            print(document.data())
+//                        }
+//                    }
+//                })
+//            }
+        }
+        
+        
     }
     
 //    func moveItem(indexSection: Int?, indexRow: Int?) {
@@ -699,29 +774,6 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
     
     //MARK: - Load sections
     func loadSections(listID: String) {
-//        let listRef = db.collection(K.FStore.lists).document(listID)
-//
-//        listRef.getDocument { (document, error) in
-//            if let document = document, document.exists {
-//                let sectionNames = document.data()![K.List.sections] as? [String]
-//
-//                self.sections.removeAll()
-//                if let sectionNames = sectionNames {
-//                    for (index, item) in sectionNames.enumerated() {
-//                        let newSection = Section(name: item, isExpanded: true, items: [])
-//                        self.sections.append(newSection)
-//
-//                        DispatchQueue.main.async {
-//                            self.loadItems(listID: listID, section: index)
-//                        }
-//                    }
-//                }
-//                self.tableView.reloadData()
-//
-//            } else {
-//                print("Document does not exist")
-//            }
-//        }
         
         let sectionNames = FoodData.foodCategories
         self.sections.removeAll()
@@ -821,6 +873,10 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
     }
     
     @objc func addNewItem() {
+        
+        let generator = UIImpactFeedbackGenerator(style: .medium)
+        generator.impactOccurred()
+        
         let cell = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as? InputCell
         cell?.newTaskField.becomeFirstResponder()
     }

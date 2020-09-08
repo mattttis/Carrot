@@ -11,6 +11,7 @@ import Firebase
 import FirebaseStorage
 import Smartlook
 import Shake
+import BackgroundTasks
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -47,13 +48,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         Shake.configuration.isInvokedByShakeDeviceEvent = true
         Shake.configuration.isInvokedByScreenshot = false
-
         Shake.start()
         
         Messaging.messaging().delegate = self
         
         return true
     }
+    
 
     // MARK: UISceneSession Lifecycle
 

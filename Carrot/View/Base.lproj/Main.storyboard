@@ -17,11 +17,11 @@
             <objects>
                 <viewController storyboardIdentifier="AddListViewController" id="4eS-P9-CWv" customClass="AddListViewController" customModule="Carrot" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="y5p-QV-ie1">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eT0-te-GhF" customClass="PinCodeTextField" customModule="PinCodeTextField">
-                                <rect key="frame" x="67" y="298" width="279" height="128"/>
+                                <rect key="frame" x="67" y="158" width="355.66666666666669" height="128"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="128" id="3zt-jg-5IS"/>
@@ -52,7 +52,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rcu-Kr-PVs">
-                                <rect key="frame" x="61" y="504.66666666666674" width="292" height="66"/>
+                                <rect key="frame" x="61" y="344.33333333333331" width="368.66666666666669" height="66"/>
                                 <color key="backgroundColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="66" id="9IF-3g-OA6"/>
@@ -71,13 +71,13 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="if someone invited you, enter the list code below" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6QR-Q8-oHb">
-                                <rect key="frame" x="61" y="268" width="292" height="46"/>
+                                <rect key="frame" x="61" y="128" width="368.66666666666669" height="46"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="if you don't have a list yet, create one now" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vXS-p2-qzh">
-                                <rect key="frame" x="61" y="442" width="292" height="40.666666666666686"/>
+                                <rect key="frame" x="61" y="302" width="368.66666666666669" height="20.333333333333314"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -200,24 +200,28 @@
                                             <color key="trackTintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </progressView>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B6T-Y6-Dpo">
-                                            <rect key="frame" x="22" y="14.666666666666664" width="24" height="24"/>
+                                            <rect key="frame" x="22" y="14.666666666666664" width="23" height="24"/>
                                             <state key="normal" backgroundImage="checkBoxOUTLINE "/>
                                             <connections>
                                                 <action selector="checkBoxAction:" destination="IwI-ln-UVA" eventType="touchUpInside" id="ew6-bG-5Mt"/>
                                             </connections>
                                         </button>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.crop.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="ol4-tW-f4s">
-                                            <rect key="frame" x="332" y="17.333333333333329" width="20" height="19"/>
+                                            <rect key="frame" x="331" y="13.666666666666666" width="28" height="26.666666666666679"/>
                                             <color key="tintColor" systemColor="systemGray4Color" red="0.81960784310000001" green="0.81960784310000001" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="28" id="u4F-ca-wm2"/>
+                                                <constraint firstAttribute="width" constant="28" id="wb5-xw-qgJ"/>
+                                            </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tfs-oQ-fja">
-                                            <rect key="frame" x="57" y="4" width="41.666666666666657" height="21"/>
+                                            <rect key="frame" x="56" y="4" width="41.666666666666657" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="QUANTITY" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xh1-Em-DAw">
-                                            <rect key="frame" x="55.999999999999993" y="25" width="64.333333333333314" height="17"/>
+                                            <rect key="frame" x="54.999999999999993" y="25" width="64.333333333333314" height="17"/>
                                             <fontDescription key="fontDescription" name="SFCompactText-Regular" family="SF Compact Text" pointSize="14"/>
                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
@@ -235,6 +239,7 @@
                                         <constraint firstItem="B6T-Y6-Dpo" firstAttribute="leading" secondItem="WAd-u4-D5P" secondAttribute="leadingMargin" constant="2" id="Wjf-lK-jbz"/>
                                         <constraint firstItem="Tfs-oQ-fja" firstAttribute="top" secondItem="WAd-u4-D5P" secondAttribute="top" constant="4" id="lIO-6g-Y35"/>
                                         <constraint firstItem="B6T-Y6-Dpo" firstAttribute="centerY" secondItem="WAd-u4-D5P" secondAttribute="centerY" id="mk4-kk-FgS"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="ol4-tW-f4s" secondAttribute="trailing" constant="35" id="pwq-OE-jEb"/>
                                         <constraint firstAttribute="trailing" secondItem="gBu-Kt-sjo" secondAttribute="trailing" id="xpu-s4-Xnh"/>
                                     </constraints>
                                 </tableViewCellContentView>
@@ -623,7 +628,7 @@
             <objects>
                 <viewController id="v9n-dA-hOh" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="miZ-3s-NfH">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="759"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="iRs-vo-O5u"/>
@@ -810,7 +815,7 @@
         <!--Navigation Controller-->
         <scene sceneID="baa-1h-76V">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="4dn-th-RBU" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" hidesBarsOnSwipe="YES" hidesBarsOnTap="YES" id="4dn-th-RBU" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="8ee-DF-VTe">
                         <rect key="frame" x="0.0" y="44" width="414" height="96"/>
@@ -1171,9 +1176,10 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
+        <segue reference="wRj-8q-BJ9"/>
         <segue reference="OY0-sT-tkz"/>
-        <segue reference="XXC-FJ-NIR"/>
-        <segue reference="0Oi-ty-78c"/>
+        <segue reference="1VQ-DV-9fd"/>
+        <segue reference="xMn-2U-tBA"/>
         <segue reference="vs5-Xi-UG7"/>
     </inferredMetricsTieBreakers>
     <resources>

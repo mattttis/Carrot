@@ -100,21 +100,21 @@ class TaskCell: UITableViewCell {
             // self.progressBar.setProgress(0.0, animated: false)
             self.checkBoxOutlet.setBackgroundImage(#imageLiteral(resourceName: "checkBoxOUTLINE "), for: .normal)
         } else {
-            
+            self.delegate?.changeButton(state: true, indexSection: self.indexSection!, indexRow: self.indexRow!, itemID: self.itemID)
             self.checkBoxOutlet.setBackgroundImage(#imageLiteral(resourceName: "checkBoxFILLED "), for: .normal)
-            self.tempState = true
-            UIView.animate(withDuration: 4.0, animations: {
-                self.progressBar.setProgress(1.0, animated: true)
-          }) { (finished: Bool) in
-            
-                self.workItem = DispatchWorkItem {
-                    self.delegate?.changeButton(state: true, indexSection: self.indexSection!, indexRow: self.indexRow!, itemID: self.itemID)
-                }
-                
-                DispatchQueue.main.asyncAfter(deadline: .now() + 3.3, execute: self.workItem!)
-            
-            
-            }
+//            self.tempState = true
+//            UIView.animate(withDuration: 4.0, animations: {
+//                self.progressBar.setProgress(1.0, animated: true)
+//          }) { (finished: Bool) in
+//            
+//                self.workItem = DispatchWorkItem {
+//                    self.delegate?.changeButton(state: true, indexSection: self.indexSection!, indexRow: self.indexRow!, itemID: self.itemID)
+//                }
+//                
+//                DispatchQueue.main.asyncAfter(deadline: .now() + 3.3, execute: self.workItem!)
+//            
+//            
+//            }
         }
         
 //        func startAnimation() {

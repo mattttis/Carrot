@@ -39,3 +39,28 @@ exports.sendNewChangesNotification = functions.firestore
         throw new Error("Error sending message:", error, listId);
     });
 });
+
+exports.removeChecked = functions.firestore
+    .document('lists/{listId}/sections/{sectionNumber}/items/{itemId}')
+    .onUpdate((change, context) => {
+    
+    const db = admin.firestore()
+    const newValue = change.after.data()
+    
+    if(newValue.isChecked === true) {
+        const name = newValue.name
+        const categoryNumber = newValue.categoryNumber
+        const createdBy = newValue.createdBy
+        const firstName = newValue.firstName
+        const isChecked = newValue.isChecked
+        const language = newValue.language
+        const quantity = newValue.quantity
+        const dateCreated = newValue.dateCreated
+        const tokens = newValue.tokens
+        
+        
+        const res = await admin.firestore().collection('lists').doc('{listId}').collection('sections').doc('{sectionNumber}'.collection('items').doc('{itemId}').delete();
+    }
+    
+});
+

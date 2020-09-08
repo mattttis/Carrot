@@ -81,10 +81,14 @@ class InputCell: UITableViewCell, UITextFieldDelegate {
     }
     
     @objc func firstField() {
+        let generator = UIImpactFeedbackGenerator(style: .medium)
+        generator.impactOccurred()
         newTaskField.becomeFirstResponder()
     }
     
     @objc func nextField() {
+        let generator = UIImpactFeedbackGenerator(style: .light)
+        generator.impactOccurred()
         quantityField.becomeFirstResponder()
     }
 }
