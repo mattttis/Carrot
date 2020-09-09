@@ -42,25 +42,21 @@ exports.sendNewChangesNotification = functions.firestore
 
 exports.removeChecked = functions.firestore
     .document('lists/{listId}/sections/{sectionNumber}/items/{itemId}')
-    .onUpdate((change, context) => {
+    .onUpdate(async (change, context) => {
     
-    const db = admin.firestore()
+//    const db = admin.firestore()
     const newValue = change.after.data()
+    const listId = context.params.listId
+    const sectionNumber = context.params.sectionNumber
+    const itemId = context.params.itemId
+    var db = admin.firestore();
     
-    if(newValue.isChecked === true) {
-        const name = newValue.name
-        const categoryNumber = newValue.categoryNumber
-        const createdBy = newValue.createdBy
-        const firstName = newValue.firstName
-        const isChecked = newValue.isChecked
-        const language = newValue.language
-        const quantity = newValue.quantity
-        const dateCreated = newValue.dateCreated
-        const tokens = newValue.tokens
-        
-        
-        const res = await admin.firestore().collection('lists').doc('{listId}').collection('sections').doc('{sectionNumber}'.collection('items').doc('{itemId}').delete();
-    }
+    
+    setTimeout(function() {
+        if(newValue.isChecked === true) {
+            db.collection('lists').doc(listId).collection('sections').doc(sectionNumber).collection('items').doc(itemId).delete();
+        }
+    }, 300000);
     
 });
 

@@ -52,6 +52,7 @@ class AccountViewController: UIViewController {
         listCode.text = listCodeString
         firstName.text = userFirstName
         emailAddress.text = userEmail
+
         
         // DispatchQueue.global(qos: .background).async {
             self.storageRef.getData(maxSize: 1 * 1024 * 1024) { data, error in

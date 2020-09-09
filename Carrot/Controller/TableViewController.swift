@@ -35,9 +35,10 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
         
         // Navigation bar setup
         
-        let formatString = NSLocalizedString("Groceries",
-                                             comment: "TableVC Title")
-        tabBarController?.title = String.localizedStringWithFormat(formatString)
+        tabBarController?.title = NSLocalizedString("Groceries",
+        comment: "TableVC Title")
+        tabBarController?.navigationController?.hidesBarsOnTap = true
+        tabBarController?.navigationController?.hidesBarsOnSwipe = true
         
         // Share list BarButton
         let configuration = UIImage.SymbolConfiguration(weight: .semibold)
@@ -56,14 +57,13 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print(FoodData.dairy)
         
+        // Homescreen shortcuts
         NotificationCenter.default.addObserver(self, selector: #selector(addNewItem), name: Notification.Name("addNewItem"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(showCard), name: Notification.Name("showCard"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(shareFunction), name: Notification.Name("shareFunction"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(appTerminated(notification:)), name: NSNotification.Name(UIApplication.willTerminateNotification.rawValue), object: nil)
         
-        
+        // Extension of UIViewController
         self.hideKeyboardWhenTappedAround()
         
         // Methods for drag and drop
@@ -175,26 +175,38 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        // First section (1 cell) should use the inputCell
+        // First section, the input field, should use the inputCell
         if indexPath.row == 0 && indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "inputCell", for: indexPath) as! InputCell
             cell.delegate = self
             return cell
         } else {
+            
             let cell = tableView.dequeueReusableCell(withIdentifier: "taskCell", for: indexPath) as! TaskCell
             let current = sections[indexPath.section].items[indexPath.row]
+            
             cell.taskNameLabel.text = current.name
             cell.quantityLabel.isHidden = false
+            cell.profilePicture.isHidden = false
+            cell.quantityLabel.text = "HELLOOOOO"
             cell.taskNameLabel.centerYAnchor.constraint(equalTo: cell.centerYAnchor).isActive = false
             
             if current.quantity != nil && current.quantity != "" {
+                cell.translatesAutoresizingMaskIntoConstraints = true
                 cell.quantityLabel.text = current.quantity!.uppercased()
                 cell.quantityLabel.isHidden = false
                 cell.taskNameLabel.centerYAnchor.constraint(equalTo: cell.centerYAnchor).isActive = false
             } else {
-                cell.quantityLabel.isHidden = true
+                // cell.quantityLabel.isHidden = true
+                cell.translatesAutoresizingMaskIntoConstraints = true
+                cell.quantityLabel.isHidden = false
                 cell.taskNameLabel.centerYAnchor.constraint(equalTo: cell.centerYAnchor).isActive = true
+            }
+            
+            if current.uid == Auth.auth().currentUser?.uid {
+                cell.profilePicture.isHidden = true
+            } else {
+                cell.profilePicture.isHidden = false
             }
             
             
@@ -248,9 +260,10 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
     func deleteAction(at indexPath: IndexPath) -> UIContextualAction {
         let item = sections[indexPath.section].items[indexPath.row]
         
-        
         let action = UIContextualAction(style: .destructive, title: "Delete") { (action, view, completion) in
             
+            self.sections[indexPath.section].items.remove(at: indexPath.row)
+            self.tableView.deleteRows(at: [indexPath], with: .fade)
             let itemRef = self.db.collection(K.FStore.lists).document(self.currentListID!).collection(K.FStore.sections).document("\(indexPath.section)").collection(K.FStore.items).document(item.itemID!)
             
             itemRef.getDocument { (document, error) in
@@ -333,16 +346,6 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
         
 
         return UITableViewDropProposal(operation: .cancel, intent: .unspecified)
-    }
-    
-    func tableView(_ tableView: UITableView, dragSessionWillBegin session: UIDragSession) {
-//        for section in sections.enumerated() {
-//            sections[section.offset].isExpanded = true
-//            tableView.reloadData()
-//        }
-        self.sections[1].isExpanded = true
-        print("Editing began....")
-        sections[1].isExpanded = true
     }
     
     override func tableView(_ tableView: UITableView, targetIndexPathForMoveFromRowAt sourceIndexPath: IndexPath, toProposedIndexPath proposedDestinationIndexPath: IndexPath) -> IndexPath {
@@ -490,6 +493,8 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
             sections[indexSection ?? 1].items[indexRow ?? 1].checked = state
         }
         
+        tableView.reloadData()
+        
         let generator = UIImpactFeedbackGenerator(style: .light)
         generator.impactOccurred()
         
@@ -545,6 +550,7 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
                                            let cell = self.tableView.cellForRow(at: IndexPath(item: indexRow, section: indexSection)) as? TaskCell
                                             
                                             if let cell = cell {
+                                                self.tableView.reloadData()
                                                 cell.progressBar.setProgress(0.0, animated: false)
                                             }
                                             
@@ -577,41 +583,7 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
             }
         }
     }
-    
-    @objc func appTerminated(notification: NSNotification) {
         
-        print("App terminated")
-        
-        let itemRef = db.collection(K.FStore.lists).document(currentListID!).collection(K.FStore.sections).document("1").collection(K.FStore.items).order(by: K.Item.date)
-        
-        itemRef.getDocuments { (snapshot, error) in
-            if let e = error {
-                print(e)
-            } else {
-                
-                for document in snapshot!.documents {
-                    print(document.data()[K.Item.name])
-                }
-            }
-        
-//            for section in sections.enumerated() {
-//                if let currentListID = currentListID {
-//                    let itemsRef = db.collection(K.FStore.lists).document(currentListID).collection(K.FStore.sections).document("\(section.offset)").collection(K.FStore.items).whereField(K.Item.isChecked, isEqualTo: true)
-//
-//                itemsRef.getDocuments(completion: { (snapshot, error) in
-//                    if let e = error {
-//                        print(e)
-//                    } else {
-//                        for document in snapshot!.documents {
-//                            print(document.data())
-//                        }
-//                    }
-//                })
-//            }
-        }
-        
-        
-    }
     
 //    func moveItem(indexSection: Int?, indexRow: Int?) {
 //        print("Moving item to itemsChecked...")
@@ -762,12 +734,15 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
     
     func emptyTableView() {
         if self.sections[1].items.count == 0 && self.sections[2].items.count == 0 && self.sections[3].items.count == 0 && self.sections[4].items.count == 0 && self.sections[5].items.count == 0 && self.sections[6].items.count == 0 && self.sections[7].items.count == 0 && self.sections[8].items.count == 0 && self.sections[9].items.count == 0 && self.sections[10].items.count == 0 {
+            
             let emptyLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.bounds.size.width, height: self.view.bounds.size.height))
             emptyLabel.text = NSLocalizedString("You haven't added any items to your list yet.", comment: "Shown on empty tableView")
             emptyLabel.textColor = UIColor.gray
+            emptyLabel.numberOfLines = 0
             emptyLabel.textAlignment = NSTextAlignment.center
             self.tableView.backgroundView = emptyLabel
             self.tableView.separatorStyle = UITableViewCell.SeparatorStyle.none
+            
         }
     }
     

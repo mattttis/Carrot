@@ -54,7 +54,7 @@ class InputCell: UITableViewCell, UITextFieldDelegate {
 //    }
     
     @objc func saveNewTaskAction() {
-        if newTaskField.text != "" {
+        if newTaskField.text != "" && newTaskField.text != " " && newTaskField.text != "  " {
             delegate?.addTask(name: newTaskField.text!, uid: Auth.auth().currentUser!.uid, quantity: quantityField.text)
             newTaskField.text = ""
             quantityField.text = ""

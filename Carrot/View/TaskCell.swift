@@ -39,6 +39,10 @@ class TaskCell: UITableViewCell {
         }
     }
     
+    override func prepareForReuse() {
+        reset()
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -50,12 +54,24 @@ class TaskCell: UITableViewCell {
         profilePicture.clipsToBounds = true
     }
     
+    func reset() {
+        print(quantityLabel.text)
+        profilePicture.isHidden = false
+        quantityLabel.isHidden = true
+        
+        self.translatesAutoresizingMaskIntoConstraints = true
+        NSLayoutConstraint.deactivate([
+            taskNameLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor)
+        ])
+    }
+    
     func noQuantity() {
         self.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             taskNameLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor)
         ])
     }
+    
 
     
     @objc func tapFunction(sender:UITapGestureRecognizer) {
@@ -64,12 +80,6 @@ class TaskCell: UITableViewCell {
             startAnimation()
         } else {
             stopAnimation()
-        }
-
-        if uid == currentUid {
-            profilePicture.isHidden = true
-        } else {
-            profilePicture.isHidden = false
         }
     }
     

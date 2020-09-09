@@ -42,7 +42,7 @@ struct FoodData {
         switch FoodData.language {
             
         // Dutch
-        case "nl": return ["bananen", "banaan", "appels", "appel", "peren", "peer", "blauwe bessen", "watermeloen", "watermeloenen", "meloen", "meloenen", "chiquita bananen", "aardbeien", "rode druiven", "rode druifjes", "groene druiven", "groene druifjes", "druiven", "witte druiven", "witte druifjes", "frambozen", "blauwe bessen", "mango", "mangos", "citroenen", "mandarijnen", "jonagold", "handsinaasappelen", "perssinaasappelen", "limoenen", "kiwi", "kiwis", "limoen",  "ananas", "bramen", "granny smith", "fuji", "papaya", "papayas"]
+        case "nl": return ["bananen", "banaan", "appels", "appel", "peren", "peer", "blauwe bessen", "watermeloen", "watermeloenen", "meloen", "meloenen", "chiquita bananen", "aardbeien", "rode druiven", "rode druifjes", "groene druiven", "groene druifjes", "druiven", "witte druiven", "witte druifjes", "frambozen", "blauwe bessen", "mango", "mangos", "citroenen", "mandarijnen", "jonagold", "handsinaasappelen", "perssinaasappelen", "limoenen", "kiwi", "kiwis", "kiwi's", "kiwi’s ", "limoen",  "ananas", "bramen", "granny smith", "fuji", "papaya", "papayas"]
                 
         // Default (English)
         default: return ["apples", "apricots", "avocados", "avocado", "bananas", "berries", "cherries", "grapefruit", "grapes", "kiwi", "lemons", "limes", "melons", "nectarines", "oranges", "papaya", "peaches", "pears", "plums", "pomegranate", "watermelon", "banana", "bananas", "apple", "pear"]
