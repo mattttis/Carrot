@@ -358,7 +358,7 @@ PODS:
   - PinCodeTextField (0.1.0)
   - PromisesObjC (1.2.10)
   - Protobuf (3.13.0)
-  - Shake (10.0.6)
+  - Shake (11.0.0)
   - SkyFloatingLabelTextField (3.8.0)
   - Smartlook (1.4.1)
 
@@ -432,7 +432,7 @@ SPEC CHECKSUMS:
   PinCodeTextField: a3c39be58bde3ed1d6888d0fb1d88b0a4a2277cc
   PromisesObjC: b14b1c6b68e306650688599de8a45e49fae81151
   Protobuf: 3dac39b34a08151c6d949560efe3f86134a3f748
-  Shake: 56c29f2babd4d2fd8266ec0a1dd82aad2808e5b1
+  Shake: 197f0be9f66c1b239b4f3c1aae380cdbfd0520c0
   SkyFloatingLabelTextField: 5a338412114808e961fe2d14ea2c5452c8b6e4aa
   Smartlook: a83db121ff758fef7c5353bab64046a40dd85f82
 

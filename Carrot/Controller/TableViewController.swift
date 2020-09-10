@@ -196,7 +196,8 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
                 cell.quantityLabel.text = current.quantity!.uppercased()
                 cell.quantityLabel.isHidden = false
                 cell.taskNameLabel.centerYAnchor.constraint(equalTo: cell.centerYAnchor).isActive = false
-            } else {
+            }
+             else {
                 // cell.quantityLabel.isHidden = true
                 cell.translatesAutoresizingMaskIntoConstraints = true
                 cell.quantityLabel.isHidden = false
