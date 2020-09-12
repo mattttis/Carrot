@@ -34,3 +34,7 @@
 "QUANTITY" = "AANTAL";
 "Item name" = "Productnaam";
 "Someone" = "Iemand";
+
+// ShareVC
+"Join my grocery list! Download the app 'Carrot' and use the invite code " = "Ik gebruik Carrot als gezamenlijk boodschappenlijstje. Download de app en voer de code ";
+" to add items to my list. You can download the app here: " = " in. Je kunt de app hier downloaden: ";

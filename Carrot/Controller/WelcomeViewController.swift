@@ -175,8 +175,11 @@ extension WelcomeViewController: ASAuthorizationControllerDelegate {
                         ]
 
                         UserDefaults.standard.set(dict[K.User.firstName], forKey: "firstName")
+                        UserDefaults.standard.set(dict[K.User.lastName], forKey: "lastName")
                         UserDefaults.standard.set(dict[K.User.email], forKey: "email")
                         UserDefaults.standard.synchronize()
+                    
+                        print(UserDefaults.standard.string(forKey: "firstName"))
                         
                         let userRef = Firestore.firestore().collection(K.FStore.users).document(authData.user.uid)
                         

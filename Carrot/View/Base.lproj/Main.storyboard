@@ -141,7 +141,7 @@
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Item name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eCz-MS-0xe">
                                                     <rect key="frame" x="15" y="14" width="329" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <textInputTraits key="textInputTraits" returnKeyType="next"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="next"/>
                                                 </textField>
                                                 <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="plus.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="wPF-HZ-BsY">
                                                     <rect key="frame" x="347" y="18" width="30" height="30"/>
@@ -234,11 +234,13 @@
                                         <constraint firstAttribute="bottomMargin" secondItem="xh1-Em-DAw" secondAttribute="bottom" id="BYD-gg-Ja8"/>
                                         <constraint firstItem="xh1-Em-DAw" firstAttribute="top" secondItem="Tfs-oQ-fja" secondAttribute="bottom" id="Gf0-Hm-0he"/>
                                         <constraint firstItem="Tfs-oQ-fja" firstAttribute="leading" secondItem="B6T-Y6-Dpo" secondAttribute="trailing" constant="11" id="GqC-8D-fVz"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="B6T-Y6-Dpo" secondAttribute="bottom" constant="3.3300000000000001" id="JDe-iW-QhK"/>
                                         <constraint firstItem="xh1-Em-DAw" firstAttribute="leading" secondItem="B6T-Y6-Dpo" secondAttribute="trailing" constant="10" id="UcB-xA-iRH"/>
                                         <constraint firstItem="B6T-Y6-Dpo" firstAttribute="leading" secondItem="WAd-u4-D5P" secondAttribute="leadingMargin" constant="2" id="Wjf-lK-jbz"/>
                                         <constraint firstItem="Tfs-oQ-fja" firstAttribute="top" secondItem="WAd-u4-D5P" secondAttribute="top" constant="8" id="lIO-6g-Y35"/>
                                         <constraint firstItem="B6T-Y6-Dpo" firstAttribute="centerY" secondItem="WAd-u4-D5P" secondAttribute="centerY" id="mk4-kk-FgS"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="ol4-tW-f4s" secondAttribute="trailing" constant="35" id="pwq-OE-jEb"/>
+                                        <constraint firstItem="B6T-Y6-Dpo" firstAttribute="top" secondItem="WAd-u4-D5P" secondAttribute="topMargin" constant="3.6699999999999999" id="qkM-Ox-JXY"/>
                                         <constraint firstAttribute="trailing" secondItem="gBu-Kt-sjo" secondAttribute="trailing" id="xpu-s4-Xnh"/>
                                     </constraints>
                                 </tableViewCellContentView>
@@ -405,7 +407,7 @@
                                             <textField opaque="NO" tag="2" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="top" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2X4-j1-YLI" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
                                                 <rect key="frame" x="67" y="105.33333333333331" width="280" height="52.666666666666686"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                                <textInputTraits key="textInputTraits" returnKeyType="go" secureTextEntry="YES"/>
+                                                <textInputTraits key="textInputTraits" returnKeyType="go" secureTextEntry="YES" textContentType="password"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="color" keyPath="textColor">
                                                         <color key="value" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -421,7 +423,7 @@
                                             <textField opaque="NO" tag="1" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kYV-83-SDt" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
                                                 <rect key="frame" x="67" y="27" width="280" height="52.666666666666671"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                                <textInputTraits key="textInputTraits" returnKeyType="continue" enablesReturnKeyAutomatically="YES"/>
+                                                <textInputTraits key="textInputTraits" returnKeyType="continue" enablesReturnKeyAutomatically="YES" textContentType="email"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="color" keyPath="textColor">
                                                         <color key="value" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -901,7 +903,7 @@
                                             <textField opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="First name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="enH-4U-pLT" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
                                                 <rect key="frame" x="61" y="15.000000000000004" width="292" height="52.333333333333343"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                                <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="continue" enablesReturnKeyAutomatically="YES"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="continue" enablesReturnKeyAutomatically="YES" textContentType="given-name"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="color" keyPath="textColor">
                                                         <color key="value" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -917,7 +919,7 @@
                                             <textField opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" placeholder="Last name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bUL-Du-qP4" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
                                                 <rect key="frame" x="61" y="89.333333333333314" width="292" height="52.666666666666657"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                                <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="go"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="go" textContentType="family-name"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="color" keyPath="textColor">
                                                         <color key="value" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -1054,7 +1056,7 @@
                                             <textField opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rcq-8u-hwg" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
                                                 <rect key="frame" x="61" y="14.999999999999996" width="292" height="52.666666666666657"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                                <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="continue" enablesReturnKeyAutomatically="YES"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="continue" enablesReturnKeyAutomatically="YES" textContentType="email"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="color" keyPath="textColor">
                                                         <color key="value" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -1070,7 +1072,7 @@
                                             <textField opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GNj-aX-g30" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
                                                 <rect key="frame" x="61" y="89.666666666666686" width="292" height="52.333333333333343"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                                <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="go" secureTextEntry="YES"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="go" secureTextEntry="YES" textContentType="new-password"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="color" keyPath="textColor">
                                                         <color key="value" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
