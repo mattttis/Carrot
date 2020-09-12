@@ -18,6 +18,7 @@ pod 'SkyFloatingLabelTextField'
 pod 'Smartlook'
 pod 'Shake'
 pod 'PinCodeTextField'
+pod 'lottie-ios'
 
 # pod 'UXCam'
 # pod 'Instabug'

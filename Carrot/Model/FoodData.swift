@@ -53,7 +53,7 @@ struct FoodData {
         switch FoodData.language {
             
         // Dutch
-        case "nl": return ["rundergehakt", "gehakt", "spekreepje", "spekreepjes", "burger", "bbq", "hamburger", "hamburgers", "ontbijtspek", "schnitzel", "varkensbraadworst", "braadworst", "slavink", "slavinken", "runderchipolata", "chipolata", "biefstuk", "rundervink", "rundervinken", "runderbraadworst", "runderbraadworsten", "kipbraadworst", "speklap", "riblap", "pannenkoekspek",  "pannenkoekenspek", "shoarmareepjes", "shoarmavlees", "shoarma", "rookworst", "bbq burger", "grill burger", "gehaktbal", "gehaktballetjes", "gehaktballen", "rookworsten", "biefstuk","ossenhaas", "schouderkarbonade", "spek", "speklapjes", "braadworst", "ontbijtspek", "rundervinken", "varkenshaas", "cordon bleu", "bamivlees", "schnitzel", "worst", "worstjes", "bbq worst", "vlees"]
+        case "nl": return ["rundergehakt", "gehakt", "spekreepje", "spekreepjes", "burger", "bbq", "hamburger", "hamburgers", "ontbijtspek", "schnitzel", "varkensbraadworst", "braadworst", "slavink", "slavinken", "runderchipolata", "chipolata", "biefstuk", "rundervink", "rundervinken", "runderbraadworst", "runderbraadworsten", "kipbraadworst", "speklap", "riblap", "pannenkoekspek",  "pannenkoekenspek", "shoarmareepjes", "shoarmavlees", "shoarma", "rookworst", "bbq burger", "grill burger", "gehaktbal", "gehaktballetjes", "gehaktballen", "rookworsten", "biefstuk","ossenhaas", "schouderkarbonade", "spek", "speklapjes", "braadworst", "ontbijtspek", "rundervinken", "varkenshaas", "cordon bleu", "bamivlees", "schnitzel", "worst", "worstjes", "bbq worst", "vlees", "grillworst", "grillworst kip", "kipgrillworst", "grilworst"]
                 
         // Default (English)
         default: return ["bacon", "chicken", "deli meat", "ground beef", "ground turkey", "ham", "hot dogs", "pork", "sausage", "steak", "turkey", "beef"]
@@ -125,7 +125,7 @@ struct FoodData {
         switch FoodData.language {
             
         // Dutch
-        case "nl": return ["chips", "stroopwafels", "tony chocolony", "tony chocolonely", "pepernoten", "kruidnoten", "chocopepernoten", "chocoladepepernoten", "kauwgom", "schoolkrijt", "winegums", "dropjes", "drop", "lays", "cheetos", "paprika chips", "naturel chips", "pringles", "pringles original", "pringles naturel", "chocolate chip cookies", "chocolate chip", "ribbelchips", "doritos", "cashewnoten", "verkade", "tortillachips", "buggles", "bastogne", "hamkas", "hamkaas", "tuc", "tucjes", "tuc tuc", "tuc tucjes", "tuctucjes", "lange vingers", "roze koeken", "noodles", "noedles", "walnoten", "liga", "likkoekjes", "bugles", "nibbits", "nibbs", "notenmix", "duyvis", "borrelnootjes", "mergpijpen", "zaans huisje", "chipito", "kaasstengels", "bokkenpootjes", "sultana", "sultanas", "croky", "wafels", "eierwafels", "zeezout karamel", "tonys zeezout", "tonys zeezout karamel", "koekjes", "eierkoeken", "gevulde koeken"]
+        case "nl": return ["chips", "stroopwafels", "tony chocolony", "tony chocolonely", "pepernoten", "kruidnoten", "chocopepernoten", "chocoladepepernoten", "kauwgom", "schoolkrijt", "winegums", "dropjes", "drop", "lays", "cheetos", "paprika chips", "naturel chips", "pringles", "pringles original", "pringles naturel", "chocolate chip cookies", "chocolate chip", "ribbelchips", "doritos", "cashewnoten", "verkade", "tortillachips", "buggles", "bastogne", "hamkas", "hamkaas", "tuc", "tucjes", "tuc tuc", "tuc tucjes", "tuctucjes", "lange vingers", "roze koeken", "noodles", "noedles", "walnoten", "liga", "likkoekjes", "bugles", "nibbits", "nibbs", "notenmix", "duyvis", "borrelnootjes", "mergpijpen", "zaans huisje", "chipito", "kaasstengels", "bokkenpootjes", "sultana", "sultanas", "croky", "wafels", "eierwafels", "zeezout karamel", "tonys zeezout", "tonys zeezout karamel", "koekjes", "eierkoeken", "gevulde koeken", "popcorn", "zoute popcorn", "popcorn zout", "popcorn zoet", "zoete popcorn", "chili chips", "AH chips", "nachos", "nacho's", "ah nachos", "nachos ah", "doritos paars", "paarse doritos", "doritos naturel"]
                 
         // Default (English)
         default: return [
@@ -138,7 +138,7 @@ struct FoodData {
         switch FoodData.language {
             
         // Dutch
-        case "nl": return ["ijsjes", "dokter oetker", "dr oetker", "dr. oetker", "pizza salami", "pizza margarita", "raketjes", "ijsblokjes", "ovenfriet", "friet", "cornetto", "split", "ijshoorntjes", "magnum", "mini magnums", "vissticks", "pizza mozzarella", "liuk", "dropijs", "ovenfrikandel", "bitterballen", "ovenbitterballen"]
+        case "nl": return ["ijsjes", "dokter oetker", "dr oetker", "dr. oetker", "pizza salami", "pizza margarita", "raketjes", "ijsblokjes", "ovenfriet", "friet", "cornetto", "split", "ijshoorntjes", "magnum", "mini magnums", "vissticks", "pizza mozzarella", "liuk", "dropijs", "ovenfrikandel", "bitterballen", "ovenbitterballen", "pizza", "pizzas", "pizza's"]
                 
         // Default (English)
         default: return ["chicken bites", "desserts", "fish sticks", "fruit", "ice", "ice cream", "ice pops", "juice", "meat", "pie shells", "pizza", "pot pies", "potatoes", "TV dinners", "vegetables", "veggie burger", "waffles"]

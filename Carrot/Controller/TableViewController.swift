@@ -57,7 +57,6 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
         // Homescreen shortcuts
         NotificationCenter.default.addObserver(self, selector: #selector(addNewItem), name: Notification.Name("addNewItem"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(showCard), name: Notification.Name("showCard"), object: nil)
@@ -188,7 +187,7 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
             cell.taskNameLabel.text = current.name
             cell.quantityLabel.isHidden = false
             cell.profilePicture.isHidden = false
-            cell.quantityLabel.text = "HELLOOOOO"
+            cell.quantityLabel.text = ""
             cell.taskNameLabel.centerYAnchor.constraint(equalTo: cell.centerYAnchor).isActive = false
             
             if current.quantity != nil && current.quantity != "" {

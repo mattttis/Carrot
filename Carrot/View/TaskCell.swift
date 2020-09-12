@@ -108,6 +108,7 @@ class TaskCell: UITableViewCell {
         if items![indexRow!].checked {
             self.delegate?.changeButton(state: false, indexSection: indexSection!, indexRow: indexRow!, itemID: itemID!)
             // self.progressBar.setProgress(0.0, animated: false)
+            
             self.checkBoxOutlet.setBackgroundImage(#imageLiteral(resourceName: "checkBoxOUTLINE "), for: .normal)
         } else {
             self.delegate?.changeButton(state: true, indexSection: self.indexSection!, indexRow: self.indexRow!, itemID: self.itemID)

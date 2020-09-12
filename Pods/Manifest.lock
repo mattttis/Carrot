@@ -350,6 +350,7 @@ PODS:
     - Kingfisher/Core (= 5.15.0)
   - Kingfisher/Core (5.15.0)
   - leveldb-library (1.22)
+  - lottie-ios (3.1.8)
   - nanopb (1.30906.0):
     - nanopb/decode (= 1.30906.0)
     - nanopb/encode (= 1.30906.0)
@@ -370,6 +371,7 @@ DEPENDENCIES:
   - Firebase/Messaging
   - Firebase/Storage
   - Kingfisher
+  - lottie-ios
   - PinCodeTextField
   - Shake
   - SkyFloatingLabelTextField
@@ -398,6 +400,7 @@ SPEC REPOS:
     - GTMSessionFetcher
     - Kingfisher
     - leveldb-library
+    - lottie-ios
     - nanopb
     - PinCodeTextField
     - PromisesObjC
@@ -428,6 +431,7 @@ SPEC CHECKSUMS:
   GTMSessionFetcher: 6f5c8abbab8a9bce4bb3f057e317728ec6182b10
   Kingfisher: 1acb67597a520c2d0310677e66d6e0af455ef757
   leveldb-library: 55d93ee664b4007aac644a782d11da33fba316f7
+  lottie-ios: 48fac6be217c76937e36e340e2d09cf7b10b7f5f
   nanopb: 59317e09cf1f1a0af72f12af412d54edf52603fc
   PinCodeTextField: a3c39be58bde3ed1d6888d0fb1d88b0a4a2277cc
   PromisesObjC: b14b1c6b68e306650688599de8a45e49fae81151
@@ -436,6 +440,6 @@ SPEC CHECKSUMS:
   SkyFloatingLabelTextField: 5a338412114808e961fe2d14ea2c5452c8b6e4aa
   Smartlook: a83db121ff758fef7c5353bab64046a40dd85f82
 
-PODFILE CHECKSUM: 87a535fe1932120046874f235bc4b1eee7f1bb62
+PODFILE CHECKSUM: a8f5334ff45d242d1824d5e4b2f09f076b530d21
 
 COCOAPODS: 1.9.3

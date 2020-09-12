@@ -33,6 +33,7 @@
 		A0AE90C124B8F2DA00E31B68 /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0AE90C024B8F2DA00E31B68 /* Section.swift */; };
 		A0B38CD724EC8F1D00511F06 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7B59B01024AA7816005FBC70 /* Assets.xcassets */; };
 		A0C466B124B12FF400DDDAAA /* FoodData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C466B024B12FF400DDDAAA /* FoodData.swift */; };
+		A0CA856D250A76F50062BCF0 /* CheckAnimation.json in Resources */ = {isa = PBXBuildFile; fileRef = A0CA856C250A76F50062BCF0 /* CheckAnimation.json */; };
 		A0DCFC5824FD976C0037D750 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A0DCFC5A24FD976C0037D750 /* Localizable.strings */; };
 /* End PBXBuildFile section */
 
@@ -79,6 +80,7 @@
 		A0ACFEAC24BBA320008943E4 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		A0AE90C024B8F2DA00E31B68 /* Section.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Section.swift; path = Carrot/Controller/Section.swift; sourceTree = SOURCE_ROOT; };
 		A0C466B024B12FF400DDDAAA /* FoodData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodData.swift; sourceTree = "<group>"; usesTabs = 0; };
+		A0CA856C250A76F50062BCF0 /* CheckAnimation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = CheckAnimation.json; sourceTree = "<group>"; };
 		A0DCFC5624FD97610037D750 /* nl */ = {isa = PBXFileReference; explicitFileType = text.plist.strings; name = nl; path = nl.lproj/Main.strings; sourceTree = "<group>"; };
 		A0DCFC5724FD97620037D750 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		A0DCFC5924FD976C0037D750 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -126,6 +128,7 @@
 				A03C5D7B24B11A0E00C2BB4D /* Controller */,
 				A03C5D7A24B11A0800C2BB4D /* View */,
 				A03C5D7924B11A0000C2BB4D /* Model */,
+				A0CA856E250A773D0062BCF0 /* Animations */,
 				A044353C2503B813007270A2 /* Fonts */,
 				7B59B01024AA7816005FBC70 /* Assets.xcassets */,
 				7B59B01524AA7816005FBC70 /* Info.plist */,
@@ -182,6 +185,14 @@
 				A044353D2503B83E007270A2 /* SF-Compact-Text-Regular.otf */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		A0CA856E250A773D0062BCF0 /* Animations */ = {
+			isa = PBXGroup;
+			children = (
+				A0CA856C250A76F50062BCF0 /* CheckAnimation.json */,
+			);
+			path = Animations;
 			sourceTree = "<group>";
 		};
 		CAFEAECB567A3E3E5D34EBBB /* Frameworks */ = {
@@ -264,6 +275,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A0DCFC5824FD976C0037D750 /* Localizable.strings in Resources */,
+				A0CA856D250A76F50062BCF0 /* CheckAnimation.json in Resources */,
 				A07E2C2224F930F400058F35 /* GoogleService-Info.plist in Resources */,
 				A04435412503B83F007270A2 /* SF-Compact-Text-Medium.otf in Resources */,
 				7B59B01424AA7816005FBC70 /* LaunchScreen.storyboard in Resources */,
@@ -428,7 +440,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -483,7 +495,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
