@@ -423,7 +423,6 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
     
     func addTask(name: String, uid: String, quantity: String?) {
         let newTask = Task(name: name, uid: uid)
-        print("LINE 426: \(name), \(uid)")
         
         let thisCategory = newTask.category
         
@@ -454,7 +453,6 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
         
         // Adding to Firestore
         var ref: DocumentReference? = nil
-            print("LINE 453: \(newTask.name), \(newTask.uid)")
             ref = db.collection(K.lists).document(currentListID!).collection(K.FStore.sections).document("\(newTask.number)").collection(K.FStore.items).addDocument(data: [
                 K.Item.name: newTask.name,
                 K.Item.quantity: newTask.quantity ?? "",
@@ -470,7 +468,6 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
                 print("Error adding document: \(err)")
             } else {
                 if let newItemID = ref?.documentID {
-                    print("LINE 469: \(newItemID)")
                     newTask.itemID = newItemID
                     newTask.uid = self.currentUserID
                     

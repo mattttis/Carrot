@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="4dn-th-RBU">
-    <device id="retina6_5" orientation="portrait" appearance="light"/>
+    <device id="retina6_5" orientation="portrait" appearance="dark"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
@@ -152,7 +152,7 @@
                                                     </constraints>
                                                 </imageView>
                                             </subviews>
-                                            <color key="backgroundColor" name="Gray (MT)"/>
+                                            <color key="backgroundColor" name="background"/>
                                             <constraints>
                                                 <constraint firstAttribute="bottom" secondItem="wPF-HZ-BsY" secondAttribute="bottom" constant="16.670000000000002" id="D1c-Iv-3Qk"/>
                                                 <constraint firstAttribute="trailing" secondItem="MiS-jP-p4p" secondAttribute="trailing" constant="50" id="DbQ-ik-xIw"/>
@@ -202,6 +202,9 @@
                                         </progressView>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B6T-Y6-Dpo">
                                             <rect key="frame" x="22" y="14.666666666666664" width="24" height="24"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" secondItem="B6T-Y6-Dpo" secondAttribute="height" multiplier="1:1" id="rBe-ef-r63"/>
+                                            </constraints>
                                             <state key="normal" backgroundImage="checkBoxOUTLINE "/>
                                             <connections>
                                                 <action selector="checkBoxAction:" destination="IwI-ln-UVA" eventType="touchUpInside" id="ew6-bG-5Mt"/>
@@ -1178,7 +1181,7 @@
         <segue reference="OY0-sT-tkz"/>
         <segue reference="XXC-FJ-NIR"/>
         <segue reference="0Oi-ty-78c"/>
-        <segue reference="3OA-L9-CNT"/>
+        <segue reference="vs5-Xi-UG7"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="bonuskaart" width="272" height="406"/>
@@ -1188,7 +1191,7 @@
         <image name="plus.circle.fill" catalog="system" width="128" height="121"/>
         <image name="plus2" width="48.333332061767578" height="48.333332061767578"/>
         <image name="xmark" catalog="system" width="128" height="113"/>
-        <namedColor name="Gray (MT)">
+        <namedColor name="background">
             <color red="0.94509803921568625" green="0.94509803921568625" blue="0.94509803921568625" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>

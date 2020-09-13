@@ -40,10 +40,10 @@ class InputCell: UITableViewCell, UITextFieldDelegate {
         saveNewTaskOutlet.addGestureRecognizer(tapGesture)
         
         quantityField.attributedPlaceholder = NSAttributedString(string: NSLocalizedString("QUANTITY", comment: "Quantity text field placeholder"),
-        attributes: [NSAttributedString.Key.foregroundColor: UIColor.darkGray])
+        attributes: [NSAttributedString.Key.foregroundColor: UIColor(named: "placeholder")])
         
         newTaskField.attributedPlaceholder = NSAttributedString(string: NSLocalizedString("Item name", comment: "New item name field placeholder"),
-        attributes: [NSAttributedString.Key.foregroundColor: UIColor.darkGray])
+        attributes: [NSAttributedString.Key.foregroundColor: UIColor(named: "placeholder")])
         
         newTaskField.delegate = self
         quantityField.delegate = self
