@@ -24,7 +24,12 @@ class RegisterViewControllerOne: UIViewController {
         hiThere.text = NSLocalizedString("Hi there, welcome to Carrot!", comment: "Hi there text displayed on first registration step")
         firstName.placeholder = NSLocalizedString("First name", comment: "Placeholder on first registration step")
         lastName.placeholder = NSLocalizedString("Last name", comment: "Placeholder on first registration step")
+        
+        firstName.delegate = self
+        lastName.delegate = self
     }
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +37,10 @@ class RegisterViewControllerOne: UIViewController {
     }
     
     @IBAction func nextButton(_ sender: Any) {
+        nextFunction()
+    }
+    
+    func nextFunction() {
         if firstName.text != "" && lastName.text != "" {
             performSegue(withIdentifier: K.Segues.registerOneToTwo, sender: self)
             let generator = UIImpactFeedbackGenerator(style: .light)
@@ -48,6 +57,18 @@ class RegisterViewControllerOne: UIViewController {
             secondViewController.lastName = lastName.text
         }
     }
-    
+}
 
+extension RegisterViewControllerOne: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == firstName {
+            firstName.resignFirstResponder()
+            lastName.becomeFirstResponder()
+        } else {
+            lastName.resignFirstResponder()
+            nextFunction()
+        }
+        
+        return true
+    }
 }

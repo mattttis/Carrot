@@ -82,10 +82,15 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
                     self.currentLists = (data[K.User.lists] as! [String])
                     self.userToken = (data[K.User.token] as? String)
                     
+                    print("LINE 85 CURRENTLISTS: \(self.currentLists)")
+                    
                     if self.currentLists != [] {
                         if self.currentLists?[0] != nil {
                             
                             self.currentListID = self.currentLists![0]
+                            
+                            print("LINE 92 CURRENTLISTID: \(self.currentListID)")
+                            
                             self.listsRef = self.db.collection(K.FStore.lists).document(self.currentListID!)
                             
                             DispatchQueue.global(qos: .background).async {
@@ -115,10 +120,7 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
                             
                             // Load the section names
                             self.loadSections(listID: self.currentListID!)
-                            
-                            // Save variables in UserDefaults
-                            UserDefaults.standard.set(self.userFirstName, forKey: "firstName")
-                            UserDefaults.standard.synchronize()
+                    
                         } else {
                             self.performSegue(withIdentifier: K.Segues.tableToAddList, sender: self)
                         }
@@ -421,6 +423,7 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
     
     func addTask(name: String, uid: String, quantity: String?) {
         let newTask = Task(name: name, uid: uid)
+        print("LINE 426: \(name), \(uid)")
         
         let thisCategory = newTask.category
         
@@ -438,8 +441,8 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
             newTask.quantity = quantity
         }
        
-        // Remove the device's messaging token from the list's pushTokens -> user that adds the item doesn't receive notification
-        // Push notifications are handled by Firebase Functions in the root document/triggers. Language: node.js
+        // Remove the device's messaging token from the list's pushTokens so the user that adds the item doesn't receive a notification
+        // Push notifications are handled by Firebase Functions in the root document /triggers (JavaScript & node.js)
         if var sendToTokens = self.receiverTokens {
             if let index = sendToTokens.firstIndex(of: self.userToken!) {
                 sendToTokens.remove(at: index)
@@ -447,6 +450,7 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
         
         // Adding to Firestore
         var ref: DocumentReference? = nil
+            print("LINE 453: \(newTask.name), \(newTask.uid)")
             ref = db.collection(K.lists).document(currentListID!).collection(K.FStore.sections).document("\(newTask.number)").collection(K.FStore.items).addDocument(data: [
                 K.Item.name: newTask.name,
                 K.Item.quantity: newTask.quantity ?? "",
@@ -462,6 +466,7 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
                 print("Error adding document: \(err)")
             } else {
                 if let newItemID = ref?.documentID {
+                    print("LINE 469: \(newItemID)")
                     newTask.itemID = newItemID
                     newTask.uid = self.currentUserID
                     

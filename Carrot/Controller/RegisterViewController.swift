@@ -30,12 +30,20 @@ class RegisterViewController: UIViewController, UIImagePickerControllerDelegate,
         
         self.hideKeyboardWhenTappedAround()
         self.setupAvatar()
+        
         errorMessage.text = ""
         passwordTextfield.placeholder = NSLocalizedString("Password", comment: "Placeholder on second sign up step")
         signUp.setTitle(NSLocalizedString("Sign up", comment: "Button title on second sign up step"), for: .normal)
+        
+        emailTextfield.delegate = self
+        passwordTextfield.delegate = self
     }
     
     @IBAction func registerPressed(_ sender: Any) {
+        register()
+    }
+    
+    func register() {
         view.endEditing(true)
         
         email = emailTextfield.text
@@ -89,6 +97,7 @@ class RegisterViewController: UIViewController, UIImagePickerControllerDelegate,
         }
     }
     
+    // Profile picture setup
     func setupAvatar() {
         
         profilePicture.isUserInteractionEnabled = true
@@ -164,5 +173,17 @@ class RegisterViewController: UIViewController, UIImagePickerControllerDelegate,
                 self?.profilePicture.image = UIImage(data: data)
             }
         }
+    }
+}
+
+extension RegisterViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == emailTextfield {
+            passwordTextfield.becomeFirstResponder()
+        } else {
+            passwordTextfield.resignFirstResponder()
+            register()
+        }
+        return true
     }
 }
