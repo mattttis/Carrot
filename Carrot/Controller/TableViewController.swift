@@ -441,12 +441,16 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
             newTask.quantity = quantity
         }
        
+        var sendToTokens2: [String]?
+        
         // Remove the device's messaging token from the list's pushTokens so the user that adds the item doesn't receive a notification
         // Push notifications are handled by Firebase Functions in the root document /triggers (JavaScript & node.js)
         if var sendToTokens = self.receiverTokens {
             if let index = sendToTokens.firstIndex(of: self.userToken!) {
                 sendToTokens.remove(at: index)
+                sendToTokens2 = sendToTokens
             }
+        }
         
         // Adding to Firestore
         var ref: DocumentReference? = nil
@@ -460,7 +464,7 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
                 K.Item.firstName: self.userFirstName ?? NSLocalizedString("Someone", comment: "Used in new item notification"),
                 K.Item.uid: currentUserID!,
                 "language": UserDefaults.standard.string(forKey: K.List.language)!,
-                K.Item.tokens: sendToTokens
+                K.Item.tokens: sendToTokens2
         ]) { err in
             if let err = err {
                 print("Error adding document: \(err)")
@@ -484,8 +488,8 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
                     self.sections[newTask.number].isExpanded = true
                 }
             }
-        }
-        }
+            }
+            
         
         refreshTable()
     }
