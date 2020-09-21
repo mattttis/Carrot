@@ -8,8 +8,6 @@
 
 import Foundation
 
-//🥩🥓", "Fish 🐟🍣", "Bread 🍞🥯", "Canned goods 🥫", "Dairy 🥛🧀", "Snacks 🍿🥨", "Frozen foods 🧊", "Produce 🍅🍒"
-
 struct FoodData {
     
     static var language = UserDefaults.standard.string(forKey: "language")
@@ -53,7 +51,7 @@ struct FoodData {
         switch FoodData.language {
             
         // Dutch
-        case "nl": return ["rundergehakt", "gehakt", "spekreepje", "spekreepjes", "burger", "bbq", "hamburger", "hamburgers", "ontbijtspek", "schnitzel", "varkensbraadworst", "braadworst", "slavink", "slavinken", "runderchipolata", "chipolata", "biefstuk", "rundervink", "rundervinken", "runderbraadworst", "runderbraadworsten", "kipbraadworst", "speklap", "riblap", "pannenkoekspek",  "pannenkoekenspek", "shoarmareepjes", "shoarmavlees", "shoarma", "rookworst", "bbq burger", "grill burger", "gehaktbal", "gehaktballetjes", "gehaktballen", "rookworsten", "biefstuk","ossenhaas", "schouderkarbonade", "spek", "speklapjes", "braadworst", "ontbijtspek", "rundervinken", "varkenshaas", "cordon bleu", "bamivlees", "schnitzel", "worst", "worstjes", "bbq worst", "vlees", "grillworst", "grillworst kip", "kipgrillworst", "grilworst"]
+        case "nl": return ["rundergehakt", "gehakt", "spekreepje", "spekreepjes", "burger", "bbq", "hamburger", "hamburgers", "ontbijtspek", "schnitzel", "varkensbraadworst", "braadworst", "slavink", "slavinken", "runderchipolata", "chipolata", "biefstuk", "rundervink", "rundervinken", "runderbraadworst", "runderbraadworsten", "kipbraadworst", "speklap", "riblap", "pannenkoekspek",  "pannenkoekenspek", "shoarmareepjes", "shoarmavlees", "shoarma", "rookworst", "bbq burger", "grill burger", "gehaktbal", "gehaktballetjes", "gehaktballen", "rookworsten", "biefstuk","ossenhaas", "schouderkarbonade", "spek", "speklapjes", "braadworst", "ontbijtspek", "rundervinken", "varkenshaas", "cordon bleu", "bamivlees", "schnitzel", "worst", "worstjes", "bbq worst", "vlees", "grillworst", "grillworst kip", "kipgrillworst", "grilworst", "smeerworst"]
                 
         // Default (English)
         default: return ["bacon", "chicken", "deli meat", "ground beef", "ground turkey", "ham", "hot dogs", "pork", "sausage", "steak", "turkey", "beef"]
@@ -76,7 +74,7 @@ struct FoodData {
         switch FoodData.language {
             
         // Dutch
-        case "nl": return ["eieren","biologische eieren","melk","halfvolle melk","scharreleieren","yoghurt","griekse yoghurt","koffiemelk","halfvolle koffiemelk","volle melk","magere franse kwark","kwark","franse kwark","magere kwark","drinkyoghurt","optimel","roomboter","boter","karnemelk","magere yoghurt","volle youghurt","roomboter gezouten","roomboter ongezouten","halvarine","optimel aardbei","optimel aardbei-kers","vanille vla","vla","chocoladevla","chocolademousse","mousse","campina","chocomelk","chocolademelk","chocomel","breaker","blue band","blue band halvarine","amandelmelk","kookroom","slagroom","sour cream","becel","becel light","lactosevrije melk","sojamelk","soyamelk","sojadrink","arla","skyr","skyr yoghurt","campina vlaflip","paula vla","paula", "feta", "kaas", "jonge kaas", "oude kaas", "belegen kaas", "jong belegen kaas", "jong belegen", "feta kaas", "creme freche", "creme fraiche", "cheddar"]
+        case "nl": return ["eieren", "biologische eieren", "melk", "halfvolle melk", "scharreleieren", "yoghurt", "griekse yoghurt", "koffiemelk", "halfvolle koffiemelk", "volle melk", "magere franse kwark", "kwark", "franse kwark", "magere kwark", "drinkyoghurt", "optimel", "roomboter","boter", "karnemelk", "magere yoghurt", "volle youghurt", "roomboter gezouten","roomboter ongezouten","halvarine", "optimel aardbei","optimel aardbei-kers", "vanille vla", "vla", "chocoladevla", "chocolademousse", "mousse", "campina", "chocomelk","chocolademelk", "chocomel","breaker","blue band","blue band halvarine", "amandelmelk", "kookroom", "slagroom", "sour cream","becel","becel light","lactosevrije melk", "sojamelk", "soyamelk", "sojadrink", "arla","skyr","skyr yoghurt","campina vlaflip","paula vla","paula", "feta", "kaas", "jonge kaas", "oude kaas", "belegen kaas", "jong belegen kaas", "jong belegen", "feta kaas", "creme freche", "creme fraiche", "cheddar", "smeerkaas"]
                 
         // Default (English)
         default: return ["tofu", "butter", "cheddar cheese", "cream", "cream cheese", "dip", "eggs", "egg substitute", "feta cheese", "half & half", "jack cheese", "milk", "mozzarella", "processed cheese", "salsa", "shredded cheese", "sour cream", "Swiss cheese", "whipped cream", "yogurt"]
@@ -88,7 +86,7 @@ struct FoodData {
         switch FoodData.language {
             
         // Dutch
-        case "nl": return ["brood", "broodjes", "witte bollen","witte bolletjes","bolletjes","bruine bolletjes","kaiserbroodje","kaiserbroodjes","tijgerbrood","tijgerbrood bruin","half tijgerbrood","tijger bruin","bruin tijgerbrood","volkoren bollen","zaans volkoren","half zaans volkoren","zaans volkoren half","meergranen volkoren","meergranen volkoren half","half meergranen volkoren","luchtige crackers","crackers","volkoren heel","krentenbollen","waldkorn","tijger volkoren","mini krentenbollen","krentenbollen mini","minicrackers","stokbrood","frans stokbrood","afbakbroodjes","casino wit","casino wit half","hamburgerbroodjes","madeleine","croissants","croissant","croissantje","croissantjes","tijger wit","wit tijgerbrood","witte puntjes","cracotte","bruin brood","bruin heel","pita broodjes","pita","pita brood","ciabatta","pistoletjes","pistoletje","ciabattas","italiaanse bol","italiaanse bollen","focaccia","triangel","meergranenbrood","triangel meergranen","croissantdeeg","partybroodjes","bananenbrood","tarwebloem","meel","bloem","bagel","bagels","pistolets","spelt","speltbrood","bakkersbollen","stokbrood kruidenboter","worstenbroodjes","appeltaart","appeltaartjes","appeltaarten","appeltaartje","chocoladetaart","chocotaart","chocoladetaarten","chocoladetaartjes","tijgerbollen","tijgerbol","mini worstenbroodjes"]
+        case "nl": return ["brood", "broodjes", "witte bollen","witte bolletjes","bolletjes","bruine bolletjes", "kaiserbroodje", "kaiserbroodjes","tijgerbrood","tijgerbrood bruin","half tijgerbrood","tijger bruin","bruin tijgerbrood", "volkoren bollen", "zaans volkoren", "half zaans volkoren", "zaans volkoren half", "meergranen volkoren", "meergranen volkoren half", "half meergranen volkoren", "luchtige crackers", "crackers", "volkoren heel", "krentenbollen", "waldkorn", "tijger volkoren", "mini krentenbollen", "krentenbollen mini", "minicrackers", "stokbrood", "frans stokbrood", "afbakbroodjes", "casino wit", "casino wit half", "hamburgerbroodjes", "madeleine", "croissants", "croissant", "croissantje", "croissantjes","tijger wit","wit tijgerbrood","witte puntjes","cracotte","bruin brood","bruin heel","pita broodjes","pita","pita brood","ciabatta","pistoletjes","pistoletje","ciabattas","italiaanse bol","italiaanse bollen","focaccia","triangel","meergranenbrood","triangel meergranen","croissantdeeg","partybroodjes","bananenbrood","tarwebloem","meel","bloem","bagel","bagels","pistolets","spelt","speltbrood","bakkersbollen","stokbrood kruidenboter","worstenbroodjes","appeltaart","appeltaartjes","appeltaarten","appeltaartje","chocoladetaart","chocotaart","chocoladetaarten","chocoladetaartjes","tijgerbollen","tijgerbol","mini worstenbroodjes"]
                 
         // Default (English)
         default: return ["bagels", "bagel", "bread", "donuts", "cake", "cookies", "croutons", "dinner rolls", "hamburger buns", "hot dog buns", "muffins", "pastries", "pie", "pita bread", "tortillas", "corn tortillas", "flour tortillas", "croissant", "bread roll"]
@@ -125,7 +123,7 @@ struct FoodData {
         switch FoodData.language {
             
         // Dutch
-        case "nl": return ["chips", "stroopwafels", "tony chocolony", "tony chocolonely", "pepernoten", "kruidnoten", "chocopepernoten", "chocoladepepernoten", "kauwgom", "schoolkrijt", "winegums", "dropjes", "drop", "lays", "cheetos", "paprika chips", "naturel chips", "pringles", "pringles original", "pringles naturel", "chocolate chip cookies", "chocolate chip", "ribbelchips", "doritos", "cashewnoten", "verkade", "tortillachips", "buggles", "bastogne", "hamkas", "hamkaas", "tuc", "tucjes", "tuc tuc", "tuc tucjes", "tuctucjes", "lange vingers", "roze koeken", "noodles", "noedles", "walnoten", "liga", "likkoekjes", "bugles", "nibbits", "nibbs", "notenmix", "duyvis", "borrelnootjes", "mergpijpen", "zaans huisje", "chipito", "kaasstengels", "bokkenpootjes", "sultana", "sultanas", "croky", "wafels", "eierwafels", "zeezout karamel", "tonys zeezout", "tonys zeezout karamel", "koekjes", "eierkoeken", "gevulde koeken", "popcorn", "zoute popcorn", "popcorn zout", "popcorn zoet", "zoete popcorn", "chili chips", "AH chips", "nachos", "nacho's", "ah nachos", "nachos ah", "doritos paars", "paarse doritos", "doritos naturel"]
+        case "nl": return ["chips", "stroopwafels", "tony chocolony", "tony chocolonely", "pepernoten", "kruidnoten", "chocopepernoten", "chocoladepepernoten", "kauwgom", "schoolkrijt", "winegums", "dropjes", "drop", "lays", "cheetos", "paprika chips", "naturel chips", "pringles", "pringles original", "pringles naturel", "chocolate chip cookies", "chocolate chip", "ribbelchips", "doritos", "cashewnoten", "verkade", "tortillachips", "buggles", "bastogne", "hamkas", "hamkaas", "tuc", "tucjes", "tuc tuc", "tuc tucjes", "tuctucjes", "lange vingers", "roze koeken", "noodles", "noedles", "walnoten", "liga", "likkoekjes", "bugles", "nibbits", "nibbs", "notenmix", "duyvis", "borrelnootjes", "mergpijpen", "zaans huisje", "chipito", "kaasstengels", "bokkenpootjes", "sultana", "sultanas", "croky", "wafels", "eierwafels", "zeezout karamel", "tonys zeezout", "tonys zeezout karamel", "koekjes", "eierkoeken", "gevulde koeken", "popcorn", "zoute popcorn", "popcorn zout", "popcorn zoet", "zoete popcorn", "chili chips", "AH chips", "nachos", "nacho's", "ah nachos", "nachos ah", "doritos paars", "paarse doritos", "doritos naturel", "schoolkrijtjes"]
                 
         // Default (English)
         default: return [
@@ -138,11 +136,10 @@ struct FoodData {
         switch FoodData.language {
             
         // Dutch
-        case "nl": return ["ijsjes", "dokter oetker", "dr oetker", "dr. oetker", "pizza salami", "pizza margarita", "raketjes", "ijsblokjes", "ovenfriet", "friet", "cornetto", "split", "ijshoorntjes", "magnum", "mini magnums", "vissticks", "pizza mozzarella", "liuk", "dropijs", "ovenfrikandel", "bitterballen", "ovenbitterballen", "pizza", "pizzas", "pizza's"]
+        case "nl": return ["ijsjes", "dokter oetker", "dr oetker", "dr. oetker", "pizza salami", "pizza margarita", "raketjes", "ijsblokjes", "ovenfriet", "friet", "cornetto", "split", "ijshoorntjes", "magnum", "mini magnums", "vissticks", "pizza mozzarella", "liuk", "dropijs", "ovenfrikandel", "frikadellen", "frikandellen", "frikandel", "diepvriessnacks", "ovensnacks", "bitterballen", "ovenbitterballen", "pizza", "pizzas", "pizza's", "pizza picante", "pizza pikante"]
                 
         // Default (English)
         default: return ["chicken bites", "desserts", "fish sticks", "fruit", "ice", "ice cream", "ice pops", "juice", "meat", "pie shells", "pizza", "pot pies", "potatoes", "TV dinners", "vegetables", "veggie burger", "waffles"]
-        
         }
     }
     
@@ -150,7 +147,7 @@ struct FoodData {
         switch FoodData.language {
             
         // Dutch
-        case "nl": return ["zeep", "wasmiddel", "keukenpapier", "toiletrollen", "toiletreiniger", "doekjes", "afvalzakken", "tissues", "zakdoekjes"]
+        case "nl": return ["axe", "deo", "deodorant", "axe deo", "zeep", "wasmiddel", "keukenpapier", "keukenrol", "keukenrollen", "toiletrollen", "toiletreiniger", "doekjes", "afvalzakken", "tissues", "zakdoekjes", "tandpasta", "zonnebrand", "handgel", "bekers", "bekertjes", "aluminiumfolie", "zonnebrand", "zeep", "muggenspul", "muggenspray", "shampoo", "conditioner", "douchegel", "axe douchegel", "wax", "gel", "vuilniszakken", "scheermesjes", "scheerschuim"]
                 
         // Default (English)
         default: return ["aluminum foil", "coffee filters", "cups", "garbage bags", "napkins", "paper plates", "paper towels", "plastic bags", "plastic cutlery", "plastic wrap", "straws", "waxed paper", "bath soap", "bug repellant", "conditioner", "cotton swabs", "dental floss", "deodorant", "facial tissue", "condoms", "tampons", "pads", "hair spray", "hand soap", "lip care", "lotion", "makeup", "mouthwash", "razors", "blades", "shampoo", "shaving cream", "sunscreen", "toilet tissue", "toothbrush", "toothpaste"]

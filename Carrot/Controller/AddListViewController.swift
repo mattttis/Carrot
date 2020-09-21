@@ -24,19 +24,10 @@ class AddListViewController: UIViewController, UNUserNotificationCenterDelegate,
         existingListOutlet.delegate = self
     }
     
-    func myTextFieldTextChanged (textField: UITextField) {
-        textField.text =  textField.text?.uppercased()
-    }
-    
     func textFieldShouldReturn(_ textField: PinCodeTextField) -> Bool {
         self.existingList()
         return true
     }
-    
-//    func textFieldDidEndEditing(_ textField: PinCodeTextField) {
-//        print(textField.text)
-//        self.existingList()
-//    }
     
     func textFieldShouldEndEditing(_ textField: PinCodeTextField) -> Bool {
         self.existingList()
@@ -44,7 +35,6 @@ class AddListViewController: UIViewController, UNUserNotificationCenterDelegate,
     }
     
     func existingList() {
-        print("Existing list action III")
         
         let listRef = db.collection(K.FStore.lists)
         let userRef = db.collection(K.FStore.users).document(user!.uid)
@@ -59,7 +49,9 @@ class AddListViewController: UIViewController, UNUserNotificationCenterDelegate,
                             K.List.members: FieldValue.arrayUnion([self.user!.uid])
                         ]))
                         
+                        let currentID = document.documentID
                         UserDefaults.standard.set(enteredCode, forKey: "code")
+                        UserDefaults.standard.set(currentID, forKey: "listID")
                         UserDefaults.standard.synchronize()
                         
                         userRef.updateData([
@@ -83,23 +75,12 @@ class AddListViewController: UIViewController, UNUserNotificationCenterDelegate,
         var currentListID: String?
         
         // Create 5 letter random string to save as code
-        let letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+        let letters = "ABCDEFGHIJKLMNPQRSTUVWXYZ123456789"
         let code1 = ((0..<5).map{ _ in letters.randomElement()! })
         let code = String(code1)
-        print(code)
         
-        
-//        print("Create list")
-//
         let userRef = db.collection(K.FStore.users).document(Auth.auth().currentUser!.uid)
-//
-//        // Create a new list and save it to FireStore
-//        var currentListID: String?
-//
-//        // Create 5 letter random string to save as code
-//        let letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
-//        let code = ((0..<5).map{ _ in letters.randomElement()! })
-//
+        
         let listRef = db.collection(K.FStore.lists)
         let someData = [
             // K.List.dateCreated: Date(),
@@ -113,29 +94,29 @@ class AddListViewController: UIViewController, UNUserNotificationCenterDelegate,
             K.List.language: Locale.current.languageCode!
         ] as [String : Any]
 
-        UserDefaults.standard.set(String(code), forKey: "code")
-        UserDefaults.standard.set(String(Locale.current.languageCode!), forKey: "language")
-        UserDefaults.standard.synchronize()
+        
 
         let aDoc = listRef.document()
         currentListID = aDoc.documentID
         aDoc.setData(someData)
+        
+        UserDefaults.standard.set(String(code), forKey: "code")
+        UserDefaults.standard.set(String(Locale.current.languageCode!), forKey: "language")
+        UserDefaults.standard.set(currentListID, forKey: "listID")
+        UserDefaults.standard.synchronize()
 
         //  Append previously created list ID to user's "lists" array
         userRef.updateData([
-            // K.User.lists: FieldValue.arrayUnion([currentListID])
             K.User.lists: [currentListID]
         ])
 
         // Set up sections
         for (index, section) in FoodData.foodCategories.enumerated() {
-            print("Got till line 103")
             db.collection(K.FStore.lists).document(currentListID!).collection(K.FStore.sections).document("\(index)").setData([
                 K.Section.name: "\(section)",
                 K.Section.index: "\(index)",
                 K.Section.dateCreated: Timestamp(date: Date())
             ])
-            print("Until heree")
         }
 
         // Redirect user to groceries

@@ -82,14 +82,10 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
                     self.currentLists = (data[K.User.lists] as! [String])
                     self.userToken = (data[K.User.token] as? String)
                     
-                    print("LINE 85 CURRENTLISTS: \(self.currentLists)")
-                    
                     if self.currentLists != [] {
                         if self.currentLists?[0] != nil {
                             
                             self.currentListID = self.currentLists![0]
-                            
-                            print("LINE 92 CURRENTLISTID: \(self.currentListID)")
                             
                             self.listsRef = self.db.collection(K.FStore.lists).document(self.currentListID!)
                             
@@ -98,9 +94,12 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
                                     if let e = error {
                                         print("Error accessing listRef: \(e)")
                                     } else {
-                                        
                                         let token = Messaging.messaging().fcmToken
                                         self.receiverTokens = document?.data()?[K.List.tokens] as? [String]
+                                        if let cardCode = document?.data()?[K.User.barcodeNumber] as? String {
+                                            UserDefaults.standard.set(cardCode, forKey: K.User.barcodeNumber)
+                                        }
+                                        
                                         if let tokenss = self.receiverTokens {
                                             if tokenss.contains(token!) {
                                                 print("Token already in list")
@@ -444,10 +443,12 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
         
         // Remove the device's messaging token from the list's pushTokens so the user that adds the item doesn't receive a notification
         // Push notifications are handled by Firebase Functions in the root document /triggers (JavaScript & node.js)
-        if var sendToTokens = self.receiverTokens {
-            if let index = sendToTokens.firstIndex(of: self.userToken!) {
-                sendToTokens.remove(at: index)
-                sendToTokens2 = sendToTokens
+        if let userTokens = self.userToken {
+            if var sendToTokens = self.receiverTokens {
+                if let index = sendToTokens.firstIndex(of: userTokens) {
+                    sendToTokens.remove(at: index)
+                    sendToTokens2 = sendToTokens
+                }
             }
         }
         
@@ -460,8 +461,8 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
                 K.Item.categoryNumber: newTask.number,
                 K.Item.date: Date(),
                 K.Item.firstName: self.userFirstName ?? NSLocalizedString("Someone", comment: "Used in new item notification"),
-                K.Item.uid: currentUserID!,
-                "language": UserDefaults.standard.string(forKey: K.List.language)!,
+                K.Item.uid: currentUserID,
+                "language": UserDefaults.standard.string(forKey: K.List.language) ?? "en",
                 K.Item.tokens: sendToTokens2
         ]) { err in
             if let err = err {
@@ -553,7 +554,7 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
                                         if let err = err {
                                             print("Error adding document: \(err)")
                                         } else {
-                                           let cell = self.tableView.cellForRow(at: IndexPath(item: indexRow, section: indexSection)) as? TaskCell
+                                            let cell = self.tableView.cellForRow(at: IndexPath(item: indexRow, section: indexSection)) as? TaskCell
                                             
                                             if let cell = cell {
                                                 self.tableView.reloadData()

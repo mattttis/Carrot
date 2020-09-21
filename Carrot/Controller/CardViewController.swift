@@ -17,10 +17,9 @@ class CardViewController: UIViewController {
 
     var currentBrightNess: CGFloat? = nil
     let dbRef = Firestore.firestore().collection(K.FStore.users).document(Auth.auth().currentUser!.uid)
+    let listID = UserDefaults.standard.string(forKey: "listID")
     let storageRef = Storage.storage().reference().child(K.FStore.users).child(Auth.auth().currentUser!.uid).child(K.User.barcodeImage)
     var image: UIImage?
-    let imageCache = NSCache<NSString, AnyObject>()
-    // let cardImageRef: StorageReference?
     
     @IBOutlet weak var cardNumber: UILabel!
     @IBOutlet weak var cardCode: UIImageView!
@@ -145,8 +144,9 @@ extension CardViewController: BarcodeScannerCodeDelegate {
         cardCode.backgroundColor = UIColor.white
         controller.dismiss(animated: true, completion: nil)
         
-        // Save code to Firestore
-        dbRef.updateData([
+        // Save code to Firestore list
+        let ref = Firestore.firestore().collection(K.FStore.lists).document(listID!)
+        ref.updateData([
             K.User.barcodeNumber: code
         ])
         

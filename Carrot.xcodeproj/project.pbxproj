@@ -27,7 +27,7 @@
 		A04F5C0E250281CF00FAB696 /* RegisterViewControllerOne.swift in Sources */ = {isa = PBXBuildFile; fileRef = A04F5C0D250281CF00FAB696 /* RegisterViewControllerOne.swift */; };
 		A05BDA4524CDC78D00854F00 /* AddListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05BDA4424CDC78D00854F00 /* AddListViewController.swift */; };
 		A06DE5AC24F17A020023E0DB /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B59B01D24AA7A59005FBC70 /* TableViewController.swift */; };
-		A07E2C2224F930F400058F35 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A07E2C2124F930F400058F35 /* GoogleService-Info.plist */; };
+		A07E2C2224F930F400058F35 /* GoogleService-Info-OLD.plist in Resources */ = {isa = PBXBuildFile; fileRef = A07E2C2124F930F400058F35 /* GoogleService-Info-OLD.plist */; };
 		A0812ADF24C76C2E002A03EB /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0812ADE24C76C2E002A03EB /* AccountViewController.swift */; };
 		A0ACFEAD24BBA320008943E4 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0ACFEAC24BBA320008943E4 /* Constants.swift */; };
 		A0AE90C124B8F2DA00E31B68 /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0AE90C024B8F2DA00E31B68 /* Section.swift */; };
@@ -35,6 +35,7 @@
 		A0C466B124B12FF400DDDAAA /* FoodData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C466B024B12FF400DDDAAA /* FoodData.swift */; };
 		A0CA856D250A76F50062BCF0 /* CheckAnimation.json in Resources */ = {isa = PBXBuildFile; fileRef = A0CA856C250A76F50062BCF0 /* CheckAnimation.json */; };
 		A0DCFC5824FD976C0037D750 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A0DCFC5A24FD976C0037D750 /* Localizable.strings */; };
+		A0EB867925125F79003066A1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A0EB867825125F79003066A1 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -74,7 +75,7 @@
 		A044353F2503B83F007270A2 /* SF-Compact-Text-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Compact-Text-Light.otf"; sourceTree = "<group>"; };
 		A04F5C0D250281CF00FAB696 /* RegisterViewControllerOne.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewControllerOne.swift; sourceTree = "<group>"; };
 		A05BDA4424CDC78D00854F00 /* AddListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddListViewController.swift; sourceTree = "<group>"; };
-		A07E2C2124F930F400058F35 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		A07E2C2124F930F400058F35 /* GoogleService-Info-OLD.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-OLD.plist"; sourceTree = "<group>"; };
 		A07E2C2324F9320D00058F35 /* Carrot.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Carrot.entitlements; sourceTree = "<group>"; };
 		A0812ADE24C76C2E002A03EB /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AccountViewController.swift; path = Carrot/Controller/AccountViewController.swift; sourceTree = SOURCE_ROOT; };
 		A0ACFEAC24BBA320008943E4 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -85,6 +86,7 @@
 		A0DCFC5724FD97620037D750 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		A0DCFC5924FD976C0037D750 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		A0DCFC5B24FD97720037D750 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
+		A0EB867825125F79003066A1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		DD9E70B64D89EFFCE59BE41C /* Pods-Carrot.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Carrot.release.xcconfig"; path = "Target Support Files/Pods-Carrot/Pods-Carrot.release.xcconfig"; sourceTree = "<group>"; };
 		E04A748A672CA8543E3991F9 /* Pods_Carrot.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Carrot.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -133,7 +135,8 @@
 				7B59B01024AA7816005FBC70 /* Assets.xcassets */,
 				7B59B01524AA7816005FBC70 /* Info.plist */,
 				A07E2C2324F9320D00058F35 /* Carrot.entitlements */,
-				A07E2C2124F930F400058F35 /* GoogleService-Info.plist */,
+				A0EB867825125F79003066A1 /* GoogleService-Info.plist */,
+				A07E2C2124F930F400058F35 /* GoogleService-Info-OLD.plist */,
 			);
 			path = Carrot;
 			sourceTree = "<group>";
@@ -276,13 +279,14 @@
 			files = (
 				A0DCFC5824FD976C0037D750 /* Localizable.strings in Resources */,
 				A0CA856D250A76F50062BCF0 /* CheckAnimation.json in Resources */,
-				A07E2C2224F930F400058F35 /* GoogleService-Info.plist in Resources */,
+				A07E2C2224F930F400058F35 /* GoogleService-Info-OLD.plist in Resources */,
 				A04435412503B83F007270A2 /* SF-Compact-Text-Medium.otf in Resources */,
 				7B59B01424AA7816005FBC70 /* LaunchScreen.storyboard in Resources */,
 				A04435422503B83F007270A2 /* SF-Compact-Text-Light.otf in Resources */,
 				A0B38CD724EC8F1D00511F06 /* Assets.xcassets in Resources */,
 				A04435402503B83F007270A2 /* SF-Compact-Text-Regular.otf in Resources */,
 				7B59B00F24AA7811005FBC70 /* Main.storyboard in Resources */,
+				A0EB867925125F79003066A1 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -513,13 +517,14 @@
 				CODE_SIGN_ENTITLEMENTS = Carrot/Carrot.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 2C75387PJ6;
 				INFOPLIST_FILE = Carrot/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2;
+				MARKETING_VERSION = 1.2.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.mattt.Carrot;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -542,7 +547,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2;
+				MARKETING_VERSION = 1.2.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.mattt.Carrot;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

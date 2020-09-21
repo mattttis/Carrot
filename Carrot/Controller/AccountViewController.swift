@@ -166,6 +166,12 @@ class AccountViewController: UIViewController {
             do {
                 try Auth.auth().signOut()
                 UserDefaults.standard.set(false, forKey: "isLoggedIn")
+                
+                // Remove info
+                UserDefaults.standard.removeObject(forKey: K.User.barcodeNumber)
+                UserDefaults.standard.removeObject(forKey: "language")
+                UserDefaults.standard.removeObject(forKey: K.User.firstName)
+                
                 UserDefaults.standard.synchronize()
             } catch {
                 print("Already logged out")

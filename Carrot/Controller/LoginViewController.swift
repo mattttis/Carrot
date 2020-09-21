@@ -77,9 +77,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                             print(e)
                         } else {
                             let firstName = doc?.data()?[K.User.firstName]
-                            let barcode = doc?.data()?[K.User.barcodeNumber]
+                            // let barcode = doc?.data()?[K.User.barcodeNumber]
                             UserDefaults.standard.set(firstName, forKey: "firstName")
-                            UserDefaults.standard.set(barcode, forKey: K.User.barcodeNumber)
+                            // UserDefaults.standard.set(barcode, forKey: K.User.barcodeNumber)
                             UserDefaults.standard.synchronize()
                         }
                     }
@@ -89,11 +89,18 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                             print("Error getting documents: \(err)")
                         } else {
                             for document in querySnapshot!.documents {
+                                let listID = document.documentID
                                 let listCode = document.data()[K.List.code]!
                                 let language = document.data()[K.List.language] as? String
+                                let barcode = document.data()[K.User.barcodeNumber] as? String
+                                
+                                FoodData.language = language
+                                
+                                UserDefaults.standard.set(listID, forKey: "listID")
                                 UserDefaults.standard.set(listCode, forKey: "code")
                                 UserDefaults.standard.set(language, forKey: "language")
-                                FoodData.language = language
+                                UserDefaults.standard.set(barcode, forKey: K.User.barcodeNumber)
+                                
                                 UserDefaults.standard.synchronize()
                             }
                         }

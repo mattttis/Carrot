@@ -44,9 +44,6 @@ class ShareViewController: UIViewController {
             
             let text = NSLocalizedString("Join my grocery list! Download the app 'Carrot' and use the invite code ", comment: "Share1") + listCode + NSLocalizedString(" to add items to my list. You can download the app here: ", comment: "Share2") + String(describing: myWebsite!)
             
-            let text3 = "Join my grocery list! Download the app 'Carrot' and use the invite code " + listCode + " to add items to my list. You can download the app here: " + String(describing: myWebsite!)
-            let text4 = "Ik gebruik Carrot als gezamenlijk boodschappenlijstje. Download de app en voer de code " + listCode + " in. Je kunt de app hier downloaden: " + String(describing: myWebsite!)
-            
             // set up activity view controller
             let textToShare = [text]
             let activityViewController = UIActivityViewController(activityItems: textToShare, applicationActivities: nil)

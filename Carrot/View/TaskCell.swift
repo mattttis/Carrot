@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Firebase
+import FirebaseAuth
 
 protocol ChangeButton {
     func changeButton(state: Bool, indexSection: Int?, indexRow: Int?, itemID: String?)
@@ -15,6 +15,12 @@ protocol ChangeButton {
 }
 
 class TaskCell: UITableViewCell {
+    
+    @IBOutlet weak var profilePicture: UIImageView!
+    @IBOutlet weak var taskNameLabel: UILabel!
+    @IBOutlet weak var checkBoxOutlet: UIButton!
+    @IBOutlet weak var progressBar: UIProgressView!
+    @IBOutlet weak var quantityLabel: UILabel!
 
     var delegate: ChangeButton?
     
@@ -31,14 +37,6 @@ class TaskCell: UITableViewCell {
     
     private var workItem: DispatchWorkItem?
     
-    @IBAction func checkBoxAction(_ sender: Any) {
-        if tempState == false {
-            startAnimation()
-        } else {
-            stopAnimation()
-        }
-    }
-    
     override func prepareForReuse() {
         reset()
     }
@@ -52,6 +50,8 @@ class TaskCell: UITableViewCell {
         
         profilePicture.layer.cornerRadius = profilePicture.frame.height / 2
         profilePicture.clipsToBounds = true
+        
+        reset()
     }
     
     func reset() {
@@ -65,6 +65,15 @@ class TaskCell: UITableViewCell {
         ])
     }
     
+    @IBAction func checkBoxAction(_ sender: Any) {
+        if tempState == false {
+            startAnimation()
+        } else {
+            stopAnimation()
+        }
+    }
+    
+    // Function called when there is no quantity/description
     func noQuantity() {
         self.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -72,7 +81,6 @@ class TaskCell: UITableViewCell {
         ])
     }
     
-
     
     @objc func tapFunction(sender:UITapGestureRecognizer) {
         
@@ -82,15 +90,6 @@ class TaskCell: UITableViewCell {
             stopAnimation()
         }
     }
-    
-//    func stopAnimation() {
-//        let generator = UIImpactFeedbackGenerator(style: .medium)
-//        generator.impactOccurred()
-//        workItem?.cancel()
-//        self.progressBar.setProgress(0.0, animated: false)
-//        self.checkBoxOutlet.setBackgroundImage(#imageLiteral(resourceName: "checkBoxOUTLINE "), for: .normal)
-//        self.tempState = false
-//    }
     
     func stopAnimation() {
         let generator = UIImpactFeedbackGenerator(style: .medium)
@@ -113,53 +112,59 @@ class TaskCell: UITableViewCell {
         } else {
             self.delegate?.changeButton(state: true, indexSection: self.indexSection!, indexRow: self.indexRow!, itemID: self.itemID)
             self.checkBoxOutlet.setBackgroundImage(#imageLiteral(resourceName: "checkBoxFILLED "), for: .normal)
-//            self.tempState = true
-//            UIView.animate(withDuration: 4.0, animations: {
-//                self.progressBar.setProgress(1.0, animated: true)
-//          }) { (finished: Bool) in
-//            
-//                self.workItem = DispatchWorkItem {
-//                    self.delegate?.changeButton(state: true, indexSection: self.indexSection!, indexRow: self.indexRow!, itemID: self.itemID)
-//                }
-//                
-//                DispatchQueue.main.asyncAfter(deadline: .now() + 3.3, execute: self.workItem!)
-//            
-//            
-//            }
-        }
-        
-//        func startAnimation() {
-//        let generator = UIImpactFeedbackGenerator(style: .medium)
-//        generator.impactOccurred()
-//
-//        if items![indexRow!].checked {
-//            self.delegate?.changeButton(state: false, indexSection: indexSection!, indexRow: indexRow!, itemID: itemID!)
-//            self.progressBar.setProgress(0.0, animated: false)
-//            self.checkBoxOutlet.setBackgroundImage(#imageLiteral(resourceName: "checkBoxOUTLINE "), for: .normal)
-//        } else {
-//
-//            self.checkBoxOutlet.setBackgroundImage(#imageLiteral(resourceName: "checkBoxFILLED "), for: .normal)
-//            self.tempState = true
-//            UIView.animate(withDuration: 4.0, animations: {
-//                self.progressBar.setProgress(1.0, animated: true)
-//          }) { (finished: Bool) in
-//
-//                self.workItem = DispatchWorkItem {
-//                    self.delegate?.changeButton(state: true, indexSection: self.indexSection!, indexRow: self.indexRow!, itemID: self.itemID)
-//                }
-//
-//                DispatchQueue.main.asyncAfter(deadline: .now() + 3.3, execute: self.workItem!)
-//
-//
-//            }
-//        }
+    }
     }
     
-    @IBOutlet weak var profilePicture: UIImageView!
-    @IBOutlet weak var taskNameLabel: UILabel!
-    @IBOutlet weak var checkBoxOutlet: UIButton!
-    @IBOutlet weak var progressBar: UIProgressView!
-    @IBOutlet weak var quantityLabel: UILabel!
     
-    
-}
+
+        //    func stopAnimation() {
+        //        let generator = UIImpactFeedbackGenerator(style: .medium)
+        //        generator.impactOccurred()
+        //        workItem?.cancel()
+        //        self.progressBar.setProgress(0.0, animated: false)
+        //        self.checkBoxOutlet.setBackgroundImage(#imageLiteral(resourceName: "checkBoxOUTLINE "), for: .normal)
+        //        self.tempState = false
+        //    }
+            
+        
+    //            self.tempState = true
+    //            UIView.animate(withDuration: 4.0, animations: {
+    //                self.progressBar.setProgress(1.0, animated: true)
+    //          }) { (finished: Bool) in
+    //
+    //                self.workItem = DispatchWorkItem {
+    //                    self.delegate?.changeButton(state: true, indexSection: self.indexSection!, indexRow: self.indexRow!, itemID: self.itemID)
+    //                }
+    //
+    //                DispatchQueue.main.asyncAfter(deadline: .now() + 3.3, execute: self.workItem!)
+    //
+    //
+    //            }
+            }
+            
+    //        func startAnimation() {
+    //        let generator = UIImpactFeedbackGenerator(style: .medium)
+    //        generator.impactOccurred()
+    //
+    //        if items![indexRow!].checked {
+    //            self.delegate?.changeButton(state: false, indexSection: indexSection!, indexRow: indexRow!, itemID: itemID!)
+    //            self.progressBar.setProgress(0.0, animated: false)
+    //            self.checkBoxOutlet.setBackgroundImage(#imageLiteral(resourceName: "checkBoxOUTLINE "), for: .normal)
+    //        } else {
+    //
+    //            self.checkBoxOutlet.setBackgroundImage(#imageLiteral(resourceName: "checkBoxFILLED "), for: .normal)
+    //            self.tempState = true
+    //            UIView.animate(withDuration: 4.0, animations: {
+    //                self.progressBar.setProgress(1.0, animated: true)
+    //          }) { (finished: Bool) in
+    //
+    //                self.workItem = DispatchWorkItem {
+    //                    self.delegate?.changeButton(state: true, indexSection: self.indexSection!, indexRow: self.indexRow!, itemID: self.itemID)
+    //                }
+    //
+    //                DispatchQueue.main.asyncAfter(deadline: .now() + 3.3, execute: self.workItem!)
+    //
+    //
+    //            }
+    //        }
+

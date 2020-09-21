@@ -148,7 +148,7 @@ class Task {
         }
         else if FoodData.household.contains(itemName) {
             // Household
-            category = FoodData.foodCategories[8]
+            category = FoodData.foodCategories[9]
         }
         else {
             category = ""
