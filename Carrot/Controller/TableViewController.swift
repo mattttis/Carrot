@@ -485,8 +485,9 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
                         let count = self.sections[newTask.number].items.count - 1
                         self.sections[newTask.number].items[count].itemID = ref?.documentID
                         // self.sections[newTask.number].items[count].itemID = self.currentUserID ?? "hello"
-                        self.sections[newTask.number].items = []
+                        // self.sections[newTask.number].items = []
                         self.sections[newTask.number].isExpanded = true
+                    // self.tableView.reloadData()
                     // }
                 }
             }
@@ -565,8 +566,8 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
                                                 cell.progressBar.setProgress(0.0, animated: false)
                                             }
                                             
-//                                            let lastRow = self.sections[indexSection].items.count - 1
-//                                            self.tableView.moveRow(at: IndexPath(row: indexRow, section: indexSection), to: IndexPath(row: lastRow, section: indexSection))
+                                            let lastRow = self.sections[indexSection].items.count - 1
+                                            self.tableView.moveRow(at: IndexPath(row: indexRow, section: indexSection), to: IndexPath(row: lastRow, section: indexSection))
                                             
                                             // self.sections[indexSection].items.count - 1
                                             // If successful, delete the item in the normal collection
