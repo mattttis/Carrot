@@ -34,41 +34,24 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
         super.viewWillAppear(animated)
         
         // Navigation bar setup
-//        tabBarController?.title = NSLocalizedString("Groceries",
-//        comment: "TableVC Title")
-//        tabBarController?.navigationController?.hidesBarsOnTap = true
-//        tabBarController?.navigationController?.hidesBarsOnSwipe = true
-//
-//        // Share list BarButton
-//        let configuration = UIImage.SymbolConfiguration(weight: .semibold)
-//        let shareImage = UIImage(systemName: "person.crop.circle.badge.plus", withConfiguration: configuration)
-//        let shareButton = UIBarButtonItem(image: shareImage, style: .plain, target: self, action: #selector(shareFunction))
-//        shareButton.tintColor = UIColor.label
-//
-//        // Present Bonuskaart BarButton
-//        let cardImage = UIImage(systemName: "barcode.viewfinder", withConfiguration: configuration)
-//        let cardButton = UIBarButtonItem(image: cardImage, style: .plain, target: self, action: #selector(showCard))
-//        cardButton.tintColor = UIColor.label
-//
-//        tabBarController?.navigationItem.rightBarButtonItems = [shareButton, cardButton]
-        
-        navigationController?.title = NSLocalizedString("Groceries",
+        tabBarController?.title = NSLocalizedString("Groceries",
         comment: "TableVC Title")
-        navigationController?.navigationController?.hidesBarsOnTap = true
-        navigationController?.navigationController?.hidesBarsOnSwipe = true
-        
+        tabBarController?.navigationController?.hidesBarsOnTap = true
+        tabBarController?.navigationController?.hidesBarsOnSwipe = true
+
         // Share list BarButton
         let configuration = UIImage.SymbolConfiguration(weight: .semibold)
         let shareImage = UIImage(systemName: "person.crop.circle.badge.plus", withConfiguration: configuration)
         let shareButton = UIBarButtonItem(image: shareImage, style: .plain, target: self, action: #selector(shareFunction))
         shareButton.tintColor = UIColor.label
-        
+
         // Present Bonuskaart BarButton
         let cardImage = UIImage(systemName: "barcode.viewfinder", withConfiguration: configuration)
         let cardButton = UIBarButtonItem(image: cardImage, style: .plain, target: self, action: #selector(showCard))
         cardButton.tintColor = UIColor.label
 
-        navigationController?.navigationItem.rightBarButtonItems = [shareButton, cardButton]
+        tabBarController?.navigationItem.rightBarButtonItems = [shareButton, cardButton]
+        
     }
     
     override func viewDidLoad() {
@@ -502,9 +485,8 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
                         let count = self.sections[newTask.number].items.count - 1
                         self.sections[newTask.number].items[count].itemID = ref?.documentID
                         // self.sections[newTask.number].items[count].itemID = self.currentUserID ?? "hello"
-                        // self.sections[newTask.number].items = []
+                        self.sections[newTask.number].items = []
                         self.sections[newTask.number].isExpanded = true
-                    // self.tableView.reloadData()
                     // }
                 }
             }
@@ -588,7 +570,9 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
 //                                                cell.progressBar.setProgress(0.0, animated: false)
 //                                            }
                                             
-                                            
+              
+//                                            let lastRow = self.sections[indexSection].items.count - 1
+//                                            self.tableView.moveRow(at: IndexPath(row: indexRow, section: indexSection), to: IndexPath(row: lastRow, section: indexSection))
                                             
                                             // self.sections[indexSection].items.count - 1
                                             // If successful, delete the item in the normal collection
