@@ -34,11 +34,28 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
         super.viewWillAppear(animated)
         
         // Navigation bar setup
+//        tabBarController?.title = NSLocalizedString("Groceries",
+//        comment: "TableVC Title")
+//        tabBarController?.navigationController?.hidesBarsOnTap = true
+//        tabBarController?.navigationController?.hidesBarsOnSwipe = true
+//
+//        // Share list BarButton
+//        let configuration = UIImage.SymbolConfiguration(weight: .semibold)
+//        let shareImage = UIImage(systemName: "person.crop.circle.badge.plus", withConfiguration: configuration)
+//        let shareButton = UIBarButtonItem(image: shareImage, style: .plain, target: self, action: #selector(shareFunction))
+//        shareButton.tintColor = UIColor.label
+//
+//        // Present Bonuskaart BarButton
+//        let cardImage = UIImage(systemName: "barcode.viewfinder", withConfiguration: configuration)
+//        let cardButton = UIBarButtonItem(image: cardImage, style: .plain, target: self, action: #selector(showCard))
+//        cardButton.tintColor = UIColor.label
+//
+//        tabBarController?.navigationItem.rightBarButtonItems = [shareButton, cardButton]
         
-        tabBarController?.title = NSLocalizedString("Groceries",
+        navigationController?.title = NSLocalizedString("Groceries",
         comment: "TableVC Title")
-        tabBarController?.navigationController?.hidesBarsOnTap = true
-        tabBarController?.navigationController?.hidesBarsOnSwipe = true
+        navigationController?.navigationController?.hidesBarsOnTap = true
+        navigationController?.navigationController?.hidesBarsOnSwipe = true
         
         // Share list BarButton
         let configuration = UIImage.SymbolConfiguration(weight: .semibold)
@@ -51,7 +68,7 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
         let cardButton = UIBarButtonItem(image: cardImage, style: .plain, target: self, action: #selector(showCard))
         cardButton.tintColor = UIColor.label
 
-        tabBarController?.navigationItem.rightBarButtonItems = [shareButton, cardButton]
+        navigationController?.navigationItem.rightBarButtonItems = [shareButton, cardButton]
     }
     
     override func viewDidLoad() {
@@ -526,6 +543,11 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
                     }
                     
                     if let indexSection = indexSection, let indexRow = indexRow {
+                        
+                        // Move cell to last in row
+                        let lastRow = self.sections[indexSection].items.count - 1
+                        self.tableView.moveRow(at: IndexPath(row: indexRow, section: indexSection), to: IndexPath(row: lastRow, section: indexSection))
+                        
                         if self.sections[indexSection].items != nil {
                             let item = self.sections[indexSection].items[indexRow]
                             
@@ -559,15 +581,14 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
                                         if let err = err {
                                             print("Error adding document: \(err)")
                                         } else {
-                                            let cell = self.tableView.cellForRow(at: IndexPath(item: indexRow, section: indexSection)) as? TaskCell
+//                                            let cell = self.tableView.cellForRow(at: IndexPath(item: indexRow, section: indexSection)) as? TaskCell
+//
+//                                            if let cell = cell {
+//                                                // self.tableView.reloadData()
+//                                                cell.progressBar.setProgress(0.0, animated: false)
+//                                            }
                                             
-                                            if let cell = cell {
-                                                // self.tableView.reloadData()
-                                                cell.progressBar.setProgress(0.0, animated: false)
-                                            }
                                             
-                                            let lastRow = self.sections[indexSection].items.count - 1
-                                            self.tableView.moveRow(at: IndexPath(row: indexRow, section: indexSection), to: IndexPath(row: lastRow, section: indexSection))
                                             
                                             // self.sections[indexSection].items.count - 1
                                             // If successful, delete the item in the normal collection
