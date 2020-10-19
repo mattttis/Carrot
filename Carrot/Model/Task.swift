@@ -80,38 +80,6 @@ class Task {
     }
     
     
-//    private func findCategory (itemName: String) -> String {
-//        var category: String
-//        if FoodData.fruits.contains(itemName) || FoodData.vegetables.contains(itemName) {
-//            category = "Produce 🍅"
-//        }
-//        else if FoodData.meat.contains(itemName) {
-//            category = "Meat 🥩"
-//        }
-//        else if FoodData.bakery.contains(itemName) || FoodData.baking.contains(itemName) {
-//            category = "Baking 🥧"
-//        }
-//        else if FoodData.breakfast.contains(itemName) {
-//            category = "Breakfast 🍞"
-//        }
-//        else if FoodData.cans.contains(itemName) || FoodData.sauces.contains(itemName) {
-//            category = "Cans & Jars 🥫"
-//        }
-//        else if FoodData.seafood.contains(itemName) {
-//            category = "Seafood 🐟"
-//        }
-//        else if FoodData.drinks.contains(itemName) {
-//            category = "Drinks 🥤"
-//        }
-//        else if FoodData.frozen.contains(itemName) {
-//            category = "Frozen 🧊"
-//        }
-//        else {
-//            category = ""
-//        }
-//        return category
-//    }
-    
     private func findCategory(itemName: String) -> String {
         var category: String
         if FoodData.fruits.contains(itemName) || FoodData.vegetables.contains(itemName) {

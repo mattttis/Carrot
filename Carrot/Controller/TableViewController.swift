@@ -421,6 +421,7 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
     //MARK: - Adding task (protocol)
     
     func addTask(name: String, uid: String, quantity: String?) {
+        print("Adding task...")
         let newTask = Task(name: name, uid: uid)
         
         let thisCategory = newTask.category
@@ -477,6 +478,7 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
                     
                     
                     print("Item \(newTask.name) has category of \(newTask.category) with number \(newTask.number) & id \(newTask.itemID!) & quantity \(newTask.quantity ?? "")")
+                    print(self.sections[newTask.number].items)
                     
                     
                     // if self.sections != nil && self.sections[newTask.number].items != nil {
@@ -743,8 +745,8 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
                    print("Error fetching documents: \(error!)")
                    return
                }
-            self.items?.removeAll()
-            self.sections[section].items.removeAll()
+            // self.items?.removeAll()
+            // self.sections[section].items.removeAll()
             newItems.removeAll()
             for document in documents {
                 let name = document.data()[K.Item.name] as! String

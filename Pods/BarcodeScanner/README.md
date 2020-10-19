@@ -72,7 +72,7 @@ Use `BarcodeScannerCodeDelegate` when you want to get the captured code back.
 
 ```swift
 extension ViewController: BarcodeScannerCodeDelegate {
-  func barcodeScanner(_ controller: BarcodeScannerViewController, didCaptureCode code: String, type: String) {
+  func scanner(_ controller: BarcodeScannerViewController, didCaptureCode code: String, type: String) {
     print(code)
     controller.reset()
   }
@@ -84,7 +84,7 @@ extension ViewController: BarcodeScannerCodeDelegate {
 Use `BarcodeScannerErrorDelegate` when you want to handle session errors.
 ```swift
 extension ViewController: BarcodeScannerErrorDelegate {
-  func barcodeScanner(_ controller: BarcodeScannerViewController, didReceiveError error: Error) {
+  func scanner(_ controller: BarcodeScannerViewController, didReceiveError error: Error) {
     print(error)
   }
 }
@@ -98,7 +98,7 @@ it was presented initially.
 
 ```swift
 extension ViewController: BarcodeScannerDismissalDelegate {
-  func barcodeScannerDidDismiss(_ controller: BarcodeScannerViewController) {
+  func scannerDidDismiss(_ controller: BarcodeScannerViewController) {
     controller.dismiss(animated: true, completion: nil)
   }
 }
@@ -120,7 +120,7 @@ on the code. When the task is done you have 3 options to proceed:
 1. Dismiss `BarcodeScannerViewController` and show your results.
 
 ```swift
-func barcodeScanner(_ controller: BarcodeScannerViewController, didCaptureCode code: String, type: String) {
+func scanner(_ controller: BarcodeScannerViewController, didCaptureCode code: String, type: String) {
  // Code processing
  controller.dismiss(animated: true, completion: nil)
 }
@@ -134,7 +134,7 @@ when there is no product found with a given barcode in your database):
 </div><br/>
 
 ```swift
-func barcodeScanner(_ controller: BarcodeScannerViewController, didCaptureCode code: String, type: String) {
+func scanner(_ controller: BarcodeScannerViewController, didCaptureCode code: String, type: String) {
  // Code processing
  controller.resetWithError(message: "Error message")
  // If message is not provided the default message will be used instead.
@@ -144,7 +144,7 @@ func barcodeScanner(_ controller: BarcodeScannerViewController, didCaptureCode c
 3. Reset the controller to the scanning mode (with or without animation):
 
  ```swift
- func barcodeScanner(_ controller: BarcodeScannerViewController, didCaptureCode code: String, type: String) {
+ func scanner(_ controller: BarcodeScannerViewController, didCaptureCode code: String, type: String) {
    // Code processing
    controller.reset(animated: true)
  }
@@ -208,6 +208,8 @@ it, simply add the following line to your Podfile:
 ```ruby
 pod 'BarcodeScanner'
 ```
+
+Don't forget to set a `Privacy - Camera Usage Description` in your Info.plist file, else the app will crash with a SIGBART. 
 
 In order to quickly try the demo project of a **BarcodeScanner** just run
 `pod try BarcodeScanner` in your terminal.
