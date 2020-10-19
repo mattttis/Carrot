@@ -8,7 +8,11 @@
 
 import Foundation
 
-class Task {
+class Task: Equatable {
+    static func == (lhs: Task, rhs: Task) -> Bool {
+        return lhs.name == rhs.name && lhs.itemID == rhs.itemID
+    }
+    
     var name = ""
     var quantity: String?
     var checked = false
