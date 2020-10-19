@@ -431,10 +431,10 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
         
         // Check what the position of the category name is, return 17 ('Other') if nothing found
         if thisCategory != "" {
-            newTask.number = FoodData.foodCategories.firstIndex(of: thisCategory) ?? 10
+            newTask.number = FoodData.foodCategories.firstIndex(of: thisCategory) ?? FoodData.foodCategories.count - 1
         }
         
-        newTask.quantity = quantity
+        // // // newTask.quantity = quantity
         
         if quantity != nil {
             newTask.quantity = quantity
@@ -473,23 +473,36 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
                     newTask.itemID = newItemID
                     newTask.uid = self.currentUserID
                     
+                    if self.sections[newTask.number].items != nil && self.sections != nil {
+                        let count = self.sections[newTask.number].items.count - 1
+                        self.sections[newTask.number].items[count].itemID = ref?.documentID
+                        self.sections[newTask.number].items.append(newTask)
+                        self.sections[newTask.number].isExpanded = true
+                    }
+                                        
                     let generator = UINotificationFeedbackGenerator()
                     generator.notificationOccurred(.success)
                     
                     
                     print("Item \(newTask.name) has category of \(newTask.category) with number \(newTask.number) & id \(newTask.itemID!) & quantity \(newTask.quantity ?? "")")
-                    print(self.sections[newTask.number].items)
+                    print("AMOUNT OF ITEMS CURRENTLY IN ARRAY: \(self.sections[newTask.number].items.count)")
+                    
+                    for item in self.sections[newTask.number].items {
+                        print("ITEM \(item.name)")
+                    }
+                    
+                    self.tableView.reloadData()
                     
                     
-                    // if self.sections != nil && self.sections[newTask.number].items != nil {
-                        // Adding the task to array
-                        self.sections[newTask.number].items.append(newTask)
-                        let count = self.sections[newTask.number].items.count - 1
-                        self.sections[newTask.number].items[count].itemID = ref?.documentID
-                        // self.sections[newTask.number].items[count].itemID = self.currentUserID ?? "hello"
-                        self.sections[newTask.number].items = []
-                        self.sections[newTask.number].isExpanded = true
-                    // }
+//                    // if self.sections != nil && self.sections[newTask.number].items != nil {
+//                        // Adding the task to array
+//                        self.sections[newTask.number].items.append(newTask)
+//                        let count = self.sections[newTask.number].items.count - 1
+//                        self.sections[newTask.number].items[count].itemID = ref?.documentID
+//                        // self.sections[newTask.number].items[count].itemID = self.currentUserID ?? "hello"
+//                        self.sections[newTask.number].items = []
+//                        self.sections[newTask.number].isExpanded = true
+//                    // }
                 }
             }
             }
@@ -819,6 +832,10 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
         
         let generator = UIImpactFeedbackGenerator(style: .medium)
         generator.impactOccurred()
+        
+        // self.tableView.setContentOffset(.zero, animated: true)
+        let indexPath = IndexPath(row: 0, section: 0)
+        self.tableView.scrollToRow(at: indexPath, at: .top, animated: true)
         
         let cell = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as? InputCell
         cell?.newTaskField.becomeFirstResponder()
