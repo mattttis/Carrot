@@ -199,26 +199,27 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
             cell.quantity = ""
             cell.quantity = currentItem.quantity
             
-            if currentItem.quantity != nil && currentItem.quantity != "" && currentItem.quantity != " " {
-                cell.quantityLabel.isHidden = false
-                cell.quantityLabel.text = currentItem.quantity?.uppercased()
-                cell.taskNameLabel.centerYAnchor.constraint(equalTo: cell.centerYAnchor).isActive = false
-            } else {
-                cell.quantityLabel.isHidden = true
-                cell.taskNameLabel.centerYAnchor.constraint(equalTo: cell.centerYAnchor).isActive = true
-            }
-            
-            if currentItem.uid == Auth.auth().currentUser?.uid {
-                cell.profilePicture.isHidden = true
-            } else {
-                cell.profilePicture.isHidden = false
-            }
-            
-            if currentItem.checked {
-                cell.checkBoxOutlet.setBackgroundImage(#imageLiteral(resourceName: "checkBoxFILLED "), for: UIControl.State.normal)
-            } else {
-                cell.checkBoxOutlet.setBackgroundImage(#imageLiteral(resourceName: "checkBoxOUTLINE "), for: UIControl.State.normal)
-            }
+            cell.fillData(currentItem, profileImage: nil)
+//            if currentItem.quantity != nil && currentItem.quantity != "" && currentItem.quantity != " " {
+//                cell.quantityLabel.isHidden = false
+//                cell.quantityLabel.text = currentItem.quantity?.uppercased()
+//                cell.taskNameLabel.centerYAnchor.constraint(equalTo: cell.centerYAnchor).isActive = false
+//            } else {
+//                cell.quantityLabel.isHidden = true
+//                cell.taskNameLabel.centerYAnchor.constraint(equalTo: cell.centerYAnchor).isActive = true
+//            }
+//
+//            if currentItem.uid == Auth.auth().currentUser?.uid {
+//                cell.profilePicture.isHidden = true
+//            } else {
+//                cell.profilePicture.isHidden = false
+//            }
+//
+//            if currentItem.checked {
+//                cell.checkBoxOutlet.setBackgroundImage(#imageLiteral(resourceName: "checkBoxFILLED "), for: UIControl.State.normal)
+//            } else {
+//                cell.checkBoxOutlet.setBackgroundImage(#imageLiteral(resourceName: "checkBoxOUTLINE "), for: UIControl.State.normal)
+//            }
             
             //            cell.delegate = self
             //            cell.items = sections[indexPath.section].items

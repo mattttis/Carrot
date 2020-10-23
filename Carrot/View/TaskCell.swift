@@ -52,8 +52,27 @@ class TaskCell: UITableViewCell {
         profilePicture.layer.cornerRadius = profilePicture.frame.height / 2
         profilePicture.clipsToBounds = true
         
-        reset()
+        // reset()
     }
+    
+    func fillData(_ task: Task, profileImage: UIImage?) -> Void {
+            
+            let sysName: String = task.checked ? "largecircle.fill.circle" : "circle"
+            if let img = UIImage(systemName: sysName) {
+                checkBoxOutlet.setBackgroundImage(img, for: .normal)
+            }
+            
+            taskNameLabel.text = task.name
+            
+            // make sure quantity is not " "
+            let q = task.quantity?.trimmingCharacters(in: .whitespacesAndNewlines)
+            quantityLabel.text = q?.uppercased()
+            quantityLabel.isHidden = q == ""
+            
+            // profilePicture.image = profileImage
+            // profilePicture.isHidden = profileImage == nil
+        }
+    
     
     func reset() {
         print(quantityLabel.text)
