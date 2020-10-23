@@ -902,7 +902,7 @@
                                         <rect key="frame" x="0.0" y="202.33333333333337" width="414" height="157"/>
                                         <subviews>
                                             <textField opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="First name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="enH-4U-pLT" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
-                                                <rect key="frame" x="61" y="15" width="292" height="73.333333333333329"/>
+                                                <rect key="frame" x="61" y="15.000000000000004" width="292" height="52.333333333333343"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="continue" enablesReturnKeyAutomatically="YES" textContentType="name"/>
                                                 <userDefinedRuntimeAttributes>
@@ -918,7 +918,7 @@
                                                 </connections>
                                             </textField>
                                             <textField opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" placeholder="Last name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bUL-Du-qP4" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
-                                                <rect key="frame" x="61" y="110.33333333333331" width="292" height="31.666666666666657"/>
+                                                <rect key="frame" x="61" y="89.333333333333314" width="292" height="52.666666666666657"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="go" textContentType="family-name"/>
                                                 <userDefinedRuntimeAttributes>
@@ -1055,7 +1055,7 @@
                                         <rect key="frame" x="0.0" y="202.33333333333337" width="414" height="157"/>
                                         <subviews>
                                             <textField opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rcq-8u-hwg" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
-                                                <rect key="frame" x="61" y="15" width="292" height="75"/>
+                                                <rect key="frame" x="61" y="14.999999999999996" width="292" height="52.666666666666657"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                                 <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="continue" enablesReturnKeyAutomatically="YES" textContentType="email"/>
                                                 <userDefinedRuntimeAttributes>
@@ -1071,7 +1071,7 @@
                                                 </connections>
                                             </textField>
                                             <textField opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GNj-aX-g30" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
-                                                <rect key="frame" x="61" y="112" width="292" height="30"/>
+                                                <rect key="frame" x="61" y="89.666666666666686" width="292" height="52.333333333333343"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                                 <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="go" secureTextEntry="YES" textContentType="new-password"/>
                                                 <userDefinedRuntimeAttributes>
@@ -1177,22 +1177,22 @@
     </scenes>
     <designables>
         <designable name="2X4-j1-YLI">
-            <size key="intrinsicContentSize" width="104" height="30"/>
+            <size key="intrinsicContentSize" width="280" height="52.34765625"/>
         </designable>
         <designable name="GNj-aX-g30">
-            <size key="intrinsicContentSize" width="104" height="30"/>
+            <size key="intrinsicContentSize" width="292" height="52.34765625"/>
         </designable>
         <designable name="bUL-Du-qP4">
-            <size key="intrinsicContentSize" width="111.66666666666667" height="31.666666666666668"/>
+            <size key="intrinsicContentSize" width="292" height="52.34765625"/>
         </designable>
         <designable name="enH-4U-pLT">
-            <size key="intrinsicContentSize" width="112.33333333333333" height="31.666666666666668"/>
+            <size key="intrinsicContentSize" width="292" height="52.34765625"/>
         </designable>
         <designable name="kYV-83-SDt">
-            <size key="intrinsicContentSize" width="58.333333333333336" height="31.666666666666668"/>
+            <size key="intrinsicContentSize" width="280" height="52.34765625"/>
         </designable>
         <designable name="rcq-8u-hwg">
-            <size key="intrinsicContentSize" width="58.333333333333336" height="31.666666666666668"/>
+            <size key="intrinsicContentSize" width="292" height="52.34765625"/>
         </designable>
     </designables>
     <inferredMetricsTieBreakers>

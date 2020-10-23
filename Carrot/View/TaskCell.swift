@@ -38,7 +38,8 @@ class TaskCell: UITableViewCell {
     private var workItem: DispatchWorkItem?
     
     override func prepareForReuse() {
-        reset()
+        quantityLabel.isHidden = false
+        profilePicture.isHidden = false
     }
     
     override func awakeFromNib() {

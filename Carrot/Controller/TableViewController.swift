@@ -185,48 +185,97 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
         } else {
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "taskCell", for: indexPath) as! TaskCell
-            let current = sections[indexPath.section].items[indexPath.row]
+            let currentItem = sections[indexPath.section].items[indexPath.row]
             
-            cell.taskNameLabel.text = current.name
-            cell.quantityLabel.isHidden = false
-            cell.profilePicture.isHidden = false
-            cell.quantityLabel.text = ""
-            cell.taskNameLabel.centerYAnchor.constraint(equalTo: cell.centerYAnchor).isActive = false
+            cell.taskNameLabel.text = currentItem.name
+            // cell.quantityLabel.isHidden = false
+            // cell.profilePicture.isHidden = false
+            cell.uid = currentItem.uid
+            cell.delegate = self
+            cell.indexSection = indexPath.section
+            cell.indexRow = indexPath.row
+            cell.itemID = currentItem.itemID
+            cell.items = sections[indexPath.section].items
+            cell.quantity = ""
+            cell.quantity = currentItem.quantity
             
-            if current.quantity != nil && current.quantity != "" {
-                cell.translatesAutoresizingMaskIntoConstraints = true
-                cell.quantityLabel.text = current.quantity!.uppercased()
+            if currentItem.quantity != nil && currentItem.quantity != "" && currentItem.quantity != " " {
                 cell.quantityLabel.isHidden = false
+                cell.quantityLabel.text = currentItem.quantity?.uppercased()
                 cell.taskNameLabel.centerYAnchor.constraint(equalTo: cell.centerYAnchor).isActive = false
-            }
-             else {
-                // cell.quantityLabel.isHidden = true
-                cell.translatesAutoresizingMaskIntoConstraints = true
-                cell.quantityLabel.isHidden = false
+            } else {
+                cell.quantityLabel.isHidden = true
                 cell.taskNameLabel.centerYAnchor.constraint(equalTo: cell.centerYAnchor).isActive = true
             }
             
-            if current.uid == Auth.auth().currentUser?.uid {
+            if currentItem.uid == Auth.auth().currentUser?.uid {
                 cell.profilePicture.isHidden = true
             } else {
                 cell.profilePicture.isHidden = false
             }
             
-            
-            if current.checked {
+            if currentItem.checked {
                 cell.checkBoxOutlet.setBackgroundImage(#imageLiteral(resourceName: "checkBoxFILLED "), for: UIControl.State.normal)
             } else {
                 cell.checkBoxOutlet.setBackgroundImage(#imageLiteral(resourceName: "checkBoxOUTLINE "), for: UIControl.State.normal)
             }
             
-            cell.delegate = self
-            cell.items = sections[indexPath.section].items
-            cell.quantity = sections[indexPath.section].items[indexPath.row].quantity
-            cell.indexSection = indexPath.section
-            cell.indexRow = indexPath.row
-            cell.itemID = sections[indexPath.section].items[indexPath.row].itemID
-            cell.currentUid = currentUserID!
-            cell.uid = sections[indexPath.section].items[indexPath.row].uid
+            //            cell.delegate = self
+            //            cell.items = sections[indexPath.section].items
+            //            cell.quantity = sections[indexPath.section].items[indexPath.row].quantity
+            //            cell.quantityLabel.text = sections[indexPath.section].items[indexPath.row].quantity
+            //            cell.indexSection = indexPath.section
+            //            cell.indexRow = indexPath.row
+            //            cell.itemID = sections[indexPath.section].items[indexPath.row].itemID
+            //            cell.currentUid = currentUserID!
+            //            cell.uid = sections[indexPath.section].items[indexPath.row].uid
+            
+            
+            
+//            let cell = tableView.dequeueReusableCell(withIdentifier: "taskCell", for: indexPath) as! TaskCell
+//            let current = sections[indexPath.section].items[indexPath.row]
+//
+//            cell.taskNameLabel.text = current.name
+//            cell.quantityLabel.isHidden = false
+//            cell.profilePicture.isHidden = false
+//            cell.quantityLabel.text = current.quantity
+//            cell.taskNameLabel.centerYAnchor.constraint(equalTo: cell.centerYAnchor).isActive = false
+//
+//            if current.quantity != nil && current.quantity != "" {
+//                cell.translatesAutoresizingMaskIntoConstraints = true
+//                cell.quantityLabel.text = current.quantity!.uppercased()
+//                cell.quantityLabel.isHidden = false
+//                cell.taskNameLabel.centerYAnchor.constraint(equalTo: cell.centerYAnchor).isActive = false
+//            }
+//             else {
+//                // cell.quantityLabel.isHidden = true
+//                cell.translatesAutoresizingMaskIntoConstraints = true
+//                cell.quantityLabel.isHidden = false
+//                cell.taskNameLabel.centerYAnchor.constraint(equalTo: cell.centerYAnchor).isActive = true
+//            }
+//
+//            if current.uid == Auth.auth().currentUser?.uid {
+//                cell.profilePicture.isHidden = true
+//            } else {
+//                cell.profilePicture.isHidden = false
+//            }
+//
+//
+//            if current.checked {
+//                cell.checkBoxOutlet.setBackgroundImage(#imageLiteral(resourceName: "checkBoxFILLED "), for: UIControl.State.normal)
+//            } else {
+//                cell.checkBoxOutlet.setBackgroundImage(#imageLiteral(resourceName: "checkBoxOUTLINE "), for: UIControl.State.normal)
+//            }
+//
+//            cell.delegate = self
+//            cell.items = sections[indexPath.section].items
+//            cell.quantity = sections[indexPath.section].items[indexPath.row].quantity
+//            cell.quantityLabel.text = sections[indexPath.section].items[indexPath.row].quantity
+//            cell.indexSection = indexPath.section
+//            cell.indexRow = indexPath.row
+//            cell.itemID = sections[indexPath.section].items[indexPath.row].itemID
+//            cell.currentUid = currentUserID!
+//            cell.uid = sections[indexPath.section].items[indexPath.row].uid
             
             //MARK: - Profile picture loading
             
@@ -234,18 +283,18 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
                 cell.profilePicture.isHidden = true
             } else {
                 DispatchQueue.global(qos: .background).async() {
-                        self.db.collection(K.FStore.users).document(cell.uid!).getDocument { (snapshot, error) in
-                            if let e = error {
-                                print("Error retrieving profile picture: \(e)")
-                            } else {
-                                if let imageURL = snapshot?.data()![K.User.profilePicture] as? String {
-                                    if let realURL = URL(string: imageURL) {
-                                        cell.profilePicture.kf.setImage(with: realURL)
-                                    }
+                    self.db.collection(K.FStore.users).document(cell.uid!).getDocument { (snapshot, error) in
+                        if let e = error {
+                            print("Error retrieving profile picture: \(e)")
+                        } else {
+                            if let imageURL = snapshot?.data()![K.User.profilePicture] as? String {
+                                if let realURL = URL(string: imageURL) {
+                                    cell.profilePicture.kf.setImage(with: realURL)
                                 }
                             }
                         }
                     }
+                }
             }
             
             return cell
