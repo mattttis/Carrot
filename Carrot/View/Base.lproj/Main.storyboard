@@ -24,7 +24,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eT0-te-GhF" customClass="PinCodeTextField" customModule="PinCodeTextField">
-                                <rect key="frame" x="67" y="298" width="279" height="128"/>
+                                <rect key="frame" x="67" y="298" width="353.33333333333331" height="128"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="128" id="3zt-jg-5IS"/>
@@ -55,7 +55,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rcu-Kr-PVs">
-                                <rect key="frame" x="61" y="504.66666666666674" width="292" height="66"/>
+                                <rect key="frame" x="61" y="484.33333333333326" width="366.33333333333331" height="66"/>
                                 <color key="backgroundColor" systemColor="systemBlueColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="66" id="9IF-3g-OA6"/>
@@ -74,13 +74,13 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="if someone invited you, enter the list code below" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6QR-Q8-oHb">
-                                <rect key="frame" x="61" y="268" width="292" height="46"/>
+                                <rect key="frame" x="61" y="268" width="366.33333333333331" height="46"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" systemColor="systemGrayColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="if you don't have a list yet, create one now" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vXS-p2-qzh">
-                                <rect key="frame" x="61" y="442" width="292" height="40.666666666666686"/>
+                                <rect key="frame" x="61" y="442" width="366.33333333333331" height="20.333333333333314"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" systemColor="systemGrayColor"/>
                                 <nil key="highlightedColor"/>
@@ -195,12 +195,13 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B6T-Y6-Dpo">
-                                            <rect key="frame" x="20" y="21.666666666666671" width="24" height="24"/>
+                                            <rect key="frame" x="20" y="21" width="27" height="25.666666666666671"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="24" id="ESL-X0-dh0"/>
+                                                <constraint firstAttribute="width" constant="27" id="ESL-X0-dh0"/>
                                                 <constraint firstAttribute="width" secondItem="B6T-Y6-Dpo" secondAttribute="height" multiplier="1:1" id="xGw-Uh-Tkl"/>
                                             </constraints>
-                                            <state key="normal" backgroundImage="checkBoxOUTLINE "/>
+                                            <color key="tintColor" systemColor="systemGray2Color"/>
+                                            <state key="normal" backgroundImage="circle" catalog="system"/>
                                             <connections>
                                                 <action selector="checkBoxAction:" destination="IwI-ln-UVA" eventType="touchUpInside" id="ew6-bG-5Mt"/>
                                             </connections>
@@ -214,7 +215,7 @@
                                             </constraints>
                                         </imageView>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="UR5-Cn-lon">
-                                            <rect key="frame" x="52" y="15.333333333333332" width="294" height="36.666666666666671"/>
+                                            <rect key="frame" x="55" y="15.333333333333332" width="291" height="36.666666666666671"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tfs-oQ-fja">
                                                     <rect key="frame" x="0.0" y="0.0" width="41.333333333333336" height="20.333333333333332"/>
@@ -232,12 +233,12 @@
                                         </stackView>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="B6T-Y6-Dpo" secondAttribute="bottom" constant="6" id="8U9-Vc-iBy"/>
-                                        <constraint firstItem="B6T-Y6-Dpo" firstAttribute="top" relation="greaterThanOrEqual" secondItem="WAd-u4-D5P" secondAttribute="topMargin" constant="6" id="9RY-5E-aTR"/>
+                                        <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="B6T-Y6-Dpo" secondAttribute="bottom" constant="3" id="8U9-Vc-iBy"/>
+                                        <constraint firstItem="B6T-Y6-Dpo" firstAttribute="top" relation="greaterThanOrEqual" secondItem="WAd-u4-D5P" secondAttribute="topMargin" constant="3" id="9RY-5E-aTR"/>
                                         <constraint firstItem="ol4-tW-f4s" firstAttribute="leading" secondItem="UR5-Cn-lon" secondAttribute="trailing" constant="8" id="Au9-pX-RiJ"/>
                                         <constraint firstItem="B6T-Y6-Dpo" firstAttribute="leading" secondItem="WAd-u4-D5P" secondAttribute="leadingMargin" id="BEc-YF-HTB"/>
-                                        <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="UR5-Cn-lon" secondAttribute="bottom" constant="4" id="CFj-2c-KY5"/>
-                                        <constraint firstItem="UR5-Cn-lon" firstAttribute="top" relation="greaterThanOrEqual" secondItem="WAd-u4-D5P" secondAttribute="topMargin" constant="4" id="Dlj-p4-aKr"/>
+                                        <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="UR5-Cn-lon" secondAttribute="bottom" id="CFj-2c-KY5"/>
+                                        <constraint firstItem="UR5-Cn-lon" firstAttribute="top" relation="greaterThanOrEqual" secondItem="WAd-u4-D5P" secondAttribute="topMargin" id="Dlj-p4-aKr"/>
                                         <constraint firstItem="UR5-Cn-lon" firstAttribute="centerY" secondItem="WAd-u4-D5P" secondAttribute="centerY" id="PM5-Kj-QdE"/>
                                         <constraint firstItem="B6T-Y6-Dpo" firstAttribute="centerY" secondItem="WAd-u4-D5P" secondAttribute="centerY" id="ahF-Gs-2cX"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="ol4-tW-f4s" secondAttribute="trailing" constant="16" id="dq6-gm-hD0"/>
@@ -897,7 +898,7 @@
                                         <rect key="frame" x="0.0" y="202.33333333333337" width="414" height="157"/>
                                         <subviews>
                                             <textField opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="First name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="enH-4U-pLT" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
-                                                <rect key="frame" x="61" y="15.000000000000004" width="292" height="52.333333333333343"/>
+                                                <rect key="frame" x="61" y="15" width="292" height="73.333333333333329"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="continue" enablesReturnKeyAutomatically="YES" textContentType="name"/>
                                                 <userDefinedRuntimeAttributes>
@@ -913,7 +914,7 @@
                                                 </connections>
                                             </textField>
                                             <textField opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" placeholder="Last name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bUL-Du-qP4" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
-                                                <rect key="frame" x="61" y="89.333333333333314" width="292" height="52.666666666666657"/>
+                                                <rect key="frame" x="61" y="110.33333333333331" width="292" height="31.666666666666657"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="go" textContentType="family-name"/>
                                                 <userDefinedRuntimeAttributes>
@@ -1050,7 +1051,7 @@
                                         <rect key="frame" x="0.0" y="202.33333333333337" width="414" height="157"/>
                                         <subviews>
                                             <textField opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rcq-8u-hwg" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
-                                                <rect key="frame" x="61" y="14.999999999999996" width="292" height="52.666666666666657"/>
+                                                <rect key="frame" x="61" y="15" width="292" height="75"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                                 <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="continue" enablesReturnKeyAutomatically="YES" textContentType="email"/>
                                                 <userDefinedRuntimeAttributes>
@@ -1066,7 +1067,7 @@
                                                 </connections>
                                             </textField>
                                             <textField opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GNj-aX-g30" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
-                                                <rect key="frame" x="61" y="89.666666666666686" width="292" height="52.333333333333343"/>
+                                                <rect key="frame" x="61" y="112" width="292" height="30"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                                 <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="go" secureTextEntry="YES" textContentType="new-password"/>
                                                 <userDefinedRuntimeAttributes>
@@ -1193,13 +1194,13 @@
     <inferredMetricsTieBreakers>
         <segue reference="OY0-sT-tkz"/>
         <segue reference="XXC-FJ-NIR"/>
-        <segue reference="0Oi-ty-78c"/>
+        <segue reference="ELv-9J-ITG"/>
         <segue reference="vs5-Xi-UG7"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="bonuskaart" width="272" height="406"/>
         <image name="camera.viewfinder" catalog="system" width="128" height="115"/>
-        <image name="checkBoxOUTLINE " width="24" height="24"/>
+        <image name="circle" catalog="system" width="128" height="121"/>
         <image name="list.bullet" catalog="system" width="128" height="88"/>
         <image name="person.crop.circle.fill" catalog="system" width="128" height="121"/>
         <image name="plus.circle.fill" catalog="system" width="128" height="121"/>
@@ -1219,6 +1220,9 @@
         </systemColor>
         <systemColor name="systemBlueColor">
             <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemGray2Color">
+            <color red="0.68235294117647061" green="0.68235294117647061" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray4Color">
             <color red="0.81960784313725488" green="0.81960784313725488" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

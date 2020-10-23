@@ -19,7 +19,6 @@ class TaskCell: UITableViewCell {
     @IBOutlet weak var profilePicture: UIImageView!
     @IBOutlet weak var taskNameLabel: UILabel!
     @IBOutlet weak var checkBoxOutlet: UIButton!
-    @IBOutlet weak var progressBar: UIProgressView!
     @IBOutlet weak var quantityLabel: UILabel!
 
     var delegate: ChangeButton?
@@ -37,11 +36,6 @@ class TaskCell: UITableViewCell {
     
     private var workItem: DispatchWorkItem?
     
-    override func prepareForReuse() {
-        quantityLabel.isHidden = false
-        profilePicture.isHidden = false
-    }
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -52,38 +46,29 @@ class TaskCell: UITableViewCell {
         profilePicture.layer.cornerRadius = profilePicture.frame.height / 2
         profilePicture.clipsToBounds = true
         
-        // reset()
     }
     
     func fillData(_ task: Task, profileImage: UIImage?) -> Void {
             
             let sysName: String = task.checked ? "largecircle.fill.circle" : "circle"
-            if let img = UIImage(systemName: sysName) {
+            if let img = UIImage(systemName: sysName, withConfiguration: UIImage.SymbolConfiguration(weight: .semibold)) {
                 checkBoxOutlet.setBackgroundImage(img, for: .normal)
+            }
+            
+            if task.checked {
+                checkBoxOutlet.tintColor = .systemBlue
+            } else {
+                checkBoxOutlet.tintColor = .systemGray2
             }
             
             taskNameLabel.text = task.name
             
-            // make sure quantity is not " "
+            // Make sure quantity is not " "
             let q = task.quantity?.trimmingCharacters(in: .whitespacesAndNewlines)
             quantityLabel.text = q?.uppercased()
             quantityLabel.isHidden = q == ""
-            
-            // profilePicture.image = profileImage
-            // profilePicture.isHidden = profileImage == nil
         }
     
-    
-    func reset() {
-        print(quantityLabel.text)
-        profilePicture.isHidden = false
-        quantityLabel.isHidden = true
-        
-        self.translatesAutoresizingMaskIntoConstraints = true
-        NSLayoutConstraint.deactivate([
-            taskNameLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor)
-        ])
-    }
     
     @IBAction func checkBoxAction(_ sender: Any) {
         if tempState == false {
@@ -92,15 +77,6 @@ class TaskCell: UITableViewCell {
             stopAnimation()
         }
     }
-    
-    // Function called when there is no quantity/description
-    func noQuantity() {
-        self.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            taskNameLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor)
-        ])
-    }
-    
     
     @objc func tapFunction(sender:UITapGestureRecognizer) {
         
@@ -115,7 +91,7 @@ class TaskCell: UITableViewCell {
         let generator = UIImpactFeedbackGenerator(style: .medium)
         generator.impactOccurred()
         workItem?.cancel()
-        self.progressBar.setProgress(0.0, animated: false)
+        // self.progressBar.setProgress(0.0, animated: false)
         self.checkBoxOutlet.setBackgroundImage(#imageLiteral(resourceName: "checkBoxOUTLINE "), for: .normal)
         self.tempState = false
     }
@@ -126,65 +102,12 @@ class TaskCell: UITableViewCell {
         
         if items![indexRow!].checked {
             self.delegate?.changeButton(state: false, indexSection: indexSection!, indexRow: indexRow!, itemID: itemID!)
-            // self.progressBar.setProgress(0.0, animated: false)
-            
+            self.checkBoxOutlet.tintColor = .systemGray2
             self.checkBoxOutlet.setBackgroundImage(#imageLiteral(resourceName: "checkBoxOUTLINE "), for: .normal)
         } else {
             self.delegate?.changeButton(state: true, indexSection: self.indexSection!, indexRow: self.indexRow!, itemID: self.itemID)
             self.checkBoxOutlet.setBackgroundImage(#imageLiteral(resourceName: "checkBoxFILLED "), for: .normal)
+            self.checkBoxOutlet.tintColor = .systemBlue
+        }
     }
-    }
-    
-    
-
-        //    func stopAnimation() {
-        //        let generator = UIImpactFeedbackGenerator(style: .medium)
-        //        generator.impactOccurred()
-        //        workItem?.cancel()
-        //        self.progressBar.setProgress(0.0, animated: false)
-        //        self.checkBoxOutlet.setBackgroundImage(#imageLiteral(resourceName: "checkBoxOUTLINE "), for: .normal)
-        //        self.tempState = false
-        //    }
-            
-        
-    //            self.tempState = true
-    //            UIView.animate(withDuration: 4.0, animations: {
-    //                self.progressBar.setProgress(1.0, animated: true)
-    //          }) { (finished: Bool) in
-    //
-    //                self.workItem = DispatchWorkItem {
-    //                    self.delegate?.changeButton(state: true, indexSection: self.indexSection!, indexRow: self.indexRow!, itemID: self.itemID)
-    //                }
-    //
-    //                DispatchQueue.main.asyncAfter(deadline: .now() + 3.3, execute: self.workItem!)
-    //
-    //
-    //            }
-            }
-            
-    //        func startAnimation() {
-    //        let generator = UIImpactFeedbackGenerator(style: .medium)
-    //        generator.impactOccurred()
-    //
-    //        if items![indexRow!].checked {
-    //            self.delegate?.changeButton(state: false, indexSection: indexSection!, indexRow: indexRow!, itemID: itemID!)
-    //            self.progressBar.setProgress(0.0, animated: false)
-    //            self.checkBoxOutlet.setBackgroundImage(#imageLiteral(resourceName: "checkBoxOUTLINE "), for: .normal)
-    //        } else {
-    //
-    //            self.checkBoxOutlet.setBackgroundImage(#imageLiteral(resourceName: "checkBoxFILLED "), for: .normal)
-    //            self.tempState = true
-    //            UIView.animate(withDuration: 4.0, animations: {
-    //                self.progressBar.setProgress(1.0, animated: true)
-    //          }) { (finished: Bool) in
-    //
-    //                self.workItem = DispatchWorkItem {
-    //                    self.delegate?.changeButton(state: true, indexSection: self.indexSection!, indexRow: self.indexRow!, itemID: self.itemID)
-    //                }
-    //
-    //                DispatchQueue.main.asyncAfter(deadline: .now() + 3.3, execute: self.workItem!)
-    //
-    //
-    //            }
-    //        }
-
+}
