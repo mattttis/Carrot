@@ -27,6 +27,7 @@
 		A04F5C0E250281CF00FAB696 /* RegisterViewControllerOne.swift in Sources */ = {isa = PBXBuildFile; fileRef = A04F5C0D250281CF00FAB696 /* RegisterViewControllerOne.swift */; };
 		A05BDA4524CDC78D00854F00 /* AddListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05BDA4424CDC78D00854F00 /* AddListViewController.swift */; };
 		A06DE5AC24F17A020023E0DB /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B59B01D24AA7A59005FBC70 /* TableViewController.swift */; };
+		A0738D3A25437C4200052F4F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A0738D3C25437C4200052F4F /* InfoPlist.strings */; };
 		A07E2C2224F930F400058F35 /* GoogleService-Info-OLD.plist in Resources */ = {isa = PBXBuildFile; fileRef = A07E2C2124F930F400058F35 /* GoogleService-Info-OLD.plist */; };
 		A0812ADF24C76C2E002A03EB /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0812ADE24C76C2E002A03EB /* AccountViewController.swift */; };
 		A0ACFEAD24BBA320008943E4 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0ACFEAC24BBA320008943E4 /* Constants.swift */; };
@@ -75,6 +76,8 @@
 		A044353F2503B83F007270A2 /* SF-Compact-Text-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Compact-Text-Light.otf"; sourceTree = "<group>"; };
 		A04F5C0D250281CF00FAB696 /* RegisterViewControllerOne.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewControllerOne.swift; sourceTree = "<group>"; };
 		A05BDA4424CDC78D00854F00 /* AddListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddListViewController.swift; sourceTree = "<group>"; };
+		A0738D3B25437C4200052F4F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		A0738D3E25437C4800052F4F /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		A07E2C2124F930F400058F35 /* GoogleService-Info-OLD.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-OLD.plist"; sourceTree = "<group>"; };
 		A07E2C2324F9320D00058F35 /* Carrot.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Carrot.entitlements; sourceTree = "<group>"; };
 		A0812ADE24C76C2E002A03EB /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AccountViewController.swift; path = Carrot/Controller/AccountViewController.swift; sourceTree = SOURCE_ROOT; };
@@ -134,6 +137,7 @@
 				A044353C2503B813007270A2 /* Fonts */,
 				7B59B01024AA7816005FBC70 /* Assets.xcassets */,
 				7B59B01524AA7816005FBC70 /* Info.plist */,
+				A0738D3C25437C4200052F4F /* InfoPlist.strings */,
 				A07E2C2324F9320D00058F35 /* Carrot.entitlements */,
 				A0EB867825125F79003066A1 /* GoogleService-Info.plist */,
 				A07E2C2124F930F400058F35 /* GoogleService-Info-OLD.plist */,
@@ -286,6 +290,7 @@
 				A0B38CD724EC8F1D00511F06 /* Assets.xcassets in Resources */,
 				A04435402503B83F007270A2 /* SF-Compact-Text-Regular.otf in Resources */,
 				7B59B00F24AA7811005FBC70 /* Main.storyboard in Resources */,
+				A0738D3A25437C4200052F4F /* InfoPlist.strings in Resources */,
 				A0EB867925125F79003066A1 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -379,6 +384,15 @@
 				A0DCFC5724FD97620037D750 /* nl */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		A0738D3C25437C4200052F4F /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A0738D3B25437C4200052F4F /* en */,
+				A0738D3E25437C4800052F4F /* nl */,
+			);
+			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 		A0DCFC5A24FD976C0037D750 /* Localizable.strings */ = {

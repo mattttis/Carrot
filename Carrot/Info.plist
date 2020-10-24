@@ -79,7 +79,7 @@
 			<key>UIApplicationShortcutItemIconType</key>
 			<string>UIApplicationShortcutIconTypeAdd</string>
 			<key>UIApplicationShortcutItemTitle</key>
-			<string>Add Item</string>
+			<string>ADD_ITEM_SHORTCUT_TITLE</string>
 			<key>UIApplicationShortcutItemType</key>
 			<string>com.mattt.Carrot.addItem</string>
 		</dict>
@@ -87,7 +87,7 @@
 			<key>UIApplicationShortcutItemIconSymbolName</key>
 			<string>barcode</string>
 			<key>UIApplicationShortcutItemTitle</key>
-			<string>Show bonuskaart</string>
+			<string>SHOW_CARD_SHORTCUT_TITLE</string>
 			<key>UIApplicationShortcutItemType</key>
 			<string>com.mattt.Carrot.showCard</string>
 		</dict>
@@ -95,7 +95,7 @@
 			<key>UIApplicationShortcutItemIconSymbolName</key>
 			<string>person.badge.plus.fill</string>
 			<key>UIApplicationShortcutItemTitle</key>
-			<string>Share list</string>
+			<string>SHARE_LIST_SHORTCUT_TITLE</string>
 			<key>UIApplicationShortcutItemType</key>
 			<string>com.mattt.Carrot.shareList</string>
 		</dict>

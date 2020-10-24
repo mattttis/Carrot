@@ -1,0 +1,11 @@
+/* 
+  InfoPlist.strings
+  Carrot
+
+  Created by Matthijs Tolmeijer on 23/10/2020.
+  Copyright © 2020 Matthijs Tolmeijer. All rights reserved.
+*/
+
+ADD_ITEM_SHORTCUT_TITLE = "Add item";
+SHOW_CARD_SHORTCUT_TITLE = "Show cardspod ";
+SHARE_LIST_SHORTCUT_TITLE = "Share list";
