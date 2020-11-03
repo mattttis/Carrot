@@ -46,7 +46,7 @@ class AccountViewController: UIViewController {
         listCodeString = UserDefaults.standard.string(forKey: "code")
         
         // Change labels & text fields
-        tabBarController?.title = "Hey \(userFirstName!)!"
+        tabBarController?.title = "Hey \(userFirstName ?? "")!"
         tabBarController?.navigationItem.rightBarButtonItems = nil
         
         
