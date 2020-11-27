@@ -86,46 +86,92 @@ class Task: Equatable {
     
     private func findCategory(itemName: String) -> String {
         var category: String
-        if FoodData.fruits.contains(itemName) || FoodData.vegetables.contains(itemName) {
+        var items = itemName.components(separatedBy: " ")
+        
+        if FoodData.fruits.contains(where: items.contains) || FoodData.vegetables.contains(where: items.contains) {
             // Vegetables and fruits
             category = FoodData.foodCategories[1]
         }
-        else if FoodData.meat.contains(itemName) || FoodData.fish.contains(itemName) {
+        else if FoodData.meat.contains(where: items.contains) || FoodData.fish.contains(where: items.contains) {
             // Meat and fish
             category = FoodData.foodCategories[2]
         }
-        else if FoodData.dairy.contains(itemName) {
+        else if FoodData.dairy.contains(where: items.contains) {
             // Dairy
             category = FoodData.foodCategories[3]
         }
-        else if FoodData.bread.contains(itemName) {
+        else if FoodData.bread.contains(where: items.contains) {
             // Bread and pastries
             category = FoodData.foodCategories[4]
         }
-        else if FoodData.drinks.contains(itemName) {
+        else if FoodData.drinks.contains(where: items.contains) {
             // Drinks
             category = FoodData.foodCategories[5]
         }
-        else if FoodData.breakfast.contains(itemName) {
+        else if FoodData.breakfast.contains(where: items.contains) {
             // Breakfast
             category = FoodData.foodCategories[6]
         }
-        else if FoodData.snacks.contains(itemName) {
+        else if FoodData.snacks.contains(where: items.contains) {
             // Snacks
             category = FoodData.foodCategories[7]
         }
-        else if FoodData.frozen.contains(itemName) {
+        else if FoodData.frozen.contains(where: items.contains) {
             // Frozen
             category = FoodData.foodCategories[8]
         }
-        else if FoodData.household.contains(itemName) {
+        else if FoodData.household.contains(where: items.contains) {
             // Household
             category = FoodData.foodCategories[9]
         }
         else {
             category = ""
         }
+        
         return category
     }
-    
 }
+
+        
+        
+        
+//        if FoodData.fruits.contains(itemName) || FoodData.vegetables.contains(itemName) {
+//            // Vegetables and fruits
+//            category = FoodData.foodCategories[1]
+//        }
+//        else if FoodData.meat.contains(itemName) || FoodData.fish.contains(itemName) {
+//            // Meat and fish
+//            category = FoodData.foodCategories[2]
+//        }
+//        else if FoodData.dairy.contains(itemName) {
+//            // Dairy
+//            category = FoodData.foodCategories[3]
+//        }
+//        else if FoodData.bread.contains(itemName) {
+//            // Bread and pastries
+//            category = FoodData.foodCategories[4]
+//        }
+//        else if FoodData.drinks.contains(itemName) {
+//            // Drinks
+//            category = FoodData.foodCategories[5]
+//        }
+//        else if FoodData.breakfast.contains(itemName) {
+//            // Breakfast
+//            category = FoodData.foodCategories[6]
+//        }
+//        else if FoodData.snacks.contains(itemName) {
+//            // Snacks
+//            category = FoodData.foodCategories[7]
+//        }
+//        else if FoodData.frozen.contains(itemName) {
+//            // Frozen
+//            category = FoodData.foodCategories[8]
+//        }
+//        else if FoodData.household.contains(itemName) {
+//            // Household
+//            category = FoodData.foodCategories[9]
+//        }
+//        else {
+//            category = ""
+//        }
+//        return category

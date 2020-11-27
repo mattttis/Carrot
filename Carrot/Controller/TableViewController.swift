@@ -126,9 +126,7 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
                             self.performSegue(withIdentifier: K.Segues.tableToAddList, sender: self)
                         }
                     } else {
-                        
                         self.performSegue(withIdentifier: K.Segues.tableToAddList, sender: self)
-                        
                     }
                     
                 } else {
@@ -172,7 +170,6 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath) as? TaskCell
-        
         cell?.startAnimation()
     }
     
@@ -245,8 +242,6 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
             return UITableViewDropProposal(operation: .move, intent: .insertAtDestinationIndexPath)
         }
         
-        
-
         return UITableViewDropProposal(operation: .cancel, intent: .unspecified)
     }
     
@@ -397,7 +392,7 @@ class TableViewController: UITableViewController, AddTask, ChangeButton, UITable
             sections[indexSection ?? 1].items[indexRow ?? 1].checked = state
         }
         
-        tableView.reloadData()
+        // tableView.reloadData()
         
         let generator = UIImpactFeedbackGenerator(style: .light)
         generator.impactOccurred()

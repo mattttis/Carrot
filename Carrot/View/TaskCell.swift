@@ -57,11 +57,14 @@ class TaskCell: UITableViewCell {
             
             if task.checked {
                 checkBoxOutlet.tintColor = .systemBlue
+                taskNameLabel.textColor = .darkGray
             } else {
                 checkBoxOutlet.tintColor = .systemGray2
+                taskNameLabel.textColor = .label
             }
             
-            taskNameLabel.text = task.name
+        taskNameLabel.text = task.name
+            
             
             // Make sure quantity is not " "
             let q = task.quantity?.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -92,7 +95,7 @@ class TaskCell: UITableViewCell {
         generator.impactOccurred()
         workItem?.cancel()
         // self.progressBar.setProgress(0.0, animated: false)
-        self.checkBoxOutlet.setBackgroundImage(#imageLiteral(resourceName: "checkBoxOUTLINE "), for: .normal)
+        // self.checkBoxOutlet.setBackgroundImage(#imageLiteral(resourceName: "checkBoxOUTLINE "), for: .normal)
         self.tempState = false
     }
     
@@ -103,11 +106,13 @@ class TaskCell: UITableViewCell {
         if items![indexRow!].checked {
             self.delegate?.changeButton(state: false, indexSection: indexSection!, indexRow: indexRow!, itemID: itemID!)
             self.checkBoxOutlet.tintColor = .systemGray2
-            self.checkBoxOutlet.setBackgroundImage(#imageLiteral(resourceName: "checkBoxOUTLINE "), for: .normal)
+            self.textLabel?.textColor = .systemGray2
+            // self.checkBoxOutlet.setBackgroundImage(#imageLiteral(resourceName: "checkBoxOUTLINE "), for: .normal)
         } else {
             self.delegate?.changeButton(state: true, indexSection: self.indexSection!, indexRow: self.indexRow!, itemID: self.itemID)
-            self.checkBoxOutlet.setBackgroundImage(#imageLiteral(resourceName: "checkBoxFILLED "), for: .normal)
+            // self.checkBoxOutlet.setBackgroundImage(#imageLiteral(resourceName: "checkBoxFILLED "), for: .normal)
             self.checkBoxOutlet.tintColor = .systemBlue
+            self.textLabel?.textColor = .white
         }
     }
 }
